@@ -1,0 +1,20 @@
+{
+  "name": "mnhs",
+  "version": "1.0.0",
+  "description": "Brand Image Manager for Minnesota Historical society",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatthewKEng/mnhs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MatthewKEng/mnhs/issues"
+  },
+  "homepage": "https://github.com/MatthewKEng/mnhs#readme"
+}
