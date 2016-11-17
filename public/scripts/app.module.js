@@ -1,1 +1,1 @@
-angular.module('BrandImageManagerApp', ['ngRoute'])
+angular.module('BrandImageManagerApp', ['ngRoute']);
