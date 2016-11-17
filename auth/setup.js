@@ -9,8 +9,8 @@ exports.setup = function () {
   passport.use(new GoogleStrategy({
     authorizationURL: 'https://accounts.google.com/o/oauth2/auth',
     tokenURL: 'https://accounts.google.com/o/oauth2/token',
-    clientID: '',
-    clientSecret: '',
+    clientID: '379209359777-kb4mmhlrv7bf3mvtv0ou6jo31dp2mrte.apps.googleusercontent.com',
+    clientSecret: 'i1rxCF11L9J-kNHwL00bESJb',
     callbackURL: 'http://localhost:3000/auth/google/callback',
   },
 
@@ -20,8 +20,6 @@ exports.setup = function () {
       return cb(err, user);
     });
   }
-
-
 ));
 
 // used to serialize the user for the session
