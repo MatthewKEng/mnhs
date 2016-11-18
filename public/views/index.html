@@ -1,20 +1,28 @@
 <!DOCTYPE html>
-<html ng-app="mirrorApp">
+<html>
   <head>
     <meta charset="utf-8">
     <title>Brand Image Manager</title>
-
-    <link rel="stylesheet" href="vendors/bootstrap.min.css" media="screen" title="no title">
-    <link rel="stylesheet" href="styles/style.css" media="screen" title="no title">
-
     <script src="vendors/angular.min.js" charset="utf-8"></script>
     <script src="vendors/angular-route.min.js" charset="utf-8"></script>
+    <script src="scripts/app.module.js" charset="ut-8"></script>
+    <script src="scripts/app.config.js" charset="ut-8"></script>
+    <script src="scripts/login.controller.js"></script>
+    <script src="scripts/authFactory.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="vendor/bootstrap.min.css" media="screen" title="bootstrap">
+    <link rel="stylesheet" href="styles/style.css" media="screen" title="no title">
 
     <base href="/" />
   </head>
   <body>
+<h1>hi</h1>
+  <a href="/auth/google"><img src="assets/btn_google_signin_dark_normal_web.png"/></a>
+<p>
+  <a href="/login">Login</a>
+</p>
+    <ng-view>
 
-    <ng-view></ng-view>
+    </ng-view>
 
   </body>
 </html>

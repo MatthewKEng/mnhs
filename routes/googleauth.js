@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const passport = require('passport');
 
+var express = require('express'),
+    app = express();
+
 router.get('/google',
   passport.authenticate('google', { scope:
     ['https://www.googleapis.com/auth/plus.login',
@@ -12,7 +15,7 @@ router.get('/google',
 
 router.get('/google/callback',
   passport.authenticate('google', {
-    successRedirect: '/private',
+    successRedirect: '/login',
     failureRedirect: '/',
   }));
 

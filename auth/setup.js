@@ -9,9 +9,11 @@ exports.setup = function () {
   passport.use(new GoogleStrategy({
     authorizationURL: 'https://accounts.google.com/o/oauth2/auth',
     tokenURL: 'https://accounts.google.com/o/oauth2/token',
-    clientID: '379209359777-kb4mmhlrv7bf3mvtv0ou6jo31dp2mrte.apps.googleusercontent.com',
-    clientSecret: 'i1rxCF11L9J-kNHwL00bESJb',
-    callbackURL: 'http://localhost:3000/auth/google/callback',
+    // clientID: '101799712502916135843',
+    clientID: '635146343171-m726t7cjr75thvph68au09l2upao1tjk.apps.googleusercontent.com',
+    // clientSecret: 'i1rxCF11L9J-kNHwL00bESJb',
+    clientSecret: 'E3mabZbBKqq4ETbNjvJUyn7_',
+    callbackURL: 'http://localhost:3000/gallery',
   },
 
   function (accessToken, refreshToken, profile, cb) {
@@ -53,8 +55,8 @@ function findOrCreate(googleID, googleEmail, googleName, accessToken, refreshTok
             console.log('update user', user);
                   return done(null, user);
 
-
       }
+
 
       if (!user) {
         console.log('inside!user');
@@ -63,3 +65,5 @@ function findOrCreate(googleID, googleEmail, googleName, accessToken, refreshTok
           return done(null, user);
         });
       };
+    });
+  }

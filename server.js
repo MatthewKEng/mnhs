@@ -4,9 +4,9 @@ const path = require('path');
 const auth = require('./auth/setup');
 const passport = require('passport');
 const session = require('express-session');
-const isLoggedIn = require('./auth/login');
+const isLoggedIn = require('./auth/logins');
 const googleAuth = require('./routes/googleauth');
-const private = require('./routes/login');
+const login = require('./routes/login');
 
 const sessionConfig = {
   secret: 'super secret key goes here', // TODO this info gets stored in ENV file
@@ -29,21 +29,36 @@ app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+//
 app.use('/auth', googleAuth);
-app.use('/private',isLoggedIn, private);
+// app.use('/login',isLoggedIn, login);
+
 
 app.get('/*', function (req, res) {
- if (req.isAuthenticated()) {
+ // if (req.isAuthenticated()) {
     res.sendFile(path.join(__dirname, 'public/views/index.html'));
-} else {
+// } else {
 
-    res.redirect('/auth/google');
-  }
+    // res.redirect('/auth/google');
+
+
+
+
+
+
+app.get('/login', passport.authenticate('google'));
+
+app.get('/auth/callback/google',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    function(req, res) {
+        // Successful authentication, redirect to your app.
+        res.redirect('/');
+    }
+);
 
 });
 
-
+app.use('/login',isLoggedIn, login);
 var server = app.listen(3000, function() {
   console.log('Listening on port', server.address().port);
 });

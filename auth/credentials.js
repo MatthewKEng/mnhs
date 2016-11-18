@@ -1,8 +1,9 @@
 module.exports = {
   mail: {
-    clientId: '379209359777-kb4mmhlrv7bf3mvtv0ou6jo31dp2mrte.apps.googleusercontent.com',
-    clientSecret: 'i1rxCF11L9J-kNHwL00bESJb',
-    user: '',
+    clientId: '635146343171-m726t7cjr75thvph68au09l2upao1tjk.apps.googleusercontent.com',
+    clientSecret: 'E3mabZbBKqq4ETbNjvJUyn7_',
+    // user: '635146343171-compute@developer.gserviceaccount.com',
+    // user: '',
 
   },
   //created api key on google console
