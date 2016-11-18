@@ -43,9 +43,6 @@ app.get('/*', function (req, res) {
 
 
 
-
-
-
 app.get('/login', passport.authenticate('google'));
 
 app.get('/auth/callback/google',

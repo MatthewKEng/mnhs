@@ -3,8 +3,8 @@ const AWS = require('aws-sdk');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const multerS3 = require('multer-s3');
-const path = require('path');
-const pg = require('pg');
+const knox = require('knox');
+
 
 // Credentials should be stored in a .gitignored file (./config.json here).
 // Uncomment following line when running on local server.  Comment out when
@@ -47,41 +47,32 @@ var upload = multer({
 //
 
 // Post request.
-router.post('/', upload.single('file'), function (req, res, next) {
+router.post('/upload', upload.single('photo'), function (req, res, next) {
   console.log(req.body);
   console.log(req.file);
-  pool.connect(function (err, client, done) {
-    try {
-      if (err) {
-        res.sendStatus(500);
-      }
-
-      client.query('INSERT INTO images (img_url, department_id) VALUES ($1, $2])', [req.body.url, req.file.deptartment],
-    function (err) {
-        if (err) {
-          console.log('Error inserting into db', err);
-          return res.sendStatus(500);
-        }
-        res.sendStatus(200);
-      });
-    } finally {
-      done();
-    }
-  });
+  res.send('Uploaded!');
+  // On success, need to send image url to SQL database to be stored there as well.
+  // Img URL will be in the following format:
+  // http://BUCKET_REGION.amazonaws.com/BUCKET_NAME/IMAGE_NAME.jpg
 });
 
 
 
 //deletes entries from SQL database, not S3
-router.delete('/:name', function)
-var key = req.params.name;
-var params = {
-  Bucket: 'BUCKET_NAME',
-  Key: key,
-};
-s3.deleteObject(params, function(err, data) {
-  if (err) console.log(err, err.stack); // an error occurred
-  else     console.log(data);           // successful response
+router.delete('/:name', function (req, res) {
+  var key = req.params.name;
+  var params = {
+    Bucket: 'BUCKET_NAME',
+    Key: key,
+  };
+  s3.deleteObject(params, function(err, data) {
+    if (err) {
+      console.log(err, err.stack); // an error occurred
+    } else {
+      console.log(data);           // successful response
+      // On Success, need to delete image url from SQL database as well.
+    }
+  });
 });
 
 
