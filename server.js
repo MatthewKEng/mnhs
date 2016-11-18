@@ -38,11 +38,11 @@ app.get('/*', function (req, res) {
  // if (req.isAuthenticated()) {
     res.sendFile(path.join(__dirname, 'public/views/index.html'));
 // } else {
+//
+//     res.redirect('/auth/google');
 
-    // res.redirect('/auth/google');
 
-
-
+//
 app.get('/login', passport.authenticate('google'));
 
 app.get('/auth/callback/google',

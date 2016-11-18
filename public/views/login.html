@@ -1,5 +1,5 @@
-<nav class="navbar navbar-inverse navbar-static-top" >
-<a href="http://www.mnhs.org/"><img alt="Minnesota Historical Society" src="/static/masthead/mnhs_org/img/mnhs-logo-white.svg" onerror="this.onerror=null;this.src='/static/masthead/mnhs_org/img/mnhs-logo-white.png';"></a>
+<!-- <nav class="navbar navbar-inverse navbar-static-top" >
+<a href="http://www.mnhs.org/"><img alt="Minnesota Historical Society" src="/static/masthead/mnhs_org/img/mnhs-logo-white.svg" onerror="this.onerror=null;this.src='/static/masthead/mnhs_org/img/mnhs-logo-white.png';"></a> -->
 
 <div class="container">
 <div class="col-md-4">
@@ -9,8 +9,11 @@
 <!-- Shown for users that are NOT logged in -->
 
 <section ng-hide="nav.loggedIn">
-<!--  Googles sign-in button brand guidelines page -->
-  <a href="/auth/google"><img src="assets/btn_google_signin_dark_normal_web.png"/></a>
+ <!-- Googles sign-in button brand guidelines page -->
+  <a href="/auth/google" target="_self"><img src="assets/btn_google_signin_dark_focus_web.png"/></a>
+  <!-- <p>
+    <a href="/login">Login</a>
+  </p> -->
 </section>
 <!-- Shown for users that are logged in -->
 <section ng-show="nav.loggedIn">
@@ -22,3 +25,8 @@
 <div class="col-md-4">
 </div>
 </div>
+
+<!-- <nav class="navbar navbar-inverse navbar-static-top" >
+<a href="http://www.mnhs.org/"><img alt="Minnesota Historical Society" src="/static/masthead/mnhs_org/img/mnhs-logo-white.svg" onerror="this.onerror=null;this.src='/static/masthead/mnhs_org/img/mnhs-logo-white.png';"></a><br />
+<br />
+<a href="/auth/google" target="_self"><img src="assets/btn_google_signin_dark_focus_web.png"/></a> -->
