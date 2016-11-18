@@ -59,8 +59,8 @@ router.post('/upload', upload.single('photo'), function (req, res, next) {
 
 
 //deletes entries from SQL database, not S3
-router.delete('/', function (req, res) {
-  var key = req.body.name;
+router.delete('/:name', function (req, res) {
+  var key = req.params.name;
   var params = {
     Bucket: 'BUCKET_NAME',
     Key: key,

@@ -70,6 +70,7 @@ router.post('/', function (req, res, next) {
 
 //deletes entries from SQL database, not S3
 router.delete('/:id', function (req, res, next) {
+  var id = req.params.id;
   pool.connect(function (err, client, done) {
     try {
       if (err) {
@@ -77,7 +78,7 @@ router.delete('/:id', function (req, res, next) {
         res.sendStatus(500);
       }
 
-      client.query('DELETE FROM submissions WHERE id=$1;', [req.params.id],
+      client.query('DELETE FROM submissions WHERE id=$1;', [id],
     function (err, result) {
         if (err) {
           console.log('Error querying DB: ', err);
