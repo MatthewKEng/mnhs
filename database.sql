@@ -40,7 +40,7 @@ user_id int NOT NULL,
 submition_id int NOT NULL
 );
 
-CREATE TABLE submitions (
+CREATE TABLE submissions (
 id SERIAL PRIMARY KEY,
 saved_edit text NOT NULL,
 status varchar(120),
