@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
       done();
       next(error);
     }
-    client.query('SELECT * from access WHERE user_id=$1',function(error, result) {
+    client.query('SELECT * from access',function(error, result) {
       if (error) {
         done();
         next(error);
