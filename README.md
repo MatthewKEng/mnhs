@@ -2,8 +2,8 @@
 
 
 ### Group Members
-Adrian Flak
-Connor Hauck
-Leya Yacob
-Matt Eng
-Zach Garman
+- Adrian Flak
+- Connor Hauck
+- Leya Yacob
+- Matt Eng
+- Zach Garman
