@@ -14,14 +14,14 @@ department varchar(120) NOT NULL
 --url is the url of the image on s3
 CREATE TABLE images (
 id SERIAL PRIMARY KEY,
-url_image varchar(max) NOT NULL,
+url_image varchar(1000) NOT NULL,
 department_id int NOT NULL
 );
 
 --url is the url of the brand on s3
 CREATE TABLE brands (
 id SERIAL PRIMARY KEY,
-url_brand varchar(max) NOT NULL,
+url_brand varchar(1000) NOT NULL,
 department_id int NOT NULL
 );
 
@@ -42,7 +42,7 @@ submition_id int NOT NULL
 
 CREATE TABLE submissions (
 id SERIAL PRIMARY KEY,
-saved_edit text NOT NULL,
+saved_edit varchar(5000),
 status varchar(120),
 user_id int NOT NULL,
 department_id int,
