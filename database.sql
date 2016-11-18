@@ -25,21 +25,6 @@ url_brand varchar(1000) NOT NULL,
 department_id int NOT NULL
 );
 
---only users with admin value of true have access to this table
-CREATE TABLE admin_comments (
-id SERIAL PRIMARY KEY,
-comment varchar(500),
-user_id int NOT NULL,
-submission_id int NOT NULL
-);
-
-CREATE TABLE user_comments (
-id SERIAL PRIMARY KEY,
-comment varchar(500),
-user_id int NOT NULL,
-submition_id int NOT NULL
-);
-
 CREATE TABLE submissions (
 id SERIAL PRIMARY KEY,
 saved_edit varchar(5000),
@@ -47,7 +32,9 @@ status varchar(120),
 user_id int NOT NULL,
 department_id int,
 image_id int,
-brand_id int
+brand_id int,
+admin_comment varchar(1000),
+user_comment varchar(1000)
 );
 
 CREATE TABLE access (
@@ -80,3 +67,34 @@ split_rock_lighthouse BOOLEAN DEFAULT FALSE,
 traverse_des_sioux BOOLEAN DEFAULT FALSE,
 w_w_mayo_house BOOLEAN DEFAULT FALSE
 );
+
+--Populate departments with correct names
+INSERT INTO departments (department)
+VALUES
+('alexander_ramsey_house'),
+('birch_coulee_battlefield'),
+('charles_a_lindbergh_historic_site'),
+('comstock_house'),
+('folsom_house'),
+('fort_ridgely'),
+('harkin_store'),
+('historic_forestville'),
+('historic_fort_snelling'),
+('james_j_hill_house'),
+('jeffers_petroglyphs'),
+('lac_qui_parle_mission'),
+('lower_sioux_agency'),
+('marine_mill'),
+('mill_city_museum'),
+('mille_lacs_indian_museum'),
+('minnehaha_depot'),
+('minnesota_history_center'),
+('gale_family_library'),
+('minnesota_state_capitol'),
+('north_west_company_fur_post'),
+('oliver_kelley_farm'),
+('sibley_historic_site'),
+('split_rock_lighthouse'),
+('traverse_des_sioux'),
+('w_w_mayo_house')
+;
