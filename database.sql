@@ -50,16 +50,6 @@ image_id int,
 brand_id int
 );
 
-CREATE TABLE submitions (
-id SERIAL PRIMARY KEY,
-saved_edit text NOT NULL,
-status varchar(120),
-user_id int NOT NULL,
-department_id int,
-image_id int,
-brand_id int
-);
-
 CREATE TABLE access (
 id SERIAL PRIMARY KEY,
 user_id int NOT NULL,
