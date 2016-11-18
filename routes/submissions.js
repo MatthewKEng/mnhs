@@ -4,14 +4,14 @@ const pg = require('pg');
 
 var pool = new pg.Pool(config);
 
-//query the access table for table data
+//query the submissions table for submissions data
 router.get('/', function(req, res) {
   pool.connect(function(error, client, done) {
     if (error) {
       done();
       next(error);
     }
-    client.query('SELECT * from access',function(error, result) {
+    client.query('SELECT * from submissions',function(error, result) {
       if (error) {
         done();
         next(error);

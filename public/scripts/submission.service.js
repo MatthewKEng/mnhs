@@ -1,14 +1,14 @@
 angular.module('BrandImageManagerApp')
-.service('AccessService', AccessService);
+.service('SubmissionsService', SubmissionsService);
 
-function AccessService ($http) {
-  //do get resquest to querry the access table
-  this.accesses = function () {
+function SubmissionsService ($http) {
+  //do get resquest to querry the submissions table
+  this.submissions = function () {
     return $http({
       method: 'GET',
-      url: '/access'
+      url: '/submissions'
     }).then(function successCallback(response) {
-        console.log('whats the access data', response);
+        console.log('whats the submissions data', response);
         return response.data;
       }, function errorCallback(response) {
         console.log('Error in Call back');

@@ -2,6 +2,10 @@ const router = require('express').Router();
 const path = require('path');
 const pg = require('pg');
 
+var config = {
+  database: 'mnhs'
+};
+
 var pool = new pg.Pool(config);
 
 // Get all URL's in SQL DB for images stored in S3
@@ -54,7 +58,7 @@ router.post('/', function (req, res, next) {
       if (err) {
         res.sendStatus(500);
       }
-      client.query('INSERT INTO images (img_url, department_id) VALUES ($1, $2])', [req.body.url, req.file.department],
+      client.query('INSERT INTO images (img_url, department_id) VALUES [$1, $2])', [req.body.url, req.file.department],
                   function (err) {
         if (err) {
           console.log('Error inserting into db', err);

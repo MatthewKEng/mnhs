@@ -3,7 +3,7 @@ CREATE TABLE users (
 id SERIAL PRIMARY KEY,
 username varchar(80) UNIQUE NOT NULL,
 password varchar(120) NOT NULL,
-admin BOOLEAN NOT NULL
+admin BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE departments (
@@ -14,14 +14,14 @@ department varchar(120) NOT NULL
 --url is the url of the image on s3
 CREATE TABLE images (
 id SERIAL PRIMARY KEY,
-url_image varchar(max) NOT NULL,
+url_image varchar(1000) NOT NULL,
 department_id int NOT NULL
 );
 
 --url is the url of the brand on s3
 CREATE TABLE brands (
 id SERIAL PRIMARY KEY,
-url_brand varchar(max) NOT NULL,
+url_brand varchar(1000) NOT NULL,
 department_id int NOT NULL
 );
 
@@ -30,7 +30,7 @@ CREATE TABLE admin_comments (
 id SERIAL PRIMARY KEY,
 comment varchar(500),
 user_id int NOT NULL,
-submition_id int NOT NULL
+submission_id int NOT NULL
 );
 
 CREATE TABLE user_comments (
@@ -40,19 +40,9 @@ user_id int NOT NULL,
 submition_id int NOT NULL
 );
 
-CREATE TABLE submitions (
+CREATE TABLE submissions (
 id SERIAL PRIMARY KEY,
-saved_edit text NOT NULL,
-status varchar(120),
-user_id int NOT NULL,
-department_id int,
-image_id int,
-brand_id int
-);
-
-CREATE TABLE submitions (
-id SERIAL PRIMARY KEY,
-saved_edit text NOT NULL,
+saved_edit varchar(5000),
 status varchar(120),
 user_id int NOT NULL,
 department_id int,
@@ -63,30 +53,30 @@ brand_id int
 CREATE TABLE access (
 id SERIAL PRIMARY KEY,
 user_id int NOT NULL,
-alexander_ramsey_house BOOLEAN NOT NULL,
-birch_coulee_battlefield BOOLEAN NOT NULL,
-charles_a_lindbergh_historic_site BOOLEAN NOT NULL,
-comstock_house BOOLEAN NOT NULL,
-folsom_house BOOLEAN NOT NULL,
-fort_ridgely BOOLEAN NOT NULL,
-harkin_store BOOLEAN NOT NULL,
-historic_forestville BOOLEAN NOT NULL,
-historic_fort_snelling BOOLEAN NOT NULL,
-james_j_hill_house BOOLEAN NOT NULL,
-jeffers_petroglyphs BOOLEAN NOT NULL,
-lac_qui_parle_mission BOOLEAN NOT NULL,
-lower_sioux_agency BOOLEAN NOT NULL,
-marine_mill BOOLEAN NOT NULL,
-mill_city_museum BOOLEAN NOT NULL,
-mille_lacs_indian_museum BOOLEAN NOT NULL,
-minnehaha_depot BOOLEAN NOT NULL,
-minnesota_history_center BOOLEAN NOT NULL,
-gale_family_library BOOLEAN NOT NULL,
-minnesota_state_capitol BOOLEAN NOT NULL,
-north_west_company_fur_post BOOLEAN NOT NULL,
-oliver_kelley_farm BOOLEAN NOT NULL,
-sibley_historic_site BOOLEAN NOT NULL,
-split_rock_lighthouse BOOLEAN NOT NULL,
-traverse_des_sioux BOOLEAN NOT NULL,
-w_w_mayo_house BOOLEAN NOT NULL
+alexander_ramsey_house BOOLEAN DEFAULT FALSE,
+birch_coulee_battlefield BOOLEAN DEFAULT FALSE,
+charles_a_lindbergh_historic_site BOOLEAN DEFAULT FALSE,
+comstock_house BOOLEAN DEFAULT FALSE,
+folsom_house BOOLEAN DEFAULT FALSE,
+fort_ridgely BOOLEAN DEFAULT FALSE,
+harkin_store BOOLEAN DEFAULT FALSE,
+historic_forestville BOOLEAN DEFAULT FALSE,
+historic_fort_snelling BOOLEAN DEFAULT FALSE,
+james_j_hill_house BOOLEAN DEFAULT FALSE,
+jeffers_petroglyphs BOOLEAN DEFAULT FALSE,
+lac_qui_parle_mission BOOLEAN DEFAULT FALSE,
+lower_sioux_agency BOOLEAN DEFAULT FALSE,
+marine_mill BOOLEAN DEFAULT FALSE,
+mill_city_museum BOOLEAN DEFAULT FALSE,
+mille_lacs_indian_museum BOOLEAN DEFAULT FALSE,
+minnehaha_depot BOOLEAN DEFAULT FALSE,
+minnesota_history_center BOOLEAN DEFAULT FALSE,
+gale_family_library BOOLEAN DEFAULT FALSE,
+minnesota_state_capitol BOOLEAN DEFAULT FALSE,
+north_west_company_fur_post BOOLEAN DEFAULT FALSE,
+oliver_kelley_farm BOOLEAN DEFAULT FALSE,
+sibley_historic_site BOOLEAN DEFAULT FALSE,
+split_rock_lighthouse BOOLEAN DEFAULT FALSE,
+traverse_des_sioux BOOLEAN DEFAULT FALSE,
+w_w_mayo_house BOOLEAN DEFAULT FALSE
 );
