@@ -30,7 +30,7 @@ CREATE TABLE admin_comments (
 id SERIAL PRIMARY KEY,
 comment varchar(500),
 user_id int NOT NULL,
-submition_id int NOT NULL
+submission_id int NOT NULL
 );
 
 CREATE TABLE user_comments (
