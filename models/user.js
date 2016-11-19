@@ -1,6 +1,6 @@
 const router = require('express').Router();
-// const bcrypt = require('bcrypt');
-// const SALT_ROUNDS = 10;
+const bcrypt = require('bcrypt');
+const SALT_ROUNDS = 10;
 const pool = require('../db/connection');
 
 // find by username

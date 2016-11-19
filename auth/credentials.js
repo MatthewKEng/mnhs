@@ -3,7 +3,6 @@ module.exports = {
     clientId: '635146343171-m726t7cjr75thvph68au09l2upao1tjk.apps.googleusercontent.com',
     clientSecret: 'E3mabZbBKqq4ETbNjvJUyn7_',
     // user: '635146343171-compute@developer.gserviceaccount.com',
-    // user: '',
 
   },
   //created api key on google console

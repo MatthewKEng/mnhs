@@ -1,0 +1,15 @@
+.navbar {
+  color:#323e48;
+  background-color: #323e48;
+  background-image: none;
+  background-repeat: no-repeat;
+ }
+.picLogo {
+  height: auto;
+  width: 22%;
+  padding: 2%;
+}
+
+img {
+  padding-top: 20%;
+}

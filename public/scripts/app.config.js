@@ -1,9 +1,12 @@
 angular.module('BrandImageManagerApp').config(function($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
 
-  $routeProvider.when('/gallery', {
-    templateUrl: 'views/gallery.html',
-    controller: 'GalleryController as gallery'
+  $routeProvider.when('/login.html', {
+    templateUrl: 'views/login.html',
+    controller: 'NavController as nav'
+  }).when('/gallery', {
+    templateUrl: 'views/gallery.html'
+    // controller: 'GalleryController as gallery'
   }).when('/editor', {
     templateUrl: 'views/editor.html',
     controller: 'EditorController as editor'
