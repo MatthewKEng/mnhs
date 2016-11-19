@@ -2,6 +2,10 @@ const router = require('express').Router();
 const path = require('path');
 const pg = require('pg');
 
+var config = {
+  database: 'rho'
+};
+
 var pool = new pg.Pool(config);
 
 //query the submissions table for submissions data

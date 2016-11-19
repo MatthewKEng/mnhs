@@ -7,6 +7,10 @@ const session = require('express-session');
 const isLoggedIn = require('./auth/logins');
 const googleAuth = require('./routes/googleauth');
 const login = require('./routes/login');
+const access = require('./routes/access');
+const submissions = require('./routes/submissions');
+//const s3ImageRouter = require('./routes/s3ImageRouter');
+//const SQLImageRouter = require('./routes/SQLImageRouter');
 
 const sessionConfig = {
   secret: 'super secret key goes here', // TODO this info gets stored in ENV file
@@ -29,9 +33,16 @@ app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
 
-//
+
 app.use('/auth', googleAuth);
+
+app.use('/access', access);
+app.use('/submissions', submissions);
 // app.use('/login',isLoggedIn, login);
+//s3 image route and SQL image route
+//app.use('/s3ImageRouter', s3ImageRouter);
+//app.use('/SQLImageRouter', SQLImageRouter);
+
 
 
 app.get('/*', function (req, res) {
