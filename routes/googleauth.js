@@ -15,7 +15,7 @@ router.get('/google',
 
 router.get('/google/callback',
   passport.authenticate('google', {
-    successRedirect: '/login',
+    successRedirect: '/gallery',
     failureRedirect: '/',
   }));
 
@@ -28,10 +28,10 @@ router.get('/google/callback',
 
 });
 
-router.get('/logout', function (req, res) {
-  req.logout();
-  res.sendStatus(200); // they made it!
-});
+// router.get('/logout', function (req, res) {
+//   req.logout();
+//   res.sendStatus(200); // they made it!
+// });
 
 
 

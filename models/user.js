@@ -74,7 +74,6 @@ function create(googleID, googleEmail, googleName, accessToken, refreshToken) {
   });
 }
 
-
 module.exports = {
   findById: findById,
   create: create,

@@ -9,6 +9,7 @@ const googleAuth = require('./routes/googleauth');
 const login = require('./routes/login');
 const access = require('./routes/access');
 const submissions = require('./routes/submissions');
+const logout = require('./routes/logout');
 //const s3ImageRouter = require('./routes/s3ImageRouter');
 //const SQLImageRouter = require('./routes/SQLImageRouter');
 
@@ -34,11 +35,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use('/auth', googleAuth);
 
+app.use('/auth', googleAuth);
+app.use('/login',isLoggedIn, login);
+app.use('/logout', logout);
 app.use('/access', access);
 app.use('/submissions', submissions);
-// app.use('/login',isLoggedIn, login);
+
 //s3 image route and SQL image route
 //app.use('/s3ImageRouter', s3ImageRouter);
 //app.use('/SQLImageRouter', SQLImageRouter);
@@ -53,20 +56,15 @@ app.get('/*', function (req, res) {
     // res.redirect('/auth/google');
 
 
-//
-app.get('/login', passport.authenticate('google'));
-
-app.get('/auth/callback/google',
-    passport.authenticate('google', { failureRedirect: '/login' }),
-    function(req, res) {
-        // Successful authentication, redirect to your app.
-        res.redirect('/');
-    }
-);
+// log out function
+// app.get('/logout', function(req, res){
+//   req.logout();
+//   res.redirect('/');
+// });
 
 });
 
-app.use('/login',isLoggedIn, login);
+
 var server = app.listen(3000, function() {
   console.log('Listening on port', server.address().port);
 });
