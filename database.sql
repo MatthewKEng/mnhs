@@ -1,10 +1,14 @@
 --first time table is created will have to hard code the admin user BOOLEAN value as true
 CREATE TABLE users (
 id SERIAL PRIMARY KEY,
-username varchar(80) UNIQUE NOT NULL,
-password varchar(120) NOT NULL,
+googleID varchar(1000)  NOT NULL,
+email varchar(1000) NOT NULL,
+google_name varchar (1000) NOT NULL,
+accessToken varchar (1000),
+refreshToken varchar (1000),
 admin BOOLEAN DEFAULT FALSE
 );
+
 
 CREATE TABLE departments (
 id SERIAL PRIMARY KEY,
