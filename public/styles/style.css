@@ -16,9 +16,14 @@ body{
  }
  /*side admin menu bar*/
 .sideMenu{
-  color:#323e48;
+  color: white;
   background-color: #323e48;
   height: 87vh;
+}
+.sideButtonContainer{
+  position: relative;
+  top: 40%;
+  transform: translateY(-60%);
 }
 .picLogo {
   height: auto;
