@@ -29,7 +29,7 @@ router.get('/admin', function(req, res) {
   });
 });
 
-// Get only URL's in SQL DB for specific user department
+// Get only Image URL's in SQL DB for specific user department
 router.get('/:deptID', function(req, res) {
   var deptID = req.params.deptID;
   pool.connect(function (err, client, done) {
