@@ -1,19 +1,21 @@
 <!--side menu-->
 <div class="container-fluid col-xs-2 col-md-2 col-lg-2 sideMenu">
   <div class="sideButtonContainer">
-    <button class="btn btn-info btn-lg btn-block sideButton">Pending</button>
-    <button class="btn btn-info btn-lg btn-block sideButton">Approved</button>
-    <button class="btn btn-info btn-lg btn-block sideButton">Revision</button>
-    <button class="btn btn-warning btn-lg btn-block sideButton">Access</button>
+    <button ng-click="admin.showPendingGallery()" class="btn btn-info btn-lg btn-block sideButton">Pending</button>
+    <button ng-click="admin.showApprovedGallery()" class="btn btn-info btn-lg btn-block sideButton">Approved</button>
+    <button ng-click="admin.showRevisionGallery()" class="btn btn-info btn-lg btn-block sideButton">Revision</button>
+    <button ng-click="admin.showAccess()" class="btn btn-warning btn-lg btn-block sideButton">Access</button>
   </div>
 </div>
+
 <!--dynamicly created gallary of images that are pennding, approved, or needs rivision-->
-<div class="container">
-<div class="row col-xs-4 col-md-4 col-lg-4 text-center">
-  <div>
-    <image>Placeholer</image>
-    <h6>image Title</h6>
-  </div>
+<!--pending-->
+<div ng-show="((admin.pendingGalleryDisplay))" class="container">
+  <div class="row col-xs-4 col-md-4 col-lg-4 text-center">
+    <div>
+      <image>Placeholer</image>
+      <h6>Pending image Title</h6>
+    </div>
     <span>
       <button class="btn btn-success">Approve</button>
       <button class="btn btn-danger">Revise</button>
@@ -21,7 +23,43 @@
     </span>
   </div>
 </div>
+<!--approved-->
+<div ng-show="((admin.approvedGalleryDisplay))" class="container">
+  <div class="row col-xs-4 col-md-4 col-lg-4 text-center">
+    <div>
+      <image>Placeholer</image>
+      <h6>approved image Title</h6>
+    </div>
+    <span>
+      <button class="btn btn-danger">Delete</button>
+      <button ng-click="admin.viewButton()" class="btn btn-info">View</button>
+    </span>
+  </div>
+</div>
+<!--revision-->
+<div ng-show="((admin.revisionGalleryDisplay))" class="container">
+  <div class="row col-xs-4 col-md-4 col-lg-4 text-center">
+    <div>
+      <image>Placeholer</image>
+      <h6>revision image Title</h6>
+    </div>
+    <span>
+      <button class="btn btn-danger">Delete</button>
+      <button ng-click="admin.viewButton()" class="btn btn-info">View</button>
+    </span>
+  </div>
+</div>
 <!--access controls-->
+<div ng-show="((admin.accessControlsDisplay))" class="container text-center">
+  <div class="row ol-xs-9 col-md-9 col-lg-9">
+    <!--dynamicly created list of users and there access-->
+    <div>
+      <ul>
+        username place holder
+      </ul>
+    </div>
+  </div>
+</div>
 
 <!--modal-->
 <div id="adminModal" class="modal">
@@ -32,7 +70,7 @@
       <span ng-click="admin.closeModal()" class="close">×</span>
       <h2>Department</h2>
     </div>
-    <div class="modal-body">
+    <div class="modal-body text-center">
       <!--image dynamicly created same image as image clicked-->
       <div>
         <image>Placeholer</image>
