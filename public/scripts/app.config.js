@@ -12,7 +12,7 @@ angular.module('BrandImageManagerApp').config(function($routeProvider, $location
     controller: 'EditorController as editor'
   }).when('/admin', {
     templateUrl: 'views/admin.html',
-    //controller: 'AdminController as admin'
+    controller: 'AdminController as admin'
   }).otherwise({
     templateUrl: 'views/login.html',
     controller: 'LoginController as login'

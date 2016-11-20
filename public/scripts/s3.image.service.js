@@ -9,7 +9,7 @@ function ImageService($http) {
 
   // function to return all approved images for Admin
 
-  // function to delete a specific image from S3 and SQL DB.  
+  // function to delete a specific image from S3 and SQL DB.
 
 
 }
