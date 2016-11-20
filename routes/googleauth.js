@@ -8,7 +8,6 @@ router.get('/google',
   passport.authenticate('google', { scope:
     ['https://www.googleapis.com/auth/plus.login',
     'https://www.googleapis.com/auth/plus.profile.emails.read',
-    // 'https://www.googleapis.com/auth/calendar',
     'https://mail.google.com'],
     }
   ));
@@ -28,9 +27,12 @@ router.get('/google/callback',
 
 });
 
-// router.get('/logout', function (req, res) {
+// router.get('/', function (req, res) {
+//   console.log('feels good to log out');
+//   // req.session.destroy();
 //   req.logout();
-//   res.sendStatus(200); // they made it!
+//   // res.sendStatus(200); // they made it!
+//   res.redirect('/');
 // });
 
 

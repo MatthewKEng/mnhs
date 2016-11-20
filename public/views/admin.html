@@ -1,1 +1,51 @@
-<h1>hello i am admin landing page</h1>
+<!--side menu-->
+<div class="container-fluid col-xs-2 col-md-2 col-lg-2 sideMenu">
+  <div class="sideButtonContainer">
+    <button class="btn btn-info btn-lg btn-block sideButton">Pending</button>
+    <button class="btn btn-info btn-lg btn-block sideButton">Approved</button>
+    <button class="btn btn-info btn-lg btn-block sideButton">Revision</button>
+    <button class="btn btn-warning btn-lg btn-block sideButton">Access</button>
+  </div>
+</div>
+<!--dynamicly created gallary of images that are pennding, approved, or needs rivision-->
+<div class="container">
+<div class="row col-xs-4 col-md-4 col-lg-4 text-center">
+  <div>
+    <image>Placeholer</image>
+    <h6>image Title</h6>
+  </div>
+    <span>
+      <button class="btn btn-success">Approve</button>
+      <button class="btn btn-danger">Revise</button>
+      <button ng-click="admin.viewButton()" class="btn btn-info">View</button>
+    </span>
+  </div>
+</div>
+<!--access controls-->
+
+<!--modal-->
+<div id="adminModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span ng-click="admin.closeModal()" class="close">×</span>
+      <h2>Department</h2>
+    </div>
+    <div class="modal-body">
+      <!--image dynamicly created same image as image clicked-->
+      <div>
+        <image>Placeholer</image>
+        <h6>image Title</h6>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <span>
+        <button class="btn btn-success">Approve</button>
+        <button class="btn btn-danger">Revise</button>
+        <button class="btn btn-info">Fullscreen</button>
+      </span>
+    </div>
+  </div>
+
+</div>

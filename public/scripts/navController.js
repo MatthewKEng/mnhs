@@ -28,22 +28,19 @@ angular.module('BrandImageManagerApp').controller('NavController', function(Auth
             });
 
     nav.logout = function() {
-        // authFactory.logout()
-        //     .then(function(response) { // success
-        //             authFactory.setLoggedIn(false);
-        //             nav.username = '';
-        //             $window.location.href = '/'; // forces a page reload which will update our NavController
-        //         },
-        //
-        //         function(response) { // error
-        //             nav.message.text = 'Unable to logout';
-        //             nav.message.type = 'error';
-        //         });
-        //
+        authFactory.logout()
+            .then(function(response) { // success
+              console.log('inside nav controller');
+                    authFactory.setLoggedIn(false);
+                    nav.username = '';
+                    // $window.location.href = '/'; // forces a page reload which will update our NavController
 
+                },
 
-
-
+                function(response) { // error
+                    nav.message.text = 'Unable to logout';
+                    nav.message.type = 'error';
+                });
     };
 
 });
