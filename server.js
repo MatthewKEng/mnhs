@@ -48,21 +48,31 @@ app.use('/submissions', submissions);
 
 
 
-app.get('/*', function (req, res) {
- // if (req.isAuthenticated()) {
+app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'public/views/index.html'));
-// } else {
-//
-    // res.redirect('/auth/google');
-
-
-// log out function
-// app.get('/logout', function(req, res){
-//   req.logout();
-//   res.redirect('/');
-// });
-
 });
+
+// everything beyond this point must be authenticated
+app.use(ensureAuthenticated);
+
+//admin and home page are not requiring authentication yet...? not sure 
+
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'public/views/index.html'));
+});
+
+
+
+function ensureAuthenticated (req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  }else {
+    res.sendStatus(401);
+    // res.redirect('/');
+  }
+}
+
+
 
 
 var server = app.listen(3000, function() {

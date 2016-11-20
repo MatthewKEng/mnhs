@@ -25,9 +25,10 @@ angular.module('BrandImageManagerApp').factory('AuthFactory', function ($http) {
       Status.loggedIn = value;
     },
 
-    // logout: function () {
-    //   return $http.get('/logout');
-    // },
+    logout: function () {
+      console.log('inside auth factory');
+      return $http.get('/logout');
+    },
   };
 
 });
