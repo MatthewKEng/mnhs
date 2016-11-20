@@ -31,6 +31,7 @@ angular.module('BrandImageManagerApp').controller('NavController', function(Auth
         authFactory.logout()
             .then(function(response) { // success
               console.log('inside nav controller');
+                    nav.displayLogout = false;
                     authFactory.setLoggedIn(false);
                     nav.username = '';
                     // $window.location.href = '/'; // forces a page reload which will update our NavController

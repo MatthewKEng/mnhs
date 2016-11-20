@@ -2,6 +2,7 @@
 <html ng-app="BrandImageManagerApp">
   <head>
     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brand Image Manager</title>
     <!--vendor scripts-->
     <script src="vendors/angular.min.js" charset="utf-8"></script>
@@ -18,6 +19,7 @@
     <script src="scripts/submission.service.js" charset="utf-8"></script>
     <!--stylesheets-->
     <link rel="stylesheet" href="vendors/bootstrap.min.css" media="screen" title="bootstrap">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet" />
     <link rel="stylesheet" href="styles/style.css" media="screen">
 
     <base href="/" />
@@ -25,24 +27,26 @@
   <body>
 
 
-  <nav nav class="navbar navbar-default">
+  <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <div class="collapse navbar-collapse">
-              <a alt="Minnesota Historical Society"><img src="assets/mnhs_logo_2color.png" class="picLogo"/></a>
-              <ul class="nav navbar-nav navbar-right" ng-controller="NavController as nav">
-              <li class="active"><a href="/gallery">Home</a></li>
-              <li class="active"><a href="/admin">Admin</a></li>
-              <li class="active"><a ng-click="nav.logout()" href="/">Logout</a></li>
+            <div class="navbar-header">
+              <a alt="Minnesota Historical Society"><img src="http://www.mnhs.org/static/masthead/mnhs_org/img/mnhs-logo-white.svg" class="picLogo"/></a>
+            </div>
+              <ul class="nav navbar-nav" ng-controller="NavController as nav">
+              <li class="icons"><a href="/gallery"><span class="glyphicon glyphicon-home"><br />Home</span></a></li>
+              <li class="icons"><a href="/admin"><span class="glyphicon glyphicon-user"><br />Admin</span></a></li>
+              <li ng-show="nav.displayLogout" class="icons"><a ng-click="nav.logout()" href="/"><span class="glyphicon glyphicon-log-out"><br />Logout</span></a></li>
               </ul>
 
              </div>
-         </div>
-
 </nav>
 
     <ng-view>
 
     </ng-view>
+    <footer class="navbar navbar-fixed-bottom">
+
+    </footer>
 
   </body>
 

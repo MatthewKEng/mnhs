@@ -29,8 +29,8 @@ img {
   transform: translateY(-60%);
 }
 .picLogo {
-  height: auto;
-  width: 22%;
+  /*height: auto;
+  width: 22%;*/
   padding: 2%;
 }
 /*modal styles and animation*/
@@ -103,7 +103,13 @@ img {
     color: white;
 }
 
-/*
-body {
-  padding-top: 100px;
-}*/
+.glyphicon {
+  color: white;
+  font-size: 125%;
+  /*padding-top: 80%;
+  margin-left: 350%;*/
+
+}
+.glyphicon:hover {
+  color: #eeb111;
+}
