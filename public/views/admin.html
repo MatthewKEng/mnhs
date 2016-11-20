@@ -17,6 +17,35 @@
     <span>
       <button class="btn btn-success">Approve</button>
       <button class="btn btn-danger">Revise</button>
+      <button ng-click="admin.viewButton()" class="btn btn-info">View</button>
     </span>
   </div>
+</div>
+<!--access controls-->
+
+<!--modal-->
+<div id="adminModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span ng-click="admin.closeModal()" class="close">×</span>
+      <h2>Department</h2>
+    </div>
+    <div class="modal-body">
+      <!--image dynamicly created same image as image clicked-->
+      <div>
+        <image>Placeholer</image>
+        <h6>image Title</h6>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <span>
+        <button class="btn btn-success">Approve</button>
+        <button class="btn btn-danger">Revise</button>
+        <button class="btn btn-info">Fullscreen</button>
+      </span>
+    </div>
+  </div>
+
 </div>
