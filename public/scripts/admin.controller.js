@@ -40,17 +40,20 @@ function AdminController($location, AccessService, SubmissionsService) {
       admin.approvedGalleryDisplay = false;
       admin.revisionGalleryDisplay = true;
     }
-    //function for truthy value of button clicked
-    admin.truthiness = function (boolean) {
-      function currentbutton() {};
-      var showMe = new currentbutton()
-      if (boolean == true) {
-         admin.showUserAcess = false;
-         console.log('whats the truth ',admin.showUserAcess);
-      }else{
-         admin.showUserAcess = true;
-         console.log('whats the truth ',admin.showUserAcess);
+    //function for truthy value for access acordion
+    admin.truthiness = function (index) {
+      //for loop that takes current index of button clicked turns proberty of index true and
+      //all other proberties in the admin.showUserAccess array false
+      for (var i = 0; i < admin.allUserAccess.length; i++) {
+        if (i == index) {
+          admin.showUserAccess[i] = !admin.showUserAccess[i];
+           //console.log('whats the truth ',admin.showUserAccess);
+        }else{
+          admin.showUserAccess[i] = false;
+           //console.log('whats the truth ',admin.showUserAccess);
+        }
       }
+
     }
     //call to service to get status of all submissions
     //push statuses into specific arrays to count number of statuses based on array
@@ -58,8 +61,8 @@ function AdminController($location, AccessService, SubmissionsService) {
     //function to get all user data from the user table for access controls
     admin.getUsersAccesses = function () {
       AccessService.accesses().then(function(response){
-        admin.allUserAccess = response
-        console.log('whats the access response', admin.allUserAccess);
+        admin.allUserAccess = response;
+        //console.log('whats the access response', admin.allUserAccess);
       });
     }
 
