@@ -32,12 +32,13 @@
             <div class="navbar-header">
               <a alt="Minnesota Historical Society"><img src="http://www.mnhs.org/static/masthead/mnhs_org/img/mnhs-logo-white.svg" class="picLogo"/></a>
             </div>
-              <ul class="nav navbar-nav" ng-controller="NavController as nav">
+            <div class="row col-xs-9 col-md-9 col-lg-9">
+              <ul class="nav navbar-nav pull-right" ng-controller="NavController as nav">
               <li class="icons"><a href="/gallery"><span class="glyphicon glyphicon-home"><br />Home</span></a></li>
               <li class="icons"><a href="/admin"><span class="glyphicon glyphicon-user"><br />Admin</span></a></li>
               <li ng-show="nav.displayLogout" class="icons"><a ng-click="nav.logout()" href="/"><span class="glyphicon glyphicon-log-out"><br />Logout</span></a></li>
               </ul>
-
+            </div>
              </div>
 </nav>
 

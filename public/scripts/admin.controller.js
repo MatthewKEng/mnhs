@@ -12,6 +12,7 @@ function AdminController($location, AccessService, SubmissionsService) {
 
     //function to display access
     admin.showAccess = function () {
+      admin.getUsersAccesses();
       admin.accessControlsDisplay = true;
       admin.pendingGalleryDisplay = false;
       admin.approvedGalleryDisplay = false;
@@ -31,7 +32,6 @@ function AdminController($location, AccessService, SubmissionsService) {
       admin.pendingGalleryDisplay = false;
       admin.approvedGalleryDisplay = true;
       admin.revisionGalleryDisplay = false;
-      console.log('approved clicked');
     }
     //display revision gallery
     admin.showRevisionGallery = function () {
@@ -39,10 +39,37 @@ function AdminController($location, AccessService, SubmissionsService) {
       admin.pendingGalleryDisplay = false;
       admin.approvedGalleryDisplay = false;
       admin.revisionGalleryDisplay = true;
-      console.log('revision clicked');
+    }
+    //function for truthy value for access acordion
+    admin.truthiness = function (index) {
+      //for loop that takes current index of button clicked turns proberty of index true and
+      //all other properties in the admin.showUserAccess array false
+      for (var i = 0; i < admin.allUserAccess.length; i++) {
+        if (i == index) {
+          admin.showUserAccess[i] = !admin.showUserAccess[i];
+           //console.log('whats the truth ',admin.showUserAccess);
+        }else{
+          admin.showUserAccess[i] = false;
+           //console.log('whats the truth ',admin.showUserAccess);
+        }
+      }
+    }
+
+    //make the key pretty function
+    admin.pretty = function (key) {
+      var prettyKey = key.replace(/_/g, " ").toLocaleUpperCase();
+      return prettyKey;
     }
     //call to service to get status of all submissions
     //push statuses into specific arrays to count number of statuses based on array
+
+    //function to get all user data from the user table for access controls
+    admin.getUsersAccesses = function () {
+      AccessService.accesses().then(function(response){
+        admin.allUserAccess = response;
+        //console.log('whats the access response', admin.allUserAccess);
+      });
+    }
 
 
     //modal controlls
