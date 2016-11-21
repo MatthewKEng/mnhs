@@ -55,7 +55,11 @@ app.get('/', function (req, res) {
 // everything beyond this point must be authenticated
 app.use(ensureAuthenticated);
 
-//admin and home page are not requiring authentication yet...? not sure 
+
+
+
+
+//admin and home page are not requiring authentication yet...? not sure
 
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'public/views/index.html'));
