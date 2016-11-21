@@ -16,6 +16,7 @@ img {
   background-repeat: no-repeat;
   padding: 0;
   margin: 0;
+  border-radius: 0;
  }
  /*side admin menu bar*/
 .sideMenu{

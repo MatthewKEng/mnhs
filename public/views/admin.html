@@ -56,9 +56,12 @@
     <div ng-repeat="user in admin.allUserAccess" ng-init = "admin.showUserAccess[$index]= false">
       <button ng-click="admin.truthiness($index)" class="btn btn-primary btn-block">{{user.email}}</button>
       <div ng-show="admin.showUserAccess[$index]" >
-        <ul ng-repeat="(key,val) in user" ng-if="$index >= 1">
-          {{key}}&nbsp;<input type="checkbox" ng-checked="{{val}}" >
-        </ul>
+        <label ng-repeat="(key,val) in user" ng-if="$index >= 1" class="checkbox-inline text-left"><input type="checkbox" ng-checked="{{val}}">
+          {{admin.pretty(key)}}
+        </label>
+        <!-- <ul ng-repeat="(key,val) in user" ng-if="$index >= 1">
+          {{admin.pretty(key)}}&nbsp;<input type="checkbox" ng-checked="{{val}}" >
+        </ul> -->
       </div>
     </div>
   </div>
