@@ -40,7 +40,7 @@ function AdminController($location, AccessService, SubmissionsService) {
       admin.approvedGalleryDisplay = false;
       admin.revisionGalleryDisplay = true;
     }
-    //function for truthy value for access acordion
+    //function for truthy value for access accordion
     admin.truthiness = function (index) {
       //for loop that takes current index of button clicked turns proberty of index true and
       //all other properties in the admin.showUserAccess array false
@@ -70,6 +70,17 @@ function AdminController($location, AccessService, SubmissionsService) {
         //console.log('whats the access response', admin.allUserAccess);
       });
     }
+
+    //update user access
+    admin.updateUsersAccesses = function (user, site, boolean) {
+      var accessObj = {email:user, department:site, accessBoolean:boolean };
+      AccessService.updateAccess(accessObj).then(function(response){
+        AccessService.updateAccess = response;
+        console.log('whats the update access response', AccessService.updateAccess);
+        admin.getUsersAccesses();
+      });
+    }
+
 
 
     //modal controlls
