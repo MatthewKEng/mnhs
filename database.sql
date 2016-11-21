@@ -3,7 +3,7 @@ CREATE TABLE users (
 id SERIAL PRIMARY KEY,
 googleID varchar(1000)  NOT NULL,
 email varchar(1000) NOT NULL,
-google_name varchar (1000) NOT NULL,
+google_name varchar (1000),
 accessToken varchar (1000),
 refreshToken varchar (1000),
 admin BOOLEAN DEFAULT FALSE,
