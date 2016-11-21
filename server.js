@@ -10,6 +10,8 @@ const login = require('./routes/login');
 const access = require('./routes/access');
 const submissions = require('./routes/submissions');
 const logout = require('./routes/logout');
+
+
 //const s3ImageRouter = require('./routes/s3ImageRouter');
 //const SQLImageRouter = require('./routes/SQLImageRouter');
 
@@ -35,6 +37,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, 'public/views/index.html'));
+});
+
+
 
 app.use('/auth', googleAuth);
 app.use('/login',isLoggedIn, login);
@@ -48,13 +55,12 @@ app.use('/submissions', submissions);
 
 
 
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'public/views/index.html'));
-});
+// app.get('/', function (req, res) {
+//     res.sendFile(path.join(__dirname, 'public/views/index.html'));
+// });
 
 // everything beyond this point must be authenticated
 app.use(ensureAuthenticated);
-
 
 
 

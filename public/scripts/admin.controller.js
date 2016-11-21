@@ -4,6 +4,7 @@ angular.module('BrandImageManagerApp')
 function AdminController($location, AccessService, SubmissionsService) {
     var admin = this;
 
+
     //ng-show variables onload
     admin.accessControlsDisplay = false;
     admin.pendingGalleryDisplay = true;
