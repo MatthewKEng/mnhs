@@ -42,6 +42,8 @@ function AdminController($location, AccessService, SubmissionsService) {
     }
     //function for truthy value of button clicked
     admin.truthiness = function (boolean) {
+      function currentbutton() {};
+      var showMe = new currentbutton()
       if (boolean == true) {
          admin.showUserAcess = false;
          console.log('whats the truth ',admin.showUserAcess);
