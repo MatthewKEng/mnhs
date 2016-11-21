@@ -54,14 +54,11 @@
   <div class="row ol-xs-9 col-md-9 col-lg-9">
     <!--dynamicly created list of users and there access-->
     <div ng-repeat="user in admin.allUserAccess" ng-init = "admin.showUserAccess[$index]= false">
-      <button ng-click="admin.truthiness($index)" class="btn btn-primary btn-block">{{user.email}}</button>
-      <div ng-show="admin.showUserAccess[$index]" >
-        <label ng-repeat="(key,val) in user" ng-if="$index >= 1" class="checkbox-inline text-left"><input type="checkbox" ng-checked="{{val}}">
+      <button ng-click="admin.truthiness($index)" class="btn btn-primary btn-block acordionButton">{{user.email}}</button>
+      <div class="text-left" ng-show="admin.showUserAccess[$index]" >
+        <label ng-repeat="(key,val) in user" ng-if="$index >= 1" class="checkbox-inline">&nbsp;<input type="checkbox" ng-checked="{{val}}">
           {{admin.pretty(key)}}
         </label>
-        <!-- <ul ng-repeat="(key,val) in user" ng-if="$index >= 1">
-          {{admin.pretty(key)}}&nbsp;<input type="checkbox" ng-checked="{{val}}" >
-        </ul> -->
       </div>
     </div>
   </div>

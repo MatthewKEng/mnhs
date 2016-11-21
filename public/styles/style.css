@@ -29,6 +29,10 @@ img {
   top: 40%;
   transform: translateY(-60%);
 }
+/*remove the rounded corners for the acordion buttons*/
+.acordionButton{
+  border-radius: 0;
+}
 .picLogo {
   /*height: auto;
   width: 22%;*/
