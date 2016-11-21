@@ -53,10 +53,13 @@
 <div ng-show="((admin.accessControlsDisplay))" class="container text-center">
   <div class="row ol-xs-9 col-md-9 col-lg-9">
     <!--dynamicly created list of users and there access-->
-    <div>
-      <ul>
-        username place holder
-      </ul>
+    <div ng-repeat="user in admin.allUserAccess">
+      <button ng-click="admin.truthiness(admin.showUserAcess)" class="btn btn-primary btn-block">{{user.email}}</button>
+      <div ng-show="((admin.showUserAcess))" >
+        <ul ng-repeat="(key,val) in user" ng-if="$index >= 1">
+          {{key}}&nbsp;<input type="checkbox" ng-checked="{{val}}" >
+        </ul>
+      </div>
     </div>
   </div>
 </div>
