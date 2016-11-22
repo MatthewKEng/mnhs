@@ -48,9 +48,11 @@ function AdminController($location, AccessService, SubmissionsService) {
       for (var i = 0; i < admin.allUserAccess.length; i++) {
         if (i == index) {
           admin.showUserAccess[i] = !admin.showUserAccess[i];
+          admin.opnen = '-';
            //console.log('whats the truth ',admin.showUserAccess);
         }else{
           admin.showUserAccess[i] = false;
+          admin.opnen = '+';
            //console.log('whats the truth ',admin.showUserAccess);
         }
       }
@@ -74,10 +76,9 @@ function AdminController($location, AccessService, SubmissionsService) {
 
     //update user access
     admin.updateUsersAccesses = function (user, site, val) {
-      var accessObj = {email:user, department:site, accessBoolean:boolean };
+      var accessObj = {email:user, department:site, accessBoolean:val };
       AccessService.updateAccess(accessObj).then(function(response){
-        AccessService.updateAccess = response;
-        console.log('whats the update access response', AccessService.updateAccess);
+        console.log('whats the update access response', response);
         //admin.getUsersAccesses();
       });
     }
