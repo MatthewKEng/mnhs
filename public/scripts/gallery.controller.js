@@ -1,7 +1,7 @@
-
-
- angular.module('BrandImageManagerApp')
-      .controller('GalleryController', GalleryController);
+ // 
+ //
+ // angular.module('BrandImageManagerApp')
+ //      .controller('GalleryController', GalleryController);
 
 
  // angular.module('BrandImageManagerApp')
@@ -18,7 +18,7 @@
 
 
 
-        }
+        // }
 
 
 // angular.module('BrandImageManagerApp')
