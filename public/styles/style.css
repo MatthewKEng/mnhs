@@ -44,7 +44,6 @@ img {
 /*remove the rounded corners for the acordion buttons*/
 .acordionButton{
   border-radius: 0;
-
 }
 .picLogo {
   /*height: auto;
