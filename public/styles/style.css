@@ -28,6 +28,17 @@ img {
   top: 40%;
   transform: translateY(-60%);
 }
+.sideButtonContainer2{
+  position: relative;
+}
+.zach{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.col{
+  width: 30%;
+}
 .picLogo {
   /*height: auto;
   width: 22%;*/
