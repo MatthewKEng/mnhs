@@ -40,7 +40,7 @@ img {
 }
 .col{
   width: 30%;
-
+}
 /*remove the rounded corners for the acordion buttons*/
 .acordionButton{
   border-radius: 0;
