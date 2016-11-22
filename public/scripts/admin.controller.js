@@ -3,7 +3,7 @@ angular.module('BrandImageManagerApp')
 
 function AdminController($location, AccessService, SubmissionsService) {
     var admin = this;
-    
+
 
     //ng-show variables onload
     admin.accessControlsDisplay = false;
@@ -73,12 +73,12 @@ function AdminController($location, AccessService, SubmissionsService) {
     }
 
     //update user access
-    admin.updateUsersAccesses = function (user, site, boolean) {
+    admin.updateUsersAccesses = function (user, site, val) {
       var accessObj = {email:user, department:site, accessBoolean:boolean };
       AccessService.updateAccess(accessObj).then(function(response){
         AccessService.updateAccess = response;
         console.log('whats the update access response', AccessService.updateAccess);
-        admin.getUsersAccesses();
+        //admin.getUsersAccesses();
       });
     }
 
