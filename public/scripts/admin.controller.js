@@ -4,6 +4,8 @@ angular.module('BrandImageManagerApp')
 function AdminController($location, AccessService, SubmissionsService) {
     var admin = this;
 
+    //set onload the open
+    admin.open = '+';
 
     //ng-show variables onload
     admin.accessControlsDisplay = false;
@@ -48,11 +50,10 @@ function AdminController($location, AccessService, SubmissionsService) {
       for (var i = 0; i < admin.allUserAccess.length; i++) {
         if (i == index) {
           admin.showUserAccess[i] = !admin.showUserAccess[i];
-          admin.opnen = '-';
+          
            //console.log('whats the truth ',admin.showUserAccess);
         }else{
           admin.showUserAccess[i] = false;
-          admin.opnen = '+';
            //console.log('whats the truth ',admin.showUserAccess);
         }
       }
