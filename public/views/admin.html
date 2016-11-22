@@ -13,7 +13,7 @@
 <div ng-show="((admin.pendingGalleryDisplay))" class="container">
   <div class="row col-xs-4 col-md-4 col-lg-4 text-center">
     <div>
-      <image>Placeholer</image>
+      <image>Placeholder</image>
       <h6>Pending image Title</h6>
     </div>
     <span>
@@ -27,7 +27,7 @@
 <div ng-show="((admin.approvedGalleryDisplay))" class="container">
   <div class="row col-xs-4 col-md-4 col-lg-4 text-center">
     <div>
-      <image>Placeholer</image>
+      <image>Placeholder</image>
       <h6>approved image Title</h6>
     </div>
     <span>
@@ -40,7 +40,7 @@
 <div ng-show="((admin.revisionGalleryDisplay))" class="container">
   <div class="row col-xs-4 col-md-4 col-lg-4 text-center">
     <div>
-      <image>Placeholer</image>
+      <image>Placeholder</image>
       <h6>revision image Title</h6>
     </div>
     <span>
@@ -54,7 +54,7 @@
   <div class="row ol-xs-9 col-md-9 col-lg-9">
     <!--dynamicly created list of users and there access-->
     <div ng-repeat="user in admin.allUserAccess" ng-init = "admin.showUserAccess[$index]= false">
-      <button ng-click="admin.truthiness($index)" class="btn btn-primary btn-block acordionButton">{{user.email}}</button>
+      <button ng-click="admin.truthiness($index)" class="btn btn-primary btn-block acordionButton">{{user.email}}<span class="pull-right">{{admin.open}}</span></button>
       <div class="text-left" ng-show="admin.showUserAccess[$index]" >
         <label ng-repeat="(key,val) in user" ng-if="$index >= 2" class="checkbox-inline">
           <input type="checkbox" ng-model="val" ng-change="admin.updateUsersAccesses(user.email, key, val)" ng-checked="{{val}}">
@@ -77,7 +77,7 @@
     <div class="modal-body text-center">
       <!--image dynamicly created same image as image clicked-->
       <div>
-        <image>Placeholer</image>
+        <image>Placeholder</image>
         <h6>image Title</h6>
       </div>
     </div>
