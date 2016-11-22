@@ -16,6 +16,7 @@ img {
   background-repeat: no-repeat;
   padding: 0;
   margin: 0;
+  border-radius: 0;
  }
  /*side admin menu bar*/
 .sideMenu{
@@ -28,6 +29,7 @@ img {
   top: 40%;
   transform: translateY(-60%);
 }
+<<<<<<< HEAD
 .sideButtonContainer2{
   position: relative;
 }
@@ -38,6 +40,11 @@ img {
 }
 .col{
   width: 30%;
+=======
+/*remove the rounded corners for the acordion buttons*/
+.acordionButton{
+  border-radius: 0;
+>>>>>>> fee0b641ae166c2e47df25a2d89a53e6bf8c4d62
 }
 .picLogo {
   /*height: auto;

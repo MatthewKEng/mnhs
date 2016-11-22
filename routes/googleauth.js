@@ -27,16 +27,4 @@ router.get('/google/callback',
 
 });
 
-// router.get('/', function (req, res) {
-//   console.log('feels good to log out');
-//   // req.session.destroy();
-//   req.logout();
-//   // res.sendStatus(200); // they made it!
-//   res.redirect('/');
-// });
-
-
-
-
-
 module.exports = router;
