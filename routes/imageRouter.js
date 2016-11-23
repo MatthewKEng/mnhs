@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const AWS = require('aws-sdk');
 const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({dest: 'uploads/'});
 const multerS3 = require('multer-s3');
 const knox = require('knox');
 const path = require('path');
@@ -34,7 +34,7 @@ var pool = new pg.Pool(config);
 var s3 = new AWS.S3();
 
 //sets the destination for multer to upload the file as s3
-var upload = multer({
+var uploads3 = multer({
   storage: multerS3({
     s3: s3,
     bucket: 'mnhs',
@@ -42,12 +42,11 @@ var upload = multer({
     // file later on.  This is optional, but helpful.
     acl: 'public-read',
     metadata: function (req, file, cb) {
-      cb(null, { fieldName: file.fieldname });
+      cb(null, {fieldName: file.fieldname});
     },
-
     key: function (req, file, cb) {
-      //creates a name for the file with the file extention
-      //New name will be stored in req.file.key;
+      // creates a name for the file with the file extention
+      // New name will be stored in req.file.key;
       cb(null, Date.now().toString() + path.extname(file.originalname));
     },
   }),

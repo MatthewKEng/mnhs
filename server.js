@@ -10,7 +10,7 @@ const login = require('./routes/login');
 const access = require('./routes/access');
 const submissions = require('./routes/submissions');
 const logout = require('./routes/logout');
-const imageRouter = require('imageRouter');
+const imageRouter = require('./routes/imageRouter');
 
 
 //const s3ImageRouter = require('./routes/s3ImageRouter');
