@@ -13,6 +13,9 @@ angular.module('BrandImageManagerApp').config(function($routeProvider, $location
   }).when('/admin', {
     templateUrl: 'views/admin.html',
     controller: 'AdminController as admin'
+  }).when('/photoUploader', {
+    templateUrl: 'views/photoUploader.html',
+    controller: 'PhotoController as photo'
   }).otherwise({
     templateUrl: 'views/login.html',
     controller: 'LoginController as login'

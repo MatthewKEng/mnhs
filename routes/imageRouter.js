@@ -13,23 +13,8 @@ var config = {
 
 var pool = new pg.Pool(config);
 
-
-// Credentials should be stored in a .gitignored file (./config.json here).
-// Uncomment following line when running on local server.  Comment out when
-// testing on Heroku where creditials can be loaded from ENV variables.
-// AWS.config.loadFromPath('./config.json');
-
-
-// Can also require dotenv and load env variables like:
-// var accessKeyId =  process.env.AWS_ACCESS_KEY;
-// var secretAccessKey = process.env.AWS_SECRET_KEY;
-//
-// // accessKeyID and secretAccesKey provided by Amazon S3.
-// AWS.config.update({
-//     accessKeyId: accessKeyId,
-//     secretAccessKey: secretAccessKey,
-//     region: 'us-west-2',   // or whatever region our bucket is in.
-//   });
+// accessKeyID and secretAccesKey provided by Amazon S3.
+AWS.config.loadFromPath('./config.json');
 
 var s3 = new AWS.S3();
 
@@ -55,7 +40,7 @@ var uploads3 = multer({
 
 // Post request.  Need to send department_id as part of req.body from client
 router.post('/upload', uploads3.single('file'), function (req, res) {
-  
+
   // On success, send image to SQL DB to store URL.
   var url = 'https://s3.amazonaws.com/mnhs/' + req.file.key;
   pool.connect(function (err, client, done) {
