@@ -12,7 +12,7 @@ function PhotoController(Upload) {
     Upload.upload({
       url: '/image',
       method: 'POST',
-      data: admin.upload,
+      data: photo.upload,
     });
   };
 
