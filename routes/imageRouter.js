@@ -55,6 +55,7 @@ var uploads3 = multer({
 
 // Post request.  Need to send department_id as part of req.body from client
 router.post('/upload', uploads3.single('file'), function (req, res) {
+  
   // On success, send image to SQL DB to store URL.
   var url = 'https://s3.amazonaws.com/mnhs/' + req.file.key;
   pool.connect(function (err, client, done) {
