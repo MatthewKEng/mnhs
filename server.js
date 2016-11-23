@@ -10,6 +10,7 @@ const login = require('./routes/login');
 const access = require('./routes/access');
 const submissions = require('./routes/submissions');
 const logout = require('./routes/logout');
+const imageRouter = require('imageRouter');
 
 
 //const s3ImageRouter = require('./routes/s3ImageRouter');
@@ -48,6 +49,7 @@ app.use('/login',isLoggedIn, login);
 app.use('/logout', logout);
 app.use('/access', access);
 app.use('/submissions', submissions);
+app.use('/image', imageRouter);
 
 //s3 image route and SQL image route
 //app.use('/s3ImageRouter', s3ImageRouter);

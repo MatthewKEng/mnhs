@@ -56,17 +56,13 @@ var upload = multer({
 
 // Post request.  Need to send department_id as part of req.body from client
 router.post('/upload', upload.single('file'), function (req, res) {
-  console.log(req.file.key);
-  // On success, need to send image url to SQL database to be stored there as well.
-  // Img URL will be in the following format:
-  // http://BUCKET_REGION.amazonaws.com/BUCKET_NAME/IMAGE_NAME.jpg
+  // On success, send image to SQL DB to store URL.
   var url = 'https://s3.amazonaws.com/mnhs/' + req.file.key;
   pool.connect(function (err, client, done) {
   try {
     if (err) {
       res.sendStatus(500);
     }
-
     client.query('INSERT INTO images (url_image, department_id) VALUES ($1, $2);',
                 [url, req.body.department_id],
           function (err) {
@@ -81,11 +77,8 @@ router.post('/upload', upload.single('file'), function (req, res) {
   }
 });
 
-
-
-
-//deletes entries from S3 database, not SQL
-router.delete('/:key', function (req, res) {
+//deletes entries from S3 database, then delete from SQL
+router.delete('/:key/:id', function (req, res) {
   var key = req.params.key;
   var bucket = 'mnhs';
   var params = {
@@ -98,9 +91,72 @@ router.delete('/:key', function (req, res) {
     } else {
       console.log(data);           // successful response
       // On Success, need to delete image url from SQL database as well.
+      var id = req.params.id;
+      pool.connect(function (err, client, done) {
+        try {
+          if (err) {
+            console.log('Error connecting with DB: ', err);
+            res.sendStatus(500);
+          }
+
+          client.query('DELETE FROM submissions WHERE id=$1;', [id],
+            function (err, result) {
+              if (err) {
+                console.log('Error querying DB: ', err);
+                return res.sendStatus(500);
+              }
+              res.sendStatus(204);
+            });
+        } finally {
+          done();
+        }
+      });
     }
   });
 });
 
+
+// Get all URL's in SQL DB for images stored in S3
+router.get('/admin', function(req, res) {
+  pool.connect(function (err, client, done) {
+    try {
+      if (err) {
+        console.log('Error connecting to DB', err);
+        res.sendStatus(500);
+      }
+      client.query('SELECT * FROM images;', function(err, result) {
+        if (err) {
+          console.log('Error querying DB', err);
+          res.sendStatus(500);
+        }
+        res.send(result.rows);
+      });
+    } finally {
+      done();
+    }
+  });
+});
+
+// Get only Image URL's in SQL DB for specific user department
+router.get('/:deptID', function(req, res) {
+  var deptID = req.params.deptID;
+  pool.connect(function (err, client, done) {
+    try {
+      if (err) {
+        console.log('Error connecting to DB', err);
+        res.sendStatus(500);
+      }
+      client.query('SELECT * FROM images WHERE department_id = $1;', [deptID],function(err, result) {
+        if (err) {
+          console.log('Error querying DB', err);
+          res.sendStatus(500);
+        }
+        res.send(result.rows);
+      });
+    } finally {
+      done();
+    }
+  });
+});
 
 module.exports = router;
