@@ -21,7 +21,7 @@ function SubmissionsService ($http) {
       method: 'GET',
       url: '/submissions/admin'
     }).then(function successCallback(response) {
-        console.log('whats the submissions data', response);
+        console.log('whats all the submissions data', response);
         return response.data;
       }, function errorCallback(response) {
         console.log('Error in Call back');
@@ -78,7 +78,7 @@ function SubmissionsService ($http) {
   this.deleteSubmission = function (id) {
     return $http({
       method: 'DELETE',
-      url: '/submissions/' + id 
+      url: '/submissions/' + id
     }).then(function successCallback(response) {
         console.log('whats the submissions data', response);
         return response.data;

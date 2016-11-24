@@ -6,6 +6,69 @@ body{
 img {
   padding-top: 20%;
 }
+
+h1 {
+  margin-top: 0%;
+  padding-top: .4444444444rem;
+
+padding-bottom: .4444444444rem;
+line-height: 1.125;
+font-size: 3.1666666667rem;
+font-weight: 600;
+font-family: "Proxima Nova",proxima-nova,"Helvetica Neue",Helvetica,Arial,sans-serif;
+display: block;
+text-align: center;
+
+}
+
+h3 {
+  text-align: center;
+  font-size: 1.3333333333rem;
+  font-weight: 600;
+  padding-top: 0;
+  display: block;
+  text-transform: none;
+  letter-spacing: normal;
+  font-family: "Proxima Nova",proxima-nova,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  padding-top: .3125rem;
+  padding-bottom: .3125rem;
+}
+
+header {
+  background-image: url(/assets/OKF__1.jpg);
+  background-position-x: center;
+  background-position-y: top;
+  font-family: helvetica;
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
+  color: #323e48;
+
+}
+
+.hero_tall {
+  padding-top: 12vh;
+  padding-bottom: 12vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.hero {
+  display: flex;
+  color: white;
+  flex-direction: column;
+
+}
+
+.home .hero {
+    text-align: center;
+}
+
+.centeredblock {
+    text-align: center;
+    padding-bottom: 20%;
+}
+
 /*top navbar */
 .navbar {
   border-bottom: 1px solid #323e48;

@@ -60,7 +60,13 @@ function AdminController($location, AccessService, SubmissionsService) {
       var prettyKey = key.replace(/_/g, " ").toLocaleUpperCase();
       return prettyKey;
     }
-    //call to service to get status of all submissions
+    //call to service to get all data from submissions table
+    admin.getSubmissions = function () {
+      SubmissionsService.getAllSubmissions().then(function(response){
+        admin.allUsersSubmitions = response;
+        console.log('whats the access response', admin.allUsersSubmitions);
+      });
+    }
     //push statuses into specific arrays to count number of statuses based on array
 
     //function to get all user data from the user table for access controls
@@ -77,7 +83,7 @@ function AdminController($location, AccessService, SubmissionsService) {
       AccessService.updateAccess(accessObj).then(function(response){
           console.log('whats the update access response', response);
           if (site == 'admin') {
-            
+
           }
           //admin.getUsersAccesses();
         });
