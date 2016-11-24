@@ -12,10 +12,6 @@ const submissions = require('./routes/submissions');
 const logout = require('./routes/logout');
 const imageRouter = require('./routes/imageRouter');
 
-
-//const s3ImageRouter = require('./routes/s3ImageRouter');
-//const SQLImageRouter = require('./routes/SQLImageRouter');
-
 const sessionConfig = {
   secret: 'super secret key goes here', // TODO this info gets stored in ENV file
   key: 'user',
@@ -37,12 +33,9 @@ app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'public/views/index.html'));
 });
-
-
 
 app.use('/auth', googleAuth);
 app.use('/login',isLoggedIn, login);
@@ -51,23 +44,12 @@ app.use('/access', access);
 app.use('/submissions', submissions);
 app.use('/image', imageRouter);
 
-//s3 image route and SQL image route
-//app.use('/s3ImageRouter', s3ImageRouter);
-//app.use('/SQLImageRouter', SQLImageRouter);
-
-
-
-
 // everything beyond this point must be authenticated
 app.use(ensureAuthenticated);
-
-
 
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'public/views/index.html'));
 });
-
-
 
 function ensureAuthenticated (req, res, next) {
   if (req.isAuthenticated()) {
@@ -77,9 +59,6 @@ function ensureAuthenticated (req, res, next) {
     // res.redirect('/');
   }
 }
-
-
-
 
 var server = app.listen(3000, function() {
   console.log('Listening on port', server.address().port);
