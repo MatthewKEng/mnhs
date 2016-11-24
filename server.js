@@ -27,7 +27,7 @@ const app = express();
 auth.setup();
 
 app.use(session(sessionConfig));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(passport.initialize());
