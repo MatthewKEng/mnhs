@@ -16,6 +16,7 @@ angular.module('BrandImageManagerApp').controller('NavController', function(Auth
                     nav.displayLogout = true;
                     authFactory.setLoggedIn(true);
                     nav.username = response.data.name;
+                    console.log('username', nav.username);
                 } else { // is not logged in on server
                     nav.displayLogout = false;
                     authFactory.setLoggedIn(false);
