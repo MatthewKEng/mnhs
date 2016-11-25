@@ -32,24 +32,27 @@ var uploads3 = multer({
     key: function (req, file, cb) {
       // creates a name for the file with the file extention
       // New name will be stored in req.file.key;
+      // cb(null, 'small');
       cb(null, Date.now().toString() + path.extname(file.originalname));
+
     },
   }),
 });
 
 
 // Post request.  Need to send department_id as part of req.body from client
-router.post('/upload', uploads3.single('file'), function (req, res) {
-
+router.post('/', uploads3.single('file'), function (req, res) {
   // On success, send image to SQL DB to store URL.
   var url = 'https://s3.amazonaws.com/mnhs/' + req.file.key;
+  var dep = 2
   pool.connect(function (err, client, done) {
     try {
       if (err) {
+        console.log('error connecting to DB', err);
         res.sendStatus(500);
       }
       client.query('INSERT INTO images (url_image, department_id) VALUES ($1, $2);',
-                  [url, req.body.department_id],
+                  [url, dep],
             function (err) {
               if (err) {
                 console.log('Error inserting into db', err);
