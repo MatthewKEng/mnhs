@@ -19,4 +19,8 @@ function PhotoController(Upload) {
 
   };
 
+  photo.findUser = function() {
+    console.log(user);
+  }
+
 }

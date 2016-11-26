@@ -19,7 +19,7 @@ function findById(googleID, googleEmail, googleName, accessToken, refreshToken) 
         if (err) {
           reject(err);
         }
-
+        console.log('HERE IT IS', result.rows[0]);
         resolve(result.rows[0]);
       });
     });
@@ -66,7 +66,6 @@ function create(googleID, googleEmail, googleName, accessToken, refreshToken) {
                        if (err) {
                          return reject(err);
                        }
-
                        resolve(result.rows[0]);
                      });
       });
