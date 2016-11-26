@@ -8,7 +8,7 @@ function AccessService ($http) {
       method: 'GET',
       url: '/access'
     }).then(function successCallback(response) {
-        //console.log('whats the access data', response);
+        // console.log('whats the access data', response);
         return response.data;
       }, function errorCallback(response) {
         console.log('Error in Call back');
@@ -43,17 +43,23 @@ function AccessService ($http) {
       });
   };//end of put
 
-  this.userDepts = [];
-
   this.storeUserAccess = function(user) {
+    this.userDepts = [];
     for (key in user) {
       if (user[key] == true) {
         this.userDepts.push(key);
       }
     }
-    console.log('AccessService', user);
-    console.log('AccessService keys', this.userDepts);
   };
 
+  this.getUserDepts = function() {
+    console.log('User Departments:', this.userDepts);
+  }
 
+  this.getDepartmentIds = function() {
+    return $http({
+      method: 'GET',
+      url: '/'
+    })
+  }
 }
