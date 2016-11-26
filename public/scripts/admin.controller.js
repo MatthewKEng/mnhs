@@ -68,16 +68,16 @@ function AdminController($location, AccessService, SubmissionsService) {
     //call to service to get all data from submissions table
     admin.getSubmissions = function () {
       SubmissionsService.getAllSubmissions().then(function(response){
-        admin.allUsersSubmitions = response;
-        console.log('whats the access response', admin.allUsersSubmitions);
-      });
-      // for loop to push statuses into specific arrays
-      //to count number of statuses based on array
-      for (var i = 0; i < admin.allUsersSubmitions.length; i++) {
-        if (admin.allUsersSubmitions[i].status = 'approved') {
-            admin.aprroved.push(angular.copy(response.data.articles));
+        admin.allUsersSubmissions = response;
+        console.log('whats the access response', admin.allUsersSubmissions);
+        // for loop to push statuses into specific arrays
+        //to count number of statuses based on array
+        for (var i = 0; i < admin.allUsersSubmissions.length; i++) {
+          if (admin.allUsersSubmissions[i].status == 'approved') {
+              admin.aprroved.push(angular.copy(response[i]));
+          }
         }
-      }
+      });
     }
 
 

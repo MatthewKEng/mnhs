@@ -16,11 +16,11 @@ function PhotoController(Upload, AccessService) {
       method: 'POST',
       data: photo.upload,
     });
-
   };
 
   photo.findUser = function() {
-    console.log('PhotoController', AccessService.getUserDepts());
+    photo.userDepts = AccessService.userDepts;
+    console.log('PhotoController', photo.userDepts);
   }
 
 }
