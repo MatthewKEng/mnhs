@@ -43,16 +43,16 @@ function AccessService ($http) {
       });
   };//end of put
 
-  var userDepts = [];
+  this.userDepts = [];
 
   this.storeUserAccess = function(user) {
     for (key in user) {
       if (user[key] == true) {
-        userDepts.push(key);
+        this.userDepts.push(key);
       }
     }
     console.log('AccessService', user);
-    console.log('AccessService keys', userDepts);
+    console.log('AccessService keys', this.userDepts);
   };
 
 
