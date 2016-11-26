@@ -29,7 +29,7 @@ router.get('/', function(req, res) {
         done();
         next(error);
       }
-      console.log('whats the access route rows data',result.rows);
+      //console.log('whats the access route rows data',result.rows);
       res.send(result.rows);
     });
   });

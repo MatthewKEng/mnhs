@@ -22,7 +22,7 @@ function AccessService ($http) {
       url: '/access',
       data: accessObj
     }).then(function successCallback(response) {
-        console.log('whats the access update data', response);
+        //console.log('whats the access update data', response);
         return response.data;
       }, function errorCallback(response) {
         console.log('Error in Call back');
@@ -36,7 +36,7 @@ function AccessService ($http) {
       url: '/access',
       data: accessObj
     }).then(function successCallback(response) {
-        console.log('whats the access update data', response);
+        //console.log('whats the access update data', response);
         return response.data;
       }, function errorCallback(response) {
         console.log('Error in Call back');
