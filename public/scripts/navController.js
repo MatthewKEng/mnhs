@@ -1,4 +1,4 @@
-angular.module('BrandImageManagerApp').controller('NavController', function(AuthFactory, $window) {
+angular.module('BrandImageManagerApp').controller('NavController', function(AuthFactory, $window, AccessService) {
 
     console.log('NavController loading!')
     var nav = this;
@@ -17,6 +17,8 @@ angular.module('BrandImageManagerApp').controller('NavController', function(Auth
                     authFactory.setLoggedIn(true);
                     nav.username = response.data.name;
                     console.log('username', nav.username);
+                    nav.user = response.data.user;
+                    AccessService.storeUserAccess(nav.user);
                 } else { // is not logged in on server
                     nav.displayLogout = false;
                     authFactory.setLoggedIn(false);

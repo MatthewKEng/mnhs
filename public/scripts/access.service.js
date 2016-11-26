@@ -43,4 +43,17 @@ function AccessService ($http) {
       });
   };//end of put
 
+  var userDepts = [];
+
+  this.storeUserAccess = function(user) {
+    for (key in user) {
+      if (user[key] == true) {
+        userDepts.push(key);
+      }
+    }
+    console.log('AccessService', user);
+    console.log('AccessService keys', userDepts);
+  };
+
+
 }

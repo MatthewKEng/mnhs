@@ -20,7 +20,7 @@ router.get('/google/callback',
 
   router.get('/', function (req, res) {
   if (req.isAuthenticated()) {
-    res.json({ status: true, name: req.user.email });
+    res.json({ status: true, name: req.user.email, user: req.user });
   } else {
     res.json({ status: false });
   }

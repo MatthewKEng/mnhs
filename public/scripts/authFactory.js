@@ -18,7 +18,6 @@ angular.module('BrandImageManagerApp').factory('AuthFactory', function ($http) {
 
     logIn: function () {
       return $http.get('/auth/google');
-
     },
 
     setLoggedIn: function (value) {

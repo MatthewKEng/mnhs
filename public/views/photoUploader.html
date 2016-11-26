@@ -4,6 +4,7 @@
     <div class="preview-block">
       <img ng-show="photo.upload.file!=undefined" ngf-src="photo.upload.file" alt="Image Preview" class="preview" />
     </div>
+    
     <form enctype="multipart/form-data" name="uploadForm" id="uploadForm">
       <div class="col-xs-12">
         <label ng-hide="photo.upload.file!=undefined" id="file-label" for="file-input">Please select a file</label>

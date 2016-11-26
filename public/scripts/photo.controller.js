@@ -1,5 +1,5 @@
 angular.module('BrandImageManagerApp')
-       .controller('PhotoController', PhotoController);
+       .controller('PhotoController', PhotoController, AccessService);
 
 function PhotoController(Upload) {
 
@@ -20,7 +20,7 @@ function PhotoController(Upload) {
   };
 
   photo.findUser = function() {
-    console.log(user);
+    console.log('PhotoController', AccessService.userDepts);
   }
 
 }
