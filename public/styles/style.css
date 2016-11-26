@@ -3,70 +3,87 @@ body{
   padding: 0;
   margin: 0;
 }
-img {
-  padding-top: 20%;
-}
 
 h1 {
   margin-top: 0%;
   padding-top: .4444444444rem;
-
 padding-bottom: .4444444444rem;
 line-height: 1.125;
 font-size: 3.1666666667rem;
 font-weight: 600;
-font-family: "Proxima Nova",proxima-nova,"Helvetica Neue",Helvetica,Arial,sans-serif;
+font-family: helvetica;
 display: block;
 text-align: center;
+background-color: #eeb111;
 
 }
 
-h3 {
-  text-align: center;
-  font-size: 1.3333333333rem;
-  font-weight: 600;
-  padding-top: 0;
-  display: block;
-  text-transform: none;
-  letter-spacing: normal;
-  font-family: "Proxima Nova",proxima-nova,"Helvetica Neue",Helvetica,Arial,sans-serif;
-  padding-top: .3125rem;
-  padding-bottom: .3125rem;
+#left img {
+    align-items: left;
+    background-size: cover;
+    justify-content: left;
+    float: left;
+    padding-top: -8%;
+    width:50%;
+   height: auto;
+   margin-left: -14%;
+   padding-right: 5%;
+   /*padding-left: 0%;*/
+   margin-right: 0%;
 }
 
-header {
-  background-image: url(/assets/OKF__1.jpg);
-  background-position-x: center;
-  background-position-y: top;
-  font-family: helvetica;
+#right img {
+  align-items: right;
   background-size: cover;
-  align-items: center;
-  justify-content: center;
-  color: #323e48;
+  justify-content: right;
+  float: right;
+  width:50%;
+  height: auto;
+  margin-right: -13%;
+ padding-left: 5%;
+ margin-top: -30%;
+ margin-left: -14%;
+ padding-right: -8%;
 
 }
 
-.hero_tall {
+#middle img {
+  align-items: center;
+  background-size: cover;
+  justify-content: center;
+  float: center;
+  padding-top: -8%;
+  width:50%;
+ height: auto;
+ padding-right: 5%;
+ margin-left: -10%;
+
+}
+
+/*.hero_tall {
   padding-top: 12vh;
   padding-bottom: 12vh;
   overflow-x: hidden;
   overflow-y: hidden;
-}
+}*/
 
-.hero {
+/*.hero {
   display: flex;
   color: white;
   flex-direction: column;
 
-}
+}*/
 
-.home .hero {
+/*.home .hero {
     text-align: center;
-}
+}*/
 
 .centeredblock {
     text-align: center;
-    padding-bottom: 20%;
+    padding-top: 3%;
+    padding-bottom: 1%;
+    background-color: #eeb111;
+    margin-top: -2%;
 }
 
 /*top navbar */

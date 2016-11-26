@@ -1,6 +1,6 @@
-angular.module('BrandImageManagerApp').controller('NavController', function(AuthFactory, $window) {
+angular.module('BrandImageManagerApp').controller('NavController', function(AuthFactory) {
 
-    console.log('NavController loading!')
+    // console.log('NavController loading!')
     var nav = this;
     var authFactory = AuthFactory;
     nav.displayLogout = false;
