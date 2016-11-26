@@ -1,17 +1,5 @@
-
-angular.module('BrandImageManagerApp').controller('NavController', function(AuthFactory) {
-
-    // console.log('NavController loading!')
-    var nav = this;
-    var authFactory = AuthFactory;
-    nav.displayLogout = false;
-    nav.message = {
-        text: false,
-        type: 'info',
-    };
-
 angular.module('BrandImageManagerApp')
-       .controller('NavController', function(AuthFactory, $window, AccessService) {
+       .controller('NavController', function(AuthFactory, AccessService) {
 
   console.log('NavController loading!')
   var nav = this;
