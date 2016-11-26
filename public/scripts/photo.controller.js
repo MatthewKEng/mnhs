@@ -6,10 +6,17 @@ function PhotoController(Upload, AccessService) {
   console.log('PhotoController loaded');
   var photo = this;
 
+  // Uploads Image to S3 if one is selected.  Also sends image url to SQL db
+  // with department_id.
   photo.uploadPicture = function(form) {
     if (form.$invalid) {
       return;
     }
+    // This only uploads to the first department the user has access to.  Need
+    // to update with the correct Dept ID for the user.
+    var deptName = AccessService.userDepts[0];
+    var deptId = AccessService.departmentIds[deptName];
+    photo.upload.department = deptId;
     console.log('photo.controller', photo.upload);
     Upload.upload({
       url: '/image',
@@ -18,9 +25,17 @@ function PhotoController(Upload, AccessService) {
     });
   };
 
+  // Function to determine all department names that the user has access to.
+  // Data is stored in access.service.js file.
   photo.findUser = function() {
     photo.userDepts = AccessService.userDepts;
     console.log('PhotoController', photo.userDepts);
-  }
+  };
+
+  // Function to obtain an object containing department_name - department_id
+  // key - value pairs.  Data is stored in access.service.js file.
+  photo.getDepartmentIds = function() {
+    AccessService.getDepartmentIds();
+  };
 
 }

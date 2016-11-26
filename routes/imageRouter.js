@@ -44,7 +44,7 @@ var uploads3 = multer({
 router.post('/', uploads3.single('file'), function (req, res) {
   // On success, send image to SQL DB to store URL.
   var url = 'https://s3.amazonaws.com/mnhs/' + req.file.key;
-  var dep = 2
+  var dep = req.body.department;
   pool.connect(function (err, client, done) {
     try {
       if (err) {

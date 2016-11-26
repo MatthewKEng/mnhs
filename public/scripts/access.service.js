@@ -3,7 +3,9 @@ angular.module('BrandImageManagerApp')
 
 function AccessService ($http) {
   //do get resquest to querry the access table
-  this.accesses = function () {
+
+  var access = this;
+  access.accesses = function () {
     return $http({
       method: 'GET',
       url: '/access'
@@ -16,7 +18,7 @@ function AccessService ($http) {
   };//end of get
 
   // do PUT request to SQL DB to update an entry
-  this.updateAccess = function (accessObj) {
+  access.updateAccess = function (accessObj) {
     return $http({
       method: 'PUT',
       url: '/access',
@@ -30,7 +32,7 @@ function AccessService ($http) {
   };//end of put
 
   // do put request to SQL DB to update all users
-  this.updateAdminAccess = function (accessObj) {
+  access.updateAdminAccess = function (accessObj) {
     return $http({
       method: 'PUT',
       url: '/access',
@@ -43,23 +45,35 @@ function AccessService ($http) {
       });
   };//end of put
 
-  this.storeUserAccess = function(user) {
-    this.userDepts = [];
+  access.storeUserAccess = function(user) {
+    access.getDepartmentIds();
+    access.userDepts = [];
     for (key in user) {
-      if (user[key] == true) {
-        this.userDepts.push(key);
+      if (user[key] == true && user[key].toString().length > 3) {
+        access.userDepts.push(key);
       }
     }
   };
 
-  this.getUserDepts = function() {
-    console.log('User Departments:', this.userDepts);
+  // A check to see if User Departments runs correctly.
+  access.getUserDepts = function() {
+    console.log('User Departments:', access.userDepts);
   }
 
-  this.getDepartmentIds = function() {
+  // This matches department names to department_ids in access.departmentIds object
+  access.getDepartmentIds = function() {
     return $http({
       method: 'GET',
-      url: '/'
-    })
-  }
+      url: '/access/departments',
+    }).then(function successCallback(response) {
+      access.departmentIds = {};
+      for (i = 0; i < response.data.length; i++) {
+        var dept = response.data[i].department;
+        access.departmentIds[dept] = response.data[i].id;
+      }
+      console.log('AS dIDs', access.departmentIds);
+    }, function errorCallback(response) {
+      console.log('Error in Call back');
+    });
+  };
 }
