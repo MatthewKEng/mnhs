@@ -4,6 +4,11 @@ angular.module('BrandImageManagerApp')
 function AdminController($location, AccessService, SubmissionsService) {
     var admin = this;
 
+    //arrays to count number of statuses
+    admin.aprroved = [];
+    admin.pending = [];
+    admin.revision = [];
+
     //ng-show variables onload
     admin.accessControlsDisplay = false;
     admin.pendingGalleryDisplay = true;
@@ -66,8 +71,15 @@ function AdminController($location, AccessService, SubmissionsService) {
         admin.allUsersSubmitions = response;
         console.log('whats the access response', admin.allUsersSubmitions);
       });
+      // for loop to push statuses into specific arrays
+      //to count number of statuses based on array
+      for (var i = 0; i < admin.allUsersSubmitions.length; i++) {
+        if (admin.allUsersSubmitions[i].status = 'approved') {
+            admin.aprroved.push(angular.copy(response.data.articles));
+        }
+      }
     }
-    //push statuses into specific arrays to count number of statuses based on array
+
 
     //function to get all user data from the user table for access controls
     admin.getUsersAccesses = function () {
