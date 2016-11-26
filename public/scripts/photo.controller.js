@@ -32,10 +32,4 @@ function PhotoController(Upload, AccessService) {
     console.log('PhotoController', photo.userDepts);
   };
 
-  // Function to obtain an object containing department_name - department_id
-  // key - value pairs.  Data is stored in access.service.js file.
-  photo.getDepartmentIds = function() {
-    AccessService.getDepartmentIds();
-  };
-
 }

@@ -71,7 +71,6 @@ function AccessService ($http) {
         var dept = response.data[i].department;
         access.departmentIds[dept] = response.data[i].id;
       }
-      console.log('AS dIDs', access.departmentIds);
     }, function errorCallback(response) {
       console.log('Error in Call back');
     });
