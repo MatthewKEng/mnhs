@@ -8,6 +8,27 @@ var config = {
 
 var pool = new pg.Pool(config);
 
+// query departments table to get department and department_id's
+router.get('/departments', function(req, res) {
+  pool.connect(function(error, client, done) {
+    try {
+      if (error) {
+        console.log('Error connecting to DB', error);
+        res.sendStatus(500);
+      }
+      client.query('SELECT * FROM departments;', [], function(error, result) {
+        if (error) {
+          console.log('Error querying DB', error);
+          res.sendStatus(500);
+        }
+        res.send(result.rows);
+      });
+    } finally {
+      done();
+    }
+  });
+});
+
 //query the users table for access data and users email
 router.get('/', function(req, res) {
   pool.connect(function(error, client, done) {
@@ -29,7 +50,7 @@ router.get('/', function(req, res) {
         done();
         next(error);
       }
-      console.log('whats the access route rows data',result.rows);
+      //console.log('whats the access route rows data',result.rows);
       res.send(result.rows);
     });
   });

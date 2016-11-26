@@ -19,7 +19,6 @@ function findById(googleID, googleEmail, googleName, accessToken, refreshToken) 
         if (err) {
           reject(err);
         }
-
         resolve(result.rows[0]);
       });
     });
@@ -41,7 +40,7 @@ function updateTokens(googleID, googleEmail, googleName, accessToken, refreshTok
         if (err) {
           reject(err);
         }
-        resolve(200);
+        resolve(result.rows[0]);
       });
     });
     });
@@ -66,7 +65,6 @@ function create(googleID, googleEmail, googleName, accessToken, refreshToken) {
                        if (err) {
                          return reject(err);
                        }
-
                        resolve(result.rows[0]);
                      });
       });
