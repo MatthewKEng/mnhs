@@ -109,7 +109,7 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
   //apply correct checkbox truthiness value for if it shows for ng-show
 
 admin.checkboxesTruthiness = function (index) {
-  for (var i = 0; i < admin.allUsersSubmitions.length; i++) {
+  for (var i = 0; i < admin.allUsersSubmissions.length; i++) {
     if (admin.showCheckboxes[i] == false) {
       admin.showCheckboxes[i] = true;
     }else{
