@@ -151,11 +151,7 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
     });
   }
   //check all checked boxes on checking admin function
-  admin.checkall = function (){
-    for (var i = 0; i < array.length; i++) {
-      array[i]
-    }
-  }
+
 
 
   //modal controlls
