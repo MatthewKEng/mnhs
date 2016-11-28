@@ -239,3 +239,17 @@ background-color: #eeb111;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+/* Temporary styling for gallery */
+.addPhoto, .addPhoto:active, .addPhoto:visited {
+  background-color: lightslategray;
+  color: white;
+  font-size: 70px;
+  text-align: center;
+  padding: 30px 60px 40px 60px;
+  width: 100px;
+}
+.addContainer {
+  width: 150px;
+  margin: 50px auto 20px auto;
+}
