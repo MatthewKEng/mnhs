@@ -3,8 +3,11 @@ angular.module('BrandImageManagerApp')
 
 function AccessService ($http) {
   //do get resquest to querry the access table
-
   var access = this;
+
+  // set Admin access to false initially
+  access.admin = false;
+
   access.accesses = function () {
     return $http({
       method: 'GET',
@@ -48,11 +51,19 @@ function AccessService ($http) {
   access.storeUserAccess = function(user) {
     access.getDepartmentIds();
     access.userDepts = [];
+    access.notUserDepts = [];
     for (key in user) {
-      if (user[key] == true && user[key].toString().length > 3) {
+      if (user[key] == 'admin') {
+        access.admin = true;
+      }
+      if (user[key] === true && key != 'admin') {
         access.userDepts.push(key);
+      } else if (user[key] === false && key != 'admin') {
+        access.notUserDepts.push(key);
       }
     }
+    console.log('userDepts', access.userDepts);
+    console.log('notUserDepts', access.notUserDepts);
   };
 
   // A check to see if User Departments runs correctly.
