@@ -18,6 +18,7 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
   admin.pendingGalleryDisplay = true;
   admin.approvedGalleryDisplay = false;
   admin.revisionGalleryDisplay = false;
+  admin.brandsConsoleDisplay = false;
 
   //function to display access
   admin.showAccess = function () {
@@ -163,7 +164,7 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
     return name.replace(/_/g, ' ').toUpperCase()
   }
 
-  // Uploads Image to S3 if one is selected.  Also sends image url to SQL db
+  // Uploads brand to S3 if one is selected.  Also sends brand url to SQL db
   // with department_id.
   admin.uploadBrand = function(form) {
     if (form.$invalid) {
