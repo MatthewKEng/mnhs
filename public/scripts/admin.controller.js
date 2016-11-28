@@ -108,7 +108,7 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
 
   //apply correct checkbox truthiness value for if it shows for ng-show
   admin.checkboxesTruthiness = function (index) {
-    for (var i = 0; i < admin.allUsersSubmitions.length; i++) {
+    for (var i = 0; i < admin.allUsersSubmissions.length; i++) {
       if (admin.showCheckboxes[i] == false) {
         admin.showCheckboxes[i] = true;
       }else{
@@ -125,28 +125,28 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
   //call to service to get all data from submissions table
   admin.getSubmissions = function () {
     SubmissionsService.getAllSubmissions().then(function(response){
-      admin.allUsersSubmitions = response;
-      console.log('whats the submissions response', admin.allUsersSubmitions);
+      admin.allUsersSubmissions = response;
+      console.log('whats the submissions response', admin.allUsersSubmissions);
       // for loop to push arrays of objects into specific arrays
       //and to count number of statuses based on the status
-      for (var i = 0; i < admin.allUsersSubmitions.length; i++) {
-        if (admin.allUsersSubmitions[i].status == 'approved') {
+      for (var i = 0; i < admin.allUsersSubmissions.length; i++) {
+        if (admin.allUsersSubmissions[i].status == 'approved') {
             //count the number under this status
             admin.approvedCount++;
             //console.log('whats the approved count',admin.approvedCount);
-            admin.aprroved.push(angular.copy(admin.allUsersSubmitions[i]));
+            admin.aprroved.push(angular.copy(admin.allUsersSubmissions[i]));
             console.log('whats the aprroved array', admin.aprroved);
-        }else if (admin.allUsersSubmitions[i].status == 'pending') {
+        }else if (admin.allUsersSubmissions[i].status == 'pending') {
           //count the number under this status
           admin.pendingCount++;
           //console.log('whats the pending count',admin.pendingCount);
-          admin.pending.push(angular.copy(admin.allUsersSubmitions[i]));
+          admin.pending.push(angular.copy(admin.allUsersSubmissions[i]));
           console.log('whats the pending array', admin.pending);
-        }else if (admin.allUsersSubmitions[i].status == 'revision') {
+        }else if (admin.allUsersSubmissions[i].status == 'revision') {
           //count the number under this status
           admin.revisionCount++;
           //console.log('whats the revision count',admin.revisionCount);
-          admin.revision.push(angular.copy(admin.allUsersSubmitions[i]));
+          admin.revision.push(angular.copy(admin.allUsersSubmissions[i]));
           console.log('whats the revision array', admin.revision);
         }
       }
