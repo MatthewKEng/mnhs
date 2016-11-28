@@ -33,7 +33,7 @@ var uploads3 = multer({
       // creates a name for the file with the file extention
       // New name will be stored in req.file.key;
       // cb(null, 'small');
-      cb(null, Date.now().toString() + path.extname(file.originalname));
+      cb(null, Date.now().toString());
     },
   }),
 });

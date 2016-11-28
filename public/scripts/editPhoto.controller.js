@@ -57,13 +57,16 @@ function EditPhotoController (Upload, AccessService) {
      * setting proper filename for the download.
      * IMPORTANT: Call it from within a onclick event.
     */
-    photo.downloadCanvas = function () {
-        link.href = document.getElementById(canvasId).toDataURL();
-        link.download = filename;
+    photo.downloadCanvas = function (link) {
+      console.log('downloadCanvas run', link);
+        function() {
+          link.href = document.getElementById('canvas').toDataURL();
+          link.download = 'test.png';
+        }, false
     };
 
     document.getElementById('download').addEventListener('click', function() {
-        photo.downloadCanvas(this, 'canvas', 'test.png');
+        photo.downloadCanvas(this);
     }, false);
 
     // $('download').on('click', function(){
