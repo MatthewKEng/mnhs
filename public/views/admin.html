@@ -57,10 +57,16 @@
     <div ng-repeat="user in admin.allUserAccess" ng-init="admin.showUserAccess[$index]= false">
       <button ng-click="admin.truthiness($index)" class="btn btn-primary btn-block btn-lg acordionButton" >{{user.email}}<span class ="glyphicon glyphicon-plus pull-right"></span></button>
       <div class="text-left" ng-show="admin.showUserAccess[$index]" >
-        <label ng-repeat="(key,val) in user" ng-if="$index >= 2" class="checkbox-inline">
+        <label ng-repeat="(key,val) in user" ng-if="$index == 2" class="checkbox-inline">
           <input type="checkbox" ng-model="val" ng-change="admin.updateUsersAccesses(user.email, key, val)" ng-checked="val" >
           {{admin.pretty(key)}}
         </label>
+        <span ng-show="admin.showCheckboxes[$index]" ng-init="admin.showCheckboxes[$index] = true" ng-if="user.admin == false">
+        <label ng-repeat="(key,val) in user" ng-if="$index >= 3" class="checkbox-inline">
+          <input type="checkbox" ng-model="val" ng-change="admin.updateUsersAccesses(user.email, key, val)" ng-checked="val" >
+          {{admin.pretty(key)}}
+        </label>
+        </span>
       </div>
     </div>
     <button ng-click="admin.addEmployeeTruthiness()" class="btn btn-success btn-block btn-lg acordionButton" ng-init="admin.showAddEmployee = false">Add Employee<span class ="glyphicon glyphicon-plus pull-right"></span></button>

@@ -19,7 +19,7 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
   admin.approvedGalleryDisplay = false;
   admin.revisionGalleryDisplay = false;
   admin.brandsConsoleDisplay = false;
-
+  
   //function to display access
   admin.showAccess = function () {
     admin.getUsersAccesses();
