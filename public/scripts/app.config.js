@@ -3,7 +3,8 @@ angular.module('BrandImageManagerApp').config(function($routeProvider, $location
 
   $routeProvider.when('/login', {
     templateUrl: 'views/login.html',
-    controller: 'NavController as nav'
+    controller: 'NavController as nav',
+    controller: 'LoginController as login'
   }).when('/gallery', {
     templateUrl: 'views/gallery.html'
     // controller: 'GalleryController as gallery'
@@ -18,6 +19,5 @@ angular.module('BrandImageManagerApp').config(function($routeProvider, $location
     controller: 'PhotoController as photo'
   }).otherwise({
     templateUrl: 'views/login.html',
-    controller: 'LoginController as login'
   });
 });
