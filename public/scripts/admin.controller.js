@@ -69,11 +69,19 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
     for (var i = 0; i < admin.allUserAccess.length; i++) {
       if (i == index) {
         admin.showUserAccess[i] = !admin.showUserAccess[i];
+
+        admin.plus[i] = !admin.plus[i];
+        admin.minus[i] = !admin.minus[i];
         admin.showAddEmployee = false;
+        admin.empPlus = true;
          //console.log('whats the truth ',admin.showUserAccess);
-      }else{
+       }
+       else{
         admin.showUserAccess[i] = false;
+        admin.plus[i] = true;
+        admin.minus[i] = false;
         admin.showAddEmployee = false;
+        admin.empPlus = true;
          //console.log('whats the truth ',admin.showUserAccess);
       }
     }
@@ -87,10 +95,12 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
     // if else stament to set the boolean value of admin.showAddEmployee for ngShow
     if (admin.showAddEmployee == false) {
         admin.showAddEmployee = true;
-        console.log('whats the truth ',admin.showAddEmployee);
+        admin.empPlus = false;
+        //console.log('whats the plus truth ',admin.empPlus);
     }else{
         admin.showAddEmployee = false;
-        console.log('whats the truth ',admin.showAddEmployee);
+        admin.empPlus = true;
+        //console.log('whats the minus truth ',admin.empPlus);
     }
   }
 
