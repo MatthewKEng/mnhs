@@ -69,11 +69,28 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
     for (var i = 0; i < admin.allUserAccess.length; i++) {
       if (i == index) {
         admin.showUserAccess[i] = !admin.showUserAccess[i];
+        admin.showAddEmployee = false;
          //console.log('whats the truth ',admin.showUserAccess);
       }else{
         admin.showUserAccess[i] = false;
+        admin.showAddEmployee = false;
          //console.log('whats the truth ',admin.showUserAccess);
       }
+    }
+  }
+  //function to show or hide add employee
+  admin.addEmployeeTruthiness = function () {
+    //for loop that makes everything false if button is clicked
+    for (var i = 0; i < admin.allUserAccess.length; i++) {
+      admin.showUserAccess[i] = false;
+      }
+    // if else stament to set the boolean value of admin.showAddEmployee for ngShow
+    if (admin.showAddEmployee == false) {
+        admin.showAddEmployee = true;
+        console.log('whats the truth ',admin.showAddEmployee);
+    }else{
+        admin.showAddEmployee = false;
+        console.log('whats the truth ',admin.showAddEmployee);
     }
   }
 
@@ -133,6 +150,13 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
       //admin.getUsersAccesses();
     });
   }
+  //check all checked boxes on checking admin function
+  admin.checkall = function (){
+    for (var i = 0; i < array.length; i++) {
+      array[i]
+    }
+  }
+
 
   //modal controlls
   //image src for modal
