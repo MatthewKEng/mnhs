@@ -28,4 +28,5 @@ function ImageService($http) {
       return $http.delete('/sql/' + imageID);
     })
   };
+
 }

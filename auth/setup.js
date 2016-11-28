@@ -9,11 +9,9 @@ exports.setup = function () {
   passport.use(new GoogleStrategy({
     authorizationURL: 'https://accounts.google.com/o/oauth2/auth',
     tokenURL: 'https://accounts.google.com/o/oauth2/token',
-    // clientID: '101799712502916135843',
     clientID: '635146343171-m726t7cjr75thvph68au09l2upao1tjk.apps.googleusercontent.com',
-    // clientSecret: 'i1rxCF11L9J-kNHwL00bESJb',
     clientSecret: 'E3mabZbBKqq4ETbNjvJUyn7_',
-    callbackURL: 'http://localhost:3000/gallery',
+    callbackURL: 'http://localhost:3000/auth/google/callback',
   },
 
   function (accessToken, refreshToken, profile, cb) {

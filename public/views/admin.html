@@ -1,0 +1,118 @@
+<!--side menu-->
+<div ng-init="admin.getSubmissions()" class="container-fluid col-xs-2 col-md-2 col-lg-2 sideMenu">
+  <div class="sideButtonContainer">
+    <button ng-click="admin.showPendingGallery()" class="btn btn-info btn-lg btn-block sideButton">Pending:&nbsp;{{admin.pendingCount}}</button>
+    <button ng-click="admin.showApprovedGallery()" class="btn btn-info btn-lg btn-block sideButton">Approved:&nbsp;{{admin.approvedCount}}</button>
+    <button ng-click="admin.showRevisionGallery()" class="btn btn-info btn-lg btn-block sideButton">Revision:&nbsp;{{admin.revisionCount}}</button>
+    <button ng-click="admin.showAccess()" class="btn btn-warning btn-lg btn-block sideButton">Access</button>
+    <button ng-click="admin.showBrands()" class="btn btn-warning btn-lg btn-block sideButton">Brands</button>
+  </div>
+</div>
+
+<!--dynamicly created gallary of images that are pennding, approved, or needs rivision-->
+<!--pending-->
+<div ng-show="((admin.pendingGalleryDisplay))" class="container">
+  <div ng-repeat="pending in admin.pending" class="row col-xs-4 col-md-4 col-lg-4 text-center">
+    <div>
+      <img ng-src="{{pending.saved_edit}}" alt="pending submission" class="img-responsive img-thumbnail"/>
+    </div>
+    <span>
+      <button class="btn btn-success">Approve</button>
+      <button class="btn btn-danger">Revise</button>
+      <button ng-click="admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
+      admin.viewButton();" class="btn btn-info">View</button>
+    </span>
+  </div>
+</div>
+<!--approved-->
+<div ng-show="((admin.approvedGalleryDisplay))" class="container">
+  <div ng-repeat="approved in admin.aprroved" class="row col-xs-4 col-md-4 col-lg-4 text-center">
+    <div>
+      <img ng-src="{{approved.saved_edit}}" alt="approved submission" class="img-responsive img-thumbnail"/>
+    </div>
+    <span>
+      <button class="btn btn-danger">Delete</button>
+      <button ng-click="admin.modalUserComment = approved.user_comment; admin.modalImage = approved.saved_edit;
+       admin.viewButton()" class="btn btn-info">View</button>
+    </span>
+  </div>
+</div>
+<!--revision-->
+<div ng-show="((admin.revisionGalleryDisplay))" class="container">
+  <div ng-repeat="revision in admin.revision" class="row col-xs-4 col-md-4 col-lg-4 text-center">
+    <div>
+      <img ng-src="{{revision.saved_edit}}" alt="revision submission" class="img-responsive img-thumbnail"/>
+    </div>
+    <span>
+      <button class="btn btn-danger">Delete</button>
+      <button ng-click="admin.modalUserComment = revision.user_comment; admin.modalImage = revision.saved_edit; 
+      admin.viewButton()" class="btn btn-info">View</button>
+    </span>
+  </div>
+</div>
+<!--access controls-->
+<div ng-show="((admin.accessControlsDisplay))" class="container text-center">
+  <div class="row col-xs-9 col-md-9 col-lg-9">
+    <!--dynamicly created list of users and there access-->
+    <div ng-repeat="user in admin.allUserAccess" ng-init = "admin.showUserAccess[$index]= false">
+      <button ng-click="admin.truthiness($index)" class="btn btn-primary btn-block btn-lg acordionButton">{{user.email}}<span class="pull-right">&nabla;</span></button>
+      <div class="text-left" ng-show="admin.showUserAccess[$index]" >
+        <label ng-repeat="(key,val) in user" ng-if="$index >= 2" class="checkbox-inline">
+          <input type="checkbox" ng-model="val" ng-change="admin.updateUsersAccesses(user.email, key, val)" ng-checked="{{val}}">
+          {{admin.pretty(key)}}
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+<!--brands-->
+<div ng-show="((admin.brandsConsoleDisplay))" class="container upload-brands">
+  <div class="col-xs-4 col-xs-offset-4">
+    <div class="row preview-block">
+      <img ng-show="admin.upload.file!=undefined" ngf-src="admin.upload.file" alt="Brand Preview" class="preview" />
+    </div>
+
+    <div class="row">
+      <form enctype="multipart/form-data" name="uploadBrandForm" id="uploadBrandForm">
+        <div class="row">
+          <label ng-hide="admin.upload.file!=undefined" id="file-label" for="file-input">Please select a file</label>
+          <input type="file" ng-model="admin.upload.file" ngf-select ngf-max-size="10MB" name="file-input" id="file-input"required>
+        </div>
+        <input class="upload-brand-button" type="submit" ng-click="admin.uploadPicture(uploadBrandForm)" value="Upload Image" />
+      </form>
+    </div>
+
+    <div class="row">
+      <button class="btn btn-success">Approve</button>
+      <button class="btn btn-danger">Revise</button>
+    </div>
+  </div>
+</div>
+
+<!--modal-->
+<div id="adminModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span ng-click="admin.closeModal()" class="close">×</span>
+      <h2>Department</h2>
+    </div>
+    <div class="modal-body text-center">
+      <!--image dynamicly created same image as image clicked-->
+      <div>
+        <img ng-src="{{admin.modalImage}}" alt="large version of image" />
+        <h4><u>Comments</u></h4>
+        <h6>{{admin.modalUserComment}}</h6>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <span>
+        <button class="btn btn-success">Approve</button>
+        <button class="btn btn-danger">Revise</button>
+        <button class="btn btn-danger">Delete</button>
+      </span>
+    </div>
+  </div>
+
+</div>
