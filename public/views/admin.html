@@ -64,14 +64,14 @@
 
       <div class="text-left" ng-show="admin.showUserAccess[$index]" >
         <label ng-repeat="(key,val) in user" ng-if="$index == 2" class="checkbox-inline">
-          <input type="checkbox" ng-model="val" ng-change="admin.updateUsersAccesses(user.email, key, val)" ng-checked="val" >
+          <input type="checkbox" ng-model="val" ng-change="admin.updateUsersAccesses(user.email, key, val); admin.checkboxesTruthiness($index);" ng-checked="val" >
           {{admin.pretty(key)}}
         </label>
-        <span ng-show="admin.showCheckboxes[$index]" ng-init="admin.showCheckboxes[$index] = true" ng-if="user.admin == false">
-        <label ng-repeat="(key,val) in user" ng-if="$index >= 3" class="checkbox-inline">
-          <input type="checkbox" ng-model="val" ng-change="admin.updateUsersAccesses(user.email, key, val)" ng-checked="val" >
-          {{admin.pretty(key)}}
-        </label>
+        <span ng-show="admin.showCheckboxes[$index]" ng-init="admin.showCheckboxes[$index]= !user.admin">
+          <label ng-repeat="(key,val) in user" ng-if="$index >= 3" class="checkbox-inline">
+            <input type="checkbox" ng-model="val" ng-change="admin.updateUsersAccesses(user.email, key, val)" ng-checked="val" >
+            {{admin.pretty(key)}}
+          </label>
         </span>
       </div>
     </div>
