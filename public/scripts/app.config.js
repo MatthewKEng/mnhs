@@ -6,8 +6,8 @@ angular.module('BrandImageManagerApp').config(function($routeProvider, $location
     controller: 'NavController as nav',
     controller: 'LoginController as login'
   }).when('/gallery', {
-    templateUrl: 'views/gallery.html'
-    // controller: 'GalleryController as gallery'
+    templateUrl: 'views/gallery.html',
+    controller: 'GalleryController as gallery'
   }).when('/editor', {
     templateUrl: 'views/editor.html',
     controller: 'EditorController as editor'

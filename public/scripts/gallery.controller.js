@@ -1,30 +1,23 @@
- //
- //
- // angular.module('BrandImageManagerApp')
- //      .controller('GalleryController', GalleryController);
+angular.module('BrandImageManagerApp').controller('GalleryController', function(AuthFactory) {
 
 
- // angular.module('BrandImageManagerApp')
- //      .controller('GalleryController', GalleryController);
- //
- //      function GalleryController() {
- //          console.log('GalleryController loaded');
- //          var ctrl = this;
- //
- //
- //
- //        }
+   var authFactory = AuthFactory;
+     
+         console.log('GalleryController loaded');
+         var ctrl = this;
+      console.log('username', ctrl.username);
+authFactory.isLoggedIn()
+    .then(function(response) {
+            console.log('ctrl controller response ', response);
+            if (response.data.status) {
+                ctrl.displayLogout = true;
+                authFactory.setLoggedIn(true);
+                ctrl.username = response.data.name;
+                console.log('username', ctrl.username);
+            } else { // is not logged in on server
+                ctrl.displayLogout = false;
+                authFactory.setLoggedIn(false);
+            }
+        });
 
-
-
-
-        // }
-
-
-// angular.module('BrandImageManagerApp')
-//     .controller('GalleryController', GalleryController);
-
-// function AdminController($location, $http) {
-//     var gallery = this;
-
-//require login to admin with a true or false statement
+     });
