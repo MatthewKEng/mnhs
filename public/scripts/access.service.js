@@ -50,6 +50,7 @@ function AccessService ($http) {
 
   access.storeUserAccess = function(user) {
     access.getDepartmentIds();
+    access.user = user;
     access.userDepts = [];
     access.notUserDepts = [];
     for (key in user) {
@@ -62,8 +63,6 @@ function AccessService ($http) {
         access.notUserDepts.push(key);
       }
     }
-    console.log('userDepts', access.userDepts);
-    console.log('notUserDepts', access.notUserDepts);
   };
 
   // A check to see if User Departments runs correctly.

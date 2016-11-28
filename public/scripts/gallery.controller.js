@@ -1,10 +1,7 @@
 angular.module('BrandImageManagerApp')
   .controller('GalleryController', GalleryController);
 
-
-
  function GalleryController(AuthFactory, AccessService) {
-
 
    var authFactory = AuthFactory;
 
@@ -14,6 +11,7 @@ angular.module('BrandImageManagerApp')
          ctrl.notUserDepts = AccessService.notUserDepts;
       console.log('username', ctrl.username);
       console.log('user depts1', ctrl.userDepts);
+      console.log('user depts2', ctrl.notUserDepts)
       authFactory.isLoggedIn()
         .then(function(response) {
             console.log('ctrl controller response ', response);
@@ -27,6 +25,7 @@ angular.module('BrandImageManagerApp')
                 authFactory.setLoggedIn(false);
             }
         });
+
         ctrl.pretty = function (name) {
           var prettyUserDept = name.replace(/_/g, " ").toLocaleUpperCase();
           return prettyUserDept;
