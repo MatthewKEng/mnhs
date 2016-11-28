@@ -63,8 +63,6 @@ function AccessService ($http) {
         access.notUserDepts.push(key);
       }
     }
-    console.log('userDepts', access.userDepts);
-    console.log('notUserDepts', access.notUserDepts);
   };
 
   // A check to see if User Departments runs correctly.
