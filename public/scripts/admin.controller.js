@@ -107,12 +107,12 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
   }
 
   //apply correct checkbox truthiness value for if it shows for ng-show
-  admin.checkboxesTruthiness = function (index) {
-    for (var i = 0; i < admin.allUsersSubmitions.length; i++) {
-      if (admin.showCheckboxes[i] == false) {
-        admin.showCheckboxes[i] = true;
-      }else{
-        admin.showCheckboxes[i] = false;
+admin.checkboxesTruthiness = function (index) {
+  for (var i = 0; i < admin.allUsersSubmitions.length; i++) {
+    if (admin.showCheckboxes[i] == false) {
+      admin.showCheckboxes[i] = true;
+    }else{
+      admin.showCheckboxes[i] = false;
       }
     }
   }
@@ -167,16 +167,10 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
     var accessObj = {email:user, department:site, accessBoolean:val };
     AccessService.updateAccess(accessObj).then(function(response){
       console.log('whats the update access response', response);
-//         for (var i = 0; i < admin.allUserAccess.length; i++) {
-//       if (site == 'admin') {
-//         admin.showCheckboxes[i] = !admin.showCheckboxes[i];
-//         console.log('hide checkboxes', admin.showCheckboxes);
-//       }
-// }
       //admin.getUsersAccesses();
     });
   }
-  //check all checked boxes on checking admin function
+  
 
 
 

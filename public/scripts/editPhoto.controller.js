@@ -120,7 +120,7 @@ function EditPhotoController(Upload, AccessService) {
         console.log('blob', blob);
         photo.submission.deptId = 1;
         Upload.upload({
-            url: '/image/submission',
+            url: '/image/submissions',
             method: 'POST',
             data: {
                 originalname : "ryan",
