@@ -69,10 +69,15 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
     for (var i = 0; i < admin.allUserAccess.length; i++) {
       if (i == index) {
         admin.showUserAccess[i] = !admin.showUserAccess[i];
+        admin.value = false;
+        console.log('plus truthiness', admin.value);
         admin.showAddEmployee = false;
          //console.log('whats the truth ',admin.showUserAccess);
-      }else{
+       }
+       else{
         admin.showUserAccess[i] = false;
+        admin.value = true;
+              console.log('minus truthiness', admin.value);
         admin.showAddEmployee = false;
          //console.log('whats the truth ',admin.showUserAccess);
       }
