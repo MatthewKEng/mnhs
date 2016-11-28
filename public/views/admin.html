@@ -78,13 +78,14 @@
           <label ng-hide="admin.upload.file!=undefined" id="file-label" for="file-input">Please select a file</label>
           <input type="file" ng-model="admin.upload.file" ngf-select ngf-max-size="10MB" name="file-input" id="file-input"required>
         </div>
-        <input class="upload-brand-button" type="submit" ng-click="admin.uploadPicture(uploadBrandForm)" value="Upload Image" />
+        <div class="row">
+          <select ng-model="admin.upload.deptId" required>
+            <option value="" selected disabled>Select...</option>
+            <option ng-repeat="name in admin.deptNames" ng-value="name.id">{{admin.prettyDeptName(name.department)}}</option>
+          </select>
+        </div>
+        <input class="upload-brand-button" type="submit" ng-click="admin.uploadBrand(uploadBrandForm)" value="Upload Image" />
       </form>
-    </div>
-
-    <div class="row">
-      <button class="btn btn-success">Approve</button>
-      <button class="btn btn-danger">Revise</button>
     </div>
   </div>
 </div>

@@ -66,6 +66,7 @@ function AccessService ($http) {
       method: 'GET',
       url: '/access/departments',
     }).then(function successCallback(response) {
+      access.departmentNames = response.data;
       access.departmentIds = {};
       for (i = 0; i < response.data.length; i++) {
         var dept = response.data[i].department;
