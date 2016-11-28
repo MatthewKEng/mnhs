@@ -169,8 +169,6 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
 
 
 
-
-
   //modal controlls
   //image src for modal
   admin.modalImage = {};
