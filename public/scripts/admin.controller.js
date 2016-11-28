@@ -159,7 +159,7 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
         for (var i = 0; i < admin.allUserAccess.length; i++) {
       if (site == 'admin') {
         admin.showCheckboxes[i] = !admin.showCheckboxes[i];
-        console.log('hide checkboxes', admin.showCheckboxes[i]);
+        console.log('hide checkboxes', admin.showCheckboxes);
       }
 }
       //admin.getUsersAccesses();
