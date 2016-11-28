@@ -17,6 +17,8 @@ angular.module('BrandImageManagerApp').config(function($routeProvider, $location
   }).when('/photoUploader', {
     templateUrl: 'views/photoUploader.html',
     controller: 'PhotoController as photo'
+  }).when('/photoedit', {
+    templateUrl: 'views/photoedit.html'
   }).otherwise({
     templateUrl: 'views/login.html',
   });

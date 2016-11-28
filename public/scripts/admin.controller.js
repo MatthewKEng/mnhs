@@ -69,11 +69,40 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
     for (var i = 0; i < admin.allUserAccess.length; i++) {
       if (i == index) {
         admin.showUserAccess[i] = !admin.showUserAccess[i];
+
+        admin.plus[i] = !admin.plus[i];
+        admin.minus[i] = !admin.minus[i];
+        admin.showAddEmployee = false;
+        admin.empPlus = true;
          //console.log('whats the truth ',admin.showUserAccess);
-      }else{
+       }
+       else{
         admin.showUserAccess[i] = false;
+        admin.plus[i] = true;
+        admin.minus[i] = false;
+        admin.showAddEmployee = false;
+        admin.empPlus = true;
          //console.log('whats the truth ',admin.showUserAccess);
       }
+    }
+  }
+  //function to show or hide add employee
+  admin.addEmployeeTruthiness = function () {
+    //for loop that makes everything false if button is clicked
+    for (var i = 0; i < admin.allUserAccess.length; i++) {
+      admin.showUserAccess[i] = false;
+      admin.plus[i] = true;
+      admin.minus[i] = false;
+      }
+    // if else stament to set the boolean value of admin.showAddEmployee for ngShow
+    if (admin.showAddEmployee == false) {
+        admin.showAddEmployee = true;
+        admin.empPlus = false;
+        //console.log('whats the plus truth ',admin.empPlus);
+    }else{
+        admin.showAddEmployee = false;
+        admin.empPlus = true;
+        //console.log('whats the minus truth ',admin.empPlus);
     }
   }
 
@@ -127,12 +156,20 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
     var accessObj = {email:user, department:site, accessBoolean:val };
     AccessService.updateAccess(accessObj).then(function(response){
       console.log('whats the update access response', response);
+        for (var i = 0; i < admin.allUserAccess.length; i++) {
       if (site == 'admin') {
-
+        admin.showCheckboxes[i] = !admin.showCheckboxes[i];
+        console.log('hide checkboxes', admin.showCheckboxes);
       }
+}
       //admin.getUsersAccesses();
     });
   }
+  //check all checked boxes on checking admin function
+
+
+
+
 
   //modal controlls
   //image src for modal
