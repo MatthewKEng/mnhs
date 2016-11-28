@@ -1,7 +1,7 @@
 
-<div id="sitemenu" class="container-fluid col-xs-2 col-md-2 col-lg-2 sideMenu">
+<div id="not" class="container-fluid col-xs-2 col-md-2 col-lg-2 sideMenu">
   <div class="sideButtonContainer2">
-    <button ng-repeat="dept in gallery.userDepts" ng-click="" style="font-size:12px; margin-bottom:4px;white-space: normal;" class="btn btn-success btn-lg btn-block sideButton">{{gallery.pretty(dept)}}</button>
+    <button ng-repeat="dept in gallery.userDepts" ng-click="gallery.addNotApprov()" style="font-size:12px; margin-bottom:4px;white-space: normal;" class="btn btn-success btn-lg btn-block sideButton">{{gallery.pretty(dept)}}</button>
   </div>
   <div class="sideButtonContainer2">
     <button ng-repeat="notDept in gallery.notUserDepts" ng-click="" style="font-size:12px; margin-bottom:4px;white-space: normal; background-color: #e7e7e7; color: black;" class="btn btn-info btn-lg btn-block sideButton">{{gallery.pretty(notDept)}}</button>
@@ -11,7 +11,7 @@
 
 
 <div class="zach">
-      <div class="col">
+      <div ng-repeat="" class="col">
         <img ng-src="{{}}"/>
         <p>Create Image</p>
       </div>
