@@ -1,5 +1,6 @@
 
-angular.module('BrandImageManagerApp').controller('GalleryController', function(AuthFactory) {
+angular.module('BrandImageManagerApp')
+       .controller('GalleryController', function(AuthFactory) {
 
 
    var authFactory = AuthFactory;
@@ -22,4 +23,4 @@ authFactory.isLoggedIn()
         });
 
      });
->>>>>>> e98b2902006a3d4ad4c1db6499ca5e6bf39ef46d
+     ctrl.userDepts = AccessService.userDepts;

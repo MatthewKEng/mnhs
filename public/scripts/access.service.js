@@ -50,6 +50,7 @@ function AccessService ($http) {
 
   access.storeUserAccess = function(user) {
     access.getDepartmentIds();
+    access.user = user;
     access.userDepts = [];
     access.notUserDepts = [];
     for (key in user) {
