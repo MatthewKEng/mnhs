@@ -21,6 +21,7 @@ router.get('/admin', function(req, res) {
           console.log('Error querying DB', err);
           res.sendStatus(500);
         }
+        console.log('whats all submissions row',result.rows);
         res.send(result.rows);
       });
     } finally {

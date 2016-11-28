@@ -15,13 +15,13 @@ function SubmissionsService ($http) {
       });//end of get
   };
 
-  // do GET resquest to query the submissions table for a single department
+  // do GET resquest to query the submissions table for all department
   this.getAllSubmissions = function () {
     return $http({
       method: 'GET',
       url: '/submissions/admin'
     }).then(function successCallback(response) {
-        console.log('whats all the submissions data', response);
+        console.log('whats the  all submissions data', response);
         return response.data;
       }, function errorCallback(response) {
         console.log('Error in Call back');

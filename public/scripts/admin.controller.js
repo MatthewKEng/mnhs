@@ -4,10 +4,14 @@ angular.module('BrandImageManagerApp')
 function AdminController($location, AccessService, SubmissionsService) {
     var admin = this;
 
-    //arrays to count number of statuses
+    //arrays to hold submissions bassed on status
     admin.aprroved = [];
     admin.pending = [];
     admin.revision = [];
+    //variables to hold the number of items for each status
+    admin.approvedCount = 0;
+    admin.pendingCount = 0;
+    admin.revisionCount = 0;
 
     //ng-show variables onload
     admin.accessControlsDisplay = false;
@@ -68,6 +72,7 @@ function AdminController($location, AccessService, SubmissionsService) {
     //call to service to get all data from submissions table
     admin.getSubmissions = function () {
       SubmissionsService.getAllSubmissions().then(function(response){
+<<<<<<< Updated upstream
         admin.allUsersSubmissions = response;
         console.log('whats the access response', admin.allUsersSubmissions);
         // for loop to push statuses into specific arrays
@@ -75,6 +80,31 @@ function AdminController($location, AccessService, SubmissionsService) {
         for (var i = 0; i < admin.allUsersSubmissions.length; i++) {
           if (admin.allUsersSubmissions[i].status == 'approved') {
               admin.aprroved.push(angular.copy(response[i]));
+=======
+        admin.allUsersSubmitions = response;
+        console.log('whats the submissions response', admin.allUsersSubmitions);
+        // for loop to push arrays of objects into specific arrays
+        //and to count number of statuses based on the status
+        for (var i = 0; i < admin.allUsersSubmitions.length; i++) {
+          if (admin.allUsersSubmitions[i].status == 'approved') {
+              //count the number under this status
+              admin.approvedCount++;
+              //console.log('whats the approved count',admin.approvedCount);
+              admin.aprroved.push(angular.copy(admin.allUsersSubmitions[i]));
+              console.log('whats the aprroved array', admin.aprroved);
+          }else if (admin.allUsersSubmitions[i].status == 'pending') {
+            //count the number under this status
+            admin.pendingCount++;
+            //console.log('whats the pending count',admin.pendingCount);
+            admin.pending.push(angular.copy(admin.allUsersSubmitions[i]));
+            console.log('whats the pending array', admin.pending);
+          }else if (admin.allUsersSubmitions[i].status == 'revision') {
+            //count the number under this status
+            admin.revisionCount++;
+            //console.log('whats the revision count',admin.revisionCount);
+            admin.revision.push(angular.copy(admin.allUsersSubmitions[i]));
+            console.log('whats the revision array', admin.revision);
+>>>>>>> Stashed changes
           }
         }
       });
