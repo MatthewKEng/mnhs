@@ -19,7 +19,8 @@
     <span>
       <button class="btn btn-success">Approve</button>
       <button class="btn btn-danger">Revise</button>
-      <button ng-click="admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit; admin.viewButton();" class="btn btn-info">View</button>
+      <button ng-click="admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
+      admin.viewButton();" class="btn btn-info">View</button>
     </span>
   </div>
 </div>
@@ -31,7 +32,8 @@
     </div>
     <span>
       <button class="btn btn-danger">Delete</button>
-      <button ng-click="admin.viewButton()" class="btn btn-info">View</button>
+      <button ng-click="admin.modalUserComment = approved.user_comment; admin.modalImage = approved.saved_edit;
+       admin.viewButton()" class="btn btn-info">View</button>
     </span>
   </div>
 </div>
@@ -43,7 +45,8 @@
     </div>
     <span>
       <button class="btn btn-danger">Delete</button>
-      <button ng-click="admin.viewButton()" class="btn btn-info">View</button>
+      <button ng-click="admin.modalUserComment = revision.user_comment; admin.modalImage = revision.saved_edit; 
+      admin.viewButton()" class="btn btn-info">View</button>
     </span>
   </div>
 </div>
