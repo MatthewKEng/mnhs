@@ -124,6 +124,10 @@ function AdminController($location, AccessService, SubmissionsService) {
 
 
     //modal controlls
+    //image src for modal
+    admin.modalImage = {};
+    //user comment for modal
+    admin.modalUserComment = {};
     // Get the modal
     var modal = document.getElementById('adminModal');
 

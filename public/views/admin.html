@@ -13,21 +13,20 @@
 <div ng-show="((admin.pendingGalleryDisplay))" class="container">
   <div ng-repeat="pending in admin.pending" class="row col-xs-4 col-md-4 col-lg-4 text-center">
     <div>
-      <img src="{{pending.saved_edit}}" alt="pending submission" class="img-responsive img-thumbnail"/>
+      <img ng-src="{{pending.saved_edit}}" alt="pending submission" class="img-responsive img-thumbnail"/>
     </div>
     <span>
       <button class="btn btn-success">Approve</button>
       <button class="btn btn-danger">Revise</button>
-      <button ng-click="admin.viewButton()" class="btn btn-info">View</button>
+      <button ng-click="admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit; admin.viewButton();" class="btn btn-info">View</button>
     </span>
   </div>
 </div>
 <!--approved-->
 <div ng-show="((admin.approvedGalleryDisplay))" class="container">
-  <div class="row col-xs-4 col-md-4 col-lg-4 text-center">
+  <div ng-repeat="approved in admin.aprroved" class="row col-xs-4 col-md-4 col-lg-4 text-center">
     <div>
-      <image>Placeholder</image>
-      <h6>approved image Title</h6>
+      <img ng-src="{{approved.saved_edit}}" alt="approved submission" class="img-responsive img-thumbnail"/>
     </div>
     <span>
       <button class="btn btn-danger">Delete</button>
@@ -37,10 +36,9 @@
 </div>
 <!--revision-->
 <div ng-show="((admin.revisionGalleryDisplay))" class="container">
-  <div class="row col-xs-4 col-md-4 col-lg-4 text-center">
+  <div ng-repeat="revision in admin.revision" class="row col-xs-4 col-md-4 col-lg-4 text-center">
     <div>
-      <image>Placeholder</image>
-      <h6>revision image Title</h6>
+      <img ng-src="{{revision.saved_edit}}" alt="revision submission" class="img-responsive img-thumbnail"/>
     </div>
     <span>
       <button class="btn btn-danger">Delete</button>
@@ -76,15 +74,16 @@
     <div class="modal-body text-center">
       <!--image dynamicly created same image as image clicked-->
       <div>
-        <image>Placeholder</image>
-        <h6>image Title</h6>
+        <img ng-src="{{admin.modalImage}}" alt="large version of image" />
+        <h4><u>Comments</u></h4>
+        <h6>{{admin.modalUserComment}}</h6>
       </div>
     </div>
     <div class="modal-footer">
       <span>
         <button class="btn btn-success">Approve</button>
         <button class="btn btn-danger">Revise</button>
-        <button class="btn btn-info">Fullscreen</button>
+        <button class="btn btn-danger">Delete</button>
       </span>
     </div>
   </div>
