@@ -1,13 +1,21 @@
-angular.module('BrandImageManagerApp').controller('GalleryController', function(AuthFactory) {
+angular.module('BrandImageManagerApp')
+  .controller('GalleryController', GalleryController);
+
+
+
+ function GalleryController(AuthFactory, AccessService) {
 
 
    var authFactory = AuthFactory;
-     
+
          console.log('GalleryController loaded');
          var ctrl = this;
+         ctrl.userDepts = AccessService.userDepts;
+         ctrl.notUserDepts = AccessService.notUserDepts;
       console.log('username', ctrl.username);
-authFactory.isLoggedIn()
-    .then(function(response) {
+      console.log('user depts1', ctrl.userDepts);
+      authFactory.isLoggedIn()
+        .then(function(response) {
             console.log('ctrl controller response ', response);
             if (response.data.status) {
                 ctrl.displayLogout = true;
@@ -19,5 +27,8 @@ authFactory.isLoggedIn()
                 authFactory.setLoggedIn(false);
             }
         });
-
-     });
+        ctrl.pretty = function (name) {
+          var prettyUserDept = name.replace(/_/g, " ").toLocaleUpperCase();
+          return prettyUserDept;
+        }
+        }
