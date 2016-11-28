@@ -1,6 +1,7 @@
 $(document).ready(function(){
 if(window.location.pathname === "/photoedit"){
 console.log(window.location.pathname);
+
 var canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d');
 
@@ -48,15 +49,23 @@ function redRight() {
  * setting proper filename for the download.
  * IMPORTANT: Call it from within a onclick event.
 */
-function downloadCanvas(link, canvasId, filename) {
-    link.href = document.getElementById(canvasId).toDataURL();
-    link.download = filename;
-}
+// function downloadCanvas(link, canvasId, filename) {
+//     // link.href = document.getElementById(canvasId).toDataURL();
+//     // link.download = filename;
+//     photo.submission.file = document.getElementById(canvasId).toDataURL();
+//     photo.submission.deptId = 1;
+//     Upload.upload({
+//         url: '/image/submission',
+//         method: 'POST',
+//         data: submission,
+//     });
+// }
 
 
-document.getElementById('download').addEventListener('click', function() {
-    downloadCanvas(this, 'canvas', 'test.png');
-}, false);
+
+// document.getElementById('download').addEventListener('click', function() {
+//     downloadCanvas(this, 'canvas', 'test.png');
+// }, false);
 
 // $('download').on('click', function(){
 //     downloadCanvas(this, 'canvas', 'test.png');

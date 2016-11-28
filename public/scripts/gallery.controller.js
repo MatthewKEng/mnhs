@@ -31,4 +31,10 @@ angular.module('BrandImageManagerApp')
           var prettyUserDept = name.replace(/_/g, " ").toLocaleUpperCase();
           return prettyUserDept;
         }
+
+          ctrl.addNotApprov = function() {
+            console.log('populating not approved images');
+            
+          }
+
         }
