@@ -91,6 +91,8 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
     //for loop that makes everything false if button is clicked
     for (var i = 0; i < admin.allUserAccess.length; i++) {
       admin.showUserAccess[i] = false;
+      admin.plus[i] = true;
+      admin.minus[i] = false;
       }
     // if else stament to set the boolean value of admin.showAddEmployee for ngShow
     if (admin.showAddEmployee == false) {
@@ -154,13 +156,18 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
     var accessObj = {email:user, department:site, accessBoolean:val };
     AccessService.updateAccess(accessObj).then(function(response){
       console.log('whats the update access response', response);
+        for (var i = 0; i < admin.allUserAccess.length; i++) {
       if (site == 'admin') {
-
+        admin.showCheckboxes[i] = !admin.showCheckboxes[i];
+        console.log('hide checkboxes', admin.showCheckboxes[i]);
       }
+}
       //admin.getUsersAccesses();
     });
   }
   //check all checked boxes on checking admin function
+
+
 
 
 
