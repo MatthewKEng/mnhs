@@ -23,6 +23,15 @@ function AdminController($location, AccessService, SubmissionsService) {
     admin.showAccess = function () {
       admin.getUsersAccesses();
       admin.accessControlsDisplay = true;
+      admin.brandsConsoleDisplay = false;
+      admin.pendingGalleryDisplay = false;
+      admin.approvedGalleryDisplay = false;
+      admin.revisionGalleryDisplay = false;
+    }
+    //function to display brands
+    admin.showBrands = function () {
+      admin.accessControlsDisplay = false;
+      admin.brandsConsoleDisplay = true;
       admin.pendingGalleryDisplay = false;
       admin.approvedGalleryDisplay = false;
       admin.revisionGalleryDisplay = false;
@@ -31,6 +40,7 @@ function AdminController($location, AccessService, SubmissionsService) {
     //display pending gallery
     admin.showPendingGallery = function () {
       admin.accessControlsDisplay = false;
+      admin.brandsConsoleDisplay = false;
       admin.pendingGalleryDisplay = true;
       admin.approvedGalleryDisplay = false;
       admin.revisionGalleryDisplay = false;
@@ -38,6 +48,7 @@ function AdminController($location, AccessService, SubmissionsService) {
     //display approved gallery
     admin.showApprovedGallery = function () {
       admin.accessControlsDisplay = false;
+      admin.brandsConsoleDisplay = false;
       admin.pendingGalleryDisplay = false;
       admin.approvedGalleryDisplay = true;
       admin.revisionGalleryDisplay = false;
@@ -45,6 +56,7 @@ function AdminController($location, AccessService, SubmissionsService) {
     //display revision gallery
     admin.showRevisionGallery = function () {
       admin.accessControlsDisplay = false;
+      admin.brandsConsoleDisplay = false;
       admin.pendingGalleryDisplay = false;
       admin.approvedGalleryDisplay = false;
       admin.revisionGalleryDisplay = true;
