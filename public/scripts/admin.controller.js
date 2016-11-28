@@ -158,17 +158,18 @@ function AdminController($location, AccessService, SubmissionsService, Upload) {
     }
   }
 
+  admin.deptNames = AccessService.departmentNames;
+  admin.prettyDeptName = function(name) {
+    return name.replace(/_/g, ' ').toUpperCase()
+  }
+
   // Uploads Image to S3 if one is selected.  Also sends image url to SQL db
   // with department_id.
   admin.uploadBrand = function(form) {
     if (form.$invalid) {
       return;
     }
-    // This only uploads to the first department the user has access to.  Need
-    // to update with the correct Dept ID for the user.
-    var deptName = admin.upload.deptName;
-    var deptId = AccessService.departmentIds[deptName];
-    adminModal.upload.department = deptId;
+    admin.upload.deptId = parseInt(admin.upload.deptId);
     console.log('admin.controller', admin.upload);
     Upload.upload({
       url: '/image/brand',
