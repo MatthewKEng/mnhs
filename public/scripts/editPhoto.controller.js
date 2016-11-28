@@ -102,6 +102,8 @@ function EditPhotoController(Upload, AccessService) {
 
   console.log('PhotoController loaded');
   var photo = this;
+  
+
   var canvas = document.getElementById('canvas');
   photo.canvas = document.getElementById('canvas');
 
