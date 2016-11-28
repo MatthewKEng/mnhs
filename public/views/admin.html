@@ -55,7 +55,7 @@
   <div class="row col-xs-9 col-md-9 col-lg-9">
     <!--dynamicly created list of users and there access-->
     <div ng-repeat="user in admin.allUserAccess" ng-init = "admin.showUserAccess[$index]= false">
-      <button ng-click="admin.truthiness($index)" class="btn btn-primary btn-block btn-lg acordionButton">{{user.email}}<span class="pull-right">&nabla;</span></button>
+      <button ng-click="admin.truthiness($index)" class="btn btn-primary btn-block btn-lg acordionButton" >{{user.email}}<span class ="glyphicon glyphicon-plus pull-right"></span></button>
       <div class="text-left" ng-show="admin.showUserAccess[$index]" >
         <label ng-repeat="(key,val) in user" ng-if="$index >= 2" class="checkbox-inline">
           <input type="checkbox" ng-model="val" ng-change="admin.updateUsersAccesses(user.email, key, val)" ng-checked="{{val}}">
