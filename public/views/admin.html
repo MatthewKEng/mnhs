@@ -1,11 +1,11 @@
 <!--side menu-->
 <div ng-init="admin.getSubmissions()" class="container-fluid col-xs-2 col-md-2 col-lg-2 sideMenu">
   <div class="sideButtonContainer">
-    <button ng-click="admin.showPendingGallery()" class="btn btn-info btn-lg btn-block sideButton">Pending:&nbsp;{{admin.pendingCount}}</button>
-    <button ng-click="admin.showApprovedGallery()" class="btn btn-info btn-lg btn-block sideButton">Approved:&nbsp;{{admin.approvedCount}}</button>
-    <button ng-click="admin.showRevisionGallery()" class="btn btn-info btn-lg btn-block sideButton">Revision:&nbsp;{{admin.revisionCount}}</button>
-    <button ng-click="admin.showAccess()" class="btn btn-warning btn-lg btn-block sideButton">Access</button>
-    <button ng-click="admin.showBrands()" class="btn btn-warning btn-lg btn-block sideButton">Brands</button>
+    <button ng-click="admin.showPendingGallery()" class="btn btn-default btn-lg btn-block sideButton" class="sideButton">Pending:&nbsp;{{admin.pendingCount}}</button>
+    <button ng-click="admin.showApprovedGallery()" class="btn btn-default btn-lg btn-block sideButton" class="sideButton">Approved:&nbsp;{{admin.approvedCount}}</button>
+    <button ng-click="admin.showRevisionGallery()" class="btn btn-default btn-lg btn-block sideButton" class="sideButton">Revision:&nbsp;{{admin.revisionCount}}</button>
+    <button ng-click="admin.showAccess()" class="btn btn-default btn-lg btn-block sidesButton" class="sidesButton">Access</button>
+    <button ng-click="admin.showBrands()" class="btn btn-default btn-lg btn-block sidesButton" class="sidesButton">Brands</button>
   </div>
 </div>
 
@@ -18,7 +18,7 @@
     </div>
     <span>
       <button ng-click="admin.approveButton(pending)" class="btn btn-success">Approve</button>
-      <button ng-click="admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
+      <button  ng-click="admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
       admin.reviseButton(pending)" class="btn btn-danger">Revise</button>
       <button ng-click="admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
       admin.viewButton();" class="btn btn-info">View</button>

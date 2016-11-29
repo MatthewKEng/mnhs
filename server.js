@@ -44,7 +44,7 @@ app.use('/logout', logout);
 app.use('/access', access);
 app.use('/submissions', submissions);
 app.use('/image', imageRouter);
-app.use('/gallery', gall);
+// app.use('/gallery', gall);
 
 // everything beyond this point must be authenticated
 app.use(ensureAuthenticated);
