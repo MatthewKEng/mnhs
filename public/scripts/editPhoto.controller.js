@@ -98,11 +98,13 @@
 angular.module('BrandImageManagerApp')
        .controller('EditPhotoController', EditPhotoController);
 
-function EditPhotoController(Upload, AccessService) {
+function EditPhotoController(Upload, AccessService, ImageService) {
 
   console.log('PhotoController loaded');
   var photo = this;
-  
+
+  //sets the image src onload based on the image clicked from the gallery.html
+  photo.imageSrc = ImageService.image
 
   var canvas = document.getElementById('canvas');
   photo.canvas = document.getElementById('canvas');
