@@ -1,10 +1,10 @@
 
 <div id="not" class="container-fluid col-xs-2 col-md-2 col-lg-2 sideMenu">
   <div class="sideButtonContainer2">
-    <button ng-repeat="dept in gallery.userDepts" ng-click="gallery.showDept($index); gallery.getImages($index);" style="font-size:12px; margin-bottom:4px;white-space: normal;" class="btn btn-success btn-lg btn-block sideButton">{{gallery.pretty(dept)}}</button>
+    <button ng-repeat="dept in gallery.userDepts" ng-click="gallery.showDept(dept); gallery.getImages(dept, 1);" style="font-size:12px; margin-bottom:4px;white-space: normal;" class="btn btn-success btn-lg btn-block sideButton">{{gallery.pretty(dept)}}</button>
   </div>
   <div class="sideButtonContainer2">
-    <button ng-repeat="notDept in gallery.notUserDepts" ng-click="" style="font-size:12px; margin-bottom:4px;white-space: normal; background-color: #e7e7e7; color: black;" class="btn btn-info btn-lg btn-block sideButton">{{gallery.pretty(notDept)}}</button>
+    <button ng-repeat="notDept in gallery.notUserDepts" ng-click="gallery.showDept(notDept); gallery.getImages(notDept, 0);" style="font-size:12px; margin-bottom:4px;white-space: normal; background-color: #e7e7e7; color: black;" class="btn btn-info btn-lg btn-block sideButton">{{gallery.pretty(notDept)}}</button>
   </div>
 </div>
 
@@ -31,8 +31,8 @@
     <div class="gallery-display" ng-repeat="image in gallery.approved">
       <img ng-src="{{image.saved_edit}}" class="img-responsive gallery-item" alt="approved image" />
       <div class="row">
-        <button class="btn btn-success">Download</button>
-        <button class="btn btn-danger">Delete</button>
+        <button ng-disable="gallery.disableButtons" class="btn btn-success">Download</button>
+        <button ng-disable="gallery.disableButtons" class="btn btn-danger">Delete</button>
       </div>
     </div>
   </div>
