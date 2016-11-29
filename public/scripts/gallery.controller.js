@@ -1,7 +1,7 @@
 angular.module('BrandImageManagerApp')
   .controller('GalleryController', GalleryController);
 
-function GalleryController(AuthFactory, AccessService, ImageService, ImageTableService) {
+function GalleryController(AuthFactory, AccessService, ImageService, ImageTableService, Upload, $timeout) {
 
   var authFactory = AuthFactory;
 
@@ -86,4 +86,32 @@ function GalleryController(AuthFactory, AccessService, ImageService, ImageTableS
     ImageService.image = image;
     console.log('did we get the image clicked', ImageService.image);
   }
+
+  ctrl.success = false;
+
+  // Uploads Image to S3 if one is selected.  Also sends image url to SQL db
+  // with department_id.
+  ctrl.uploadPicture = function(form) {
+    if (form.$invalid) {
+      return;
+    }
+    // This only uploads to the first department the user has access to.  Need
+    // to update with the correct Dept ID for the user.
+    var deptName = AccessService.userDepts[0];
+    var deptId = AccessService.departmentIds[deptName];
+    ctrl.upload.department = deptId;
+    console.log('ctrl.controller', ctrl.upload);
+    Upload.upload({
+      url: '/image',
+      method: 'POST',
+      data: ctrl.upload,
+    }).then(function() {
+      console.log('Success!');
+      ctrl.upload = undefined;
+      ctrl.success = true;
+      $timeout(function() {
+        ctrl.success = false;
+      }, 2500);
+    });
+  };
 }

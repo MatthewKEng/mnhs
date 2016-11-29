@@ -10,7 +10,7 @@
 
 <div class="col-xs-4">
   <div class="row addContainer">
-    <a class="addPhoto" href="/photoUploader">+</a>
+    <h1 class="addPhoto glyphicon glyphicon-upload" ng-click="gallery.modalImage=image.url_image; gallery.viewButton()"></h1>
   </div>
   <div class="row gallery-display" ng-repeat="image in gallery.deptImages">
     <a href="/photoedit"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image.url_image)" ng-src="{{image.url_image}}" /></a>
@@ -42,9 +42,22 @@
     <div class="modal-body text-center">
       <!--image dynamicly created same image as image clicked-->
       <div>
-        <img ng-src="{{gallery.modalImage}}" alt="large version of image" />
-        <h4><u>Comments</u></h4>
-        <h6>{{gallery.modalUserComment}}</h6>
+        <h3>Upload a new image.</h3>
+        <div class="row preview-block">
+          <img ng-show="gallery.upload.file!=undefined" ngf-src="gallery.upload.file" alt="Image Preview" class="preview" />
+          <span ng-show="gallery.success" class="success btn btn-success">Success!</span>
+        </div>
+
+        <form enctype="multipart/form-data" name="uploadForm" id="uploadForm">
+          <div class="col-xs-12">
+            <label ng-hide="gallery.upload.file!=undefined" id="file-label" for="file-input">Please select an image</label>
+            <label ng-show="gallery.upload.file!=undefined" id="file-label" for="file-input">Change image</label>
+            <input type="file" ng-model="gallery.upload.file" ngf-select ngf-max-size="10MB" name="file-input" id="file-input"required>
+          </div>
+            <input class="upload-form-button" type="submit" ng-click="gallery.uploadPicture(uploadForm)" value="Upload Image" />
+          </div>
+        </form>
+
       </div>
     </div>
     <div class="modal-footer">
