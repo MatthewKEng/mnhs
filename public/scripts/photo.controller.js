@@ -22,14 +22,16 @@ function PhotoController(Upload, AccessService) {
       url: '/image',
       method: 'POST',
       data: photo.upload,
+    }).then(function() {
+      console.log('Success!');
     });
   };
 
-  // Function to determine all department names that the user has access to.
-  // Data is stored in access.service.js file.
-  photo.findUser = function() {
-    photo.userDepts = AccessService.userDepts;
-    console.log('PhotoController', photo.userDepts);
-  };
+  // // Function to determine all department names that the user has access to.
+  // // Data is stored in access.service.js file.
+  // photo.findUser = function() {
+  //   photo.userDepts = AccessService.userDepts;
+  //   console.log('PhotoController', photo.userDepts);
+  // };
 
 }

@@ -17,8 +17,9 @@
       <img ng-src="{{pending.saved_edit}}" alt="pending submission" class="img-responsive img-thumbnail"/>
     </div>
     <span>
-      <button class="btn btn-success">Approve</button>
-      <button class="btn btn-danger">Revise</button>
+      <button ng-click="admin.approveButton(pending)" class="btn btn-success">Approve</button>
+      <button ng-click="admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
+      admin.reviseButton(pending)" class="btn btn-danger">Revise</button>
       <button ng-click="admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
       admin.viewButton();" class="btn btn-info">View</button>
     </span>
@@ -31,7 +32,7 @@
       <img ng-src="{{approved.saved_edit}}" alt="approved submission" class="img-responsive img-thumbnail"/>
     </div>
     <span>
-      <button class="btn btn-danger">Delete</button>
+      <button ng-click="admin.deleteButton(approved)" class="btn btn-danger">Delete</button>
       <button ng-click="admin.modalUserComment = approved.user_comment; admin.modalImage = approved.saved_edit;
        admin.viewButton()" class="btn btn-info">View</button>
     </span>
@@ -82,9 +83,9 @@
     <form ng-show="((admin.showAddEmployee))" class="form-inline">
       <div class="form-group">
         <label class="sr-only" for="exampleInputEmail3">Email address</label>
-        <input type="email" class="form-control" placeholder="Email">
+        <input ng-model="admin.newUser" type="email" class="form-control" placeholder="Email">
       </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button ng-click="admin.submitButton()" type="submit" class="btn btn-default">Submit</button>
     </form>
   </div>
 </div>
@@ -127,14 +128,15 @@
       <div>
         <img ng-src="{{admin.modalImage}}" alt="large version of image" />
         <h4><u>Comments</u></h4>
-        <h6>{{admin.modalUserComment}}</h6>
+        <h6 ng-show="reviseClass">{{admin.modalUserComment}}</h6>
+        <input ng-hide="reviseInput" ng-model="admin.reviseComment" />
       </div>
     </div>
     <div class="modal-footer">
       <span>
-        <button class="btn btn-success">Approve</button>
-        <button class="btn btn-danger">Revise</button>
-        <button class="btn btn-danger">Delete</button>
+        <button ng-show="reviseClass" class="btn btn-success">Approve</button>
+        <button ng-click="admin.subReviseButton()" class="btn btn-danger">Revise</button>
+        <button ng-show="reviseClass" ng-click="admin.deleteButton(admin)" class="btn btn-danger">Delete</button>
       </span>
     </div>
   </div>

@@ -1,27 +1,83 @@
 
 <div id="not" class="container-fluid col-xs-2 col-md-2 col-lg-2 sideMenu">
   <div class="sideButtonContainer2">
-    <button ng-repeat="dept in gallery.userDepts" ng-click="gallery.addNotApprov()" style="font-size:12px; margin-bottom:4px;white-space: normal;" class="btn btn-success btn-lg btn-block sideButton">{{gallery.pretty(dept)}}</button>
+    <button ng-repeat="dept in gallery.userDepts" ng-click="gallery.showDept($index); gallery.getImages($index);" style="font-size:12px; margin-bottom:4px;white-space: normal;" class="btn btn-success btn-lg btn-block sideButton">{{gallery.pretty(dept)}}</button>
   </div>
   <div class="sideButtonContainer2">
     <button ng-repeat="notDept in gallery.notUserDepts" ng-click="" style="font-size:12px; margin-bottom:4px;white-space: normal; background-color: #e7e7e7; color: black;" class="btn btn-info btn-lg btn-block sideButton">{{gallery.pretty(notDept)}}</button>
   </div>
 </div>
 
+<div class="container-fluid">
+  <div class="row col-xs-3 overflow">
+    <div class="row addContainer">
+      <h4><u>Image Selection</u></h4>
+      <h1 class="addPhoto glyphicon glyphicon-upload" ng-click="gallery.modalImage=image.url_image; gallery.viewButton()"></h1>
+    </div>
+    <div class="row gallery-display" ng-repeat="image in gallery.deptImages">
+      <a href="/photoedit"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image.url_image)" ng-src="{{image.url_image}}" /></a>
+    </div>
+  </div>
+
+  <div class="row col-xs-3 text-center overflow">
+    <h4><u>Revision images:&nbsp;{{gallery.revisionCount}}</u></h4>
+    <div class="gallery-display" ng-repeat="image in gallery.revision">
+      <a href="/photoedit"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image.saved_edit)" ng-src="{{image.saved_edit}}" alt="revision image" /></a>
+    </div>
+  </div>
+
+  <div class="row col-xs-3 text-center overflow">
+    <h4><u>Approved Images:&nbsp;{{gallery.approvedCount}}</u></h4>
+    <div class="gallery-display" ng-repeat="image in gallery.approved">
+      <img ng-src="{{image.saved_edit}}" class="img-responsive gallery-item" alt="approved image" />
+      <div class="row">
+        <button class="btn btn-success">Download</button>
+        <button class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-<div class="zach">
-      <div ng-repeat="" class="col">
-        <img ng-src="{{}}"/>
-        <p>Create Image</p>
+
+
+<!--modal-->
+<div id="adminModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span ng-click="gallery.closeModal()" class="close">×</span>
+      <h2>Department</h2>
+    </div>
+    <div class="modal-body text-center">
+      <!--image dynamicly created same image as image clicked-->
+      <div>
+        <h3>Upload a new image.</h3>
+        <div class="row preview-block">
+          <img ng-show="gallery.upload.file!=undefined" ngf-src="gallery.upload.file" alt="Image Preview" class="preview" />
+          <span ng-show="gallery.success" class="success btn btn-success">Success!</span>
+        </div>
+
+        <form enctype="multipart/form-data" name="uploadForm" id="uploadForm">
+          <div class="col-xs-12">
+            <label ng-hide="gallery.upload.file!=undefined" id="file-label" for="file-input">Please select an image</label>
+            <label ng-show="gallery.upload.file!=undefined" id="file-label" for="file-input">Change image</label>
+            <input type="file" ng-model="gallery.upload.file" ngf-select ngf-max-size="10MB" name="file-input" id="file-input"required>
+          </div>
+            <input class="upload-form-button" type="submit" ng-click="gallery.uploadPicture(uploadForm)" value="Upload Image" />
+          </div>
+        </form>
+
       </div>
-      <div class="col">
-        <img ng-src="{{}}"/>
-        <p>Image Not Approved/Needs Edit</p>
-      </div>
-      <div class="col">
-        <img ng-src="{{}}"/>
-        <p>Images Approved</p>
-      </div>
-      <a href="/photoUploader">Go To photoUploader</a>
+    </div>
+    <div class="modal-footer">
+      <span>
+        <button class="btn btn-success">Approve</button>
+        <button class="btn btn-danger">Revise</button>
+        <button class="btn btn-danger">Delete</button>
+      </span>
+    </div>
+  </div>
+
 </div>

@@ -239,3 +239,80 @@ background-color: #eeb111;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+/* Temporary styling for gallery and photoUploader pages*/
+.addPhoto, .addPhoto:active, .addPhoto:visited {
+  background-color: lightslategray;
+  color: white;
+  font-size: 70px;
+  text-align: center;
+  height: 150px;
+  width: 150px;
+  padding-top: 38px;
+  cursor: pointer;
+}
+.addPhoto:hover {
+  text-decoration: none;
+  background-color: #bbb;
+  color: gray;
+}
+.addContainer {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.upload {
+  text-align: center;
+}
+#file-input {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.#file-input + label {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  background-color: black;
+  display: inline-block;
+}
+.file-upload {
+  text-align: center;
+}
+#file-input:focus, #file-label,
+#file-input {
+  background: linear-gradient(#444, white);
+  color: #263238;
+  padding: 7px;
+  font-weight: normal;
+}
+#file-label:hover {
+  background: linear-gradient(darkslategray, lightslategray);
+  color: white;
+}
+#file-input, #file-label {
+  cursor: pointer;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonface;
+}
+.gallery-display {
+  height: 200px;
+  margin: 0 auto 20px auto;
+  text-align: center;
+}
+.gallery-item {
+  margin: 0 auto;
+  height: 170px;
+}
+.success {
+  margin-top: 60px;
+  font-size: 50px;
+}
+.overflow {
+  overflow: scroll;
+  height: 87vh;
+  width: 29%;
+}
