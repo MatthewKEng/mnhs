@@ -83,7 +83,8 @@ background-color: #eeb111;
     padding-top: 3%;
     padding-bottom: 1%;
     background-color: #eeb111;
-    margin-top: -2%;
+    width: 100vw;
+    height: 47vh;
 }
 
 /*top navbar */
