@@ -21,15 +21,15 @@
 
   <div class="row col-xs-3 text-center overflow">
     <h4><u>Revision images:&nbsp;{{gallery.revisionCount}}</u></h4>
-    <div ng-repeat="image in gallery.revision">
-      <a href="/photoedit"><img ng-click="gallery.sendThisImage(image.saved_edit)" ng-src="{{image.saved_edit}}" alt="revision image" /></a>
+    <div class="gallery-display" ng-repeat="image in gallery.revision">
+      <a href="/photoedit"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image.saved_edit)" ng-src="{{image.saved_edit}}" alt="revision image" /></a>
     </div>
   </div>
 
   <div class="row col-xs-3 text-center overflow">
     <h4><u>Approved Images:&nbsp;{{gallery.approvedCount}}</u></h4>
-    <div ng-repeat="image in gallery.approved">
-      <img ng-src="{{image.saved_edit}}" alt="approved image" />
+    <div class="gallery-display" ng-repeat="image in gallery.approved">
+      <img ng-src="{{image.saved_edit}}" class="img-responsive gallery-item" alt="approved image" />
       <div class="row">
         <button class="btn btn-success">Download</button>
         <button class="btn btn-danger">Delete</button>

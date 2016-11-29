@@ -258,6 +258,7 @@ background-color: #eeb111;
 }
 .addContainer {
   text-align: center;
+  margin-bottom: 20px;
 }
 .upload {
   text-align: center;
@@ -299,7 +300,7 @@ background-color: #eeb111;
 }
 .gallery-display {
   height: 200px;
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
   text-align: center;
 }
 .gallery-item {
