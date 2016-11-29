@@ -1,7 +1,7 @@
 
 <div id="not" class="container-fluid col-xs-2 col-md-2 col-lg-2 sideMenu">
   <div class="sideButtonContainer2">
-    <button ng-repeat="dept in gallery.userDepts" ng-click="gallery.addNotApprov()" style="font-size:12px; margin-bottom:4px;white-space: normal;" class="btn btn-success btn-lg btn-block sideButton">{{gallery.pretty(dept)}}</button>
+    <button ng-repeat="dept in gallery.userDepts" ng-click="gallery.showDept($index)" style="font-size:12px; margin-bottom:4px;white-space: normal;" class="btn btn-success btn-lg btn-block sideButton">{{gallery.pretty(dept)}}</button>
   </div>
   <div class="sideButtonContainer2">
     <button ng-repeat="notDept in gallery.notUserDepts" ng-click="" style="font-size:12px; margin-bottom:4px;white-space: normal; background-color: #e7e7e7; color: black;" class="btn btn-info btn-lg btn-block sideButton">{{gallery.pretty(notDept)}}</button>
@@ -9,28 +9,51 @@
 </div>
 
 <div class="col-xs-4">
-  <div class="addContainer">
+  <div class="row addContainer">
     <a class="addPhoto" href="/photoUploader">+</a>
   </div>
+  <div class="row gallery-display" ng-repeat="image in gallery.deptImages">
+    <img class="img-responsive gallery-item" ng-src="{{image.url_image}}" />
+  </div>
+
+
+  <button ng-click="gallery.modalUserComment = pending.user_comment; gallery.modalImage = pending.saved_edit;
+  gallery.viewButton();" class="btn btn-info">View</button>
 </div>
+
 <div class="col-xs-4">
-
+  <a>Unapproved images</a>
 </div>
+
 <div class="col-xs-4">
-
+  <a>Approved Images</a>
 </div>
 
-<div class="zach">
-      <div ng-repeat="" class="col">
-        <img ng-src="{{}}"/>
-        <p>Create Image</p>
+
+<!--modal-->
+<div id="adminModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span ng-click="gallery.closeModal()" class="close">×</span>
+      <h2>Department</h2>
+    </div>
+    <div class="modal-body text-center">
+      <!--image dynamicly created same image as image clicked-->
+      <div>
+        <img ng-src="{{gallery.modalImage}}" alt="large version of image" />
+        <h4><u>Comments</u></h4>
+        <h6>{{gallery.modalUserComment}}</h6>
       </div>
-      <div class="col">
-        <img ng-src="{{}}"/>
-        <p>Image Not Approved/Needs Edit</p>
-      </div>
-      <div class="col">
-        <img ng-src="{{}}"/>
-        <p>Images Approved</p>
-      </div>
+    </div>
+    <div class="modal-footer">
+      <span>
+        <button class="btn btn-success">Approve</button>
+        <button class="btn btn-danger">Revise</button>
+        <button class="btn btn-danger">Delete</button>
+      </span>
+    </div>
+  </div>
+
 </div>
