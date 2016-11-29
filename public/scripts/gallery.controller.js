@@ -81,5 +81,9 @@ function GalleryController(AuthFactory, AccessService, ImageService, ImageTableS
       }
     });
   }
-
+  //function to attack image clicked url to the ImageService so the photoedit gets it
+  ctrl.sendThisImage = function (image) {
+    ImageService.image = image;
+    console.log('did we get the image clicked', ImageService.image);
+  }
 }
