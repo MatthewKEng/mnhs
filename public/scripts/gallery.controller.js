@@ -1,7 +1,7 @@
 angular.module('BrandImageManagerApp')
   .controller('GalleryController', GalleryController);
 
- function GalleryController(AuthFactory, AccessService) {
+ function GalleryController(AuthFactory, AccessService, ImageService) {
 
    var authFactory = AuthFactory;
 
@@ -33,7 +33,7 @@ angular.module('BrandImageManagerApp')
 
           ctrl.addNotApprov = function() {
             console.log('populating not approved images');
-            
-          }
 
+          }
+          
         }
