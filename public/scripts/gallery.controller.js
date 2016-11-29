@@ -1,7 +1,7 @@
 angular.module('BrandImageManagerApp')
   .controller('GalleryController', GalleryController);
 
-function GalleryController(AuthFactory, AccessService, ImageService, ImageTableService, Upload, $timeout) {
+function GalleryController(AuthFactory, SubmissionsService, AccessService, ImageService, ImageTableService, Upload, $timeout) {
 
   var authFactory = AuthFactory;
 
@@ -51,27 +51,33 @@ function GalleryController(AuthFactory, AccessService, ImageService, ImageTableS
 
   };
 
+
+  //empty arrays to hold the data based on the status
+  ctrl.revision = [];
+  ctrl.approved = [];
+  //start the count at zero for status counter
+  ctrl.approvedCount = 0;
+  ctrl.revisionCount = 0;
   //call to service to get all data from submissions table
-  ctrl.getImages = function () {
+  ctrl.getImages = function (index) {
+    //reset value on click
+    ctrl.revision = [];
+    ctrl.approved = [];
+    ctrl.approvedCount = 0;
+    ctrl.revisionCount = 0;
     SubmissionsService.getAllSubmissions().then(function(response){
       ctrl.allUsersSubmissions = response;
       console.log('whats the submissions response', ctrl.allUsersSubmissions);
       // for loop to push arrays of objects into specific arrays
       //and to count number of statuses based on the status
       for (var i = 0; i < ctrl.allUsersSubmissions.length; i++) {
-        if (ctrl.allUsersSubmissions[i].status == 'approved') {
+        if (ctrl.allUsersSubmissions[i].status == 'approved' && ctrl.allUsersSubmissions[i].department_id == index+1) {
             //count the number under this status
             ctrl.approvedCount++;
             //console.log('whats the approved count',ctrl.approvedCount);
-            ctrl.aprroved.push(angular.copy(ctrl.allUsersSubmissions[i]));
-            console.log('whats the aprroved array', ctrl.aprroved);
-        } else if (ctrl.allUsersSubmissions[i].status == 'pending') {
-          //count the number under this status
-          ctrl.pendingCount++;
-          //console.log('whats the pending count',ctrl.pendingCount);
-          ctrl.pending.push(angular.copy(ctrl.allUsersSubmissions[i]));
-          console.log('whats the pending array', ctrl.pending);
-        } else if (ctrl.allUsersSubmissions[i].status == 'revision') {
+            ctrl.approved.push(angular.copy(ctrl.allUsersSubmissions[i]));
+            console.log('whats the approved array', ctrl.approved);
+        } else if (ctrl.allUsersSubmissions[i].status == 'revision' && ctrl.allUsersSubmissions[i].department_id == index+1) {
           //count the number under this status
           ctrl.revisionCount++;
           //console.log('whats the revision count',ctrl.revisionCount);

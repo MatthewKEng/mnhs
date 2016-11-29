@@ -313,4 +313,5 @@ background-color: #eeb111;
 .overflow {
   overflow: scroll;
   height: 87vh;
+  width: 29%;
 }

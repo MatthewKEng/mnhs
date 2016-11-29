@@ -1,7 +1,7 @@
 
 <div id="not" class="container-fluid col-xs-2 col-md-2 col-lg-2 sideMenu">
   <div class="sideButtonContainer2">
-    <button ng-repeat="dept in gallery.userDepts" ng-click="gallery.showDept($index)" style="font-size:12px; margin-bottom:4px;white-space: normal;" class="btn btn-success btn-lg btn-block sideButton">{{gallery.pretty(dept)}}</button>
+    <button ng-repeat="dept in gallery.userDepts" ng-click="gallery.showDept($index); gallery.getImages($index);" style="font-size:12px; margin-bottom:4px;white-space: normal;" class="btn btn-success btn-lg btn-block sideButton">{{gallery.pretty(dept)}}</button>
   </div>
   <div class="sideButtonContainer2">
     <button ng-repeat="notDept in gallery.notUserDepts" ng-click="" style="font-size:12px; margin-bottom:4px;white-space: normal; background-color: #e7e7e7; color: black;" class="btn btn-info btn-lg btn-block sideButton">{{gallery.pretty(notDept)}}</button>
@@ -11,6 +11,7 @@
 <div class="container-fluid">
   <div class="row col-xs-3 overflow">
     <div class="row addContainer">
+      <h4><u>Image Selection</u></h4>
       <h1 class="addPhoto glyphicon glyphicon-upload" ng-click="gallery.modalImage=image.url_image; gallery.viewButton()"></h1>
     </div>
     <div class="row gallery-display" ng-repeat="image in gallery.deptImages">
@@ -18,12 +19,22 @@
     </div>
   </div>
 
-  <div class="row col-xs-3 overflow">
-    <a>Unapproved images</a>
+  <div class="row col-xs-3 text-center overflow">
+    <h4><u>Revision images:&nbsp;{{gallery.revisionCount}}</u></h4>
+    <div ng-repeat="image in gallery.revision">
+      <a href="/photoedit"><img ng-click="gallery.sendThisImage(image.saved_edit)" ng-src="{{image.saved_edit}}" alt="revision image" /></a>
+    </div>
   </div>
 
-  <div class="row col-xs-3 overflow">
-    <a>Approved Images</a>
+  <div class="row col-xs-3 text-center overflow">
+    <h4><u>Approved Images:&nbsp;{{gallery.approvedCount}}</u></h4>
+    <div ng-repeat="image in gallery.approved">
+      <img ng-src="{{image.saved_edit}}" alt="approved image" />
+      <div class="row">
+        <button class="btn btn-success">Download</button>
+        <button class="btn btn-danger">Delete</button>
+      </div>
+    </div>
   </div>
 </div>
 
