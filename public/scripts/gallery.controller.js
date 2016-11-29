@@ -7,11 +7,23 @@ function GalleryController(AuthFactory, AccessService, ImageService, ImageTableS
 
   console.log('GalleryController loaded');
   var ctrl = this;
+  ctrl.modalImage = {};
+  // get the modal
+  var modal = document.getElementById('adminModal');
+
+  // When the user clicks the button, open the modal
+  ctrl.viewButton = function() {
+    modal.style.display = "block";
+  };
+
+  // When the user clicks on <span> (x), close the modal
+  ctrl.closeModal = function() {
+    modal.style.display = "none";
+  }
+  // Store current user's access by department
   ctrl.userDepts = AccessService.userDepts;
   ctrl.notUserDepts = AccessService.notUserDepts;
-  console.log('username', ctrl.username);
-  console.log('user depts1', ctrl.userDepts);
-  console.log('user depts2', ctrl.notUserDepts)
+
   authFactory.isLoggedIn()
     .then(function(response) {
       console.log('ctrl controller response ', response);
