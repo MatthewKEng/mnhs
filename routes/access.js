@@ -62,7 +62,7 @@ router.post('/', function(req, res) {
       done();
       next(error);
     }
-    client.query('INSERT INTO users (email) ' + 'VALUES ($1)', [req.body.email],
+    client.query('INSERT INTO users (first_name, last_name, email) ' + 'VALUES ($1, $2, $3)', [req.body.first_name, req.body.last_name, req.body.email],
     function(error, result) {
       if (error) {
         done();

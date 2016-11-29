@@ -58,7 +58,7 @@
     <div ng-repeat="user in admin.allUserAccess" ng-init="admin.showUserAccess[$index]= false">
       <!--accordion made dynamicly button-->
       <button ng-init="admin.plus[$index]=true; admin.minus[$index]=false"
-      ng-click="admin.truthiness($index)" class="btn btn-primary btn-block btn-lg acordionButton" >
+      ng-click="admin.truthiness($index)" class="btn btn-default btn-block btn-small" >
       {{user.email}}<span ng-show="admin.plus[$index]" class ="glyphicon glyphicon-plus pull-right"></span>
       <span ng-show="admin.minus[$index]" class ="glyphicon glyphicon-minus pull-right"></span></button>
 
@@ -82,6 +82,13 @@
     <span ng-hide="admin.empPlus" class="glyphicon glyphicon-minus pull-right"></span></button>
     <form ng-show="((admin.showAddEmployee))" class="form-inline">
       <div class="form-group">
+        <label class="sr-only">First Name</label>
+        <input ng-model="admin.firstName" type="text" class="form-control" placeholder="First Name">
+
+        <label class="sr-only">Last Name</label>
+        <input ng-model="admin.lastName" type="text" class="form-control" placeholder="Last Name">
+
+
         <label class="sr-only" for="exampleInputEmail3">Email address</label>
         <input ng-model="admin.newUser" type="email" class="form-control" placeholder="Email">
       </div>

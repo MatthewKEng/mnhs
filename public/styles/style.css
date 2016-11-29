@@ -32,6 +32,11 @@ background-color: #eeb111;
   text-decoration: none;
 }
 
+/*.adminpage {
+  background-color: #323e48;
+  color: white;
+}*/
+
 .sideButton:hover {
   background-color: #eeb111;
   color: #323e48;

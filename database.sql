@@ -2,6 +2,8 @@
 CREATE TABLE users (
 id SERIAL PRIMARY KEY,
 googleID varchar(1000),
+first_name varchar (80),
+last_name varchar (80),
 email varchar(1000) NOT NULL,
 google_name varchar (1000),
 accessToken varchar (1000),
@@ -34,7 +36,6 @@ split_rock_lighthouse BOOLEAN DEFAULT FALSE,
 traverse_des_sioux BOOLEAN DEFAULT FALSE,
 w_w_mayo_house BOOLEAN DEFAULT FALSE
 );
-
 
 CREATE TABLE departments (
 id SERIAL PRIMARY KEY,
