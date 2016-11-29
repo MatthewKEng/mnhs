@@ -104,7 +104,7 @@ function EditPhotoController(Upload, AccessService, ImageService) {
   var photo = this;
 
   //sets the image src onload based on the image clicked from the gallery.html
-  photo.imageSrc = ImageService.image
+  photo.imageSrc = ImageService.image;
 
   var canvas = document.getElementById('canvas');
   photo.canvas = document.getElementById('canvas');
