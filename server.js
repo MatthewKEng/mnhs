@@ -11,7 +11,6 @@ const access = require('./routes/access');
 const submissions = require('./routes/submissions');
 const logout = require('./routes/logout');
 const imageRouter = require('./routes/imageRouter');
-const gall = require('./routes/gallery');
 
 const sessionConfig = {
   secret: 'super secret key goes here', // TODO this info gets stored in ENV file
@@ -44,7 +43,6 @@ app.use('/logout', logout);
 app.use('/access', access);
 app.use('/submissions', submissions);
 app.use('/image', imageRouter);
-app.use('/gallery', gall);
 
 // everything beyond this point must be authenticated
 app.use(ensureAuthenticated);
