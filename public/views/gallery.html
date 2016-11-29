@@ -13,7 +13,7 @@
     <a class="addPhoto" href="/photoUploader">+</a>
   </div>
   <div class="row gallery-display" ng-repeat="image in gallery.deptImages">
-    <img class="img-responsive gallery-item" ng-src="{{image.url_image}}" />
+    <a href="/photoedit"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image.url_image)" ng-src="{{image.url_image}}" /></a>
   </div>
 
 
