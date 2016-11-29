@@ -19,7 +19,7 @@ router.get('/', function(req, res){
             return;
         }
 
-        client.query("SELECT * FROM art WHERE status = 'pending';",
+        client.query("SELECT saved_edit, admin_comment FROM submissions WHERE status = 'not_approved';",
 
         function(err,result){
             done();
@@ -33,3 +33,5 @@ router.get('/', function(req, res){
         });
     });
     });
+
+    module.exports = router;

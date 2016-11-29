@@ -128,6 +128,15 @@ admin.checkboxesTruthiness = function (index) {
   }
   //call to service to get all data from submissions table
   admin.getSubmissions = function () {
+    //reset to zero
+    //arrays to hold submissions bassed on status
+    admin.aprroved = [];
+    admin.pending = [];
+    admin.revision = [];
+    //variables to hold the number of items for each status
+    admin.approvedCount = 0;
+    admin.pendingCount = 0;
+    admin.revisionCount = 0;
     SubmissionsService.getAllSubmissions().then(function(response){
       admin.allUsersSubmissions = response;
       console.log('whats the submissions response', admin.allUsersSubmissions);
@@ -198,7 +207,9 @@ admin.checkboxesTruthiness = function (index) {
       id: id,
       status: pending.status
     }).then(function(){
-      $location.path('/admin'); //on click of button needs to refresh and not on page load
+      //$location.path('/admin'); //on click of button needs to refresh and not on page load
+      //reload submissions data
+      admin.getSubmissions();
     });
   }
 
@@ -209,7 +220,9 @@ admin.checkboxesTruthiness = function (index) {
     var id = pending.id;
     $http.delete('/submissions/'+id, {
     }).then(function(){
-      $location.path('/admin'); //on click of button needs to refresh and not on page load
+      //$location.path('/admin'); //on click of button needs to refresh and not on page load
+      //reload submissions data
+      admin.getSubmissions();
     })
   }
 
