@@ -248,9 +248,6 @@ background-color: #eeb111;
   text-align: center;
   height: 150px;
   width: 150px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
   padding-top: 38px;
   cursor: pointer;
 }
@@ -261,7 +258,6 @@ background-color: #eeb111;
 }
 .addContainer {
   text-align: center;
-  position: relative;
 }
 .upload {
   text-align: center;
@@ -313,4 +309,8 @@ background-color: #eeb111;
 .success {
   margin-top: 60px;
   font-size: 50px;
+}
+.overflow {
+  overflow: scroll;
+  height: 87vh;
 }
