@@ -1,9 +1,11 @@
 angular.module('BrandImageManagerApp')
     .controller('AdminController', AdminController);
 
-function AdminController($location, AccessService, SubmissionsService, Upload) {
+function AdminController($http, $location, AccessService, SubmissionsService, Upload) {
   var admin = this;
-
+  var reviseClass = true;
+  var reviseInput = false;
+  var imageData = {};
   //arrays to hold submissions bassed on status
   admin.aprroved = [];
   admin.pending = [];
@@ -174,6 +176,74 @@ admin.checkboxesTruthiness = function (index) {
   }
 
 
+
+  // //submit new user button
+    admin.submitButton = function() {
+      admin.newUser;
+      console.log('newUser ', admin.newUser);
+      $http.post('/access', {
+        email: admin.newUser
+      }).then(function(){
+      admin.newUser = "";
+  });
+  }
+
+//approve button for admin
+  admin.approveButton = function(pending) {
+    console.log('pending ', pending);
+    var id = pending.id;
+    pending.status = "approved";
+    console.log('status ', pending.status);
+    $http.put('/submissions/'+id, {
+      id: id,
+      status: pending.status
+    }).then(function(){
+      $location.path('/admin'); //on click of button needs to refresh and not on page load
+    });
+  }
+
+
+//delete button for all users
+  admin.deleteButton = function(pending) {
+    console.log('pending ', pending);
+    var id = pending.id;
+    $http.delete('/submissions/'+id, {
+    }).then(function(){
+      $location.path('/admin'); //on click of button needs to refresh and not on page load
+    })
+  }
+
+//revise button under pending, will pop up the modal
+  admin.reviseButton = function(image) {
+    console.log('revise working');
+    console.log('image', image);
+    imageData = image; //setting image data equal to the current image
+    reviseClass = false; //for ng-show/ng-hide to hide delete and approve button on modal
+    reviseInput = true; //to show input for comments
+    admin.viewButton();
+
+  }
+
+  //popup modal revise button to submit comment for ADMIN
+  admin.subReviseButton = function() {
+    console.log('image info ', imageData); //using same image data to target image id
+    admin.closeModal();
+    reviseClass = true; //should revert buttons back for view
+    reviseInput = false; //should get rid of input and allow to see comment
+    admin.reviseComment;
+    console.log('comment ', admin.reviseComment);
+    //updates comments and posts to DB
+    $http.put('/submissions/'+imageData.id, {
+      status: "pending",
+      admin_comment: admin.reviseComment,
+      id: imageData.id
+    }).then(function(){
+      //clears comment input field
+    admin.reviseComment = "";
+    //resets image data to an empty object
+    imageData = {};
+});
+}
 
 
   //modal controlls

@@ -56,6 +56,25 @@ router.get('/', function(req, res) {
   });
 });//end of get router
 
+router.post('/', function(req, res) {
+  pool.connect(function(error, client, done) {
+    if (error) {
+      done();
+      next(error);
+    }
+    client.query('INSERT INTO users (email) ' + 'VALUES ($1)', [req.body.email],
+    function(error, result) {
+      if (error) {
+        done();
+        next(error);
+      }
+      //console.log('whats the access route rows data',result.rows);
+      res.sendStatus(201);
+    });
+  });
+});//end of get router
+
+
 // Edit user access to SQL DB.
 router.put('/', function (req, res, next) {
   var email = req.body.email;

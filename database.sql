@@ -1,7 +1,7 @@
 --first time table is created will have to hard code the admin user BOOLEAN value as true
 CREATE TABLE users (
 id SERIAL PRIMARY KEY,
-googleID varchar(1000)  NOT NULL,
+googleID varchar(1000),
 email varchar(1000) NOT NULL,
 google_name varchar (1000),
 accessToken varchar (1000),
