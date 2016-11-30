@@ -44,7 +44,6 @@ app.use('/access', access);
 app.use('/submissions', submissions);
 app.use('/image', imageRouter);
 
-
 // everything beyond this point must be authenticated
 app.use(ensureAuthenticated);
 
