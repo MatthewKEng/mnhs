@@ -3,7 +3,7 @@ const path = require('path');
 const pg = require('pg');
 
 var config = {
-  database: 'mnhs'
+  database: 'rho'
 };
 
 var pool = new pg.Pool(config);
@@ -36,7 +36,7 @@ router.get('/', function(req, res) {
       done();
       next(error);
     }
-    client.query('SELECT id, email, admin, alexander_ramsey_house,'+
+    client.query('SELECT id, first_name, last_name, email, admin, alexander_ramsey_house,'+
       'birch_coulee_battlefield, charles_a_lindbergh_historic_site,'+
       'comstock_house, folsom_house, fort_ridgely, harkin_store,'+
       'historic_forestville, historic_fort_snelling, james_j_hill_house,'+

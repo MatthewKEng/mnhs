@@ -139,7 +139,7 @@ admin.checkboxesTruthiness = function (index) {
     admin.revisionCount = 0;
     SubmissionsService.getAllSubmissions().then(function(response){
       admin.allUsersSubmissions = response;
-      console.log('whats the submissions response', admin.allUsersSubmissions);
+      // console.log('whats the submissions response', admin.allUsersSubmissions);
       // for loop to push arrays of objects into specific arrays
       //and to count number of statuses based on the status
       for (var i = 0; i < admin.allUsersSubmissions.length; i++) {
@@ -148,19 +148,19 @@ admin.checkboxesTruthiness = function (index) {
             admin.approvedCount++;
             //console.log('whats the approved count',admin.approvedCount);
             admin.aprroved.push(angular.copy(admin.allUsersSubmissions[i]));
-            console.log('whats the aprroved array', admin.aprroved);
+            // console.log('whats the aprroved array', admin.aprroved);
         }else if (admin.allUsersSubmissions[i].status == 'pending') {
           //count the number under this status
           admin.pendingCount++;
           //console.log('whats the pending count',admin.pendingCount);
           admin.pending.push(angular.copy(admin.allUsersSubmissions[i]));
-          console.log('whats the pending array', admin.pending);
+          // console.log('whats the pending array', admin.pending);
         }else if (admin.allUsersSubmissions[i].status == 'revision') {
           //count the number under this status
           admin.revisionCount++;
           //console.log('whats the revision count',admin.revisionCount);
           admin.revision.push(angular.copy(admin.allUsersSubmissions[i]));
-          console.log('whats the revision array', admin.revision);
+          // console.log('whats the revision array', admin.revision);
         }
       }
     });
@@ -171,7 +171,7 @@ admin.checkboxesTruthiness = function (index) {
   admin.getUsersAccesses = function () {
     AccessService.accesses().then(function(response){
       admin.allUserAccess = response;
-      // console.log('whats the access response', admin.allUserAccess);
+      console.log('whats the access response', admin.allUserAccess);
     });
   }
 
@@ -179,7 +179,7 @@ admin.checkboxesTruthiness = function (index) {
   admin.updateUsersAccesses = function (user, site, val) {
     var accessObj = {email:user, department:site, accessBoolean:val };
     AccessService.updateAccess(accessObj).then(function(response){
-      console.log('whats the update access response', response);
+      // console.log('whats the update access response', response);
       //admin.getUsersAccesses();
     });
   }
