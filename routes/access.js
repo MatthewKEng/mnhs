@@ -38,7 +38,7 @@ router.post('/departments', function(req, res) {
         console.log('Error connecting to DB', error);
         res.sendStatus(500);
       }
-      client.query('INSERT INTO departments (department) VALUES ($1)', [req.body.department], function(error, result) {
+      client.query('INSERT INTO departments (department) VALUES ($1);', [req.body.department], function(error, result) {
         if (error) {
           console.log('Error querying DB', error);
           res.sendStatus(500);
@@ -104,23 +104,23 @@ router.post('/', function(req, res) {
 
 
 //to add a column to users DB of department //not sure what to put to ADD COLUMN
-// router.post('/users', function(req, res) {
-//   pool.connect(function(error, client, done) {
-//     if (error) {
-//       done();
-//       next(error);
-//     }
-//     client.query ('ALTER TABLE users ADD COLUMN department BOOLEAN DEFAULT FALSE', [req.body.department],
-//     function(error, result) {
-//       if (error) {
-//         done();
-//         next(error);
-//       }
-//       //console.log('whats the access route rows data',result.rows);
-//       res.sendStatus(201);
-//     });
-//   });
-// });//end of get router
+router.post('/users', function(req, res) {
+  pool.connect(function(error, client, done) {
+    if (error) {
+      done();
+      next(error);
+    }
+    client.query ('ALTER TABLE users ADD COLUMN ' + req.body.department + '  BOOLEAN DEFAULT FALSE',
+    function(error, result) {
+      if (error) {
+        done();
+        next(error);
+      }
+      //console.log('whats the access route rows data',result.rows);
+      res.sendStatus(201);
+    });
+  });
+});//end of get router
 
 
 

@@ -210,25 +210,28 @@ admin.checkboxesTruthiness = function (index) {
   admin.addDepartment = function() {
     admin.newDepartment;
     console.log('department', admin.newDepartment);
+    admin.newDepartment = admin.newDepartment.replace(/ /g, '_').toLowerCase();
+    console.log('create space');
     $http.post('/access/departments', {
       department: admin.newDepartment
     }).then(function(){
       //for below function
-      // admin.addColumnUsers(admin.newDepartment);
-      admin.newDepartment = "";
+      admin.addColumnUsers();
+      // admin.newDepartment = "";
     });
   }
 
   //to update and add a column to users DB with department // not sure how this should work???
-  // admin.addColumnUsers = function(department){
-  //   console.log('department', department);
-  //   $http.post('/access/users', {
-  //     // department: false
-  //
-  //   }).then(function(){
-  //     console.log('end of function');
-  //   })
-  // }
+  admin.addColumnUsers = function(){
+    console.log('department');
+    $http.post('/access/users', {
+      department: admin.newDepartment
+
+    }).then(function(){
+      admin.newDepartment = "";
+      console.log('end of function');
+    })
+  }
 
 
 
