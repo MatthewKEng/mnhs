@@ -45,7 +45,7 @@
       <img ng-src="{{revision.saved_edit}}" alt="revision submission" class="img-responsive img-thumbnail"/>
     </div>
     <span>
-      <button class="btn btn-danger">Delete</button>
+      <button ng-click="admin.deleteButton(revision)" class="btn btn-danger">Delete</button>
       <button ng-click="admin.modalUserComment = revision.user_comment; admin.modalImage = revision.saved_edit;
       admin.viewButton()" class="btn btn-info">View</button>
     </span>
@@ -59,7 +59,7 @@
       <!--accordion made dynamicly button-->
       <button ng-init="admin.plus[$index]=true; admin.minus[$index]=false"
       ng-click="admin.truthiness($index)" class="btn btn-default btn-block btn-small" >
-      {{user.email}}<span ng-show="admin.plus[$index]" class ="glyphicon glyphicon-plus pull-right"></span>
+      {{user.first_name}} {{user.last_name}}<span ng-show="admin.plus[$index]" class ="glyphicon glyphicon-plus pull-right"></span>
       <span ng-show="admin.minus[$index]" class ="glyphicon glyphicon-minus pull-right"></span></button>
 
 
@@ -117,6 +117,14 @@
         </div>
         <input class="upload-brand-button" type="submit" ng-click="admin.uploadBrand(uploadBrandForm)" value="Upload Image" />
       </form>
+      <input type="text" ng-model="admin.newDepartment"/>
+      <button ng-click="admin.addDepartment()">Add Department</button>
+
+      <select ng-model="admin.remove.deptId" required>
+        <option value="" selected disabled>Select...</option>
+        <option ng-repeat="name in admin.deptNames" ng-value="name.id">{{admin.prettyDeptName(name.department)}}</option>
+      </select>
+      <button ng-click="admin.deleteDepartment()">Delete Department</button>
     </div>
   </div>
 </div>
