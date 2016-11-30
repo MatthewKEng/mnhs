@@ -6,11 +6,13 @@ function EditPhotoController(Upload, AccessService, ImageService, EditorService)
   console.log('PhotoController loaded');
   var photo = this;
 
-  //this function after images arrive to create the canvas
 
   //sets the image src onload based on the image clicked from the gallery.html
   photo.imageSrc = ImageService.image;
   console.log('did the image arrive from gallery', photo.imageSrc);
+
+  //this function after images arrive to create the canvas
+  photo.makeTheCavas = EditorService
 
   var canvas = document.getElementById('canvas');
   photo.canvas = document.getElementById('canvas');
