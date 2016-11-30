@@ -30,7 +30,7 @@ router.get('/departments', function(req, res) {
 });
 
 
-// query departments table to get department and department_id's
+// query departments table to post department and department_id's
 router.post('/departments', function(req, res) {
   pool.connect(function(error, client, done) {
     try {
@@ -83,13 +83,14 @@ router.get('/', function(req, res) {
   });
 });//end of get router
 
+//post users from admin into approved_users table
 router.post('/', function(req, res) {
   pool.connect(function(error, client, done) {
     if (error) {
       done();
       next(error);
     }
-    client.query('INSERT INTO users (first_name, last_name, email) ' + 'VALUES ($1, $2, $3)', [req.body.first_name, req.body.last_name, req.body.email],
+    client.query('INSERT INTO approved_users (first_name, last_name, email) ' + 'VALUES ($1, $2, $3)', [req.body.first_name, req.body.last_name, req.body.email],
     function(error, result) {
       if (error) {
         done();
@@ -99,7 +100,7 @@ router.post('/', function(req, res) {
       res.sendStatus(201);
     });
   });
-});//end of get router
+});//end of post router
 
 
 
