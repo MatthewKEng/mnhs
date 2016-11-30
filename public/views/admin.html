@@ -1,11 +1,11 @@
 <!--side menu-->
 <div ng-init="admin.getSubmissions()" class="container-fluid col-xs-2 col-md-2 col-lg-2 sideMenu">
   <div class="sideButtonContainer">
-    <button ng-click="admin.showPendingGallery()" class="btn btn-info btn-lg btn-block sideButton">Pending:&nbsp;{{admin.pendingCount}}</button>
-    <button ng-click="admin.showApprovedGallery()" class="btn btn-info btn-lg btn-block sideButton">Approved:&nbsp;{{admin.approvedCount}}</button>
-    <button ng-click="admin.showRevisionGallery()" class="btn btn-info btn-lg btn-block sideButton">Revision:&nbsp;{{admin.revisionCount}}</button>
-    <button ng-click="admin.showAccess()" class="btn btn-warning btn-lg btn-block sideButton">Access</button>
-    <button ng-click="admin.showBrands()" class="btn btn-warning btn-lg btn-block sideButton">Brands</button>
+    <button ng-click="admin.showPendingGallery()" class="btn btn-default btn-lg btn-block sideButton" class="sideButton">Pending:&nbsp;{{admin.pendingCount}}</button>
+    <button ng-click="admin.showApprovedGallery()" class="btn btn-default btn-lg btn-block sideButton" class="sideButton">Approved:&nbsp;{{admin.approvedCount}}</button>
+    <button ng-click="admin.showRevisionGallery()" class="btn btn-default btn-lg btn-block sideButton" class="sideButton">Revision:&nbsp;{{admin.revisionCount}}</button>
+    <button ng-click="admin.showAccess()" class="btn btn-default btn-lg btn-block sidesButton" class="sidesButton">Access</button>
+    <button ng-click="admin.showBrands()" class="btn btn-default btn-lg btn-block sidesButton" class="sidesButton">Brands</button>
   </div>
 </div>
 
@@ -17,8 +17,9 @@
       <img ng-src="{{pending.saved_edit}}" alt="pending submission" class="img-responsive img-thumbnail"/>
     </div>
     <span>
-      <button class="btn btn-success">Approve</button>
-      <button class="btn btn-danger">Revise</button>
+      <button ng-click="admin.approveButton(pending)" class="btn btn-success">Approve</button>
+      <button  ng-click="admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
+      admin.reviseButton(pending)" class="btn btn-danger">Revise</button>
       <button ng-click="admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
       admin.viewButton();" class="btn btn-info">View</button>
     </span>
@@ -31,7 +32,7 @@
       <img ng-src="{{approved.saved_edit}}" alt="approved submission" class="img-responsive img-thumbnail"/>
     </div>
     <span>
-      <button class="btn btn-danger">Delete</button>
+      <button ng-click="admin.deleteButton(approved)" class="btn btn-danger">Delete</button>
       <button ng-click="admin.modalUserComment = approved.user_comment; admin.modalImage = approved.saved_edit;
        admin.viewButton()" class="btn btn-info">View</button>
     </span>
@@ -44,7 +45,7 @@
       <img ng-src="{{revision.saved_edit}}" alt="revision submission" class="img-responsive img-thumbnail"/>
     </div>
     <span>
-      <button class="btn btn-danger">Delete</button>
+      <button ng-click="admin.deleteButton(revision)" class="btn btn-danger">Delete</button>
       <button ng-click="admin.modalUserComment = revision.user_comment; admin.modalImage = revision.saved_edit;
       admin.viewButton()" class="btn btn-info">View</button>
     </span>
@@ -57,8 +58,8 @@
     <div ng-repeat="user in admin.allUserAccess" ng-init="admin.showUserAccess[$index]= false">
       <!--accordion made dynamicly button-->
       <button ng-init="admin.plus[$index]=true; admin.minus[$index]=false"
-      ng-click="admin.truthiness($index)" class="btn btn-primary btn-block btn-lg acordionButton" >
-      {{user.email}}<span ng-show="admin.plus[$index]" class ="glyphicon glyphicon-plus pull-right"></span>
+      ng-click="admin.truthiness($index)" class="btn btn-default btn-block btn-small" >
+      {{user.first_name}} {{user.last_name}}<span ng-show="admin.plus[$index]" class ="glyphicon glyphicon-plus pull-right"></span>
       <span ng-show="admin.minus[$index]" class ="glyphicon glyphicon-minus pull-right"></span></button>
 
 
@@ -81,10 +82,17 @@
     <span ng-hide="admin.empPlus" class="glyphicon glyphicon-minus pull-right"></span></button>
     <form ng-show="((admin.showAddEmployee))" class="form-inline">
       <div class="form-group">
+        <label class="sr-only">First Name</label>
+        <input ng-model="admin.firstName" type="text" class="form-control" placeholder="First Name">
+
+        <label class="sr-only">Last Name</label>
+        <input ng-model="admin.lastName" type="text" class="form-control" placeholder="Last Name">
+
+
         <label class="sr-only" for="exampleInputEmail3">Email address</label>
-        <input type="email" class="form-control" placeholder="Email">
+        <input ng-model="admin.newUser" type="email" class="form-control" placeholder="Email">
       </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button ng-click="admin.submitButton()" type="submit" class="btn btn-default">Submit</button>
     </form>
   </div>
 </div>
@@ -109,6 +117,14 @@
         </div>
         <input class="upload-brand-button" type="submit" ng-click="admin.uploadBrand(uploadBrandForm)" value="Upload Image" />
       </form>
+      <input type="text" ng-model="admin.newDepartment"/>
+      <button ng-click="admin.addDepartment()">Add Department</button>
+
+      <select ng-model="admin.remove.deptId" required>
+        <option value="" selected disabled>Select...</option>
+        <option ng-repeat="name in admin.deptNames" ng-value="name.id">{{admin.prettyDeptName(name.department)}}</option>
+      </select>
+      <button ng-click="admin.deleteDepartment()">Delete Department</button>
     </div>
   </div>
 </div>
@@ -127,14 +143,15 @@
       <div>
         <img ng-src="{{admin.modalImage}}" alt="large version of image" />
         <h4><u>Comments</u></h4>
-        <h6>{{admin.modalUserComment}}</h6>
+        <h6 ng-show="reviseClass">{{admin.modalUserComment}}</h6>
+        <input ng-hide="reviseInput" ng-model="admin.reviseComment" />
       </div>
     </div>
     <div class="modal-footer">
       <span>
-        <button class="btn btn-success">Approve</button>
-        <button class="btn btn-danger">Revise</button>
-        <button class="btn btn-danger">Delete</button>
+        <button ng-show="reviseClass" class="btn btn-success">Approve</button>
+        <button ng-click="admin.subReviseButton()" class="btn btn-danger">Revise</button>
+        <button ng-show="reviseClass" ng-click="admin.deleteButton(admin)" class="btn btn-danger">Delete</button>
       </span>
     </div>
   </div>

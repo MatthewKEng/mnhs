@@ -111,22 +111,24 @@ router.post('/', function (req, res, next) {
 });
 
 // Edit submission to SQL DB.
-router.put('/', function (req, res, next) {
-  var id = req.body.submissionID;
+router.put('/:id', function (req, res, next) {
+  console.log('inside put request');
   var status = req.body.status;
-  var savedEdit = req.body.savedEdit;
-  var brandID = req.body.brandID;
-  var adminComment = req.body.adminComment;
-  var userComment = req.body.userComment;
+  var admin_comment = req.body.admin_comment;
+  var id = req.body.id;
+  console.log('id ', id);
+  console.log('status ', status);
+  console.log('comment ', admin_comment);
+  // var savedEdit = req.body.savedEdit;
+  // var brandID = req.body.brandID;
+  // var userComment = req.body.userComment;
   pool.connect(function (err, client, done) {
     try {
       if (err) {
         res.sendStatus(500);
       }
-      client.query('UPDATE submissions SET saved_edit = $1, status = $2, '
-                  + 'brand_id = $3, admin_comment = $4, user_comment = $5 '
-                  + 'WHERE id = $6;',
-                  [savedEdit, status, brandID, adminComment, userComment, id],
+      client.query('UPDATE submissions SET status = $1, admin_comment = $2 WHERE id = $3',
+                  [status, admin_comment, id],
                   function (err) {
                     if (err) {
                       console.log('Error inserting into db', err);

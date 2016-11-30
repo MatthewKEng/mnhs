@@ -14,6 +14,7 @@ angular.module('BrandImageManagerApp').factory('AuthFactory', function ($http) {
 
     isLoggedIn: function () {
       return $http.get('/auth');
+
     },
 
     logIn: function () {

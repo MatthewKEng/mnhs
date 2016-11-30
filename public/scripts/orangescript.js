@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
 if(window.location.pathname === "/photoedit"){
 console.log(window.location.pathname);
@@ -235,4 +236,5 @@ document.getElementById('updateTextBottom').addEventListener('click', function()
  */
 doCanvas();
 }
+
 });

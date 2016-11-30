@@ -1,7 +1,12 @@
+
 /*set to zero*/
 body{
   padding: 0;
   margin: 0;
+}
+
+body {
+  background-color: #F0F8FF;
 }
 
 h1 {
@@ -17,6 +22,46 @@ text-align: center;
 background-color: #eeb111;
 
 }
+
+.sideButton {
+  background-color: #323e48;
+  color: white;
+  outline: none;
+  /*border: none;*/
+  box-shadow: none;
+  text-decoration: none;
+}
+
+/*.adminpage {
+  background-color: #323e48;
+  color: white;
+}*/
+
+.sideButton:hover {
+  background-color: #eeb111;
+  color: #323e48;
+  outline: none;
+  box-shadow: none;
+}
+
+.sidesButton {
+  background-color: #eeb111;
+  color: #323e48;
+  outline: none;
+}
+
+.sidesButton:hover {
+  background-color: white;
+}
+
+.img-thumbnail {
+  margin: 10px;
+}
+
+.btn:focus {
+  outline: none;
+}
+
 
 #left img {
     align-items: left;
@@ -83,7 +128,8 @@ background-color: #eeb111;
     padding-top: 3%;
     padding-bottom: 1%;
     background-color: #eeb111;
-    margin-top: -2%;
+    width: 100vw;
+    height: 47vh;
 }
 
 /*top navbar */
@@ -263,4 +309,83 @@ background-color: #eeb111;
 
 #downloadButton {
     font-family: 'Gotham Condensed Book';
+
+
+
+
+/* Temporary styling for gallery and photoUploader pages*/
+.addPhoto, .addPhoto:active, .addPhoto:visited {
+  background-color: lightslategray;
+  color: white;
+  font-size: 70px;
+  text-align: center;
+  height: 150px;
+  width: 150px;
+  padding-top: 38px;
+  cursor: pointer;
+}
+.addPhoto:hover {
+  text-decoration: none;
+  background-color: #bbb;
+  color: gray;
+}
+.addContainer {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.upload {
+  text-align: center;
+}
+#file-input {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.#file-input + label {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  background-color: black;
+  display: inline-block;
+}
+.file-upload {
+  text-align: center;
+}
+#file-input:focus, #file-label,
+#file-input {
+  background: linear-gradient(#444, white);
+  color: #263238;
+  padding: 7px;
+  font-weight: normal;
+}
+#file-label:hover {
+  background: linear-gradient(darkslategray, lightslategray);
+  color: white;
+}
+#file-input, #file-label {
+  cursor: pointer;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonface;
+}
+.gallery-display {
+  height: 200px;
+  margin: 0 auto 20px auto;
+  text-align: center;
+}
+.gallery-item {
+  margin: 0 auto;
+  height: 170px;
+}
+.success {
+  margin-top: 60px;
+  font-size: 50px;
+}
+.overflow {
+  overflow: scroll;
+  height: 87vh;
+  width: 29%;
 }
