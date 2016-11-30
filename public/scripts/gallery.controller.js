@@ -26,12 +26,10 @@ function GalleryController(AuthFactory, SubmissionsService, AccessService, Image
 
   authFactory.isLoggedIn()
     .then(function(response) {
-      console.log('ctrl controller response ', response);
       if (response.data.status) {
         ctrl.displayLogout = true;
         authFactory.setLoggedIn(true);
         ctrl.username = response.data.name;
-        console.log('username', ctrl.username);
       } else { // is not logged in on server
         ctrl.displayLogout = false;
         authFactory.setLoggedIn(false);
@@ -43,12 +41,11 @@ function GalleryController(AuthFactory, SubmissionsService, AccessService, Image
     return prettyUserDept;
   };
 
-  ctrl.showDept = function(index) {
-    ImageTableService.getImages(index + 1).then(function(response) {
+  ctrl.showDept = function(name) {
+    var dept_id = AccessService.departmentIds[name];
+    ImageTableService.getImages(dept_id).then(function(response) {
       ctrl.deptImages = response;
-      console.log('deptImages', ctrl.deptImages);
     });
-
   };
 
 
@@ -59,7 +56,15 @@ function GalleryController(AuthFactory, SubmissionsService, AccessService, Image
   ctrl.approvedCount = 0;
   ctrl.revisionCount = 0;
   //call to service to get all data from submissions table
-  ctrl.getImages = function (index) {
+  ctrl.getImages = function (name, dept) {
+    if (dept == 0) {
+      console.log('Not a user Dept');
+      ctrl.disableButtons = true;
+    } else {
+      console.log('User Dept');
+      ctrl.disableButtons = false;
+    }
+    var dept_id = AccessService.departmentIds[name];
     //reset value on click
     ctrl.revision = [];
     ctrl.approved = [];
@@ -67,27 +72,24 @@ function GalleryController(AuthFactory, SubmissionsService, AccessService, Image
     ctrl.revisionCount = 0;
     SubmissionsService.getAllSubmissions().then(function(response){
       ctrl.allUsersSubmissions = response;
-      console.log('whats the submissions response', ctrl.allUsersSubmissions);
       // for loop to push arrays of objects into specific arrays
       //and to count number of statuses based on the status
       for (var i = 0; i < ctrl.allUsersSubmissions.length; i++) {
-        if (ctrl.allUsersSubmissions[i].status == 'approved' && ctrl.allUsersSubmissions[i].department_id == index+1) {
+        if (ctrl.allUsersSubmissions[i].status == 'approved' && ctrl.allUsersSubmissions[i].department_id == dept_id) {
             //count the number under this status
             ctrl.approvedCount++;
             //console.log('whats the approved count',ctrl.approvedCount);
             ctrl.approved.push(angular.copy(ctrl.allUsersSubmissions[i]));
-            console.log('whats the approved array', ctrl.approved);
-        } else if (ctrl.allUsersSubmissions[i].status == 'revision' && ctrl.allUsersSubmissions[i].department_id == index+1) {
+        } else if (ctrl.allUsersSubmissions[i].status == 'revision' && ctrl.allUsersSubmissions[i].department_id == dept_id) {
           //count the number under this status
           ctrl.revisionCount++;
           //console.log('whats the revision count',ctrl.revisionCount);
           ctrl.revision.push(angular.copy(ctrl.allUsersSubmissions[i]));
-          console.log('whats the revision array', ctrl.revision);
         }
       }
-
     });
   }
+
   //function to attack image clicked url to the ImageService so the photoedit gets it
   ctrl.sendThisImage = function (image) {
     ImageService.image = image;

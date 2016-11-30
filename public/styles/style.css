@@ -1,7 +1,12 @@
+
 /*set to zero*/
 body{
   padding: 0;
   margin: 0;
+}
+
+body {
+  background-color: #F0F8FF;
 }
 
 h1 {
@@ -17,6 +22,46 @@ text-align: center;
 background-color: #eeb111;
 
 }
+
+.sideButton {
+  background-color: #323e48;
+  color: white;
+  outline: none;
+  /*border: none;*/
+  box-shadow: none;
+  text-decoration: none;
+}
+
+/*.adminpage {
+  background-color: #323e48;
+  color: white;
+}*/
+
+.sideButton:hover {
+  background-color: #eeb111;
+  color: #323e48;
+  outline: none;
+  box-shadow: none;
+}
+
+.sidesButton {
+  background-color: #eeb111;
+  color: #323e48;
+  outline: none;
+}
+
+.sidesButton:hover {
+  background-color: white;
+}
+
+.img-thumbnail {
+  margin: 10px;
+}
+
+.btn:focus {
+  outline: none;
+}
+
 
 #left img {
     align-items: left;
@@ -83,7 +128,8 @@ background-color: #eeb111;
     padding-top: 3%;
     padding-bottom: 1%;
     background-color: #eeb111;
-    margin-top: -2%;
+    width: 100vw;
+    height: 47vh;
 }
 
 /*top navbar */

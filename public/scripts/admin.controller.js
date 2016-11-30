@@ -88,6 +88,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
       }
     }
   }
+
   //function to show or hide add employee
   admin.addEmployeeTruthiness = function () {
     //for loop that makes everything false if button is clicked
@@ -120,6 +121,7 @@ admin.checkboxesTruthiness = function (index) {
       }
     }
   }
+
 
   //make the key pretty function
   admin.pretty = function (key) {
@@ -171,6 +173,7 @@ admin.checkboxesTruthiness = function (index) {
   admin.getUsersAccesses = function () {
     AccessService.accesses().then(function(response){
       admin.allUserAccess = response;
+      console.log(response);
       //console.log('whats the access response', admin.allUserAccess);
     });
   }
@@ -188,14 +191,49 @@ admin.checkboxesTruthiness = function (index) {
 
   // //submit new user button
     admin.submitButton = function() {
+      admin.firstName;
+      admin.lastName;
       admin.newUser;
       console.log('newUser ', admin.newUser);
       $http.post('/access', {
+        first_name: admin.firstName,
+        last_name: admin.lastName,
         email: admin.newUser
       }).then(function(){
       admin.newUser = "";
+      admin.firstName = "";
+      admin.lastName = "";
   });
   }
+
+  //add a new department
+  admin.addDepartment = function() {
+    admin.newDepartment;
+    console.log('department', admin.newDepartment);
+    admin.newDepartment = admin.newDepartment.replace(/ /g, '_').toLowerCase();
+    console.log('create space');
+    $http.post('/access/departments', {
+      department: admin.newDepartment
+    }).then(function(){
+      //for below function
+      admin.addColumnUsers();
+      // admin.newDepartment = "";
+    });
+  }
+
+  //to update and add a column to users DB with department // not sure how this should work???
+  admin.addColumnUsers = function(){
+    console.log('department');
+    $http.post('/access/users', {
+      department: admin.newDepartment
+
+    }).then(function(){
+      admin.newDepartment = "";
+      console.log('end of function');
+    })
+  }
+
+
 
 //approve button for admin
   admin.approveButton = function(pending) {
@@ -226,6 +264,19 @@ admin.checkboxesTruthiness = function (index) {
     })
   }
 
+//delete function for departments table
+admin.deleteDepartment = function (){
+  var id = admin.remove.deptId;
+  console.log('pending', admin.remove.deptId);
+  $http.delete('/access/'+id, {
+  }).then(function(){
+    // admin.uploadBrand(); unable to refresh
+    admin.remove.deptId = "";
+    admin.getSubmissions();
+  })
+}
+
+
 //revise button under pending, will pop up the modal
   admin.reviseButton = function(image) {
     console.log('revise working');
@@ -247,7 +298,7 @@ admin.checkboxesTruthiness = function (index) {
     console.log('comment ', admin.reviseComment);
     //updates comments and posts to DB
     $http.put('/submissions/'+imageData.id, {
-      status: "pending",
+      status: "revision",
       admin_comment: admin.reviseComment,
       id: imageData.id
     }).then(function(){
@@ -255,6 +306,7 @@ admin.checkboxesTruthiness = function (index) {
     admin.reviseComment = "";
     //resets image data to an empty object
     imageData = {};
+    admin.getSubmissions();
 });
 }
 
