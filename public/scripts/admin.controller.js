@@ -188,12 +188,18 @@ admin.checkboxesTruthiness = function (index) {
 
   // //submit new user button
     admin.submitButton = function() {
+      admin.firstName;
+      admin.lastName;
       admin.newUser;
       console.log('newUser ', admin.newUser);
       $http.post('/access', {
+        first_name: admin.firstName,
+        last_name: admin.lastName,
         email: admin.newUser
       }).then(function(){
       admin.newUser = "";
+      admin.firstName = "";
+      admin.lastName = "";
   });
   }
 
