@@ -272,9 +272,22 @@ admin.deleteDepartment = function (){
   }).then(function(){
     // admin.uploadBrand(); unable to refresh
     admin.remove.deptId = "";
+    admin.deleteEachDepartment();
     admin.getSubmissions();
   })
 }
+
+//delete function for each department in users table
+admin.deleteEachDepartment = function(){
+  var id = admin.deptId;
+  $http.delete('/access/users', {
+    // department: admin.newDepartment
+  }).then(function(){
+    admin.deptId = "";
+    console.log('end of function');
+  })
+  }
+
 
 
 //revise button under pending, will pop up the modal

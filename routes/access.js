@@ -103,7 +103,7 @@ router.post('/', function(req, res) {
 
 
 
-//to add a column to users DB of department //not sure what to put to ADD COLUMN
+//to add a column to users DB of department
 router.post('/users', function(req, res) {
   pool.connect(function(error, client, done) {
     if (error) {
@@ -121,13 +121,6 @@ router.post('/users', function(req, res) {
     });
   });
 });//end of get router
-
-
-
-
-
-
-
 
 
 
@@ -188,6 +181,32 @@ router.delete('/:id', function (req, res, next) {
       }
 
       client.query('DELETE FROM departments WHERE id=$1;', [id],
+        function (err, result) {
+          if (err) {
+            console.log('Error querying DB: ', err);
+            return res.sendStatus(500);
+          }
+          res.sendStatus(204);
+          });
+    } finally {
+      done();
+    }
+  });
+});
+
+
+//dete the department column from users table
+
+router.delete('/:id', function (req, res, next) {
+  var id = req.params.id;
+  pool.connect(function (err, client, done) {
+    try {
+      if (err) {
+        console.log('Error connecting with DB: ', err);
+        res.sendStatus(500);
+      }
+
+      client.query('ALTER TABLE users drop COLUMN ' + req.body.department + [id],
         function (err, result) {
           if (err) {
             console.log('Error querying DB: ', err);
