@@ -316,3 +316,6 @@ background-color: #eeb111;
   height: 87vh;
   width: 29%;
 }
+.disabled {
+  cursor: not-allowed;
+}

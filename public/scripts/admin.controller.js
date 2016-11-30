@@ -171,7 +171,7 @@ admin.checkboxesTruthiness = function (index) {
   admin.getUsersAccesses = function () {
     AccessService.accesses().then(function(response){
       admin.allUserAccess = response;
-      //console.log('whats the access response', admin.allUserAccess);
+      // console.log('whats the access response', admin.allUserAccess);
     });
   }
 
