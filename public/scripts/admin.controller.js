@@ -64,62 +64,62 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     admin.approvedGalleryDisplay = false;
     admin.revisionGalleryDisplay = true;
   }
-  //function for truthy value for access accordion
-  admin.truthiness = function (index) {
-    //for loop that takes current index of button clicked turns proberty of index true and
-    //all other properties in the admin.showUserAccess array false
-    for (var i = 0; i < admin.allUserAccess.length; i++) {
-      if (i == index) {
-        admin.showUserAccess[i] = !admin.showUserAccess[i];
+  // //function for truthy value for access accordion
+  // admin.truthiness = function (index) {
+  //   //for loop that takes current index of button clicked turns proberty of index true and
+  //   //all other properties in the admin.showUserAccess array false
+  //   for (var i = 0; i < admin.allUserAccess.length; i++) {
+  //     if (i == index) {
+  //       admin.showUserAccess[i] = !admin.showUserAccess[i];
+  //
+  //       admin.plus[i] = !admin.plus[i];
+  //       admin.minus[i] = !admin.minus[i];
+  //       admin.showAddEmployee = false;
+  //       admin.empPlus = true;
+  //        //console.log('whats the truth ',admin.showUserAccess);
+  //      }
+  //      else{
+  //       admin.showUserAccess[i] = false;
+  //       admin.plus[i] = true;
+  //       admin.minus[i] = false;
+  //       admin.showAddEmployee = false;
+  //       admin.empPlus = true;
+  //        //console.log('whats the truth ',admin.showUserAccess);
+  //     }
+  //   }
+  // }
+  // //function to show or hide add employee
+  // admin.addEmployeeTruthiness = function () {
+  //   //for loop that makes everything false if button is clicked
+  //   for (var i = 0; i < admin.allUserAccess.length; i++) {
+  //     admin.showUserAccess[i] = false;
+  //     admin.plus[i] = true;
+  //     admin.minus[i] = false;
+  //     }
+  //   // if else stament to set the boolean value of admin.showAddEmployee for ngShow
+  //   if (admin.showAddEmployee == false) {
+  //       admin.showAddEmployee = true;
+  //       admin.empPlus = false;
+  //       //console.log('whats the plus truth ',admin.empPlus);
+  //   }else{
+  //       admin.showAddEmployee = false;
+  //       admin.empPlus = true;
+  //       //console.log('whats the minus truth ',admin.empPlus);
+  //   }
+  // }
 
-        admin.plus[i] = !admin.plus[i];
-        admin.minus[i] = !admin.minus[i];
-        admin.showAddEmployee = false;
-        admin.empPlus = true;
-         //console.log('whats the truth ',admin.showUserAccess);
-       }
-       else{
-        admin.showUserAccess[i] = false;
-        admin.plus[i] = true;
-        admin.minus[i] = false;
-        admin.showAddEmployee = false;
-        admin.empPlus = true;
-         //console.log('whats the truth ',admin.showUserAccess);
-      }
-    }
-  }
-  //function to show or hide add employee
-  admin.addEmployeeTruthiness = function () {
-    //for loop that makes everything false if button is clicked
-    for (var i = 0; i < admin.allUserAccess.length; i++) {
-      admin.showUserAccess[i] = false;
-      admin.plus[i] = true;
-      admin.minus[i] = false;
-      }
-    // if else stament to set the boolean value of admin.showAddEmployee for ngShow
-    if (admin.showAddEmployee == false) {
-        admin.showAddEmployee = true;
-        admin.empPlus = false;
-        //console.log('whats the plus truth ',admin.empPlus);
-    }else{
-        admin.showAddEmployee = false;
-        admin.empPlus = true;
-        //console.log('whats the minus truth ',admin.empPlus);
-    }
-  }
-
-  //apply correct checkbox truthiness value for if it shows for ng-show
-
-admin.checkboxesTruthiness = function (index) {
-  for (var i = 0; i < admin.allUsersSubmissions.length; i++) {
-    if (admin.showCheckboxes[i] == false) {
-      admin.showCheckboxes[i] = true;
-    }else{
-      admin.showCheckboxes[i] = false;
-
-      }
-    }
-  }
+//   //apply correct checkbox truthiness value for if it shows for ng-show
+//
+// admin.checkboxesTruthiness = function (index) {
+//   for (var i = 0; i < admin.allUsersSubmissions.length; i++) {
+//     if (admin.showCheckboxes[i] == false) {
+//       admin.showCheckboxes[i] = true;
+//     }else{
+//       admin.showCheckboxes[i] = false;
+//
+//       }
+//     }
+//   }
 
   //make the key pretty function
   admin.pretty = function (key) {
