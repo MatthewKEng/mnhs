@@ -21,6 +21,8 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   admin.approvedGalleryDisplay = false;
   admin.revisionGalleryDisplay = false;
   admin.brandsConsoleDisplay = false;
+  admin.showEmpDepts = false;
+  admin.showNotEmpDepts = false;
 
   //function to display access
   admin.showAccess = function () {
@@ -30,7 +32,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     admin.pendingGalleryDisplay = false;
     admin.approvedGalleryDisplay = false;
     admin.revisionGalleryDisplay = false;
-  }
+  };
   //function to display brands
   admin.showBrands = function () {
     admin.accessControlsDisplay = false;
@@ -38,7 +40,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     admin.pendingGalleryDisplay = false;
     admin.approvedGalleryDisplay = false;
     admin.revisionGalleryDisplay = false;
-  }
+  };
   //functions to display gallery
   //display pending gallery
   admin.showPendingGallery = function () {
@@ -47,7 +49,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     admin.pendingGalleryDisplay = true;
     admin.approvedGalleryDisplay = false;
     admin.revisionGalleryDisplay = false;
-  }
+  };
   //display approved gallery
   admin.showApprovedGallery = function () {
     admin.accessControlsDisplay = false;
@@ -55,7 +57,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     admin.pendingGalleryDisplay = false;
     admin.approvedGalleryDisplay = true;
     admin.revisionGalleryDisplay = false;
-  }
+  };
   //display revision gallery
   admin.showRevisionGallery = function () {
     admin.accessControlsDisplay = false;
@@ -63,65 +65,100 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     admin.pendingGalleryDisplay = false;
     admin.approvedGalleryDisplay = false;
     admin.revisionGalleryDisplay = true;
-  }
-  //function for truthy value for access accordion
-  admin.truthiness = function (index) {
-    //for loop that takes current index of button clicked turns proberty of index true and
-    //all other properties in the admin.showUserAccess array false
-    for (var i = 0; i < admin.allUserAccess.length; i++) {
-      if (i == index) {
-        admin.showUserAccess[i] = !admin.showUserAccess[i];
-
-        admin.plus[i] = !admin.plus[i];
-        admin.minus[i] = !admin.minus[i];
-        admin.showAddEmployee = false;
-        admin.empPlus = true;
-         //console.log('whats the truth ',admin.showUserAccess);
-       }
-       else{
-        admin.showUserAccess[i] = false;
-        admin.plus[i] = true;
-        admin.minus[i] = false;
-        admin.showAddEmployee = false;
-        admin.empPlus = true;
-         //console.log('whats the truth ',admin.showUserAccess);
+  };
+  // display the access information for the currently selected user.
+  admin.showUser = function (id) {
+    for (i = 0; i < admin.allUserAccess.length; i++) {
+      if (admin.allUserAccess[i].id == id) {
+        // admin.showUserAccess[i] = true;
+        admin.emp = admin.allUserAccess[i];
+      }
+      //else {
+      //   admin.showUserAccess[i] = false;
+      // }
+    }
+    console.log('emp name ' + admin.emp.first_name + ' ' + admin.emp.last_name + ' user.id ' + id);
+    admin.empDepts = [];
+    admin.notEmpDepts = [];
+    admin.admin = false;
+    for (key in admin.emp) {
+      if (admin.emp.admin == true) {
+        admin.admin = true;
+        admin.empDepts = ['admin'];
+        break;
+      }
+      if (admin.emp[key] === true && key != 'admin' && key != 'id') {
+        admin.empDepts.push(key);
+      } else if (admin.emp[key] === false) {
+        if (key != 'id' && key != 'first_name' && key != 'last_name' && key != 'email') {
+          admin.notEmpDepts.push(key);
+        }
       }
     }
-  }
+    // for (i = 0; i < admin.allUserAccess.length; i++) {
+    //   if (i == index) {
+    //     admin.showUserAccess[i] = !admin.showUserAccess[i];
+    //   } else {
+    //     admin.showUserAccess[i] = false;
+    //   }
+    // }
+  };
+  // //function for truthy value for access accordion
+  // admin.truthiness = function (index) {
+  //   //for loop that takes current index of button clicked turns proberty of index true and
+  //   //all other properties in the admin.showUserAccess array false
+  //   for (var i = 0; i < admin.allUserAccess.length; i++) {
+  //     if (i == index) {
+  //       admin.showUserAccess[i] = !admin.showUserAccess[i];
+  //
+  //       admin.plus[i] = !admin.plus[i];
+  //       admin.minus[i] = !admin.minus[i];
+  //       admin.showAddEmployee = false;
+  //       admin.empPlus = true;
+  //        //console.log('whats the truth ',admin.showUserAccess);
+  //      }
+  //      else{
+  //       admin.showUserAccess[i] = false;
+  //       admin.plus[i] = true;
+  //       admin.minus[i] = false;
+  //       admin.showAddEmployee = false;
+  //       admin.empPlus = true;
+  //        //console.log('whats the truth ',admin.showUserAccess);
+  //     }
+  //   }
+  // }
+  // //function to show or hide add employee
+  // admin.addEmployeeTruthiness = function () {
+  //   //for loop that makes everything false if button is clicked
+  //   for (var i = 0; i < admin.allUserAccess.length; i++) {
+  //     admin.showUserAccess[i] = false;
+  //     admin.plus[i] = true;
+  //     admin.minus[i] = false;
+  //     }
+  //   // if else stament to set the boolean value of admin.showAddEmployee for ngShow
+  //   if (admin.showAddEmployee == false) {
+  //       admin.showAddEmployee = true;
+  //       admin.empPlus = false;
+  //       //console.log('whats the plus truth ',admin.empPlus);
+  //   }else{
+  //       admin.showAddEmployee = false;
+  //       admin.empPlus = true;
+  //       //console.log('whats the minus truth ',admin.empPlus);
+  //   }
+  // }
 
-  //function to show or hide add employee
-  admin.addEmployeeTruthiness = function () {
-    //for loop that makes everything false if button is clicked
-    for (var i = 0; i < admin.allUserAccess.length; i++) {
-      admin.showUserAccess[i] = false;
-      admin.plus[i] = true;
-      admin.minus[i] = false;
-      }
-    // if else stament to set the boolean value of admin.showAddEmployee for ngShow
-    if (admin.showAddEmployee == false) {
-        admin.showAddEmployee = true;
-        admin.empPlus = false;
-        //console.log('whats the plus truth ',admin.empPlus);
-    }else{
-        admin.showAddEmployee = false;
-        admin.empPlus = true;
-        //console.log('whats the minus truth ',admin.empPlus);
-    }
-  }
-
-  //apply correct checkbox truthiness value for if it shows for ng-show
-
-admin.checkboxesTruthiness = function (index) {
-  for (var i = 0; i < admin.allUsersSubmissions.length; i++) {
-    if (admin.showCheckboxes[i] == false) {
-      admin.showCheckboxes[i] = true;
-    }else{
-      admin.showCheckboxes[i] = false;
-
-      }
-    }
-  }
-
+//   //apply correct checkbox truthiness value for if it shows for ng-show
+//
+// admin.checkboxesTruthiness = function (index) {
+//   for (var i = 0; i < admin.allUsersSubmissions.length; i++) {
+//     if (admin.showCheckboxes[i] == false) {
+//       admin.showCheckboxes[i] = true;
+//     }else{
+//       admin.showCheckboxes[i] = false;
+//
+//       }
+//     }
+//   }
 
   //make the key pretty function
   admin.pretty = function (key) {
@@ -141,7 +178,7 @@ admin.checkboxesTruthiness = function (index) {
     admin.revisionCount = 0;
     SubmissionsService.getAllSubmissions().then(function(response){
       admin.allUsersSubmissions = response;
-      console.log('whats the submissions response', admin.allUsersSubmissions);
+      // console.log('whats the submissions response', admin.allUsersSubmissions);
       // for loop to push arrays of objects into specific arrays
       //and to count number of statuses based on the status
       for (var i = 0; i < admin.allUsersSubmissions.length; i++) {
@@ -150,59 +187,115 @@ admin.checkboxesTruthiness = function (index) {
             admin.approvedCount++;
             //console.log('whats the approved count',admin.approvedCount);
             admin.aprroved.push(angular.copy(admin.allUsersSubmissions[i]));
-            console.log('whats the aprroved array', admin.aprroved);
+            // console.log('whats the aprroved array', admin.aprroved);
         }else if (admin.allUsersSubmissions[i].status == 'pending') {
           //count the number under this status
           admin.pendingCount++;
           //console.log('whats the pending count',admin.pendingCount);
           admin.pending.push(angular.copy(admin.allUsersSubmissions[i]));
-          console.log('whats the pending array', admin.pending);
+          // console.log('whats the pending array', admin.pending);
         }else if (admin.allUsersSubmissions[i].status == 'revision') {
           //count the number under this status
           admin.revisionCount++;
           //console.log('whats the revision count',admin.revisionCount);
           admin.revision.push(angular.copy(admin.allUsersSubmissions[i]));
-          console.log('whats the revision array', admin.revision);
+          // console.log('whats the revision array', admin.revision);
         }
       }
     });
   }
 
+  admin.submitChanges = function() {
+    var addOrDelete;
+    // addOrDelete set to true if we are adding access.
+    if (admin.showEmpDepts) {
+      addOrDelete = false;
+    } else if (admin.showNotEmpDepts) {
+      addOrDelete = true;
+    } else {
+      console.log('No departments selected');
+      return;
+    }
+    console.log(admin.emp + ' ' + admin.emp.id);
+    console.log(admin.changeDepts);
+    var accessObj = {
+      id: admin.emp.id,
+      departments: admin.changeDepts,
+      accessBoolean: addOrDelete,
+    };
+    AccessService.updateAccess(accessObj).then(function(response){
+      if (response == 'OK') {
+        console.log('whats the update access response', response);
+        admin.getUsersAccesses();
+      }
+    });
+  };
 
   //function to get all user data from the user table for access controls
   admin.getUsersAccesses = function () {
     AccessService.accesses().then(function(response){
       admin.allUserAccess = response;
-      console.log(response);
-      //console.log('whats the access response', admin.allUserAccess);
+      if (admin.emp != undefined) {
+        admin.showUser(admin.emp.id);
+        admin.clearDepts();
+      }
+      console.log('whats the access response', admin.allUserAccess);
     });
-  }
+  };
+
+  admin.changeDepts = [];
+  // Uncheck all update access checkboxes and clear admin.changeDepts array
+  admin.clearDepts = function() {
+    admin.changeDepts.forEach(function(dept) {
+      admin[dept] = false;
+    });
+    admin.changeDepts = [];
+  };
 
   //update user access
-  admin.updateUsersAccesses = function (user, site, val) {
-    var accessObj = {email:user, department:site, accessBoolean:val };
-    AccessService.updateAccess(accessObj).then(function(response){
-      console.log('whats the update access response', response);
-      //admin.getUsersAccesses();
-    });
-  }
+  // admin.updateUsersAccesses = function (user, site, val) {
+  //   var accessObj = {
+  //     email: admin.emp.email,
+  //     departments: admin.changeDepts,
+  //     accessBoolean: admin.showEmpDepts,
+  //   };
+  //   AccessService.updateAccess(accessObj).then(function(response){
+  //     // console.log('whats the update access response', response);
+  //     //admin.getUsersAccesses();
+  //   });
+  // };
+  // Update admin.changeDepts array to show what depts will be changed
+  admin.updateUsersAccesses = function (dept) {
+    var repeat = false;
+    for (var i = 0; i < admin.changeDepts.length; i++) {
+      if (dept == admin.changeDepts[i]) {
+        repeat = true;
+        admin.changeDepts.splice(i, 1)
+      }
+    }
+    if (repeat == false) {
+      admin.changeDepts.push(dept);
+    }
+    console.log(admin.changeDepts);
+  };
 
 
 
   // //submit new user button
-    admin.submitButton = function() {
-      admin.firstName;
-      admin.lastName;
-      admin.newUser;
-      console.log('newUser ', admin.newUser);
-      $http.post('/access', {
-        first_name: admin.firstName,
-        last_name: admin.lastName,
-        email: admin.newUser
-      }).then(function(){
+  admin.submitButton = function() {
+    admin.firstName;
+    admin.lastName;
+    admin.newUser;
+    console.log('newUser ', admin.newUser);
+    $http.post('/access', {
+      first_name: admin.firstName,
+      last_name: admin.lastName,
+      email: admin.newUser
+    }).then(function(){
       admin.newUser = "";
       admin.firstName = "";
       admin.lastName = "";
+
   });
   }
 
@@ -249,7 +342,7 @@ admin.checkboxesTruthiness = function (index) {
       //reload submissions data
       admin.getSubmissions();
     });
-  }
+  };
 
 
 //delete button for all users
@@ -261,6 +354,7 @@ admin.checkboxesTruthiness = function (index) {
       //$location.path('/admin'); //on click of button needs to refresh and not on page load
       //reload submissions data
       admin.getSubmissions();
+
     })
   }
 
@@ -298,8 +392,7 @@ admin.deleteEachDepartment = function(){
     reviseClass = false; //for ng-show/ng-hide to hide delete and approve button on modal
     reviseInput = true; //to show input for comments
     admin.viewButton();
-
-  }
+  };
 
   //popup modal revise button to submit comment for ADMIN
   admin.subReviseButton = function() {
@@ -311,7 +404,7 @@ admin.deleteEachDepartment = function(){
     console.log('comment ', admin.reviseComment);
     //updates comments and posts to DB
     $http.put('/submissions/'+imageData.id, {
-      status: "revision",
+      status: "pending",
       admin_comment: admin.reviseComment,
       id: imageData.id
     }).then(function(){
@@ -319,9 +412,8 @@ admin.deleteEachDepartment = function(){
     admin.reviseComment = "";
     //resets image data to an empty object
     imageData = {};
-    admin.getSubmissions();
-});
-}
+    });
+  };
 
 
   //modal controlls
@@ -335,24 +427,24 @@ admin.deleteEachDepartment = function(){
   // When the user clicks the button, open the modal
   admin.viewButton = function() {
     modal.style.display = "block";
-  }
+  };
 
   // When the user clicks on <span> (x), close the modal
   admin.closeModal = function() {
     modal.style.display = "none";
-  }
+  };
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
     }
-  }
+  };
 
   admin.deptNames = AccessService.departmentNames;
   admin.prettyDeptName = function(name) {
     return name.replace(/_/g, ' ').toUpperCase()
-  }
+  };
 
   // Uploads brand to S3 if one is selected.  Also sends brand url to SQL db
   // with department_id.
@@ -369,4 +461,4 @@ admin.deleteEachDepartment = function(){
     });
   };
 
-}//end of AdminController function
+};//end of AdminController function
