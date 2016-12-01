@@ -295,8 +295,38 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
       admin.newUser = "";
       admin.firstName = "";
       admin.lastName = "";
+
+  });
+  }
+
+  //add a new department
+  admin.addDepartment = function() {
+    admin.newDepartment;
+    console.log('department', admin.newDepartment);
+    admin.newDepartment = admin.newDepartment.replace(/ /g, '_').toLowerCase();
+    console.log('create space');
+    $http.post('/access/departments', {
+      department: admin.newDepartment
+    }).then(function(){
+      //for below function
+      admin.addColumnUsers();
+      // admin.newDepartment = "";
     });
-  };
+  }
+
+  //to update and add a column to users DB with department // not sure how this should work???
+  admin.addColumnUsers = function(){
+    console.log('department');
+    $http.post('/access/users', {
+      department: admin.newDepartment
+
+    }).then(function(){
+      admin.newDepartment = "";
+      console.log('end of function');
+    })
+  }
+
+
 
 //approve button for admin
   admin.approveButton = function(pending) {
@@ -324,8 +354,35 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
       //$location.path('/admin'); //on click of button needs to refresh and not on page load
       //reload submissions data
       admin.getSubmissions();
-    });
-  };
+
+    })
+  }
+
+//delete function for departments table
+admin.deleteDepartment = function (){
+  var id = admin.remove.deptId;
+  console.log('pending', admin.remove.deptId);
+  $http.delete('/access/'+id, {
+  }).then(function(){
+    // admin.uploadBrand(); unable to refresh
+    admin.remove.deptId = "";
+    admin.deleteEachDepartment();
+    admin.getSubmissions();
+  })
+}
+
+//delete function for each department in users table
+admin.deleteEachDepartment = function(){
+  var id = admin.deptId;
+  $http.delete('/access/users', {
+    // department: admin.newDepartment
+  }).then(function(){
+    admin.deptId = "";
+    console.log('end of function');
+  })
+  }
+
+
 
 //revise button under pending, will pop up the modal
   admin.reviseButton = function(image) {

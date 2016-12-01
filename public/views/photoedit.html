@@ -9,16 +9,40 @@
 
 </div>
 <div class="wrapper">
-  <div class="t-shirt">
-    <canvas ng-model="photo.canvas" width="550" height="450" style="background-color: blue;" id="canvas">Sorry, no canvas available</canvas>
-    <img ng-src="{{photo.imageSrc}}" id="hedgehog" width="550" height="450" style="display: none" alt="HEJ HOG">
-    <!-- <img ng-src="https://img.buzzfeed.com/buzzfeed-static/static/enhanced/web04/2012/1/20/14/enhanced-buzz-21522-1327089192-28.jpg" id="hedgehog" style="background-color: green; display: none" alt="Description" /> -->
+            <div class="t-shirt">
+                <canvas width="600" height="400" id="canvas" ng-model="photo.canvas">Sorry, no canvas available</canvas>
+                <!-- <img ng-src="https://img.buzzfeed.com/buzzfeed-static/static/enhanced/web04/2012/1/20/14/enhanced-buzz-21522-1327089192-28.jpg" id="hedgehog" style="background-color: green; display: none" alt="Description" /> -->
 
-    <hr />
-    <a id="redLeft" style="font-size: 36px">LEFT</a>
-    <a id="redRight" style="font-size: 36px">RIGHT</a>
-    <a id="redBottom" style="font-size: 36px">BOTTOM</a>
-    <hr />
-    <a ng-model="photo.link" ng-click="photo.downloadCanvas(this)" id="download" style="font-size: 36px">DOWNLOAD!!!</a>
-  </div>
+<hr />
+                <a id="Left" style="font-size: 36px">LEFT</a>
+                <a id="Right" style="font-size: 36px">RIGHT</a>
+                <a id="Bottom" style="font-size: 36px">BOTTOM</a>
+                <hr />
+                <a id="fitLeft" style="font-size: 36px">FIT LEFT</a>
+                <a id="fitRight" style="font-size: 36px">FIT RIGHT</a>
+                <a id="fitBottom" style="font-size: 36px">FIT BOTTOM</a>
+<hr />
+                <a ng-click="photo.downloadCanvas()" id="downloadButton" style="font-size: 36px">DOWNLOAD!!!</a>
+<hr />
+                <a id="addTextLeft" style="font-size: 36px">ADD TEXT</a>
+                <a id="updateTextLeft" style="font-size: 36px">UPDATE TEXT</a>
+                <p id="textHtmlLeft" style="display: none">this wont work for a while</p>
+
+                <a id="addTextRight" style="font-size: 36px">ADD TEXT</a>
+                <a id="updateTextRight" style="font-size: 36px">UPDATE TEXT</a>
+                <p id="textHtmlRight" style="display: none">this wont work for a while</p>
+
+                <a id="addTextBottom" style="font-size: 36px">ADD TEXT</a>
+                <a id="updateTextBottom" style="font-size: 36px">UPDATE TEXT</a>
+                <p id="textHtmlBottom" style="display: none">this wont work for a while</p>
+
+
+                <p id="buttonHtml" contenteditable="true"></p>
+                <button type="button" id="theButton">Change Text</button>
+            </div>
+
+        </div>
+        <img ng-src="{{photo.imageSrc}}" crossorigin="anonymous" id="hedgehog" width="600" height="400" style="display: none" alt="HEJ HOG">
+
+
 </div>

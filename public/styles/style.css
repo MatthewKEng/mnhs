@@ -286,6 +286,33 @@ background-color: #eeb111;
   transform: translate(-50%, -50%);
 }
 
+
+@font-face {
+    font-family: 'Gotham Black';
+    src: local('GothamBlack'), url(./fonts/GothamBlack/Gotham-Black.ttf);
+}
+
+@font-face {
+    font-family: 'Gotham Book';
+    src: local('Gotham-Book'), url(./fonts/GothamBook/Gotham-Book.ttf);
+}
+
+@font-face {
+    font-family: 'Gotham Bold';
+    src: local('Gotham Bold'), url(./fonts/GothamBold/Gotham-Bold.ttf);
+}
+
+@font-face {
+    font-family: 'Gotham Condensed Book';
+    src: local('GothamCondensed-Book'), url(fonts/GothamCondensedBook/GothamCondensed-Book.ttf);
+}
+
+#downloadButton {
+    font-family: 'Gotham Condensed Book';
+
+
+
+
 /* Temporary styling for gallery and photoUploader pages*/
 .addPhoto, .addPhoto:active, .addPhoto:visited {
   background-color: lightslategray;

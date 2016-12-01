@@ -30,7 +30,7 @@ router.get('/departments', function(req, res) {
 });
 
 
-// query departments table to get department and department_id's
+// query departments table to post department and department_id's
 router.post('/departments', function(req, res) {
   pool.connect(function(error, client, done) {
     try {
@@ -38,7 +38,7 @@ router.post('/departments', function(req, res) {
         console.log('Error connecting to DB', error);
         res.sendStatus(500);
       }
-      client.query('INSERT INTO departments (department) VALUES ($1)', [req.body.department], function(error, result) {
+      client.query('INSERT INTO departments (department) VALUES ($1);', [req.body.department], function(error, result) {
         if (error) {
           console.log('Error querying DB', error);
           res.sendStatus(500);
@@ -83,6 +83,7 @@ router.get('/', function(req, res) {
   });
 });//end of get router
 
+//post users from admin into approved_users table
 router.post('/', function(req, res) {
   pool.connect(function(error, client, done) {
     if (error) {
@@ -99,35 +100,28 @@ router.post('/', function(req, res) {
       res.sendStatus(201);
     });
   });
+});//end of post router
+
+
+
+//to add a column to users DB of department
+router.post('/users', function(req, res) {
+  pool.connect(function(error, client, done) {
+    if (error) {
+      done();
+      next(error);
+    }
+    client.query ('ALTER TABLE users ADD COLUMN ' + req.body.department + '  BOOLEAN DEFAULT FALSE',
+    function(error, result) {
+      if (error) {
+        done();
+        next(error);
+      }
+      //console.log('whats the access route rows data',result.rows);
+      res.sendStatus(201);
+    });
+  });
 });//end of get router
-
-
-
-//to add a column to users DB of department //not sure what to put to ADD COLUMN
-// router.post('/users', function(req, res) {
-//   pool.connect(function(error, client, done) {
-//     if (error) {
-//       done();
-//       next(error);
-//     }
-//     client.query ('ALTER TABLE users ADD COLUMN department BOOLEAN DEFAULT FALSE', [req.body.department],
-//     function(error, result) {
-//       if (error) {
-//         done();
-//         next(error);
-//       }
-//       //console.log('whats the access route rows data',result.rows);
-//       res.sendStatus(201);
-//     });
-//   });
-// });//end of get router
-
-
-
-
-
-
-
 
 
 
@@ -189,6 +183,32 @@ router.delete('/:id', function (req, res, next) {
       }
 
       client.query('DELETE FROM departments WHERE id=$1;', [id],
+        function (err, result) {
+          if (err) {
+            console.log('Error querying DB: ', err);
+            return res.sendStatus(500);
+          }
+          res.sendStatus(204);
+          });
+    } finally {
+      done();
+    }
+  });
+});
+
+
+//dete the department column from users table
+
+router.delete('/:id', function (req, res, next) {
+  var id = req.params.id;
+  pool.connect(function (err, client, done) {
+    try {
+      if (err) {
+        console.log('Error connecting with DB: ', err);
+        res.sendStatus(500);
+      }
+
+      client.query('ALTER TABLE users drop COLUMN ' + req.body.department + [id],
         function (err, result) {
           if (err) {
             console.log('Error querying DB: ', err);
