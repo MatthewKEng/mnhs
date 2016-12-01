@@ -1,24 +1,26 @@
 <!--side menu-->
 <div ng-init="admin.getSubmissions()" class="container-fluid col-xs-2 col-md-2 col-lg-2 sideMenu">
   <div class="sideButtonContainer">
-    <button ng-click="admin.showPendingGallery()" class="btn btn-info btn-lg btn-block sideButton">Pending:&nbsp;{{admin.pendingCount}}</button>
-    <button ng-click="admin.showApprovedGallery()" class="btn btn-info btn-lg btn-block sideButton">Approved:&nbsp;{{admin.approvedCount}}</button>
-    <button ng-click="admin.showRevisionGallery()" class="btn btn-info btn-lg btn-block sideButton">Revision:&nbsp;{{admin.revisionCount}}</button>
-    <button ng-click="admin.showAccess()" class="btn btn-warning btn-lg btn-block sideButton">Access</button>
-    <button ng-click="admin.showBrands()" class="btn btn-warning btn-lg btn-block sideButton">Brands</button>
+    <button ng-click="admin.showPendingGallery()" class="btn btn-default btn-lg btn-block sideButton" class="sideButton">Pending:&nbsp;{{admin.pendingCount}}</button>
+    <button ng-click="admin.showApprovedGallery()" class="btn btn-default btn-lg btn-block sideButton" class="sideButton">Approved:&nbsp;{{admin.approvedCount}}</button>
+    <button ng-click="admin.showRevisionGallery()" class="btn btn-default btn-lg btn-block sideButton" class="sideButton">Revision:&nbsp;{{admin.revisionCount}}</button>
+    <button ng-click="admin.showAccess()" class="btn btn-default btn-lg btn-block sidesButton" class="sidesButton">Access</button>
+    <button ng-click="admin.showBrands()" class="btn btn-default btn-lg btn-block sidesButton" class="sidesButton">Departments</button>
   </div>
 </div>
 
 <!--dynamicly created gallary of images that are pennding, approved, or needs rivision-->
 <!--pending-->
 <div ng-show="((admin.pendingGalleryDisplay))" class="container">
+  <h3>Pending Photos</h3>
   <div ng-repeat="pending in admin.pending" class="row col-xs-4 col-md-4 col-lg-4 text-center">
     <div>
       <img ng-src="{{pending.saved_edit}}" alt="pending submission" class="img-responsive img-thumbnail"/>
     </div>
     <span>
-      <button class="btn btn-success">Approve</button>
-      <button class="btn btn-danger">Revise</button>
+      <button ng-click="admin.approveButton(pending)" class="btn btn-success">Approve</button>
+      <button  ng-click="admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
+      admin.reviseButton(pending)" class="btn btn-danger">Revise</button>
       <button ng-click="admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
       admin.viewButton();" class="btn btn-info">View</button>
     </span>
@@ -26,12 +28,13 @@
 </div>
 <!--approved-->
 <div ng-show="((admin.approvedGalleryDisplay))" class="container">
+  <h3>Approved Photos</h3>
   <div ng-repeat="approved in admin.aprroved" class="row col-xs-4 col-md-4 col-lg-4 text-center">
     <div>
       <img ng-src="{{approved.saved_edit}}" alt="approved submission" class="img-responsive img-thumbnail"/>
     </div>
     <span>
-      <button class="btn btn-danger">Delete</button>
+      <button ng-click="admin.deleteButton(approved)" class="btn btn-danger">Delete</button>
       <button ng-click="admin.modalUserComment = approved.user_comment; admin.modalImage = approved.saved_edit;
        admin.viewButton()" class="btn btn-info">View</button>
     </span>
@@ -39,30 +42,107 @@
 </div>
 <!--revision-->
 <div ng-show="((admin.revisionGalleryDisplay))" class="container">
+  <h3>Photos under Revision</h3>
   <div ng-repeat="revision in admin.revision" class="row col-xs-4 col-md-4 col-lg-4 text-center">
     <div>
       <img ng-src="{{revision.saved_edit}}" alt="revision submission" class="img-responsive img-thumbnail"/>
     </div>
     <span>
-      <button class="btn btn-danger">Delete</button>
-      <button ng-click="admin.modalUserComment = revision.user_comment; admin.modalImage = revision.saved_edit; 
+      <button ng-click="admin.deleteButton(revision)" class="btn btn-danger">Delete</button>
+      <button ng-click="admin.modalUserComment = revision.user_comment; admin.modalImage = revision.saved_edit;
       admin.viewButton()" class="btn btn-info">View</button>
     </span>
   </div>
 </div>
 <!--access controls-->
-<div ng-show="((admin.accessControlsDisplay))" class="container text-center">
-  <div class="row col-xs-9 col-md-9 col-lg-9">
-    <!--dynamicly created list of users and there access-->
-    <div ng-repeat="user in admin.allUserAccess" ng-init = "admin.showUserAccess[$index]= false">
-      <button ng-click="admin.truthiness($index)" class="btn btn-primary btn-block btn-lg acordionButton">{{user.email}}<span class="pull-right">&nabla;</span></button>
-      <div class="text-left" ng-show="admin.showUserAccess[$index]" >
-        <label ng-repeat="(key,val) in user" ng-if="$index >= 2" class="checkbox-inline">
-          <input type="checkbox" ng-model="val" ng-change="admin.updateUsersAccesses(user.email, key, val)" ng-checked="{{val}}">
-          {{admin.pretty(key)}}
-        </label>
+<div ng-show="((admin.accessControlsDisplay))" class="container text-center access-display">
+  <div class="col-xs-4">
+    <div class="row access">
+      <h4 class="user-select">User Name</h4>
+      <select class="user-select" ng-model="admin.selectedUser" ng-options="user.id as
+      admin.pretty(user.first_name) + ' ' + admin.pretty(user.last_name) for user
+      in admin.allUserAccess" ng-change="admin.showUser(admin.selectedUser)">
+      </select>
+    </div>
+
+    <div class="access current-access row">
+      <h4>Current Access</h4>
+      <ul>
+        <li ng-repeat="dept in admin.empDepts">{{admin.pretty(dept)}}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-xs-4">
+    <button class="show-access-button" ng-click="admin.showNotEmpDepts=!admin.showNotEmpDepts; admin.showEmpDepts=false; admin.clearDepts();">Add Access <div class="arrow-down"></button>
+    <button class="show-access-button" ng-click="admin.showEmpDepts=!admin.showEmpDepts; admin.showNotEmpDepts=false; admin.clearDepts();">Remove Access <div class="arrow-down"></button>
+
+    <div ng-show="admin.showNotEmpDepts" class="access row edit-access">
+      <div class="add-access-container">
+        <div ng-repeat="dept in admin.notEmpDepts" class="text-left">
+          <input ng-model="admin[dept]" ng-init="admin[dept]=false" ng-change="admin.updateUsersAccesses(dept)" type="checkbox" />
+          <label for="dept">{{admin.pretty(dept)}}</label>
+        </div>
       </div>
     </div>
+
+    <div ng-show="admin.showEmpDepts" class="access row edit-access">
+      <div class="add-access-container">
+        <div ng-repeat="dept in admin.empDepts" class="text-left">
+          <input ng-model="admin[dept]" ng-init="admin[dept]=false" ng-change="admin.updateUsersAccesses(dept)" type="checkbox" />
+          <label for="dept">{{admin.pretty(dept)}}</label>
+        </div>
+      </div>
+    </div>
+    <div class="row submit-button-position">
+      <button class="submit-button" ng-click="admin.submitChanges()">Submit</button>
+    </div>
+  </div>
+
+
+</div>
+    <!--dynamicly created list of users and there access-->
+    <div ng-repeat="user in admin.allUserAccess" ng-init="admin.showUserAccess[$index]= false">
+      <!--accordion made dynamicly button-->
+      <!-- <button ng-init="admin.plus[$index]=true; admin.minus[$index]=false"
+      ng-click="admin.truthiness($index)" class="btn btn-default btn-block btn-small" >
+
+      {{user.first_name}} {{user.last_name}}<span ng-show="admin.plus[$index]" class ="glyphicon glyphicon-plus pull-right"></span>
+      <span ng-show="admin.minus[$index]" class ="glyphicon glyphicon-minus pull-right"></span></button>
+
+      <div class="text-left" ng-show="admin.showUserAccess[$index]" >
+        <label ng-repeat="(key,val) in user" ng-if="$index == 4" class="checkbox-inline">
+          <input type="checkbox" ng-model="val" ng-change="admin.updateUsersAccesses(user.email, key, val); admin.checkboxesTruthiness($index);" ng-checked="val" >
+          {{admin.pretty(key)}}
+        </label>
+        <span ng-show="admin.showCheckboxes[$index]" ng-init="admin.showCheckboxes[$index]= !user.admin">
+          <label ng-repeat="(key,val) in user" ng-if="$index >= 5" class="checkbox-inline">
+            <input type="checkbox" ng-model="val" ng-change="admin.updateUsersAccesses(user.email, key, val)" ng-checked="val" >
+            {{admin.pretty(key)}}
+          </label>
+        </span>
+      </div>
+  </div> -->
+
+    <button ng-click="admin.addEmployeeTruthiness()" class="btn btn-success btn-lg"
+    ng-init="admin.showAddEmployee = false; admin.empPlus = true" ng-show="admin.accessControlsDisplay">Add Employee
+
+    <span ng-show="admin.empPlus" class="glyphicon glyphicon-plus pull-right"></span>
+    <span ng-hide="admin.empPlus" class="glyphicon glyphicon-minus pull-right"></span></button>
+    <form ng-show="((admin.showAddEmployee))" class="form-inline">
+      <div class="form-group">
+        <label class="sr-only">First Name</label>
+        <input ng-model="admin.firstName" type="text" class="form-control" placeholder="First Name">
+
+        <label class="sr-only">Last Name</label>
+        <input ng-model="admin.lastName" type="text" class="form-control" placeholder="Last Name">
+
+
+        <label class="sr-only" for="exampleInputEmail3">Email address</label>
+        <input ng-model="admin.newUser" type="email" class="form-control" placeholder="Email">
+      </div>
+        <button ng-click="admin.submitButton(); admin.empPlus=false" type="submit" class="btn btn-default">Submit</button>
+    </form>
   </div>
 </div>
 <!--brands-->
@@ -72,23 +152,33 @@
       <img ng-show="admin.upload.file!=undefined" ngf-src="admin.upload.file" alt="Brand Preview" class="preview" />
     </div>
 
+    
+
     <div class="row">
       <form enctype="multipart/form-data" name="uploadBrandForm" id="uploadBrandForm">
         <div class="row">
           <label ng-hide="admin.upload.file!=undefined" id="file-label" for="file-input">Please select a file</label>
           <input type="file" ng-model="admin.upload.file" ngf-select ngf-max-size="10MB" name="file-input" id="file-input"required>
         </div>
-        <input class="upload-brand-button" type="submit" ng-click="admin.uploadPicture(uploadBrandForm)" value="Upload Image" />
+        <div class="row">
+          <select ng-model="admin.upload.deptId" required>
+            <option value="" selected disabled>Select...</option>
+            <option ng-repeat="name in admin.deptNames" ng-value="name.id">{{admin.prettyDeptName(name.department)}}</option>
+          </select>
+        </div>
+        <input class="upload-brand-button" type="submit" ng-click="admin.uploadBrand(uploadBrandForm)" value="Upload Image" />
       </form>
-    </div>
+      <input type="text" ng-model="admin.newDepartment"/>
+      <button ng-click="admin.addDepartment()">Add Department</button>
 
-    <div class="row">
-      <button class="btn btn-success">Approve</button>
-      <button class="btn btn-danger">Revise</button>
+      <select ng-model="admin.remove.deptId" required>
+        <option value="" selected disabled>Select...</option>
+        <option ng-repeat="name in admin.deptNames" ng-value="name.id">{{admin.prettyDeptName(name.department)}}</option>
+      </select>
+      <button ng-click="admin.deleteDepartment()">Delete Department</button>
     </div>
   </div>
 </div>
-
 <!--modal-->
 <div id="adminModal" class="modal">
 
@@ -103,14 +193,15 @@
       <div>
         <img ng-src="{{admin.modalImage}}" alt="large version of image" />
         <h4><u>Comments</u></h4>
-        <h6>{{admin.modalUserComment}}</h6>
+        <h6 ng-show="reviseClass">{{admin.modalUserComment}}</h6>
+        <input ng-hide="reviseInput" ng-model="admin.reviseComment" />
       </div>
     </div>
     <div class="modal-footer">
       <span>
-        <button class="btn btn-success">Approve</button>
-        <button class="btn btn-danger">Revise</button>
-        <button class="btn btn-danger">Delete</button>
+        <button ng-show="reviseClass" class="btn btn-success">Approve</button>
+        <button ng-click="admin.subReviseButton()" class="btn btn-danger">Revise</button>
+        <button ng-show="reviseClass" ng-click="admin.deleteButton(admin)" class="btn btn-danger">Delete</button>
       </span>
     </div>
   </div>

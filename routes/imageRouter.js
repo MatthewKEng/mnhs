@@ -33,12 +33,62 @@ var uploads3 = multer({
       // creates a name for the file with the file extention
       // New name will be stored in req.file.key;
       // cb(null, 'small');
-      cb(null, Date.now().toString() + path.extname(file.originalname));
-
+      cb(null, Date.now().toString());
     },
   }),
 });
 
+// Post request.  Need to send department_id as part of req.body from client
+router.post('/brand', uploads3.single('file'), function (req, res) {
+  // On success, send image to SQL DB to store URL.
+  var url = 'https://s3.amazonaws.com/mnhs/' + req.file.key;
+  var dep = req.body.deptId;
+  pool.connect(function (err, client, done) {
+    try {
+      if (err) {
+        console.log('error connecting to DB', err);
+        res.sendStatus(500);
+      }
+      client.query('INSERT INTO brands (url_brand, department_id) VALUES ($1, $2);',
+                  [url, dep],
+            function (err) {
+              if (err) {
+                console.log('Error inserting into db', err);
+                return res.sendStatus(500);
+              }
+              res.sendStatus(200);
+              });
+    } finally {
+      done();
+    }
+  });
+});
+
+// Post request.  Need to send department_id as part of req.body from client
+router.post('/submissions', uploads3.single('file'), function (req, res) {
+  // On success, send image to SQL DB to store URL.
+  var url = 'https://s3.amazonaws.com/mnhs/' + req.file.key;
+  var dep = req.body.deptId;
+  pool.connect(function (err, client, done) {
+    try {
+      if (err) {
+        console.log('error connecting to DB', err);
+        res.sendStatus(500);
+      }
+      client.query('INSERT INTO submissions (saved_edit, department_id, user_id, image_id, brand_id) VALUES ($1, $2, $3, $4, $5);',
+                  [url, dep, 1, 1, 1],
+            function (err) {
+              if (err) {
+                console.log('Error inserting into db', err);
+                return res.sendStatus(500);
+              }
+              res.sendStatus(200);
+              });
+    } finally {
+      done();
+    }
+  });
+});
 
 // Post request.  Need to send department_id as part of req.body from client
 router.post('/', uploads3.single('file'), function (req, res) {
@@ -65,6 +115,7 @@ router.post('/', uploads3.single('file'), function (req, res) {
     }
   });
 });
+
 
 //deletes entries from S3 database, then delete from SQL
 router.delete('/:key/:id', function (req, res) {

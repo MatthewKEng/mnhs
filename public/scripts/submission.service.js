@@ -8,7 +8,6 @@ function SubmissionsService ($http) {
       method: 'GET',
       url: '/submissions/' + deptID
     }).then(function successCallback(response) {
-        console.log('whats the submissions data', response);
         return response.data;
       }, function errorCallback(response) {
         console.log('Error in Call back');
@@ -21,7 +20,6 @@ function SubmissionsService ($http) {
       method: 'GET',
       url: '/submissions/admin'
     }).then(function successCallback(response) {
-        console.log('whats the  all submissions data', response);
         return response.data;
       }, function errorCallback(response) {
         console.log('Error in Call back');
@@ -35,7 +33,6 @@ function SubmissionsService ($http) {
       method: 'GET',
       url: '/submissions/' + status + '/' + department
     }).then(function successCallback(response) {
-        console.log('whats the submissions data', response);
         return response.data;
       }, function errorCallback(response) {
         console.log('Error in Call back');
@@ -51,7 +48,6 @@ function SubmissionsService ($http) {
       url: '/submissions',
       data: submissionObj
     }).then(function successCallback(response) {
-        console.log('whats the submissions data', response);
         return response.data;
       }, function errorCallback(response) {
         console.log('Error in Call back');
@@ -67,7 +63,6 @@ function SubmissionsService ($http) {
       url: '/submissions',
       data: submissionObj
     }).then(function successCallback(response) {
-        console.log('whats the submissions data', response);
         return response.data;
       }, function errorCallback(response) {
         console.log('Error in Call back');
@@ -80,7 +75,6 @@ function SubmissionsService ($http) {
       method: 'DELETE',
       url: '/submissions/' + id
     }).then(function successCallback(response) {
-        console.log('whats the submissions data', response);
         return response.data;
       }, function errorCallback(response) {
         console.log('Error in Call back');

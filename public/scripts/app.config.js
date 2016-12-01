@@ -3,10 +3,11 @@ angular.module('BrandImageManagerApp').config(function($routeProvider, $location
 
   $routeProvider.when('/login', {
     templateUrl: 'views/login.html',
-    controller: 'NavController as nav'
+    controller: 'NavController as nav',
+    controller: 'LoginController as login'
   }).when('/gallery', {
-    templateUrl: 'views/gallery.html'
-    // controller: 'GalleryController as gallery'
+    templateUrl: 'views/gallery.html',
+    controller: 'GalleryController as gallery'
   }).when('/editor', {
     templateUrl: 'views/editor.html',
     controller: 'EditorController as editor'
@@ -16,8 +17,10 @@ angular.module('BrandImageManagerApp').config(function($routeProvider, $location
   }).when('/photoUploader', {
     templateUrl: 'views/photoUploader.html',
     controller: 'PhotoController as photo'
+  }).when('/photoedit', {
+    templateUrl: 'views/photoedit.html',
+    controller: 'EditPhotoController as photo'
   }).otherwise({
     templateUrl: 'views/login.html',
-    controller: 'LoginController as login'
   });
 });

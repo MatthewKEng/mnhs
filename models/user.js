@@ -4,7 +4,7 @@ const SALT_ROUNDS = 10;
 const pool = require('../db/connection');
 
 // find by username
-function findById(googleID, googleEmail, googleName, accessToken, refreshToken) {
+function findByEmail(googleID, googleEmail, googleName, accessToken, refreshToken) {
   return new Promise(function(resolve, reject){
     pool.connect(function(err, client, done){
       if (err) {
@@ -12,18 +12,45 @@ function findById(googleID, googleEmail, googleName, accessToken, refreshToken) 
         return reject(err);
       }
 
-      client.query('SELECT * FROM users WHERE googleid=$1',
-      [googleID],
+      client.query('SELECT * FROM users WHERE email=$1',
+      [googleEmail],
       function(err, result){
         done();
         if (err) {
           reject(err);
-        }
+        }else{
         resolve(result.rows[0]);
+      }
       });
     });
   });
 }
+
+function findById(id) {
+  return new Promise(function(resolve, reject){
+    pool.connect(function(err, client, done){
+      if (err) {
+        done();
+        return reject(err);
+      }
+
+      client.query('SELECT * FROM users WHERE id=$1',
+      [id],
+      function(err, result){
+        done();
+        if (err) {
+          reject(err);
+        }else{
+        resolve(result.rows[0]);
+      }
+      });
+    });
+  });
+}
+
+
+
+
 
 function updateTokens(googleID, googleEmail, googleName, accessToken, refreshToken){
     return new Promise(function(resolve, reject){
@@ -33,8 +60,8 @@ function updateTokens(googleID, googleEmail, googleName, accessToken, refreshTok
         return reject(err);
       }
 
-      client.query('UPDATE users SET accesstoken=$1, refreshtoken=$2, email=$3, google_name=$4 WHERE googleid=$5 RETURNING *',
-      [accessToken, refreshToken, googleEmail, googleName, googleID],
+      client.query('UPDATE users SET accesstoken=$1, refreshtoken=$2, googleid=$3, google_name=$4 WHERE email=$5 RETURNING *',
+      [accessToken, refreshToken, googleID, googleName, googleEmail],
       function(err, result){
         done();
         if (err) {
@@ -74,6 +101,7 @@ function create(googleID, googleEmail, googleName, accessToken, refreshToken) {
 
 module.exports = {
   findById: findById,
+  findByEmail: findByEmail,
   create: create,
   updateTokens:updateTokens
 };

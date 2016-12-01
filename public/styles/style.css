@@ -1,9 +1,12 @@
+
 /*set to zero*/
 body{
   padding: 0;
   margin: 0;
 }
-
+body {
+  background-color: #F0F8FF;
+}
 h1 {
   margin-top: 0%;
   padding-top: .4444444444rem;
@@ -15,9 +18,39 @@ font-family: helvetica;
 display: block;
 text-align: center;
 background-color: #eeb111;
-
 }
-
+.sideButton {
+  background-color: #323e48;
+  color: white;
+  outline: none;
+  /*border: none;*/
+  box-shadow: none;
+  text-decoration: none;
+}
+/*.adminpage {
+  background-color: #323e48;
+  color: white;
+}*/
+.sideButton:hover {
+  background-color: #eeb111;
+  color: #323e48;
+  outline: none;
+  box-shadow: none;
+}
+.sidesButton {
+  background-color: #eeb111;
+  color: #323e48;
+  outline: none;
+}
+.sidesButton:hover {
+  background-color: white;
+}
+.img-thumbnail {
+  margin: 10px;
+}
+.btn:focus {
+  outline: none;
+}
 #left img {
     align-items: left;
     background-size: cover;
@@ -31,7 +64,6 @@ background-color: #eeb111;
    /*padding-left: 0%;*/
    margin-right: 0%;
 }
-
 #right img {
   align-items: right;
   background-size: cover;
@@ -44,9 +76,7 @@ background-color: #eeb111;
  margin-top: -30%;
  margin-left: -14%;
  padding-right: -8%;
-
 }
-
 #middle img {
   align-items: center;
   background-size: cover;
@@ -57,33 +87,28 @@ background-color: #eeb111;
  height: auto;
  padding-right: 5%;
  margin-left: -10%;
-
 }
-
 /*.hero_tall {
   padding-top: 12vh;
   padding-bottom: 12vh;
   overflow-x: hidden;
   overflow-y: hidden;
 }*/
-
 /*.hero {
   display: flex;
   color: white;
   flex-direction: column;
-
 }*/
-
 /*.home .hero {
     text-align: center;
 }*/
-
 .centeredblock {
     text-align: center;
     padding-top: 3%;
     padding-bottom: 1%;
     background-color: #eeb111;
-    margin-top: -2%;
+    width: 100vw;
+    height: 47vh;
 }
 
 /*top navbar */
@@ -97,7 +122,7 @@ background-color: #eeb111;
   padding: 0;
   margin: 0;
   border-radius: 0;
- }
+}
  /*side admin menu bar*/
 .sideMenu{
   color: white;
@@ -109,9 +134,14 @@ background-color: #eeb111;
   top: 40%;
   transform: translateY(-60%);
 }
-
 .sideButtonContainer2{
   position: relative;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#not{
+  overflow: scroll;
 }
 .zach{
   display: flex;
@@ -144,7 +174,6 @@ background-color: #eeb111;
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-
 /* Modal Content */
 .modal-content {
     position: relative;
@@ -159,18 +188,15 @@ background-color: #eeb111;
     animation-name: animatetop;
     animation-duration: 0.4s
 }
-
 /* Add Animation */
 @-webkit-keyframes animatetop {
     from {top:-300px; opacity:0}
     to {top:0; opacity:1}
 }
-
 @keyframes animatetop {
     from {top:-300px; opacity:0}
     to {top:0; opacity:1}
 }
-
 /* The Close Button */
 .close {
     color: white;
@@ -178,42 +204,33 @@ background-color: #eeb111;
     font-size: 28px;
     font-weight: bold;
 }
-
 .close:hover,
 .close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
 }
-
 .modal-header {
     padding: 2px 16px;
     background-color: #323e48;
     color: white;
 }
-
 .modal-body {padding: 2px 16px;}
-
 .modal-footer {
     padding: 2px 16px;
     background-color: #323e48;
     color: white;
 }
-
 .glyphicon {
   color: white;
   font-size: 125%;
-
 }
-
 .glyphicon:hover {
   color: #eeb111;
 }
-
 .icon {
   font-family: helvetica;
 }
-
 /* photoUploader.html */
 .preview-block {
   height: 200px;
@@ -222,7 +239,6 @@ background-color: #eeb111;
   position: relative;
   border: 1px solid black;
 }
-
 .preview {
   padding-top: 0;
   max-width: 100%;
@@ -231,4 +247,184 @@ background-color: #eeb111;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.withinTheCanvas {
+    position: absolute;
+    top: 100px;
+    right: 600px;
+}
+@font-face {
+    font-family: 'Gotham Black';
+    src: local('GothamBlack'), url(./fonts/GothamBlack/Gotham-Black.ttf);
+}
+@font-face {
+    font-family: 'Gotham Book';
+    src: local('Gotham-Book'), url(./fonts/GothamBook/Gotham-Book.ttf);
+}
+@font-face {
+    font-family: 'Gotham Bold';
+    src: local('Gotham Bold'), url(./fonts/GothamBold/Gotham-Bold.ttf);
+}
+@font-face {
+    font-family: 'Gotham Condensed Book';
+    src: local('GothamCondensed-Book'), url(fonts/GothamCondensedBook/GothamCondensed-Book.ttf);
+}
+#downloadButton {
+    font-family: 'Gotham Condensed Book';
+}
+#buttonHtml {
+    background-color: #EAEAEA;
+}
+/* Temporary styling for gallery and photoUploader pages*/
+.addPhoto, .addPhoto:active, .addPhoto:visited {
+  background-color: lightslategray;
+  color: white;
+  font-size: 70px;
+  text-align: center;
+  height: 150px;
+  width: 150px;
+  padding-top: 38px;
+  cursor: pointer;
+}
+.addPhoto:hover {
+  text-decoration: none;
+  background-color: #bbb;
+  color: gray;
+}
+.addContainer {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.upload {
+  text-align: center;
+}
+#file-input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.#file-input + label {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  background-color: black;
+  display: inline-block;
+}
+.file-upload {
+  text-align: center;
+}
+#file-input:focus, #file-label,
+#file-input {
+  background: linear-gradient(#444, white);
+  color: #263238;
+  padding: 7px;
+  font-weight: normal;
+}
+#file-label:hover {
+  background: linear-gradient(darkslategray, lightslategray);
+  color: white;
+}
+#file-input, #file-label {
+  cursor: pointer;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonface;
+}
+.gallery-display {
+  height: 200px;
+  margin: 0 auto 20px auto;
+  text-align: center;
+}
+.gallery-item {
+  margin: 0 auto;
+  height: 170px;
+}
+.success {
+  margin-top: 60px;
+  font-size: 50px;
+}
+.overflow {
+  overflow: scroll;
+  height: 87vh;
+  width: 29%;
+}
+.disabled {
+  cursor: not-allowed;
+}
+.access-display {
+  margin-top: 20px;
+}
+.access {
+  text-align: left;
+  padding-left: 30px;
+}
+.current-access > ul > li{
+  background-color: lightgray;
+  padding: 5px;
+}
+.current-access > ul {
+  list-style-type: none;
+  padding: none;
+}
+.user-access {
+  height: 150px;
+}
+.edit-access {
+  overflow: scroll;
+  height: 150px;
+  position: absolute;
+  margin-left: 30px;
+  top: 35px;
+}
+.add-access-container {
+  background: lightgray;
+  padding: 0 5px;
+  width: 300px;
+}
+.show-access-button {
+  background: lightgray;
+  width: 40%;
+  display: inline-block;
+  margin-right: 20px;
+  position: relative;
+  padding-right: 20px;
+}
+.show-access-button:hover, .show-access-title:hover {
+  color: white;
+  background: darkgray;
+}
+.show-access-title {
+  position: relative;
+  padding-right: 20px;
+}
+.show-access-button:hover {
+  text-decoration: underline;
+}
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid gray;
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  display: inline;
+}
+.user-select {
+  display: inline;
+}
+.submit-button {
+  background: lightgray;
+  width: 40%;
+  top: 200px;
+  position: relative;
+}
+.submit-button:hover {
+  color: white;
+  background: darkgray;
+  text-decoration: underline;
 }
