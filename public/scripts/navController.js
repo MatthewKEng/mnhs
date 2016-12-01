@@ -1,5 +1,5 @@
 angular.module('BrandImageManagerApp')
-       .controller('NavController', function(AuthFactory, AccessService) {
+       .controller('NavController', function(AuthFactory, AccessService, $window) {
 
   console.log('NavController loading!')
   var nav = this;
@@ -10,7 +10,7 @@ angular.module('BrandImageManagerApp')
       type: 'info',
   };
 
-
+  
   authFactory.isLoggedIn()
     .then(function(response) {
       if (response.data.status) {
@@ -20,6 +20,7 @@ angular.module('BrandImageManagerApp')
           console.log('username', nav.username);
           nav.user = response.data.user;
           AccessService.getDepartmentIds();
+          console.log('nav.user is', nav.user);
           AccessService.storeUserAccess(nav.user);
       } else { // is not logged in on server
           nav.displayLogout = false;
@@ -39,6 +40,7 @@ angular.module('BrandImageManagerApp')
       nav.displayLogout = false;
       authFactory.setLoggedIn(false);
       nav.username = '';
+      // window.location.replace('https://accounts.google.com/Logout');
       // $window.location.href = '/'; // forces a page reload which will update our NavController
 
     }, function(response) { // error

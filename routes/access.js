@@ -30,6 +30,8 @@ router.get('/departments', function(req, res) {
 });
 
 
+
+
 // query departments table to post department and department_id's
 router.post('/departments', function(req, res) {
   pool.connect(function(error, client, done) {
