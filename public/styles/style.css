@@ -286,6 +286,11 @@ background-color: #eeb111;
   transform: translate(-50%, -50%);
 }
 
+.withinTheCanvas {
+    position: absolute;
+    top: 100px;
+    right: 600px;
+}
 
 @font-face {
     font-family: 'Gotham Black';
@@ -309,8 +314,11 @@ background-color: #eeb111;
 
 #downloadButton {
     font-family: 'Gotham Condensed Book';
+}
 
-
+#buttonHtml {
+    background-color: #EAEAEA;
+}
 
 
 /* Temporary styling for gallery and photoUploader pages*/
