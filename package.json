@@ -38,6 +38,7 @@
     "passport-google-oauth2": "^0.1.6",
     "passport-local": "^1.0.0",
     "pg": "^6.1.0",
+    "request": "^2.79.0",
     "xoauth2": "^1.2.0"
   },
   "devDependencies": {},

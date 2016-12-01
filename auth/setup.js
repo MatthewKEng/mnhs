@@ -25,7 +25,7 @@ exports.setup = function () {
 // used to serialize the user for the session
 passport.serializeUser(function (user, done) {
 
-  done(null, user.googleid);
+  done(null, user.id);
 
 });
 
@@ -45,7 +45,7 @@ function findOrCreate(googleID, googleEmail, googleName, accessToken, refreshTok
 
     console.log('googleID', googleID);
 
-    User.findById(googleID, googleEmail, googleName, accessToken, refreshToken).then(function (user) {
+    User.findByEmail(googleID, googleEmail, googleName, accessToken, refreshToken).then(function (user) {
       console.log('user', user);
       if (user) {
           // update access and refresh token
@@ -54,7 +54,6 @@ function findOrCreate(googleID, googleEmail, googleName, accessToken, refreshTok
                   return done(null, user);
 
       }
-
 
       if (!user) {
         console.log('inside!user');

@@ -63,7 +63,7 @@ router.get('/', function(req, res) {
       done();
       next(error);
     }
-    client.query('SELECT id, email, first_name, last_name, admin, alexander_ramsey_house,'+
+    client.query('SELECT id, first_name, last_name, email, admin, alexander_ramsey_house,'+
       'birch_coulee_battlefield, charles_a_lindbergh_historic_site,'+
       'comstock_house, folsom_house, fort_ridgely, harkin_store,'+
       'historic_forestville, historic_fort_snelling, james_j_hill_house,'+
@@ -90,7 +90,7 @@ router.post('/', function(req, res) {
       done();
       next(error);
     }
-    client.query('INSERT INTO approved_users (first_name, last_name, email) ' + 'VALUES ($1, $2, $3)', [req.body.first_name, req.body.last_name, req.body.email],
+    client.query('INSERT INTO users (first_name, last_name, email) ' + 'VALUES ($1, $2, $3)', [req.body.first_name, req.body.last_name, req.body.email],
     function(error, result) {
       if (error) {
         done();
@@ -104,7 +104,7 @@ router.post('/', function(req, res) {
 
 
 
-//to add a column to users DB of department //not sure what to put to ADD COLUMN
+//to add a column to users DB of department
 router.post('/users', function(req, res) {
   pool.connect(function(error, client, done) {
     if (error) {
@@ -125,36 +125,31 @@ router.post('/users', function(req, res) {
 
 
 
-
-
-
-
-
-
-
 // Edit user access to SQL DB.
 router.put('/', function (req, res, next) {
-  var email = req.body.email;
-  var department = req.body.department;
+  var id = req.body.id;
+  var departments = req.body.departments;
+  var numberOfDepartments = departments.length;
   var accessBoolean = req.body.accessBoolean.toString().toUpperCase();
   //console.log('whats the truth',accessBoolean);
+  var statement = 'UPDATE USERS set ';
+  for (var i = 0; i < numberOfDepartments; i++) {
+    statement = statement + departments[i] + '=' + accessBoolean;
+    if (i != numberOfDepartments - 1) {
+      statement = statement + ',';
+    }
+  }
+  statement = statement + ' WHERE id=' + id;
+  console.log('STATEMENT: ', statement);
+
   pool.connect(function (err, client, done) {
     try {
       if (err) {
         res.sendStatus(500);
       }
-      if (department == 'admin') {
-        client.query('UPDATE users SET admin=$1, alexander_ramsey_house=$1,'+
-          'birch_coulee_battlefield=$1, charles_a_lindbergh_historic_site=$1,'+
-          'comstock_house=$1, folsom_house=$1, fort_ridgely=$1, harkin_store=$1,'+
-          'historic_forestville=$1, historic_fort_snelling=$1, james_j_hill_house=$1,'+
-          'jeffers_petroglyphs=$1, lac_qui_parle_mission=$1, lower_sioux_agency=$1,'+
-          'marine_mill=$1, mill_city_museum=$1, mille_lacs_indian_museum=$1,'+
-          'minnehaha_depot=$1, minnesota_history_center=$1, gale_family_library=$1,'+
-          'minnesota_state_capitol=$1, north_west_company_fur_post=$1, oliver_kelley_farm=$1,'+
-          'sibley_historic_site=$1, split_rock_lighthouse=$1, traverse_des_sioux=$1,'+
-          'w_w_mayo_house=$1 WHERE email=$2;',
-                    [accessBoolean, email],
+      if (departments[0] == 'admin') {
+        client.query('UPDATE USERS set admin=$1 WHERE id=$2;',
+                    [accessBoolean, id],
                     function (err) {
                       if (err) {
                         console.log('Error inserting into db', err);
@@ -162,9 +157,8 @@ router.put('/', function (req, res, next) {
                       }
                       res.sendStatus(200);
                     });//end of querry
-      }else {
-        client.query('UPDATE users SET '+ department +'=$1 WHERE email=$2;',
-                    [accessBoolean, email],
+      } else {
+        client.query(statement,
                     function (err) {
                       if (err) {
                         console.log('Error inserting into db', err);
@@ -189,6 +183,32 @@ router.delete('/:id', function (req, res, next) {
       }
 
       client.query('DELETE FROM departments WHERE id=$1;', [id],
+        function (err, result) {
+          if (err) {
+            console.log('Error querying DB: ', err);
+            return res.sendStatus(500);
+          }
+          res.sendStatus(204);
+          });
+    } finally {
+      done();
+    }
+  });
+});
+
+
+//dete the department column from users table
+
+router.delete('/:id', function (req, res, next) {
+  var id = req.params.id;
+  pool.connect(function (err, client, done) {
+    try {
+      if (err) {
+        console.log('Error connecting with DB: ', err);
+        res.sendStatus(500);
+      }
+
+      client.query('ALTER TABLE users drop COLUMN ' + req.body.department + [id],
         function (err, result) {
           if (err) {
             console.log('Error querying DB: ', err);
