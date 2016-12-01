@@ -102,7 +102,7 @@
 
 </div>
     <!--dynamicly created list of users and there access-->
-    <!-- <div ng-repeat="user in admin.allUserAccess" ng-init="admin.showUserAccess[$index]= false">-->
+    <div ng-repeat="user in admin.allUserAccess" ng-init="admin.showUserAccess[$index]= false">
       <!--accordion made dynamicly button-->
       <!-- <button ng-init="admin.plus[$index]=true; admin.minus[$index]=false"
       ng-click="admin.truthiness($index)" class="btn btn-default btn-block btn-small" >
@@ -123,7 +123,7 @@
         </span>
       </div>
   </div> -->
-    <button ng-click="admin.addEmployeeTruthiness()" class="btn btn-success btn-block btn-lg acordionButton"
+    <button ng-click="admin.addEmployeeTruthiness()" class="btn btn-success btn-block btn-small acordionButton"
     ng-init="admin.showAddEmployee = false; admin.empPlus = true">Add Employee
     <span ng-show="admin.empPlus" class="glyphicon glyphicon-plus pull-right"></span>
     <span ng-hide="admin.empPlus" class="glyphicon glyphicon-minus pull-right"></span></button>

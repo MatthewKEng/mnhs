@@ -16,7 +16,8 @@ exports.setup = function () {
 
   function (accessToken, refreshToken, profile, cb) {
 
-    findOrCreate(profile.id, profile.email, profile.displayName, accessToken, refreshToken, function (err, user) {
+    findOrCreate(profile.id, profile.email, profile.displayName, accessToken, refreshToken,
+      function (err, user) {
       return cb(err, user);
     });
   }
