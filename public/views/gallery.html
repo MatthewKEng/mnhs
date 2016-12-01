@@ -18,7 +18,7 @@
       <a ng-class="gallery.disabled()"href="/photoedit"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image.url_image)" ng-src="{{image.url_image}}" /></a>
     </div>
   </div>
-
+  
   <div class="row col-xs-3 text-center overflow">
     <h4><u>Revision images:&nbsp;{{gallery.revisionCount}}</u></h4>
     <div class="gallery-display" ng-repeat="image in gallery.revision">

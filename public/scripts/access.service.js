@@ -65,6 +65,7 @@ function AccessService ($http) {
       }
     }
 
+
     console.log(user);
     console.log('admin privilege ', user.admin);
     console.log(access.userDepts);

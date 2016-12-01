@@ -12,7 +12,11 @@ exports.setup = function () {
     clientID: '635146343171-m726t7cjr75thvph68au09l2upao1tjk.apps.googleusercontent.com',
     clientSecret: 'E3mabZbBKqq4ETbNjvJUyn7_',
     callbackURL: 'http://localhost:3000/auth/google/callback',
+    // callbackURL: 'https://YOUR_AUTH0_DOMAIN/v2/logout', = to force logout,redirect user to the following URL:
   },
+
+
+  // gapi.auth.signOut();
 
   function (accessToken, refreshToken, profile, cb) {
 
