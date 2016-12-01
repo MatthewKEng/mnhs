@@ -309,9 +309,7 @@ background-color: #eeb111;
 
 #downloadButton {
     font-family: 'Gotham Condensed Book';
-
-
-
+}
 
 /* Temporary styling for gallery and photoUploader pages*/
 .addPhoto, .addPhoto:active, .addPhoto:visited {
