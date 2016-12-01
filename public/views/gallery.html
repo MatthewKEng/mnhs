@@ -4,7 +4,7 @@
     <button ng-repeat="dept in gallery.userDepts" ng-click="gallery.showDept(dept); gallery.getImages(dept, 1);" style="font-size:12px; margin-bottom:4px;white-space: normal;" class="btn btn-success btn-lg btn-block sideButton">{{gallery.pretty(dept)}}</button>
   </div>
   <div class="sideButtonContainer2">
-    <button ng-repeat="notDept in gallery.notUserDepts" ng-click="gallery.showDept(notDept); gallery.getImages(notDept, 0);" style="font-size:12px; margin-bottom:4px;white-space: normal; background-color: #e7e7e7; color: black;" class="btn btn-info btn-lg btn-block sideButton">{{gallery.pretty(notDept)}}</button>
+    <button ng-repeat="notDept in gallery.notUserDepts" ng-click="gallery.showDept(notDept); gallery.getImages(notDept, 0);" style="font-size:12px; margin-bottom:4px;white-space: normal; background-color: #808080; color: black;" class="btn btn-info btn-lg btn-block sideButton">{{gallery.pretty(notDept)}}</button>
   </div>
 </div>
 
