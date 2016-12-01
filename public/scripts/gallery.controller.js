@@ -22,6 +22,7 @@ function GalleryController(AuthFactory, SubmissionsService, AccessService, Image
   }
   // Store current user's access by department
   ctrl.userDepts = AccessService.userDepts;
+  console.log('what is this userDepts', ctrl.userDepts);
   ctrl.notUserDepts = AccessService.notUserDepts;
 
   authFactory.isLoggedIn()

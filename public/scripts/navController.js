@@ -10,7 +10,7 @@ angular.module('BrandImageManagerApp')
       type: 'info',
   };
 
-
+  
   authFactory.isLoggedIn()
     .then(function(response) {
       if (response.data.status) {
@@ -20,6 +20,7 @@ angular.module('BrandImageManagerApp')
           console.log('username', nav.username);
           nav.user = response.data.user;
           AccessService.getDepartmentIds();
+          console.log('nav.user is', nav.user);
           AccessService.storeUserAccess(nav.user);
       } else { // is not logged in on server
           nav.displayLogout = false;
