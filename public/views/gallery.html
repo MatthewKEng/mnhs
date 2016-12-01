@@ -15,7 +15,7 @@
       <h1 class="addPhoto glyphicon glyphicon-upload" ng-click="gallery.modalImage=image.url_image; gallery.viewButton()"></h1>
     </div>
     <div class="row gallery-display" ng-repeat="image in gallery.deptImages">
-      <a ng-class="gallery.disabled()"href="/photoedit"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image.url_image)" ng-src="{{image.url_image}}" /></a>
+      <a ng-class="gallery.disabled()"href="/photoedit"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image.url_image, image.department_id)" ng-src="{{image.url_image}}" /></a>
     </div>
   </div>
   
