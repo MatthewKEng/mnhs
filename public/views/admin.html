@@ -123,8 +123,10 @@
         </span>
       </div>
   </div> -->
-    <button ng-click="admin.addEmployeeTruthiness()" class="btn btn-success btn-block btn-small acordionButton"
-    ng-init="admin.showAddEmployee = false; admin.empPlus = true">Add Employee
+
+    <button ng-click="admin.addEmployeeTruthiness()" class="btn btn-success btn-lg"
+    ng-init="admin.showAddEmployee = false; admin.empPlus = true" ng-show="admin.accessControlsDisplay">Add Employee
+
     <span ng-show="admin.empPlus" class="glyphicon glyphicon-plus pull-right"></span>
     <span ng-hide="admin.empPlus" class="glyphicon glyphicon-minus pull-right"></span></button>
     <form ng-show="((admin.showAddEmployee))" class="form-inline">
@@ -139,7 +141,7 @@
         <label class="sr-only" for="exampleInputEmail3">Email address</label>
         <input ng-model="admin.newUser" type="email" class="form-control" placeholder="Email">
       </div>
-        <button ng-click="admin.submitButton()" type="submit" class="btn btn-default">Submit</button>
+        <button ng-click="admin.submitButton(); admin.empPlus=false" type="submit" class="btn btn-default">Submit</button>
     </form>
   </div>
 </div>

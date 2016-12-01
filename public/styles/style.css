@@ -24,9 +24,10 @@ background-color: #eeb111;
 }
 
 .sideButton {
-  background-color: #323e48;
+  background-color: #006600;
   color: white;
   outline: none;
+
   /*border: none;*/
   box-shadow: none;
   text-decoration: none;
@@ -131,7 +132,13 @@ background-color: #eeb111;
     width: 100vw;
     height: 47vh;
 }
-
+/*takes out empty content to left and right of navbar*/
+.navbar:before {
+  content:none !important;
+}
+.navbar:after {
+  content:none !important;
+}
 /*top navbar */
 .navbar {
   border-bottom: 1px solid #323e48;
@@ -143,7 +150,16 @@ background-color: #eeb111;
   padding: 0;
   margin: 0;
   border-radius: 0;
+  display: flex;
+  justify-content: space-between;
  }
+
+
+.navRow {
+  margin-right: 25px;
+  flex-direction: row;
+
+}
  /*side admin menu bar*/
 .sideMenu{
   color: white;
@@ -286,6 +302,11 @@ background-color: #eeb111;
   transform: translate(-50%, -50%);
 }
 
+.withinTheCanvas {
+    position: absolute;
+    top: 100px;
+    right: 600px;
+}
 
 @font-face {
     font-family: 'Gotham Black';
@@ -310,6 +331,11 @@ background-color: #eeb111;
 #downloadButton {
     font-family: 'Gotham Condensed Book';
 }
+
+#buttonHtml {
+    background-color: #EAEAEA;
+}
+
 
 /* Temporary styling for gallery and photoUploader pages*/
 .addPhoto, .addPhoto:active, .addPhoto:visited {
@@ -382,6 +408,7 @@ background-color: #eeb111;
   margin-top: 60px;
   font-size: 50px;
 }
+
 .overflow {
   overflow: scroll;
   height: 87vh;
