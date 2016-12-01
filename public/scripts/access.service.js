@@ -64,8 +64,11 @@ function AccessService ($http) {
         access.notUserDepts.push(key);
       }
     }
-    // console.log(user);
-    // console.log(access.userDepts);
+
+    console.log(user);
+    console.log('admin privilege ', user.admin);
+    console.log(access.userDepts);
+
   };
 
   // A check to see if User Departments runs correctly.

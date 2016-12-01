@@ -12,6 +12,7 @@
 <!--dynamicly created gallary of images that are pennding, approved, or needs rivision-->
 <!--pending-->
 <div ng-show="((admin.pendingGalleryDisplay))" class="container">
+  <h3>Pending Photos</h3>
   <div ng-repeat="pending in admin.pending" class="row col-xs-4 col-md-4 col-lg-4 text-center">
     <div>
       <img ng-src="{{pending.saved_edit}}" alt="pending submission" class="img-responsive img-thumbnail"/>
@@ -27,6 +28,7 @@
 </div>
 <!--approved-->
 <div ng-show="((admin.approvedGalleryDisplay))" class="container">
+  <h3>Approved Photos</h3>
   <div ng-repeat="approved in admin.aprroved" class="row col-xs-4 col-md-4 col-lg-4 text-center">
     <div>
       <img ng-src="{{approved.saved_edit}}" alt="approved submission" class="img-responsive img-thumbnail"/>
@@ -40,6 +42,7 @@
 </div>
 <!--revision-->
 <div ng-show="((admin.revisionGalleryDisplay))" class="container">
+  <h3>Photos under Revision</h3>
   <div ng-repeat="revision in admin.revision" class="row col-xs-4 col-md-4 col-lg-4 text-center">
     <div>
       <img ng-src="{{revision.saved_edit}}" alt="revision submission" class="img-responsive img-thumbnail"/>
@@ -108,12 +111,12 @@
       <span ng-show="admin.minus[$index]" class ="glyphicon glyphicon-minus pull-right"></span></button>
 
       <div class="text-left" ng-show="admin.showUserAccess[$index]" >
-        <label ng-repeat="(key,val) in user" ng-if="$index == 2" class="checkbox-inline">
+        <label ng-repeat="(key,val) in user" ng-if="$index == 4" class="checkbox-inline">
           <input type="checkbox" ng-model="val" ng-change="admin.updateUsersAccesses(user.email, key, val); admin.checkboxesTruthiness($index);" ng-checked="val" >
           {{admin.pretty(key)}}
         </label>
         <span ng-show="admin.showCheckboxes[$index]" ng-init="admin.showCheckboxes[$index]= !user.admin">
-          <label ng-repeat="(key,val) in user" ng-if="$index >= 3" class="checkbox-inline">
+          <label ng-repeat="(key,val) in user" ng-if="$index >= 5" class="checkbox-inline">
             <input type="checkbox" ng-model="val" ng-change="admin.updateUsersAccesses(user.email, key, val)" ng-checked="val" >
             {{admin.pretty(key)}}
           </label>
@@ -172,7 +175,6 @@
     </div>
   </div>
 </div>
-
 <!--modal-->
 <div id="adminModal" class="modal">
 
