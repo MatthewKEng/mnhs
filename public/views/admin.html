@@ -5,13 +5,14 @@
     <button ng-click="admin.showApprovedGallery()" class="btn btn-default btn-lg btn-block sideButton" class="sideButton">Approved:&nbsp;{{admin.approvedCount}}</button>
     <button ng-click="admin.showRevisionGallery()" class="btn btn-default btn-lg btn-block sideButton" class="sideButton">Revision:&nbsp;{{admin.revisionCount}}</button>
     <button ng-click="admin.showAccess()" class="btn btn-default btn-lg btn-block sidesButton" class="sidesButton">Access</button>
-    <button ng-click="admin.showBrands()" class="btn btn-default btn-lg btn-block sidesButton" class="sidesButton">Brands</button>
+    <button ng-click="admin.showBrands()" class="btn btn-default btn-lg btn-block sidesButton" class="sidesButton">Departments</button>
   </div>
 </div>
 
 <!--dynamicly created gallary of images that are pennding, approved, or needs rivision-->
 <!--pending-->
 <div ng-show="((admin.pendingGalleryDisplay))" class="container">
+  <h3>Pending Photos</h3>
   <div ng-repeat="pending in admin.pending" class="row col-xs-4 col-md-4 col-lg-4 text-center">
     <div>
       <img ng-src="{{pending.saved_edit}}" alt="pending submission" class="img-responsive img-thumbnail"/>
@@ -27,6 +28,7 @@
 </div>
 <!--approved-->
 <div ng-show="((admin.approvedGalleryDisplay))" class="container">
+  <h3>Approved Photos</h3>
   <div ng-repeat="approved in admin.aprroved" class="row col-xs-4 col-md-4 col-lg-4 text-center">
     <div>
       <img ng-src="{{approved.saved_edit}}" alt="approved submission" class="img-responsive img-thumbnail"/>
@@ -40,6 +42,7 @@
 </div>
 <!--revision-->
 <div ng-show="((admin.revisionGalleryDisplay))" class="container">
+  <h3>Photos under Revision</h3>
   <div ng-repeat="revision in admin.revision" class="row col-xs-4 col-md-4 col-lg-4 text-center">
     <div>
       <img ng-src="{{revision.saved_edit}}" alt="revision submission" class="img-responsive img-thumbnail"/>
@@ -52,30 +55,74 @@
   </div>
 </div>
 <!--access controls-->
-<div ng-show="((admin.accessControlsDisplay))" class="container text-center">
-  <div class="row col-xs-9 col-md-9 col-lg-9">
+<div ng-show="((admin.accessControlsDisplay))" class="container text-center access-display">
+  <div class="col-xs-4">
+    <div class="row access">
+      <h4 class="user-select">User Name</h4>
+      <select class="user-select" ng-model="admin.selectedUser" ng-options="user.id as
+      admin.pretty(user.first_name) + ' ' + admin.pretty(user.last_name) for user
+      in admin.allUserAccess" ng-change="admin.showUser(admin.selectedUser)">
+      </select>
+    </div>
+
+    <div class="access current-access row">
+      <h4>Current Access</h4>
+      <ul>
+        <li ng-repeat="dept in admin.empDepts">{{admin.pretty(dept)}}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-xs-4">
+    <button class="show-access-button" ng-click="admin.showNotEmpDepts=!admin.showNotEmpDepts; admin.showEmpDepts=false; admin.clearDepts();">Add Access <div class="arrow-down"></button>
+    <button class="show-access-button" ng-click="admin.showEmpDepts=!admin.showEmpDepts; admin.showNotEmpDepts=false; admin.clearDepts();">Remove Access <div class="arrow-down"></button>
+
+    <div ng-show="admin.showNotEmpDepts" class="access row edit-access">
+      <div class="add-access-container">
+        <div ng-repeat="dept in admin.notEmpDepts" class="text-left">
+          <input ng-model="admin[dept]" ng-init="admin[dept]=false" ng-change="admin.updateUsersAccesses(dept)" type="checkbox" />
+          <label for="dept">{{admin.pretty(dept)}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div ng-show="admin.showEmpDepts" class="access row edit-access">
+      <div class="add-access-container">
+        <div ng-repeat="dept in admin.empDepts" class="text-left">
+          <input ng-model="admin[dept]" ng-init="admin[dept]=false" ng-change="admin.updateUsersAccesses(dept)" type="checkbox" />
+          <label for="dept">{{admin.pretty(dept)}}</label>
+        </div>
+      </div>
+    </div>
+    <div class="row submit-button-position">
+      <button class="submit-button" ng-click="admin.submitChanges()">Submit</button>
+    </div>
+  </div>
+
+
+</div>
     <!--dynamicly created list of users and there access-->
-    <div ng-repeat="user in admin.allUserAccess" ng-init="admin.showUserAccess[$index]= false">
+    <!-- <div ng-repeat="user in admin.allUserAccess" ng-init="admin.showUserAccess[$index]= false">-->
       <!--accordion made dynamicly button-->
-      <button ng-init="admin.plus[$index]=true; admin.minus[$index]=false"
+      <!-- <button ng-init="admin.plus[$index]=true; admin.minus[$index]=false"
       ng-click="admin.truthiness($index)" class="btn btn-default btn-block btn-small" >
+
       {{user.first_name}} {{user.last_name}}<span ng-show="admin.plus[$index]" class ="glyphicon glyphicon-plus pull-right"></span>
       <span ng-show="admin.minus[$index]" class ="glyphicon glyphicon-minus pull-right"></span></button>
 
-
       <div class="text-left" ng-show="admin.showUserAccess[$index]" >
-        <label ng-repeat="(key,val) in user" ng-if="$index == 2" class="checkbox-inline">
+        <label ng-repeat="(key,val) in user" ng-if="$index == 4" class="checkbox-inline">
           <input type="checkbox" ng-model="val" ng-change="admin.updateUsersAccesses(user.email, key, val); admin.checkboxesTruthiness($index);" ng-checked="val" >
           {{admin.pretty(key)}}
         </label>
         <span ng-show="admin.showCheckboxes[$index]" ng-init="admin.showCheckboxes[$index]= !user.admin">
-          <label ng-repeat="(key,val) in user" ng-if="$index >= 3" class="checkbox-inline">
+          <label ng-repeat="(key,val) in user" ng-if="$index >= 5" class="checkbox-inline">
             <input type="checkbox" ng-model="val" ng-change="admin.updateUsersAccesses(user.email, key, val)" ng-checked="val" >
             {{admin.pretty(key)}}
           </label>
         </span>
       </div>
-    </div>
+  </div> -->
     <button ng-click="admin.addEmployeeTruthiness()" class="btn btn-success btn-block btn-lg acordionButton"
     ng-init="admin.showAddEmployee = false; admin.empPlus = true">Add Employee
     <span ng-show="admin.empPlus" class="glyphicon glyphicon-plus pull-right"></span>
@@ -128,7 +175,6 @@
     </div>
   </div>
 </div>
-
 <!--modal-->
 <div id="adminModal" class="modal">
 

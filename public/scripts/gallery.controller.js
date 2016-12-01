@@ -47,7 +47,13 @@ function GalleryController(AuthFactory, SubmissionsService, AccessService, Image
       ctrl.deptImages = response;
     });
   };
-
+  ctrl.disabled = function(dept) {
+    if(dept == 0) {
+      return 'disabled';
+    } else {
+      return '';
+    }
+  }
 
   //empty arrays to hold the data based on the status
   ctrl.revision = [];
@@ -60,10 +66,12 @@ function GalleryController(AuthFactory, SubmissionsService, AccessService, Image
     if (dept == 0) {
       console.log('Not a user Dept');
       ctrl.disableButtons = true;
+      ctrl.disabled(false);
     } else {
       console.log('User Dept');
       ctrl.disableButtons = false;
     }
+    ctrl.disabled(dept);
     var dept_id = AccessService.departmentIds[name];
     //reset value on click
     ctrl.revision = [];
@@ -93,6 +101,7 @@ function GalleryController(AuthFactory, SubmissionsService, AccessService, Image
   //function to attack image clicked url to the ImageService so the photoedit gets it
   ctrl.sendThisImage = function (image) {
     ImageService.image = image;
+    window.image = image;
     console.log('did we get the image clicked', ImageService.image);
   }
 
