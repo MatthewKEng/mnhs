@@ -18,7 +18,7 @@ function AccessService ($http) {
       }, function errorCallback(response) {
         console.log('Error in Call back');
       });
-  };//end of get
+  };
 
   // do PUT request to SQL DB to update an entry
   access.updateAccess = function (accessObj) {
@@ -33,7 +33,7 @@ function AccessService ($http) {
       }, function errorCallback(response) {
         console.log('Error in Call back');
       });
-  };//end of put
+  };
 
   // do put request to SQL DB to update all users
   access.updateAdminAccess = function (accessObj) {
@@ -47,7 +47,7 @@ function AccessService ($http) {
       }, function errorCallback(response) {
         console.log('Error in Call back');
       });
-  };//end of put
+  };
 
   access.storeUserAccess = function(user) {
     access.getDepartmentIds();

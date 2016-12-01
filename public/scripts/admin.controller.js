@@ -32,6 +32,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     admin.pendingGalleryDisplay = false;
     admin.approvedGalleryDisplay = false;
     admin.revisionGalleryDisplay = false;
+    admin.show
   };
   //function to display brands
   admin.showBrands = function () {
@@ -127,25 +128,25 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   //     }
   //   }
   // }
-  // //function to show or hide add employee
-  // admin.addEmployeeTruthiness = function () {
-  //   //for loop that makes everything false if button is clicked
-  //   for (var i = 0; i < admin.allUserAccess.length; i++) {
-  //     admin.showUserAccess[i] = false;
-  //     admin.plus[i] = true;
-  //     admin.minus[i] = false;
-  //     }
-  //   // if else stament to set the boolean value of admin.showAddEmployee for ngShow
-  //   if (admin.showAddEmployee == false) {
-  //       admin.showAddEmployee = true;
-  //       admin.empPlus = false;
-  //       //console.log('whats the plus truth ',admin.empPlus);
-  //   }else{
-  //       admin.showAddEmployee = false;
-  //       admin.empPlus = true;
-  //       //console.log('whats the minus truth ',admin.empPlus);
-  //   }
-  // }
+  //function to show or hide add employee
+  admin.addEmployeeTruthiness = function () {
+    //for loop that makes everything false if button is clicked
+    // for (var i = 0; i < admin.allUserAccess.length; i++) {
+    //   admin.showUserAccess[i] = false;
+    //   admin.plus[i] = true;
+    //   admin.minus[i] = false;
+    //   }
+    // if else stament to set the boolean value of admin.showAddEmployee for ngShow
+    if (admin.showAddEmployee == false) {
+        admin.showAddEmployee = true;
+        admin.empPlus = false;
+        //console.log('whats the plus truth ',admin.empPlus);
+    }else{
+        admin.showAddEmployee = false;
+        admin.empPlus = true;
+        //console.log('whats the minus truth ',admin.empPlus);
+    }
+  }
 
 //   //apply correct checkbox truthiness value for if it shows for ng-show
 //
@@ -238,6 +239,8 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
       if (admin.emp != undefined) {
         admin.showUser(admin.emp.id);
         admin.clearDepts();
+        admin.showEmpDepts = false;
+        admin.showNotEmpDepts = false;
       }
       console.log('whats the access response', admin.allUserAccess);
     });
@@ -252,18 +255,6 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     admin.changeDepts = [];
   };
 
-  //update user access
-  // admin.updateUsersAccesses = function (user, site, val) {
-  //   var accessObj = {
-  //     email: admin.emp.email,
-  //     departments: admin.changeDepts,
-  //     accessBoolean: admin.showEmpDepts,
-  //   };
-  //   AccessService.updateAccess(accessObj).then(function(response){
-  //     // console.log('whats the update access response', response);
-  //     //admin.getUsersAccesses();
-  //   });
-  // };
   // Update admin.changeDepts array to show what depts will be changed
   admin.updateUsersAccesses = function (dept) {
     var repeat = false;
