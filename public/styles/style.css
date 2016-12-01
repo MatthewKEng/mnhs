@@ -136,6 +136,7 @@ background-color: #eeb111;
 .navbar:before {
   content:none !important;
 }
+
 .navbar:after {
   content:none !important;
 }
@@ -150,14 +151,16 @@ background-color: #eeb111;
   padding: 0;
   margin: 0;
   border-radius: 0;
-  display: flex;
-  justify-content: space-between;
+  /*display: flex;
+  justify-content: space-between;*/
  }
 
 
 .navRow {
+  margin-top: 30px;
   margin-right: 25px;
-  flex-direction: row;
+  /*flex-direction: row;
+  justify-content: space-between;*/
 
 }
  /*side admin menu bar*/
@@ -177,7 +180,12 @@ background-color: #eeb111;
   margin-top: 10px;
   margin-bottom: 10px;
 }
-
+#not:before {
+  content:none !important;
+}
+#not:after {
+  content:none !important;
+}
 #not{
   overflow: scroll;
 }
