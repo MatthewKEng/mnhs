@@ -69,16 +69,14 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   };
   // display the access information for the currently selected user.
   admin.showUser = function (id) {
+    // For loop determines which employee is selected
     for (i = 0; i < admin.allUserAccess.length; i++) {
       if (admin.allUserAccess[i].id == id) {
-        // admin.showUserAccess[i] = true;
         admin.emp = admin.allUserAccess[i];
       }
-      //else {
-      //   admin.showUserAccess[i] = false;
-      // }
     }
-    console.log('emp name ' + admin.emp.first_name + ' ' + admin.emp.last_name + ' user.id ' + id);
+    admin.showEmpDepts = false;
+    admin.showNotEmpDepts = false;
     admin.empDepts = [];
     admin.notEmpDepts = [];
     admin.admin = false;
@@ -96,13 +94,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
         }
       }
     }
-    // for (i = 0; i < admin.allUserAccess.length; i++) {
-    //   if (i == index) {
-    //     admin.showUserAccess[i] = !admin.showUserAccess[i];
-    //   } else {
-    //     admin.showUserAccess[i] = false;
-    //   }
-    // }
+
   };
   // //function for truthy value for access accordion
   // admin.truthiness = function (index) {
@@ -217,8 +209,8 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
       console.log('No departments selected');
       return;
     }
-    console.log(admin.emp + ' ' + admin.emp.id);
-    console.log(admin.changeDepts);
+    // console.log(admin.emp + ' ' + admin.emp.id);
+    // console.log(admin.changeDepts);
     var accessObj = {
       id: admin.emp.id,
       departments: admin.changeDepts,
@@ -226,7 +218,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     };
     AccessService.updateAccess(accessObj).then(function(response){
       if (response == 'OK') {
-        console.log('whats the update access response', response);
+        // console.log('whats the update access response', response);
         admin.getUsersAccesses();
       }
     });
@@ -242,7 +234,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
         admin.showEmpDepts = false;
         admin.showNotEmpDepts = false;
       }
-      console.log('whats the access response', admin.allUserAccess);
+      // console.log('whats the access response', admin.allUserAccess);
     });
   };
 
@@ -267,7 +259,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     if (repeat == false) {
       admin.changeDepts.push(dept);
     }
-    console.log(admin.changeDepts);
+    // console.log(admin.changeDepts);
   };
 
 
@@ -277,7 +269,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     admin.firstName;
     admin.lastName;
     admin.newUser;
-    console.log('newUser ', admin.newUser);
+    // console.log('newUser ', admin.newUser);
     $http.post('/access', {
       first_name: admin.firstName,
       last_name: admin.lastName,
@@ -293,9 +285,9 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   //add a new department
   admin.addDepartment = function() {
     admin.newDepartment;
-    console.log('department', admin.newDepartment);
+    // console.log('department', admin.newDepartment);
     admin.newDepartment = admin.newDepartment.replace(/ /g, '_').toLowerCase();
-    console.log('create space');
+    // console.log('create space');
     $http.post('/access/departments', {
       department: admin.newDepartment
     }).then(function(){

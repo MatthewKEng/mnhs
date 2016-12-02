@@ -429,3 +429,10 @@ h1 {
   background: darkgray;
   text-decoration: underline;
 }
+.welcome {
+  color: white;
+  text-transform: capitalize;
+  position: absolute;
+  bottom: -25px;
+  left: 20%;
+}

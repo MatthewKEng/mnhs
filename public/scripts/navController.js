@@ -17,10 +17,10 @@ angular.module('BrandImageManagerApp')
           nav.displayLogout = true;
           authFactory.setLoggedIn(true);
           nav.username = response.data.name;
-          console.log('username', nav.username);
+          // console.log('username', nav.username);
           nav.user = response.data.user;
           AccessService.getDepartmentIds();
-          console.log('nav.user is', nav.user);
+          // console.log('nav.user is', nav.user);
           AccessService.storeUserAccess(nav.user);
       } else { // is not logged in on server
           nav.displayLogout = false;
@@ -48,6 +48,11 @@ angular.module('BrandImageManagerApp')
         nav.message.text = 'Unable to logout';
         nav.message.type = 'error';
       });
+  };
+
+  nav.pretty = function (name) {
+    var prettyUserDept = name.toLowerCase();
+    return prettyUserDept;
   };
 
 });

@@ -32,8 +32,8 @@ function GalleryController(AuthFactory, SubmissionsService, AccessService, Image
     ctrl.userDepts = AccessService.userDepts.sort();
     ctrl.notUserDepts = AccessService.notUserDepts.sort();
   }
-  console.log('what is this userDepts', ctrl.userDepts);
-  console.log('what is this notUserDepts', ctrl.notUserDepts);
+  // console.log('what is this userDepts', ctrl.userDepts);
+  // console.log('what is this notUserDepts', ctrl.notUserDepts);
 
 
 

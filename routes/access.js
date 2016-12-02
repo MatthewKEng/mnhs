@@ -142,7 +142,7 @@ router.put('/', function (req, res, next) {
     }
   }
   statement = statement + ' WHERE id=' + id;
-  console.log('STATEMENT: ', statement);
+  // console.log('STATEMENT: ', statement);
 
   pool.connect(function (err, client, done) {
     try {
