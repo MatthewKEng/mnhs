@@ -27,13 +27,16 @@ var uploads3 = multer({
     // file later on.  This is optional, but helpful.
     acl: 'public-read',
     metadata: function (req, file, cb) {
-      cb(null, {fieldName: file.fieldname});
+      cb(null, {
+        fieldName: file.fieldname,
+      });
     },
+    contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function (req, file, cb) {
       // creates a name for the file with the file extention
       // New name will be stored in req.file.key;
       // cb(null, 'small');
-      cb(null, Date.now().toString());
+      cb(null, Date.now().toString()+ path.extname(file.originalname));
     },
   }),
 });

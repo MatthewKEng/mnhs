@@ -395,7 +395,8 @@ h1 {
   padding-right: 20px;
   width: 140px;
 }
-.show-access-button:hover, .show-access-title:hover {
+.show-access-button:hover, .show-access-title:hover,
+.show-access-button:hover > span{
   color: white;
   background: darkgray;
 }
@@ -453,4 +454,12 @@ h1 {
 }
 .form-inline {
   margin-top: 20px;
+}
+.make-selection {
+  position: absolute;
+  right: 0;
+  padding: 0;
+}
+.show-access-button > span {
+  color: black;
 }
