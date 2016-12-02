@@ -1,7 +1,7 @@
 angular.module('BrandImageManagerApp')
   .controller('GalleryController', GalleryController);
 
-function GalleryController($http, AuthFactory, SubmissionsService, AccessService, ImageService, ImageTableService, Upload, $timeout) {
+function GalleryController($http, BrandTableService, AuthFactory, SubmissionsService, AccessService, ImageService, ImageTableService, Upload, $timeout) {
 
 
 
@@ -175,7 +175,7 @@ function GalleryController($http, AuthFactory, SubmissionsService, AccessService
       $timeout(function() {
         ctrl.success = false;
       }, 2500);
-      
+
     });
   };
 }
