@@ -1,7 +1,7 @@
 angular.module('BrandImageManagerApp')
   .controller('GalleryController', GalleryController);
 
-function GalleryController($http, AuthFactory, SubmissionsService, AccessService, ImageService, ImageTableService, Upload, $timeout) {
+function GalleryController($http, BrandTableService, AuthFactory, SubmissionsService, AccessService, ImageService, ImageTableService, Upload, $timeout) {
 
 
 
@@ -127,15 +127,15 @@ function GalleryController($http, AuthFactory, SubmissionsService, AccessService
 
 
   //function to attack image clicked url to the ImageService so the photoedit gets it
-  ctrl.sendThisImage = function (image) {
+  // ctrl.sendThisImage = function (image) {
 
-  //function to attach image clicked url to the ImageService so the photoedit gets it
-  // ctrl.sendThisImage = function (image, department_id) {
-  //   //function to get brand based on department_id and assign it to the ImageService.brand
-  //   BrandTableService.getBrand(department_id).then(function(response){
-  //       console.log('whats the brand url response', response[0].url_brand);
-  //       ImageService.brand = response[0].url_brand;
-  //     });
+  // function to attach image clicked url to the ImageService so the photoedit gets it
+  ctrl.sendThisImage = function (image, department_id) {
+    //function to get brand based on department_id and assign it to the ImageService.brand
+    BrandTableService.getBrand(department_id).then(function(response){
+        console.log('whats the brand url response', response[0].url_brand);
+        ImageService.brand = response[0].url_brand;
+      });
 
     ImageService.image = image;
     window.image = image;
@@ -175,6 +175,7 @@ function GalleryController($http, AuthFactory, SubmissionsService, AccessService
       $timeout(function() {
         ctrl.success = false;
       }, 2500);
+
     });
   };
 }
