@@ -130,14 +130,16 @@ function GalleryController($http, $location, BrandTableService, AuthFactory, Sub
 
   // function to attach image clicked url to the ImageService so the photoedit gets it
   ctrl.sendThisImage = function (image, department_id) {
+    ImageService.image = image;
+    console.log('did we get the image clicked', ImageService.image);
     console.log('whats the department_id', department_id);
     //function to get brand based on department_id and assign it to the ImageService.brand
     BrandTableService.getBrand(department_id).then(function(response){
-        console.log('whats the brand url response', response[0].url_brand);
+        //console.log('whats the brand url response', response[0].url_brand);
         ImageService.brand = response[0].url_brand;
+        console.log('whats the brand url', ImageService.brand);
+        $location.path('/photoedit');
       });
-    ImageService.image = image;
-    console.log('did we get the image clicked', ImageService.image);
   }
 
 //delete function for image in gallery page
