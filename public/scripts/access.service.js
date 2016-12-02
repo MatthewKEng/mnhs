@@ -55,7 +55,7 @@ function AccessService ($http) {
    access.userDepts = [];
    access.notUserDepts = [];
    for (key in user) {
-     if (user[key] == 'admin') {
+     if (key == 'admin' && user[key] == true) {
        access.admin = true;
      }
      if (user[key] === true && key != 'admin') {
@@ -66,7 +66,6 @@ function AccessService ($http) {
    }
    console.log(user);
    console.log('admin privilege ', user.admin);
-   console.log(access.userDepts);
  };
 
  // A check to see if User Departments runs correctly.

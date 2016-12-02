@@ -10,7 +10,7 @@ angular.module('BrandImageManagerApp')
       type: 'info',
   };
 
-  
+
   authFactory.isLoggedIn()
     .then(function(response) {
       if (response.data.status) {
@@ -26,6 +26,7 @@ angular.module('BrandImageManagerApp')
           nav.displayLogout = false;
           authFactory.setLoggedIn(false);
       }
+      nav.admin = AccessService.admin;
   },
 
   function() {

@@ -23,9 +23,19 @@ function GalleryController(AuthFactory, SubmissionsService, AccessService, Image
     modal.style.display = "none";
   }
   // Store current user's access by department
-  ctrl.userDepts = AccessService.userDepts;
+  ctrl.admin = AccessService.admin;
+  // If user is an admin, all departments should fall in userDepts
+  if (ctrl.admin) {
+    ctrl.userDepts = AccessService.userDepts.concat(AccessService.notUserDepts).sort();
+    ctrl.notUserDepts = [];
+  } else {
+    ctrl.userDepts = AccessService.userDepts.sort();
+    ctrl.notUserDepts = AccessService.notUserDepts.sort();
+  }
   console.log('what is this userDepts', ctrl.userDepts);
-  ctrl.notUserDepts = AccessService.notUserDepts;
+  console.log('what is this notUserDepts', ctrl.notUserDepts);
+
+
 
   authFactory.isLoggedIn()
     .then(function(response) {
