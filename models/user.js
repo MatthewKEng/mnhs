@@ -49,9 +49,6 @@ function findById(id) {
 }
 
 
-
-
-
 function updateTokens(googleID, googleEmail, googleName, accessToken, refreshToken){
     return new Promise(function(resolve, reject){
     pool.connect(function(err, client, done){
@@ -75,33 +72,33 @@ function updateTokens(googleID, googleEmail, googleName, accessToken, refreshTok
 
 
 // create
-function create(googleID, googleEmail, googleName, accessToken, refreshToken) {
-    console.log('googleID create in database')
-  return new Promise(function(resolve, reject){
-
-      pool.connect(function(err, client, done){
-        if (err) {
-          done();
-          return reject(err);
-        }
-
-        client.query('INSERT INTO users (googleid, accesstoken, refreshtoken, email, google_name) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-                     [googleID, accessToken, refreshToken, googleEmail, googleName],
-                     function(err, result){
-                       done();
-                       if (err) {
-                         return reject(err);
-                       }
-                       resolve(result.rows[0]);
-                     });
-      });
-
-  });
-}
+// function create(googleID, googleEmail, googleName, accessToken, refreshToken) {
+//     console.log('googleID create in database')
+//   return new Promise(function(resolve, reject){
+//
+//       pool.connect(function(err, client, done){
+//         if (err) {
+//           done();
+//           return reject(err);
+//         }
+//
+//         client.query('INSERT INTO users (googleid, accesstoken, refreshtoken, email, google_name) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+//                      [googleID, accessToken, refreshToken, googleEmail, googleName],
+//                      function(err, result){
+//                        done();
+//                        if (err) {
+//                          return reject(err);
+//                        }
+//                        resolve(result.rows[0]);
+//                      });
+//       });
+//
+//   });
+// }
 
 module.exports = {
   findById: findById,
   findByEmail: findByEmail,
-  create: create,
+  // create: create,
   updateTokens:updateTokens
 };

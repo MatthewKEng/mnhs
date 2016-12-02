@@ -239,6 +239,7 @@ h1 {
   overflow: hidden;
   position: relative;
   border: 1px solid black;
+  margin-top: 10px;
 }
 .preview {
   padding-top: 0;
@@ -321,7 +322,7 @@ h1 {
 #file-input {
   background: linear-gradient(#444, white);
   color: #263238;
-  padding: 7px;
+  padding-top: 10px;
   font-weight: normal;
 }
 #file-label:hover {
@@ -435,4 +436,10 @@ h1 {
   position: absolute;
   bottom: -25px;
   left: 20%;
+}
+.newDepartment {
+  margin: 20px;
+}
+.removeDepartment {
+  margin:20px;
 }

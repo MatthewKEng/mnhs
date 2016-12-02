@@ -108,6 +108,8 @@ router.post('/', function(req, res) {
 
 //to add a column to users DB of department
 router.post('/users', function(req, res) {
+  console.log('query ', req.query);
+  console.log('body ', req.body);
   pool.connect(function(error, client, done) {
     if (error) {
       done();
@@ -117,7 +119,7 @@ router.post('/users', function(req, res) {
     function(error, result) {
       if (error) {
         done();
-        next(error);
+        // next(error);
       }
       //console.log('whats the access route rows data',result.rows);
       res.sendStatus(201);

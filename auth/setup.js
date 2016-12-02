@@ -12,7 +12,7 @@ exports.setup = function () {
     clientID: '635146343171-m726t7cjr75thvph68au09l2upao1tjk.apps.googleusercontent.com',
     clientSecret: 'E3mabZbBKqq4ETbNjvJUyn7_',
     callbackURL: 'http://localhost:3000/auth/google/callback',
-    // callbackURL: 'https://YOUR_AUTH0_DOMAIN/v2/logout', = to force logout,redirect user to the following URL:
+    // callbackURL: 'https://localhost:3000/v2/logout', //= to force logout,redirect user to the following URL:
   },
 
 
@@ -62,10 +62,13 @@ function findOrCreate(googleID, googleEmail, googleName, accessToken, refreshTok
 
       if (!user) {
         // console.log('inside!user');
-        User.create(googleID, googleEmail, googleName, accessToken, refreshToken).then(function (user) {
+        //User.create(googleID, googleEmail, googleName, accessToken, refreshToken).then(function (user) {
           // console.log('create user', user);
+
           return done(null, user);
-        });
+        // });
       };
+    }).catch(function (err) {
+      done(err);
     });
   }

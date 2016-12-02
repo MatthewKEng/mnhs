@@ -170,13 +170,13 @@
         <input class="upload-brand-button" type="submit" ng-click="admin.uploadBrand(uploadBrandForm)" value="Upload Image" />
       </form>
       <input type="text" ng-model="admin.newDepartment"/>
-      <button ng-click="admin.addDepartment()">Add Department</button>
+      <button ng-click="admin.addDepartment()" class="newDepartment">Add Department</button>
 
       <select ng-model="admin.remove.deptId" required>
         <option value="" selected disabled>Select...</option>
         <option ng-repeat="name in admin.deptNames" ng-value="name.id">{{admin.prettyDeptName(name.department)}}</option>
       </select>
-      <button ng-click="admin.deleteDepartment()">Delete Department</button>
+      <button ng-click="admin.deleteDepartment()" class="removeDepartment">Delete Department</button>
     </div>
   </div>
 </div>
