@@ -14,8 +14,8 @@
                 <!-- <img ng-src="https://img.buzzfeed.com/buzzfeed-static/static/enhanced/web04/2012/1/20/14/enhanced-buzz-21522-1327089192-28.jpg" id="hedgehog" style="background-color: green; display: none" alt="Description" /> -->
 
 <br />
-<div class="withinTheCanvas" style="width: 500px; position: absolute; left: 70%;">
-                <p id="buttonHtml" style="width: 400px; overflow: auto" contenteditable="true">BECOME A MEMBER OF THE MINNESOTA HISTORICAL SOCIETY AND GET THE BEST DEAL IN HISTORY, INCLUDING FREE REGULAR ADMISSION ALL YEAR LONG.</p>
+<div class="withinTheCanvas" style="width: 368px; position: absolute; left: 70%;">
+                <p id="buttonHtml" style="width: 368px; overflow: auto" contenteditable="true">BECOME A MEMBER OF THE MINNESOTA HISTORICAL SOCIETY AND GET THE BEST DEAL IN HISTORY, INCLUDING FREE REGULAR ADMISSION ALL YEAR LONG.</p>
                 <button type="button" id="theButton">Change Text</button>
 <br />
                 <!-- <a id="Left" style="font-size: 36px">Opaque Left</a>
@@ -26,7 +26,7 @@
                 <a id="fitRight" style="font-size: 36px">Right Fit</a>
                 <a id="fitBottom" style="font-size: 36px">Bottom Fit</a>
 <hr /> -->
-                <a ng-click="photo.downloadCanvas()" id="downloadButton" style="font-size: 36px">Upload to S3</a>
+                <a ng-click="photo.downloadCanvas()" id="downloadButton" style="font-size: 36px">Upload to Amazon Database</a>
 
 <br />
 <form class="theForm">
@@ -47,8 +47,19 @@
                 <br />
                 <a id="updateTextFitLeft">Update the Left Fit Text</a>
                 <p id="textHtmlLeft" style="display: none"></p>
+<br />
+                <a id="updateTextRight">Update Opaque Right Text</a>
+                <br />
+                <a id="updateTextFitRight">Update the Right Fit Text</a>
+                <p id="textHtmlRight" style="display: none"></p>
+                <br />
 
 
+                <!-- <a id="addTextBottom" style="font-size: 36px">ADD TEXT BOTTOM</a> -->
+                <a id="updateTextBottom">Update the Opaque Bottom Text</a>
+                <br />
+                <a id="updateTextFitBottom">Update the Bottom Fit Text</a>
+                <p id="textHtmlBottom" style="display: none"></p>
 
 <br />
 
@@ -57,18 +68,7 @@
 
 
                 <!-- <a id="addTextRight" style="font-size: 36px">ADD TEXT RIGHT</a> -->
-                <a id="updateTextRight">Update Opaque Right Text</a>
-                <br />
-                <a id="updateTextFitRight">Update the Right Fit Text</a>
-                <p id="textHtmlRight" style="display: none"></p>
-<br />
 
-
-                <!-- <a id="addTextBottom" style="font-size: 36px">ADD TEXT BOTTOM</a> -->
-                <a id="updateTextBottom">Update the Opaque Bottom Text</a>
-                <br />
-                <a id="updateTextFitBottom">Update the Bottom Fit Text</a>
-                <p id="textHtmlBottom" style="display: none"></p>
 
 
 
