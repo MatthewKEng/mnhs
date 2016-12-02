@@ -1,8 +1,7 @@
 angular.module('BrandImageManagerApp')
   .controller('GalleryController', GalleryController);
 
-function GalleryController($http, BrandTableService, AuthFactory, SubmissionsService, AccessService, ImageService, ImageTableService, Upload, $timeout) {
-
+function GalleryController($http, $location, BrandTableService, AuthFactory, SubmissionsService, AccessService, ImageService, ImageTableService, Upload, $timeout) {
 
 
   var authFactory = AuthFactory;
@@ -53,6 +52,10 @@ function GalleryController($http, BrandTableService, AuthFactory, SubmissionsSer
         ctrl.displayLogout = true;
         authFactory.setLoggedIn(true);
         ctrl.username = response.data.name;
+        console.log('whats the auth data', response.data.user.admin);
+        if (response.data.user.admin == true) {
+          $location.path('/admin');
+        }
       } else { // is not logged in on server
         ctrl.displayLogout = false;
         authFactory.setLoggedIn(false);
