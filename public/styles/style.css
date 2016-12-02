@@ -236,6 +236,7 @@ background-color: #eeb111;
   overflow: hidden;
   position: relative;
   border: 1px solid black;
+  margin-top: 10px;
 }
 .preview {
   padding-top: 0;
@@ -318,7 +319,7 @@ background-color: #eeb111;
 #file-input {
   background: linear-gradient(#444, white);
   color: #263238;
-  padding: 7px;
+  padding-top: 10px;
   font-weight: normal;
 }
 #file-label:hover {
@@ -425,4 +426,11 @@ background-color: #eeb111;
   color: white;
   background: darkgray;
   text-decoration: underline;
+}
+.newDepartment {
+  margin: 20px;
+}
+
+.removeDepartment {
+  margin:20px;
 }

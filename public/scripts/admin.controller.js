@@ -352,12 +352,12 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
 //delete function for departments table
 admin.deleteDepartment = function (){
   var id = admin.remove.deptId;
-  console.log('pending', admin.remove.deptId);
+  console.log('pending', id); //admin.html line 176 ng-value, will target id with name.id, will target name with name.name
   $http.delete('/access/'+id, {
   }).then(function(){
     // admin.uploadBrand(); unable to refresh
     admin.remove.deptId = "";
-    admin.deleteEachDepartment();
+    // admin.deleteEachDepartment();
     admin.getSubmissions();
   })
 }
@@ -365,6 +365,7 @@ admin.deleteDepartment = function (){
 //delete function for each department in users table
 admin.deleteEachDepartment = function(){
   var id = admin.deptId;
+  console.log('id in 2nd delete ', id);
   $http.delete('/access/users', {
     // department: admin.newDepartment
   }).then(function(){
