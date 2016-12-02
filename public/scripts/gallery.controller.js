@@ -125,10 +125,6 @@ function GalleryController($http, BrandTableService, AuthFactory, SubmissionsSer
     });
   }
 
-
-  //function to attack image clicked url to the ImageService so the photoedit gets it
-  // ctrl.sendThisImage = function (image) {
-
   // function to attach image clicked url to the ImageService so the photoedit gets it
   ctrl.sendThisImage = function (image, department_id) {
     //function to get brand based on department_id and assign it to the ImageService.brand
@@ -136,9 +132,7 @@ function GalleryController($http, BrandTableService, AuthFactory, SubmissionsSer
         console.log('whats the brand url response', response[0].url_brand);
         ImageService.brand = response[0].url_brand;
       });
-
     ImageService.image = image;
-    window.image = image;
     console.log('did we get the image clicked', ImageService.image);
   }
 
