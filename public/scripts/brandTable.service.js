@@ -1,5 +1,5 @@
 angular.module('BrandImageManagerApp')
-.service('BrandTableService', BrandTableService);
+  .service('BrandTableService', BrandTableService);
 
 function BrandTableService ($http) {
   var brand = this;

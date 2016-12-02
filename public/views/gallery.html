@@ -12,7 +12,7 @@
   <div class="row col-xs-3 overflow">
     <div class="row addContainer">
       <h4><u>Image Selection</u></h4>
-      <h1 class="addPhoto glyphicon glyphicon-upload" ng-click="gallery.modalImage=image.url_image; gallery.viewButton()"></h1>
+      <h1 ng-hide="gallery.disableButtons || gallery.currentDeptName==undefined" class="addPhoto glyphicon glyphicon-upload" ng-click="gallery.modalImage=image.url_image; gallery.viewButton()"></h1>
     </div>
     <div class="row gallery-display" ng-repeat="image in gallery.deptImages">
       <a ng-class="gallery.disabled()"href="/photoedit"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image.url_image, image.department_id)" ng-src="{{image.url_image}}" /></a>
