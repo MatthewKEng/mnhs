@@ -51,6 +51,9 @@ angular.module('BrandImageManagerApp')
   };
 
   nav.pretty = function (name) {
+    if (name == undefined) {
+      return;
+    }
     var prettyUserDept = name.toLowerCase();
     return prettyUserDept;
   };
