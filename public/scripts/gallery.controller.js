@@ -53,9 +53,9 @@ function GalleryController($http, $location, BrandTableService, AuthFactory, Sub
         authFactory.setLoggedIn(true);
         ctrl.username = response.data.name;
         console.log('whats the auth data', response.data.user.admin);
-        if (response.data.user.admin == true) {
-          $location.path('/admin');
-        }
+        // if (response.data.user.admin == true) {
+        //   $location.path('/admin');
+        // }
       } else { // is not logged in on server
         ctrl.displayLogout = false;
         authFactory.setLoggedIn(false);
@@ -130,6 +130,7 @@ function GalleryController($http, $location, BrandTableService, AuthFactory, Sub
 
   // function to attach image clicked url to the ImageService so the photoedit gets it
   ctrl.sendThisImage = function (image, department_id) {
+    console.log('whats the department_id', department_id);
     //function to get brand based on department_id and assign it to the ImageService.brand
     BrandTableService.getBrand(department_id).then(function(response){
         console.log('whats the brand url response', response[0].url_brand);
