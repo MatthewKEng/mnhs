@@ -10,6 +10,7 @@ body {
 h1 {
   margin-top: 0%;
   padding-top: .4444444444rem;
+<<<<<<< HEAD
   padding-bottom: .4444444444rem;
   line-height: 1.125;
   font-size: 3.1666666667rem;
@@ -18,10 +19,19 @@ h1 {
   display: block;
   text-align: center;
   background-color: #eeb111;
+=======
+padding-bottom: .4444444444rem;
+line-height: 1.125;
+font-size: 3.1666666667rem;
+font-weight: 600;
+font-family: helvetica;
+display: block;
+text-align: center;
+background-color: #eeb111;
+>>>>>>> 9550d8a428428ddf754fc0e45e08f82100b31cab
 }
-
 .sideButton {
-  background-color: #006600;
+  background-color: #323e48;
   color: white;
   outline: none;
   /*border: none;*/
@@ -73,10 +83,17 @@ h1 {
   width:50%;
   height: auto;
   margin-right: -13%;
+<<<<<<< HEAD
   padding-left: 5%;
   margin-top: -30%;
   margin-left: -14%;
   padding-right: -8%;
+=======
+ padding-left: 5%;
+ margin-top: -30%;
+ margin-left: -14%;
+ padding-right: -8%;
+>>>>>>> 9550d8a428428ddf754fc0e45e08f82100b31cab
 }
 #middle img {
   align-items: center;
@@ -85,9 +102,15 @@ h1 {
   float: center;
   padding-top: -8%;
   width:50%;
+<<<<<<< HEAD
   height: auto;
   padding-right: 5%;
   margin-left: -10%;
+=======
+ height: auto;
+ padding-right: 5%;
+ margin-left: -10%;
+>>>>>>> 9550d8a428428ddf754fc0e45e08f82100b31cab
 }
 /*.hero_tall {
   padding-top: 12vh;
@@ -99,7 +122,6 @@ h1 {
   display: flex;
   color: white;
   flex-direction: column;
-
 }*/
 /*.home .hero {
     text-align: center;
@@ -112,13 +134,7 @@ h1 {
   width: 100vw;
   height: 47vh;
 }
-/*takes out empty content to left and right of navbar*/
-.navbar:before {
-  content:none !important;
-}
-.navbar:after {
-  content:none !important;
-}
+
 /*top navbar */
 .navbar {
   border-bottom: 1px solid #323e48;
@@ -130,12 +146,6 @@ h1 {
   padding: 0;
   margin: 0;
   border-radius: 0;
-  display: flex;
-  justify-content: space-between;
- }
-.navRow {
-  margin-right: 25px;
-  flex-direction: row;
 }
  /*side admin menu bar*/
 .sideMenu{
@@ -231,6 +241,10 @@ h1 {
 .modal-body {
   padding: 2px 16px;
 }
+<<<<<<< HEAD
+=======
+.modal-body {padding: 2px 16px;}
+>>>>>>> 9550d8a428428ddf754fc0e45e08f82100b31cab
 .modal-footer {
   padding: 2px 16px;
   background-color: #323e48;
@@ -314,12 +328,12 @@ h1 {
   text-align: center;
 }
 #file-input {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }
 .#file-input + label {
   font-size: 1.25em;
@@ -361,7 +375,6 @@ h1 {
   margin-top: 60px;
   font-size: 50px;
 }
-
 .overflow {
   overflow: scroll;
   height: 87vh;
