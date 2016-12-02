@@ -27,13 +27,16 @@ var uploads3 = multer({
     // file later on.  This is optional, but helpful.
     acl: 'public-read',
     metadata: function (req, file, cb) {
-      cb(null, {fieldName: file.fieldname});
+      cb(null, {
+        fieldName: file.fieldname,
+      });
     },
+    contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function (req, file, cb) {
       // creates a name for the file with the file extention
       // New name will be stored in req.file.key;
       // cb(null, 'small');
-      cb(null, Date.now().toString());
+      cb(null, Date.now().toString()+ path.extname(file.originalname));
     },
   }),
 });
@@ -69,14 +72,16 @@ router.post('/submissions', uploads3.single('file'), function (req, res) {
   // On success, send image to SQL DB to store URL.
   var url = 'https://s3.amazonaws.com/mnhs/' + req.file.key;
   var dep = req.body.deptId;
+  var user = req.body.userId;
+  var imageId = req.body.imageId;
   pool.connect(function (err, client, done) {
     try {
       if (err) {
         console.log('error connecting to DB', err);
-        res.sendStatus(500);
+        res.sendStatus(500)
       }
-      client.query('INSERT INTO submissions (saved_edit, department_id, user_id, image_id, brand_id) VALUES ($1, $2, $3, $4, $5);',
-                  [url, dep, 1, 1, 1],
+      client.query('INSERT INTO submissions (saved_edit, department_id, user_id, image_id, brand_id, status) VALUES ($1, $2, $3, $4, $5, $6);',
+                  [url, dep, user, imageId, 1, 'pending'],
             function (err) {
               if (err) {
                 console.log('Error inserting into db', err);

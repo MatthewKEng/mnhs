@@ -15,7 +15,7 @@
       <h1 ng-hide="gallery.disableButtons || gallery.currentDeptName==undefined" class="addPhoto glyphicon glyphicon-upload" ng-click="gallery.modalImage=image.url_image; gallery.viewButton()"></h1>
     </div>
     <div class="row gallery-display" ng-repeat="image in gallery.deptImages">
-      <a ng-class="gallery.disabled()"href="/photoedit"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image.url_image, image.department_id)" ng-src="{{image.url_image}}" /></a>
+      <a ng-class="gallery.disabled()"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image.url_image, image.department_id, image.id)" ng-src="{{image.url_image}}" /></a>
     </div>
   </div>
 
@@ -35,6 +35,10 @@
         <button  class="btn btn-danger" ng-click="gallery.deleteButton(image)">Delete</button>
       </div>
     </div>
+  </div>
+
+  <div class="col-xs-10 make-selection" ng-show="gallery.currentDeptName==undefined">
+    <h1>Select a department</h1>
   </div>
 </div>
 

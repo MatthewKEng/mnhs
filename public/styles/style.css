@@ -258,19 +258,19 @@ h1 {
 }
 @font-face {
   font-family: 'Gotham Black';
-  src: local('GothamBlack'), url(./fonts/GothamBlack/Gotham-Black.ttf);
+  src: local('GothamBlack'), url(./fonts/Gotham-Black.ttf);
 }
 @font-face {
   font-family: 'Gotham Book';
-  src: local('Gotham-Book'), url(./fonts/GothamBook/Gotham-Book.ttf);
+  src: local('Gotham-Book'), url(./fonts/Gotham-Book.ttf);
 }
 @font-face {
   font-family: 'Gotham Bold';
-  src: local('Gotham Bold'), url(./fonts/GothamBold/Gotham-Bold.ttf);
+  src: local('Gotham Bold'), url(./fonts/Gotham-Bold.ttf);
 }
 @font-face {
   font-family: 'Gotham Condensed Book';
-  src: local('GothamCondensed-Book'), url(fonts/GothamCondensedBook/GothamCondensed-Book.ttf);
+  src: local('GothamCondensed-Book'), url(fonts/GothamCondensed-Book.ttf);
 }
 #downloadButton {
   font-family: 'Gotham Condensed Book';
@@ -396,7 +396,8 @@ h1 {
   padding-right: 20px;
   width: 140px;
 }
-.show-access-button:hover, .show-access-title:hover {
+.show-access-button:hover, .show-access-title:hover,
+.show-access-button:hover > span{
   color: white;
   background: darkgray;
 }
@@ -468,4 +469,13 @@ h1 {
 
 .listedDepartment {
   padding: 5px;
+
+.make-selection {
+  position: absolute;
+  right: 0;
+  padding: 0;
+}
+.show-access-button > span {
+  color: black;
+
 }

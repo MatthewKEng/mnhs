@@ -3,5 +3,6 @@ angular.module('BrandImageManagerApp')
 
 function ImageService () {
          var src = '';
-         return{image:src, brand:src};
+         var brandSrc = '';
+         return{image:src, brand:brandSrc, deptId:src, imageId:src};
        }

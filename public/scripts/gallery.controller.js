@@ -1,8 +1,7 @@
 angular.module('BrandImageManagerApp')
   .controller('GalleryController', GalleryController);
 
-function GalleryController($http, BrandTableService, AuthFactory, SubmissionsService, AccessService, ImageService, ImageTableService, Upload, $timeout) {
-
+function GalleryController($http, $location, BrandTableService, AuthFactory, SubmissionsService, AccessService, ImageService, ImageTableService, Upload, $timeout) {
 
 
   var authFactory = AuthFactory;
@@ -53,6 +52,10 @@ function GalleryController($http, BrandTableService, AuthFactory, SubmissionsSer
         ctrl.displayLogout = true;
         authFactory.setLoggedIn(true);
         ctrl.username = response.data.name;
+        console.log('whats the auth data', response.data.user.admin);
+        // if (response.data.user.admin == true) {
+        //   $location.path('/admin');
+        // }
       } else { // is not logged in on server
         ctrl.displayLogout = false;
         authFactory.setLoggedIn(false);
@@ -126,14 +129,19 @@ function GalleryController($http, BrandTableService, AuthFactory, SubmissionsSer
   }
 
   // function to attach image clicked url to the ImageService so the photoedit gets it
-  ctrl.sendThisImage = function (image, department_id) {
+  ctrl.sendThisImage = function (image, department_id, imageId) {
+    ImageService.image = image;
+    ImageService.deptId = department_id;
+    ImageService.imageId = imageId;
+    console.log('did we get the image clicked', ImageService.image);
+    console.log('whats the department_id', department_id);
     //function to get brand based on department_id and assign it to the ImageService.brand
     BrandTableService.getBrand(department_id).then(function(response){
-        console.log('whats the brand url response', response[0].url_brand);
+        //console.log('whats the brand url response', response[0].url_brand);
         ImageService.brand = response[0].url_brand;
+        console.log('whats the brand url', ImageService.brand);
+        $location.path('/photoedit');
       });
-    ImageService.image = image;
-    console.log('did we get the image clicked', ImageService.image);
   }
 
 //delete function for image in gallery page
