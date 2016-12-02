@@ -7,10 +7,11 @@ function EditPhotoController(Upload, AccessService, ImageService) {
   var photo = this;
 
 
-  //sets the image src onload based on the image clicked from the gallery.html
+  //sets the image/brand src onload based on the image clicked from the gallery.html
   photo.imageSrc = ImageService.image;
+  photo.brandSrc = ImageService.brand;
   console.log('did the image arrive from gallery', photo.imageSrc);
-
+  console.log('did the brand arrive from the galler', photo.brandSrc);
 
   var canvas = document.getElementById('canvas');
   photo.canvas = document.getElementById('canvas');

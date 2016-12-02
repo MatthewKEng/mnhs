@@ -4,7 +4,7 @@
     <button ng-repeat="dept in gallery.userDepts" ng-click="gallery.showDept(dept); gallery.getImages(dept, 1);" style="font-size:12px; margin-bottom:4px;white-space: normal;" class="btn btn-success btn-lg btn-block sideButton">{{gallery.pretty(dept)}}</button>
   </div>
   <div class="sideButtonContainer2">
-    <button ng-repeat="notDept in gallery.notUserDepts" ng-click="gallery.showDept(notDept); gallery.getImages(notDept, 0);" style="font-size:12px; margin-bottom:4px;white-space: normal; background-color: #e7e7e7; color: black;" class="btn btn-info btn-lg btn-block sideButton">{{gallery.pretty(notDept)}}</button>
+    <button ng-repeat="notDept in gallery.notUserDepts" ng-click="gallery.showDept(notDept); gallery.getImages(notDept, 0);" style="font-size:12px; margin-bottom:4px;white-space: normal; background-color: #808080; color: black;" class="btn btn-info btn-lg btn-block sideButton">{{gallery.pretty(notDept)}}</button>
   </div>
 </div>
 
@@ -12,10 +12,10 @@
   <div class="row col-xs-3 overflow">
     <div class="row addContainer">
       <h4><u>Image Selection</u></h4>
-      <h1 class="addPhoto glyphicon glyphicon-upload" ng-click="gallery.modalImage=image.url_image; gallery.viewButton()"></h1>
+      <h1 ng-hide="gallery.disableButtons || gallery.currentDeptName==undefined" class="addPhoto glyphicon glyphicon-upload" ng-click="gallery.modalImage=image.url_image; gallery.viewButton()"></h1>
     </div>
     <div class="row gallery-display" ng-repeat="image in gallery.deptImages">
-      <a ng-class="gallery.disabled()"href="/photoedit"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image.url_image)" ng-src="{{image.url_image}}" /></a>
+      <a ng-class="gallery.disabled()"href="/photoedit"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image.url_image, image.department_id)" ng-src="{{image.url_image}}" /></a>
     </div>
   </div>
 
@@ -32,9 +32,13 @@
       <img ng-src="{{image.saved_edit}}" class="img-responsive gallery-item" alt="approved image" />
       <div class="row">
         <button ng-disabled="gallery.disableButtons" class="btn btn-success">Download</button>
-        <button ng-disabled="gallery.disableButtons" class="btn btn-danger">Delete</button>
+        <button  class="btn btn-danger" ng-click="gallery.deleteButton(image)">Delete</button>
       </div>
     </div>
+  </div>
+
+  <div class="col-xs-10 make-selection" ng-show="gallery.currentDeptName==undefined">
+    <h1>Select a department</h1>
   </div>
 </div>
 
@@ -70,13 +74,6 @@
         </form>
 
       </div>
-    </div>
-    <div class="modal-footer">
-      <span>
-        <button class="btn btn-success">Approve</button>
-        <button class="btn btn-danger">Revise</button>
-        <button class="btn btn-danger">Delete</button>
-      </span>
     </div>
   </div>
 

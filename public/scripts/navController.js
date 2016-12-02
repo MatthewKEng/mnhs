@@ -1,5 +1,5 @@
 angular.module('BrandImageManagerApp')
-       .controller('NavController', function(AuthFactory, AccessService) {
+       .controller('NavController', function(AuthFactory, AccessService, $window) {
 
   console.log('NavController loading!')
   var nav = this;
@@ -17,14 +17,16 @@ angular.module('BrandImageManagerApp')
           nav.displayLogout = true;
           authFactory.setLoggedIn(true);
           nav.username = response.data.name;
-          console.log('username', nav.username);
+          // console.log('username', nav.username);
           nav.user = response.data.user;
           AccessService.getDepartmentIds();
+          // console.log('nav.user is', nav.user);
           AccessService.storeUserAccess(nav.user);
       } else { // is not logged in on server
           nav.displayLogout = false;
           authFactory.setLoggedIn(false);
       }
+      nav.admin = AccessService.admin;
   },
 
   function() {
@@ -39,12 +41,21 @@ angular.module('BrandImageManagerApp')
       nav.displayLogout = false;
       authFactory.setLoggedIn(false);
       nav.username = '';
+      // window.location.replace('https://accounts.google.com/Logout');
       // $window.location.href = '/'; // forces a page reload which will update our NavController
 
     }, function(response) { // error
         nav.message.text = 'Unable to logout';
         nav.message.type = 'error';
       });
+  };
+
+  nav.pretty = function (name) {
+    if (name == undefined) {
+      return;
+    }
+    var prettyUserDept = name.toLowerCase();
+    return prettyUserDept;
   };
 
 });

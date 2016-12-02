@@ -12,11 +12,16 @@ exports.setup = function () {
     clientID: '635146343171-m726t7cjr75thvph68au09l2upao1tjk.apps.googleusercontent.com',
     clientSecret: 'E3mabZbBKqq4ETbNjvJUyn7_',
     callbackURL: 'http://localhost:3000/auth/google/callback',
+    // callbackURL: 'https://localhost:3000/v2/logout', //= to force logout,redirect user to the following URL:
   },
+
+
+  // gapi.auth.signOut();
 
   function (accessToken, refreshToken, profile, cb) {
 
-    findOrCreate(profile.id, profile.email, profile.displayName, accessToken, refreshToken, function (err, user) {
+    findOrCreate(profile.id, profile.email, profile.displayName, accessToken, refreshToken,
+      function (err, user) {
       return cb(err, user);
     });
   }
@@ -43,24 +48,27 @@ passport.deserializeUser(function (id, done) {
 
 function findOrCreate(googleID, googleEmail, googleName, accessToken, refreshToken, done) {
 
-    console.log('googleID', googleID);
+    // console.log('googleID', googleID);
 
     User.findByEmail(googleID, googleEmail, googleName, accessToken, refreshToken).then(function (user) {
-      console.log('user', user);
+      // console.log('user', user);
       if (user) {
           // update access and refresh token
           User.updateTokens(googleID, googleEmail, googleName, accessToken, refreshToken);
-            console.log('update user', user);
+            // console.log('update user', user);
                   return done(null, user);
 
       }
 
       if (!user) {
-        console.log('inside!user');
-        User.create(googleID, googleEmail, googleName, accessToken, refreshToken).then(function (user) {
-          console.log('create user', user);
+        // console.log('inside!user');
+        //User.create(googleID, googleEmail, googleName, accessToken, refreshToken).then(function (user) {
+          // console.log('create user', user);
+
           return done(null, user);
-        });
+        // });
       };
+    }).catch(function (err) {
+      done(err);
     });
   }

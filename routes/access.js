@@ -30,6 +30,8 @@ router.get('/departments', function(req, res) {
 });
 
 
+
+
 // query departments table to post department and department_id's
 router.post('/departments', function(req, res) {
   pool.connect(function(error, client, done) {
@@ -61,7 +63,8 @@ router.get('/', function(req, res) {
   pool.connect(function(error, client, done) {
     if (error) {
       done();
-      next(error);
+      console.log('Error connecting to DB', error);
+      res.sendStatus(500);
     }
     client.query('SELECT id, first_name, last_name, email, admin, alexander_ramsey_house,'+
       'birch_coulee_battlefield, charles_a_lindbergh_historic_site,'+
@@ -75,7 +78,8 @@ router.get('/', function(req, res) {
       'w_w_mayo_house from users',function(error, result) {
       if (error) {
         done();
-        next(error);
+        console.log('Error querying DB', error);
+        res.sendStatus(500);
       }
       //console.log('whats the access route rows data',result.rows);
       res.send(result.rows);
@@ -88,13 +92,15 @@ router.post('/', function(req, res) {
   pool.connect(function(error, client, done) {
     if (error) {
       done();
-      next(error);
+      console.log('Error connecting to DB', error);
+      res.sendStatus(500);
     }
     client.query('INSERT INTO users (first_name, last_name, email) ' + 'VALUES ($1, $2, $3)', [req.body.first_name, req.body.last_name, req.body.email],
     function(error, result) {
       if (error) {
         done();
-        next(error);
+        console.log('Error querying DB', error);
+        res.sendStatus(500);
       }
       //console.log('whats the access route rows data',result.rows);
       res.sendStatus(201);
@@ -106,16 +112,21 @@ router.post('/', function(req, res) {
 
 //to add a column to users DB of department
 router.post('/users', function(req, res) {
+  console.log('query ', req.query);
+  console.log('body ', req.body);
   pool.connect(function(error, client, done) {
     if (error) {
       done();
-      next(error);
+      console.log('Error connecting to DB', error);
+      res.sendStatus(500);
     }
     client.query ('ALTER TABLE users ADD COLUMN ' + req.body.department + '  BOOLEAN DEFAULT FALSE',
     function(error, result) {
       if (error) {
         done();
-        next(error);
+        // next(error);
+        console.log('Error querying DB', error);
+        res.sendStatus(500);
       }
       //console.log('whats the access route rows data',result.rows);
       res.sendStatus(201);
@@ -140,7 +151,7 @@ router.put('/', function (req, res, next) {
     }
   }
   statement = statement + ' WHERE id=' + id;
-  console.log('STATEMENT: ', statement);
+  // console.log('STATEMENT: ', statement);
 
   pool.connect(function (err, client, done) {
     try {
