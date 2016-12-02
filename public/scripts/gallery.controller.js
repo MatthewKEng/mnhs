@@ -24,6 +24,14 @@ function GalleryController($http, AuthFactory, SubmissionsService, AccessService
     ctrl.showDept(ctrl.currentDeptName);
     modal.style.display = "none";
   }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
   // Store current user's access by department
   ctrl.admin = AccessService.admin;
   // If user is an admin, all departments should fall in userDepts
@@ -167,6 +175,7 @@ function GalleryController($http, AuthFactory, SubmissionsService, AccessService
       $timeout(function() {
         ctrl.success = false;
       }, 2500);
+      
     });
   };
 }
