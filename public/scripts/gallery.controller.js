@@ -175,7 +175,6 @@ function GalleryController($http, AuthFactory, SubmissionsService, AccessService
       $timeout(function() {
         ctrl.success = false;
       }, 2500);
-      
     });
   };
 }
