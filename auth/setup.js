@@ -48,22 +48,23 @@ passport.deserializeUser(function (id, done) {
 
 function findOrCreate(googleID, googleEmail, googleName, accessToken, refreshToken, done) {
 
-    console.log('googleID', googleID);
+    // console.log('googleID', googleID);
 
     User.findByEmail(googleID, googleEmail, googleName, accessToken, refreshToken).then(function (user) {
-      console.log('user', user);
+      // console.log('user', user);
       if (user) {
           // update access and refresh token
           User.updateTokens(googleID, googleEmail, googleName, accessToken, refreshToken);
-            console.log('update user', user);
+            // console.log('update user', user);
                   return done(null, user);
 
       }
 
       if (!user) {
-        console.log('inside!user');
-        // User.create(googleID, googleEmail, googleName, accessToken, refreshToken).then(function (user) {
-          console.log('create user', user);
+        // console.log('inside!user');
+        //User.create(googleID, googleEmail, googleName, accessToken, refreshToken).then(function (user) {
+          // console.log('create user', user);
+
           return done(null, user);
         // });
       };

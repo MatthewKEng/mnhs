@@ -69,16 +69,14 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   };
   // display the access information for the currently selected user.
   admin.showUser = function (id) {
+    // For loop determines which employee is selected
     for (i = 0; i < admin.allUserAccess.length; i++) {
       if (admin.allUserAccess[i].id == id) {
-        // admin.showUserAccess[i] = true;
         admin.emp = admin.allUserAccess[i];
       }
-      //else {
-      //   admin.showUserAccess[i] = false;
-      // }
     }
-    console.log('emp name ' + admin.emp.first_name + ' ' + admin.emp.last_name + ' user.id ' + id);
+    admin.showEmpDepts = false;
+    admin.showNotEmpDepts = false;
     admin.empDepts = [];
     admin.notEmpDepts = [];
     admin.admin = false;
@@ -96,13 +94,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
         }
       }
     }
-    // for (i = 0; i < admin.allUserAccess.length; i++) {
-    //   if (i == index) {
-    //     admin.showUserAccess[i] = !admin.showUserAccess[i];
-    //   } else {
-    //     admin.showUserAccess[i] = false;
-    //   }
-    // }
+
   };
   // //function for truthy value for access accordion
   // admin.truthiness = function (index) {
@@ -217,8 +209,8 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
       console.log('No departments selected');
       return;
     }
-    console.log(admin.emp + ' ' + admin.emp.id);
-    console.log(admin.changeDepts);
+    // console.log(admin.emp + ' ' + admin.emp.id);
+    // console.log(admin.changeDepts);
     var accessObj = {
       id: admin.emp.id,
       departments: admin.changeDepts,
@@ -226,7 +218,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     };
     AccessService.updateAccess(accessObj).then(function(response){
       if (response == 'OK') {
-        console.log('whats the update access response', response);
+        // console.log('whats the update access response', response);
         admin.getUsersAccesses();
       }
     });
@@ -242,7 +234,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
         admin.showEmpDepts = false;
         admin.showNotEmpDepts = false;
       }
-      console.log('whats the access response', admin.allUserAccess);
+      // console.log('whats the access response', admin.allUserAccess);
     });
   };
 
@@ -267,7 +259,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     if (repeat == false) {
       admin.changeDepts.push(dept);
     }
-    console.log(admin.changeDepts);
+    // console.log(admin.changeDepts);
   };
 
 
@@ -277,7 +269,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     admin.firstName;
     admin.lastName;
     admin.newUser;
-    console.log('newUser ', admin.newUser);
+    // console.log('newUser ', admin.newUser);
     $http.post('/access', {
       first_name: admin.firstName,
       last_name: admin.lastName,
@@ -293,9 +285,9 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   //add a new department
   admin.addDepartment = function() {
     admin.newDepartment;
-    console.log('department', admin.newDepartment);
+    // console.log('department', admin.newDepartment);
     admin.newDepartment = admin.newDepartment.replace(/ /g, '_').toLowerCase();
-    console.log('create space');
+    // console.log('create space');
     $http.post('/access/departments', {
       department: admin.newDepartment
     }).then(function(){
@@ -320,18 +312,21 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
 
 
 //approve button for admin
-  admin.approveButton = function(pending) {
+  admin.approveButton = function(pending, adminComment) {
     console.log('pending ', pending);
     var id = pending.id;
     pending.status = "approved";
     console.log('status ', pending.status);
     $http.put('/submissions/'+id, {
       id: id,
-      status: pending.status
+      status: pending.status,
+      admin_comment: adminComment
     }).then(function(){
       //$location.path('/admin'); //on click of button needs to refresh and not on page load
       //reload submissions data
       admin.getSubmissions();
+      admin.reviseComment = '';
+      modal.style.display = "none";
     });
   };
 
@@ -383,11 +378,11 @@ admin.deleteEachDepartment = function(){
     imageData = image; //setting image data equal to the current image
     reviseClass = false; //for ng-show/ng-hide to hide delete and approve button on modal
     reviseInput = true; //to show input for comments
-    admin.viewButton();
+    admin.revisionButton();
   };
 
   //popup modal revise button to submit comment for ADMIN
-  admin.subReviseButton = function() {
+  admin.subReviseButton = function(imageData) {
     console.log('image info ', imageData); //using same image data to target image id
     admin.closeModal();
     reviseClass = true; //should revert buttons back for view
@@ -396,19 +391,27 @@ admin.deleteEachDepartment = function(){
     console.log('comment ', admin.reviseComment);
     //updates comments and posts to DB
     $http.put('/submissions/'+imageData.id, {
-      status: "pending",
+      status: "revision",
       admin_comment: admin.reviseComment,
       id: imageData.id
     }).then(function(){
       //clears comment input field
-    admin.reviseComment = "";
+    admin.reviseComment = '';
     //resets image data to an empty object
     imageData = {};
+    //get submissions again
+    admin.getSubmissions();
     });
   };
 
 
   //modal controlls
+  //start shows as false
+  admin.showApproved = false;
+  admin.deleteShow = false;
+  admin.showUserComment = false;
+  admin.rivisionShow = false;
+  admin.showInput = false;
   //image src for modal
   admin.modalImage = {};
   //user comment for modal
@@ -418,17 +421,46 @@ admin.deleteEachDepartment = function(){
 
   // When the user clicks the button, open the modal
   admin.viewButton = function() {
+    admin.showInput = true;
+    admin.rivisionShow = true;
+    admin.deleteShow = false;
+    admin.showUserComment = true;
+    admin.showApproved = true;
+    modal.style.display = "block";
+  };
+
+  //when admin clicks the view button in the pending/aaproved section
+  admin.viewButtonApproved = function() {
+    admin.showInput = false;
+    admin.rivisionShow = false;
+    admin.showUserComment = true;
+    admin.showApproved = false;
+    admin.deleteShow = true;
+    modal.style.display = "block";
+  };
+
+  //function to open model when revision is clicked
+  admin.revisionButton = function() {
+    admin.showInput = true;
+    admin.rivisionShow = true;
+    admin.deleteShow = false;
+    admin.showUserComment = true;
+    admin.showApproved = false;
     modal.style.display = "block";
   };
 
   // When the user clicks on <span> (x), close the modal
   admin.closeModal = function() {
+    admin.showUserComment = false;
+    admin.showApproved = false;
     modal.style.display = "none";
   };
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal) {
+      admin.showUserComment = false;
+      admin.showApproved = false;
       modal.style.display = "none";
     }
   };

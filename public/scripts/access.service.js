@@ -22,7 +22,7 @@ function AccessService ($http) {
 
  // do PUT request to SQL DB to update an entry
  access.updateAccess = function (accessObj) {
-   console.log(accessObj);
+  //  console.log(accessObj);
    return $http({
      method: 'PUT',
      url: '/access',
@@ -64,8 +64,8 @@ function AccessService ($http) {
        access.notUserDepts.push(key);
      }
    }
-   console.log(user);
-   console.log('admin privilege ', user.admin);
+  //  console.log(user);
+  //  console.log('admin privilege ', user.admin);
  };
 
  // A check to see if User Departments runs correctly.

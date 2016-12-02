@@ -19,9 +19,9 @@
     </div>
     <span>
       <button ng-click="admin.approveButton(pending)" class="btn btn-success">Approve</button>
-      <button  ng-click="admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
+      <button  ng-click="admin.modalImageData = pending; admin.modalAdminComment = pending.admin_comment; admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
       admin.reviseButton(pending)" class="btn btn-danger">Revise</button>
-      <button ng-click="admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
+      <button ng-click="admin.modalImageData = pending; admin.modalAdminComment = pending.admin_comment; admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
       admin.viewButton();" class="btn btn-info">View</button>
     </span>
   </div>
@@ -35,8 +35,8 @@
     </div>
     <span>
       <button ng-click="admin.deleteButton(approved)" class="btn btn-danger">Delete</button>
-      <button ng-click="admin.modalUserComment = approved.user_comment; admin.modalImage = approved.saved_edit;
-       admin.viewButton()" class="btn btn-info">View</button>
+      <button ng-click="admin.modalAdminComment = approved.admin_comment; admin.modalUserComment = approved.user_comment; admin.modalImage = approved.saved_edit;
+       admin.viewButtonApproved()" class="btn btn-info">View</button>
     </span>
   </div>
 </div>
@@ -49,31 +49,37 @@
     </div>
     <span>
       <button ng-click="admin.deleteButton(revision)" class="btn btn-danger">Delete</button>
-      <button ng-click="admin.modalUserComment = revision.user_comment; admin.modalImage = revision.saved_edit;
-      admin.viewButton()" class="btn btn-info">View</button>
+      <button ng-click="admin.modalAdminComment = revision.admin_comment; admin.modalUserComment = revision.user_comment; admin.modalImage = revision.saved_edit;
+      admin.viewButtonApproved()" class="btn btn-info">View</button>
     </span>
   </div>
 </div>
 <!--access controls-->
 <div ng-show="((admin.accessControlsDisplay))" class="container text-center access-display">
   <div class="col-xs-4">
-    <div class="row access">
-      <h4 class="user-select">User Name</h4>
+    <div class="row access" ng-show="admin.empPlus">
+      <h4 class="user-select">Select Employee</h4>
       <select class="user-select" ng-model="admin.selectedUser" ng-options="user.id as
       admin.pretty(user.first_name) + ' ' + admin.pretty(user.last_name) for user
-      in admin.allUserAccess" ng-change="admin.showUser(admin.selectedUser)">
+      in admin.allUserAccess" ng-change="admin.showUser(admin.selectedUser); admin.clearDepts()">
       </select>
     </div>
+    <button ng-click="admin.addEmployeeTruthiness()" class="show-access-button add-user"
+    ng-init="admin.showAddEmployee=false; admin.empPlus=true" ng-show="admin.accessControlsDisplay">Add Employee
 
-    <div class="access current-access row">
+    <span ng-show="admin.empPlus" class="glyphicon glyphicon-plus pull-right"></span>
+    <span ng-hide="admin.empPlus" class="glyphicon glyphicon-minus pull-right"></span></button>
+    <div class="access current-access row" ng-show="admin.empPlus">
       <h4>Current Access</h4>
       <ul>
         <li ng-repeat="dept in admin.empDepts">{{admin.pretty(dept)}}</li>
       </ul>
     </div>
+
   </div>
 
-  <div class="col-xs-4">
+
+  <div class="col-xs-4" ng-show="admin.empPlus">
     <button class="show-access-button" ng-click="admin.showNotEmpDepts=!admin.showNotEmpDepts; admin.showEmpDepts=false; admin.clearDepts();">Add Access <div class="arrow-down"></button>
     <button class="show-access-button" ng-click="admin.showEmpDepts=!admin.showEmpDepts; admin.showNotEmpDepts=false; admin.clearDepts();">Remove Access <div class="arrow-down"></button>
 
@@ -99,10 +105,28 @@
     </div>
   </div>
 
+  <div ng-show="((admin.showAddEmployee))" class="col-xs-8">
+    <div>
+      <form class="form-inline">
+        <div class="form-group">
+          <label class="sr-only">First Name</label>
+          <input ng-model="admin.firstName" type="text" class="form-control" placeholder="First Name">
+
+          <label class="sr-only">Last Name</label>
+          <input ng-model="admin.lastName" type="text" class="form-control" placeholder="Last Name">
+
+
+          <label class="sr-only" for="exampleInputEmail3">Email address</label>
+          <input ng-model="admin.newUser" type="email" class="form-control" placeholder="Email">
+        </div>
+          <button ng-click="admin.submitButton(); admin.empPlus=false" type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+  </div>
 
 </div>
     <!--dynamicly created list of users and there access-->
-    <div ng-repeat="user in admin.allUserAccess" ng-init="admin.showUserAccess[$index]= false">
+    <!-- <div ng-repeat="user in admin.allUserAccess" ng-init="admin.showUserAccess[$index]= false"> -->
       <!--accordion made dynamicly button-->
       <!-- <button ng-init="admin.plus[$index]=true; admin.minus[$index]=false"
       ng-click="admin.truthiness($index)" class="btn btn-default btn-block btn-small" >
@@ -124,27 +148,6 @@
       </div>
   </div> -->
 
-    <button ng-click="admin.addEmployeeTruthiness()" class="btn btn-success btn-lg"
-    ng-init="admin.showAddEmployee = false; admin.empPlus = true" ng-show="admin.accessControlsDisplay">Add Employee
-
-    <span ng-show="admin.empPlus" class="glyphicon glyphicon-plus pull-right"></span>
-    <span ng-hide="admin.empPlus" class="glyphicon glyphicon-minus pull-right"></span></button>
-    <form ng-show="((admin.showAddEmployee))" class="form-inline">
-      <div class="form-group">
-        <label class="sr-only">First Name</label>
-        <input ng-model="admin.firstName" type="text" class="form-control" placeholder="First Name">
-
-        <label class="sr-only">Last Name</label>
-        <input ng-model="admin.lastName" type="text" class="form-control" placeholder="Last Name">
-
-
-        <label class="sr-only" for="exampleInputEmail3">Email address</label>
-        <input ng-model="admin.newUser" type="email" class="form-control" placeholder="Email">
-      </div>
-        <button ng-click="admin.submitButton(); admin.empPlus=false" type="submit" class="btn btn-default">Submit</button>
-    </form>
-  </div>
-</div>
 <!--brands-->
 <div ng-show="((admin.brandsConsoleDisplay))" class="container upload-brands">
   <div class="col-xs-4 col-xs-offset-4">
@@ -191,17 +194,26 @@
     <div class="modal-body text-center">
       <!--image dynamicly created same image as image clicked-->
       <div>
-        <img ng-src="{{admin.modalImage}}" alt="large version of image" />
-        <h4><u>Comments</u></h4>
-        <h6 ng-show="reviseClass">{{admin.modalUserComment}}</h6>
-        <input ng-hide="reviseInput" ng-model="admin.reviseComment" />
+        <h5 ng-show="((admin.showUserComment))">
+          <img ng-src="{{admin.modalImage}}" alt="large version of image" />
+          <div class="pull-right">
+            <h4><p><u>Creator Comment</u></p></h4>
+            <p>{{admin.modalUserComment}}</p>
+            <h4><p><u>Manager Comment</u></p></h4>
+            <p>{{admin.modalAdminComment}}</p>
+          </div>
+        </h5>
+        <div ng-show="((admin.showInput))">
+          <h4><u>Leave a comment</u></h4>
+          <input ng-model="admin.reviseComment" />
+        </div>
       </div>
     </div>
     <div class="modal-footer">
       <span>
-        <button ng-show="reviseClass" class="btn btn-success">Approve</button>
-        <button ng-click="admin.subReviseButton()" class="btn btn-danger">Revise</button>
-        <button ng-show="reviseClass" ng-click="admin.deleteButton(admin)" class="btn btn-danger">Delete</button>
+        <button ng-click="admin.approveButton(admin.modalImageData, admin.reviseComment)" ng-show="((admin.showApproved))" class="btn btn-success">Approve</button>
+        <button ng-show="((admin.rivisionShow))" ng-click="admin.subReviseButton(admin.modalImageData)" class="btn btn-danger">Revise</button>
+        <button ng-show="((admin.deleteShow))" ng-click="admin.deleteButton(admin)" class="btn btn-danger">Delete</button>
       </span>
     </div>
   </div>

@@ -393,6 +393,7 @@ h1 {
   margin-right: 20px;
   position: relative;
   padding-right: 20px;
+  width: 140px;
 }
 .show-access-button:hover, .show-access-title:hover {
   color: white;
@@ -430,10 +431,26 @@ h1 {
   background: darkgray;
   text-decoration: underline;
 }
+.welcome {
+  color: white;
+  text-transform: capitalize;
+  position: absolute;
+  bottom: -25px;
+  left: 20%;
+}
 .newDepartment {
   margin: 20px;
 }
-
 .removeDepartment {
   margin:20px;
+}
+.add-user {
+  display: inherit;
+  margin-left: 20px;
+}
+.glyphicon {
+  right: -6px;
+}
+.form-inline {
+  margin-top: 20px;
 }
