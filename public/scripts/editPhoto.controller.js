@@ -9,6 +9,8 @@ function EditPhotoController(Upload, AccessService, ImageService) {
 
   //sets the image src onload based on the image clicked from the gallery.html
   photo.imageSrc = ImageService.image;
+  photo.brandSrc = ImageService.brand;
+  console.log('photo dot brand source', photo.brandSrc);
   console.log('did the image arrive from gallery', photo.imageSrc);
 
 
@@ -117,13 +119,13 @@ function resizeImage() {
     if (img.naturalWidth > img.naturalHeight){
         img.width = 850;
         img.height = 566;
-        icon.width = 850;
-        icon.height = 940;
+        icon.width = icon.naturalWidth;
+        icon.height = icon.naturalHeight;
     } else {
         img.width = 650;
         img.height = 850;
-        icon.width = 850;
-        icon.height = 940;
+        icon.width = icon.naturalWidth;
+        icon.height = icon.naturalHeight;
     }
 }
 
@@ -313,7 +315,8 @@ function Bottom () {
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
         ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.04, icon.height * 0.98, icon.width * 0.2, icon.height * 0.2);
+
+        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.naturalWidth * 0.04, icon.naturalHeight * 0.74, icon.width * 0.15, icon.height * 0.15);
         ctx.fillStyle = 'white';
         ctx.fillRect(img.naturalWidth * 0.15, img.naturalHeight * 0.84, img.width * 0.001, img.height * -0.20);
         ctx.font = "30px Gotham Condensed Book";
@@ -390,25 +393,27 @@ function fitBottom() {
     resizeImage();
     // var text = 'This is an image of some Soldiers in a boat who are about to cross a river.';
     if (img.naturalWidth > img.naturalHeight){
-        canvas.width = img.naturalWidth * 0.75;
-        canvas.height = img.naturalHeight * 1;
+        canvas.width = img.width * 0.75;
+        canvas.height = img.height * 1;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
         ctx.fillStyle = '#47589C';
         ctx.fillRect(img.width * 0, img.height * 1, img.width * 0.75, img.height * -0.25);
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.naturalWidth * 0.02, icon.naturalHeight * 0.775, icon.naturalWidth * 0.12, icon.naturalHeight * 0.12);
         ctx.globalAlpha=1;
         ctx.fillStyle = 'white';
+        ctx.fillRect(img.naturalWidth * 0.12, img.naturalHeight * 0.86, img.width * 0.001, img.height * -0.19);
         ctx.font = "28px Gotham Condensed Book";
-        wrapText(ctx, text, img.naturalWidth * 0.15, img.naturalHeight * 0.75, img.naturalWidth * 0.5, lineHeight - 8)
+        wrapText(ctx, text, img.naturalWidth * 0.15, img.naturalHeight * 0.72, img.naturalWidth * 0.5, lineHeight - 8)
     } else {
-        canvas.width = img.naturalWidth * 0.75;
-        canvas.height = img.naturalHeight * 1;
+        canvas.width = img.width * 0.75;
+        canvas.height = img.height * 1;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
         ctx.fillStyle = '#47589C';
         ctx.fillRect(img.width * 0, img.height * 1, img.width * 0.75, img.height * -0.25);
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.naturalWidth * 0.02, icon.naturalHeight * 0.875, icon.naturalWidth * 0.12, icon.naturalHeight * 0.12);
         ctx.globalAlpha=1;
         ctx.fillStyle = 'white';
+        ctx.fillRect(img.naturalWidth * 0.15, img.naturalHeight * 0.84, img.width * 0.001, img.height * -0.20);
         ctx.font = "28px Gotham Condensed Book";
         wrapText(ctx, text, img.naturalWidth * 0.1, img.naturalHeight * 0.82, img.naturalWidth * 0.61, lineHeight - 8)
     }
@@ -421,26 +426,28 @@ function updateTextFitBottom() {
     var icon = document.getElementById('icon');
     resizeImage();
     if (img.naturalWidth > img.naturalHeight){
-        canvas.width = img.naturalWidth * 0.75;
-        canvas.height = img.naturalHeight * 1;
+        canvas.width = img.width * 0.75;
+        canvas.height = img.height * 1;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
         ctx.fillStyle = '#47589C';
         ctx.fillRect(img.width * 0, img.height * 1, img.width * 0.75, img.height * -0.25);
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.naturalWidth * 0.02, icon.naturalHeight * 0.875, icon.naturalWidth * 0.12, icon.naturalHeight * 0.12);
         ctx.globalAlpha=1;
         ctx.fillStyle = 'white';
+        ctx.fillRect(img.naturalWidth * 0.15, img.naturalHeight * 0.84, img.width * 0.001, img.height * -0.20);
         ctx.font = "36px Gotham Condensed Book";
         var text = document.getElementById('buttonHtml').innerHTML;
         wrapText(ctx, text, img.naturalWidth * 0.1, img.naturalHeight * 0.82, img.naturalWidth * 0.61, lineHeight - 8)
     } else {
-        canvas.width = img.naturalWidth * 0.75;
-        canvas.height = img.naturalHeight * 1;
+        canvas.width = img.width * 0.75;
+        canvas.height = img.height * 1;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.naturalWidth * 0.75, img.naturalHeight * 0.75);
         ctx.fillStyle = '#47589C';
-        ctx.fillRect(img.naturalWidth * 0, img.naturalHeight * 1, img.naturalWidth * 0.75, img.naturalHeight * -0.25);
+        ctx.fillRect(img.width * 0, img.height * 1, img.width * 0.75, img.height * -0.25);
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.naturalWidth * 0.02, icon.naturalHeight * 0.875, icon.naturalWidth * 0.12, icon.naturalHeight * 0.12);
         ctx.globalAlpha=1;
         ctx.fillStyle = 'white';
+        ctx.fillRect(img.naturalWidth * 0.15, img.naturalHeight * 0.84, img.width * 0.001, img.height * -0.20);
         ctx.font = "36px Gotham Condensed Book";
         var text = document.getElementById('buttonHtml').innerHTML;
         wrapText(ctx, text, img.naturalWidth * 0.1, img.naturalHeight * 0.82, img.naturalWidth * 0.61, lineHeight - 8)
