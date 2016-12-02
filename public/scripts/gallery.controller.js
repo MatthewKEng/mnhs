@@ -7,6 +7,7 @@ function GalleryController(AuthFactory, SubmissionsService, AccessService, Image
 
   console.log('GalleryController loaded');
   var ctrl = this;
+
   ctrl.modalImage = {};
   // get the modal
   var modal = document.getElementById('adminModal');
