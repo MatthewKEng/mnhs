@@ -32,7 +32,7 @@ function AccessService ($http) {
       //console.log('whats the access update data', response);
       return response.data;
     }, function errorCallback(response) {
-      console.log('Error in Call back');
+      console.log('Error in Call back', response);
     });
   };//end of put
 

@@ -9,7 +9,7 @@
 </div>
 
 <div class="container-fluid">
-  <div class="row col-xs-3 overflow">
+  <div class="row col-xs-3 overflow" ng-hide="gallery.currentDeptName==undefined">
     <div class="row addContainer">
       <h4><u>Image Selection</u></h4>
       <h1 ng-hide="gallery.disableButtons || gallery.currentDeptName==undefined" class="addPhoto glyphicon glyphicon-upload" ng-click="gallery.modalImage=image.url_image; gallery.viewButton()"></h1>
@@ -19,14 +19,14 @@
     </div>
   </div>
 
-  <div class="row col-xs-3 text-center overflow">
+  <div class="row col-xs-3 text-center overflow" ng-hide="gallery.currentDeptName==undefined">
     <h4><u>Revision images:&nbsp;{{gallery.revisionCount}}</u></h4>
     <div class="gallery-display" ng-repeat="image in gallery.revision">
       <a ng-class="gallery.disabled()" href="/photoedit"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image.saved_edit)" ng-src="{{image.saved_edit}}" alt="revision image" /></a>
     </div>
   </div>
 
-  <div class="row col-xs-3 text-center overflow">
+  <div class="row col-xs-3 text-center overflow" ng-hide="gallery.currentDeptName==undefined">
     <h4><u>Approved Images:&nbsp;{{gallery.approvedCount}}</u></h4>
     <div class="gallery-display" ng-repeat="image in gallery.approved">
       <img ng-src="{{image.saved_edit}}" class="img-responsive gallery-item" alt="approved image" />
@@ -38,7 +38,7 @@
   </div>
 
   <div class="col-xs-10 make-selection" ng-show="gallery.currentDeptName==undefined">
-    <h1>Select a department</h1>
+    <h2>Select a department</h2>
   </div>
 </div>
 
