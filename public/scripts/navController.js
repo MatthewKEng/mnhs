@@ -5,6 +5,7 @@ angular.module('BrandImageManagerApp')
   var nav = this;
   var authFactory = AuthFactory;
   nav.displayLogout = false;
+  nav.admin = false;
   nav.message = {
       text: false,
       type: 'info',
@@ -14,6 +15,7 @@ angular.module('BrandImageManagerApp')
   authFactory.isLoggedIn()
     .then(function(response) {
       if (response.data.status) {
+          nav.admin = response.data.user.admin;
           nav.displayLogout = true;
           authFactory.setLoggedIn(true);
           nav.username = response.data.name;
@@ -23,10 +25,10 @@ angular.module('BrandImageManagerApp')
           // console.log('nav.user is', nav.user);
           AccessService.storeUserAccess(nav.user);
       } else { // is not logged in on server
+          nav.admin = false;
           nav.displayLogout = false;
           authFactory.setLoggedIn(false);
       }
-      nav.admin = AccessService.admin;
   },
 
   function() {
@@ -38,6 +40,7 @@ angular.module('BrandImageManagerApp')
     authFactory.logout()
     .then(function(response) { // success
       console.log('inside nav controller');
+      nav.admin = false;
       nav.displayLogout = false;
       authFactory.setLoggedIn(false);
       nav.username = '';

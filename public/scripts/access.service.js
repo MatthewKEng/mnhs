@@ -5,8 +5,8 @@ function AccessService ($http) {
  //do get resquest to querry the access table
  var access = this;
 
- // set Admin access to false initially
- access.admin = false;
+ // // set Admin access to false initially
+ // access.admin = false;
 
  access.accesses = function () {
    return $http({
