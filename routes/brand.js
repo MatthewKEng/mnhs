@@ -17,7 +17,7 @@ router.get('/:deptID', function(req, res) {
         console.log('Error connecting to DB', err);
         res.sendStatus(500);
       }
-      client.query('SELECT * FROM brands WHERE department_id = $1;', [deptID],function(err, result) {
+      client.query('SELECT * FROM departments WHERE id = $1;', [deptID],function(err, result) {
         if (err) {
           console.log('Error querying DB', err);
           res.sendStatus(500);

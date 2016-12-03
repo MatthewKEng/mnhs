@@ -41,7 +41,7 @@ CREATE TABLE departments (
 id SERIAL PRIMARY KEY,
 department varchar(120) NOT NULL,
 url_brand varchar(1000),
-brand_color varchar(20)
+brand_color varchar(20) DEFAULT '#333e48'
 );
 
 --url is the url of the image on s3
