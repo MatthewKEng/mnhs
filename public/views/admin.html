@@ -5,7 +5,7 @@
     <button ng-click="admin.showApprovedGallery()" class="btn btn-default btn-lg btn-block sideButton" class="sideButton">Approved:&nbsp;{{admin.approvedCount}}</button>
     <button ng-click="admin.showRevisionGallery()" class="btn btn-default btn-lg btn-block sideButton" class="sideButton">Revision:&nbsp;{{admin.revisionCount}}</button>
     <button ng-click="admin.showAccess()" class="btn btn-default btn-lg btn-block sidesButton" class="sidesButton">Access</button>
-    <button ng-click="admin.showBrands()" class="btn btn-default btn-lg btn-block sidesButton" class="sidesButton">Departments</button>
+    <button ng-click="admin.showBrands()" class="btn btn-default btn-lg btn-block sidesButton" class="sidesButton">Historical Sites</button>
   </div>
 </div>
 
@@ -45,7 +45,7 @@
   <h3>Photos under Revision</h3>
   <div ng-repeat="revision in admin.revision" class="row col-xs-4 col-md-4 col-lg-4 text-center">
     <div>
-      <img ng-src="{{revision.saved_edit}}" alt="revision submission" class="img-responsive img-thumbnail"/>
+      <img ng-src="{{revision.saved_edit}}" alt="revision submission" class="img-responsive img-thumbnail" />
     </div>
     <span>
       <button ng-click="admin.deleteButton(revision)" class="btn btn-danger">Delete</button>
@@ -158,27 +158,31 @@
 
 
     <div class="row">
-      <form enctype="multipart/form-data" name="uploadBrandForm" id="uploadBrandForm">
+      <form enctype="multipart/form-data" name="uploadBrandForm" id="uploadBrandForm" role="main">
         <div class="row">
           <label ng-hide="admin.upload.file!=undefined" id="file-label" for="file-input">Please select a file</label>
           <input type="file" ng-model="admin.upload.file" ngf-select ngf-max-size="10MB" name="file-input" id="file-input"required>
         </div>
         <div class="row">
-          <select ng-model="admin.upload.deptId" required>
-            <option value="" selected disabled>Select...</option>
+          <select class="listedDepartment" ng-model="admin.upload.deptId" required>
+            <option class="listedDepartment" value="" selected disabled>Select...</option>
             <option ng-repeat="name in admin.deptNames" ng-value="name.id">{{admin.prettyDeptName(name.department)}}</option>
           </select>
         </div>
         <input class="upload-brand-button" type="submit" ng-click="admin.uploadBrand(uploadBrandForm)" value="Upload Image" />
       </form>
-      <input type="text" ng-model="admin.newDepartment"/>
-      <button ng-click="admin.addDepartment()" class="newDepartment">Add Department</button>
+      <div class="container">
 
-      <select ng-model="admin.remove.deptId" required>
-        <option value="" selected disabled>Select...</option>
-        <option ng-repeat="name in admin.deptNames" ng-value="name.id">{{admin.prettyDeptName(name.department)}}</option>
+      <input class="addDepartment" type="text" ng-model="admin.newDepartment"/>
+      <button ng-click="admin.addDepartment()" class="newDepartment">Add Department</button><br />
+
+      <select class="addDepartment" ng-model="admin.remove" ng-options="name as admin.prettyDeptName(name.department) for name in admin.deptNames" required>
+        <!-- <option value="" selected disabled>Select...</option> -->
+        <!-- <option ng-repeat="name in admin.deptNames" ng-value="name">{{admin.prettyDeptName(name.department)}}</option> -->
       </select>
       <button ng-click="admin.deleteDepartment()" class="removeDepartment">Delete Department</button>
+          </div>
+
     </div>
   </div>
 </div>

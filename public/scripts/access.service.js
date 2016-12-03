@@ -5,8 +5,8 @@ function AccessService ($http) {
   //do get resquest to querry the access table
   var access = this;
 
-  // set Admin access to false initially
-  access.admin = false;
+ // // set Admin access to false initially
+ // access.admin = false;
   access.userDepts = [];
   access.notUserDepts = [];
   access.accesses = function () {
@@ -20,6 +20,7 @@ function AccessService ($http) {
       console.log('Error in Call back');
     });
   };//end of get
+
 
   // do PUT request to SQL DB to update an entry
   access.updateAccess = function (accessObj) {

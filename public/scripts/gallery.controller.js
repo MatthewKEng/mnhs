@@ -1,7 +1,7 @@
 angular.module('BrandImageManagerApp')
   .controller('GalleryController', GalleryController);
 
-function GalleryController($http, $location, BrandTableService, AuthFactory, SubmissionsService, AccessService, ImageService, ImageTableService, Upload, $timeout) {
+function GalleryController($http, $location, TruthinessService, BrandTableService, AuthFactory, SubmissionsService, AccessService, ImageService, ImageTableService, Upload, $timeout) {
 
 
   var authFactory = AuthFactory;
@@ -44,7 +44,8 @@ function GalleryController($http, $location, BrandTableService, AuthFactory, Sub
   // console.log('what is this userDepts', ctrl.userDepts);
   // console.log('what is this notUserDepts', ctrl.notUserDepts);
 
-
+  // starts true to runonce then turns false
+  var runOnce = true;
 
   authFactory.isLoggedIn()
     .then(function(response) {
@@ -53,14 +54,26 @@ function GalleryController($http, $location, BrandTableService, AuthFactory, Sub
         authFactory.setLoggedIn(true);
         ctrl.username = response.data.name;
         console.log('whats the auth data', response.data.user.admin);
-        // if (response.data.user.admin == true) {
-        //   $location.path('/admin');
-        // }
+        var adminValue = response.data.user.admin;
+        onceFunc(adminValue);
       } else { // is not logged in on server
         ctrl.displayLogout = false;
         authFactory.setLoggedIn(false);
       }
     });
+
+  //if statment that redrect to admin if admin true
+  function runRedirectOnce(adminValue) {
+      if (adminValue == true) {
+        $location.path('/admin');
+      }
+  }
+  // function only runs once with closure
+  var onceFunc = function func(adminValue){
+     if( TruthinessService.once ) return;
+     TruthinessService.once = true;
+     runRedirectOnce(adminValue);
+};
 
   ctrl.pretty = function (name) {
     var prettyUserDept = name.replace(/_/g, " ").toLocaleUpperCase();
@@ -130,13 +143,13 @@ function GalleryController($http, $location, BrandTableService, AuthFactory, Sub
 
   // function to attach image clicked url to the ImageService so the photoedit gets it
   ctrl.sendThisImage = function (image, department_id, imageId) {
-    ImageService.image = image;
-    ImageService.deptId = department_id;
-    ImageService.imageId = imageId;
-    console.log('did we get the image clicked', ImageService.image);
-    console.log('whats the department_id', department_id);
     //function to get brand based on department_id and assign it to the ImageService.brand
     BrandTableService.getBrand(department_id).then(function(response){
+      ImageService.image = image;
+      ImageService.deptId = department_id;
+      ImageService.imageId = imageId;
+      console.log('did we get the image clicked', ImageService.image);
+      console.log('whats the department_id', department_id);
         //console.log('whats the brand url response', response[0].url_brand);
         ImageService.brand = response[0].url_brand;
         console.log('whats the brand url', ImageService.brand);
