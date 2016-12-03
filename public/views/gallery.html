@@ -75,29 +75,21 @@
       </form>
     </div>
 
-    <div ng-show="gallery.addImage==false && gallery.modalImage!=undefined" class="modal-body text-center">
+    <div ng-show="gallery.addImage==false" class="modal-body text-center">
       <div>
         <h5>
           <img class="modal-size" ng-src="{{gallery.modalImage.url_image}}" alt="large version of image" />
-          <div class="pull-right">
-            <h4><p><u>Creator Comment</u></p></h4>
-            <p>{{gallery.modalUserComment}}</p>
-            <h4><p><u>Manager Comment</u></p></h4>
-            <p>{{gallery.modalAdminComment}}</p>
-          </div>
         </h5>
-        <div>
-          <h4><u>Leave a comment</u></h4>
-          <input ng-model="admin.reviseComment" />
-        </div>
       </div>
     </div>
-    <div class="modal-footer" ng-show="gallery.addImage==false && gallery.modalImage!=undefined">
+    <div class="modal-footer" ng-show="gallery.addImage==false">
       <span>
         <!-- <button ng-show="((admin.rivisionShow))" ng-click="admin.subReviseButton(admin.modalImageData)" class="btn btn-danger">Revise</button>
         <button ng-show="((admin.deleteShow))" ng-click="admin.deleteButton(admin)" class="btn btn-danger">Delete</button> -->
-        <button class="upload-form-button" ng-show="gallery.addImage==false && gallery.modalImage!=undefined" ng-click="gallery.sendThisImage(gallery.modalImage)">Add Branding</button>
+
+        <button class="upload-form-button" ng-show="gallery.addImage==false && gallery.modalImage!=undefined" ng-click="gallery.sendThisImage(gallery.modalImage)">Edit Image</button>
         <button class="upload-form-button" ng-show="gallery.addImage==false && gallery.modalImage!=undefined" ng-click="gallery.deleteThisImage(gallery.modalImage)">Delete</button>
+
       </span>
     </div>
 

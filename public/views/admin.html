@@ -64,7 +64,7 @@
       in admin.allUserAccess" ng-change="admin.showUser(admin.selectedUser); admin.clearDepts()">
       </select>
     </div>
-    <button ng-click="admin.addEmployeeTruthiness()" class="show-access-button add-user"
+    <button ng-click="admin.addEmployeeTruthiness()" class="btn btn-default btn-sm show-access-button add-user"
     ng-init="admin.showAddEmployee=false; admin.empPlus=true" ng-show="admin.accessControlsDisplay">Add Employee
 
     <span ng-show="admin.empPlus" class="glyphicon glyphicon-plus pull-right"></span>
@@ -77,7 +77,6 @@
     </div>
 
   </div>
-
 
   <div class="col-xs-4" ng-show="admin.empPlus">
     <button class="show-access-button" ng-click="admin.showNotEmpDepts=!admin.showNotEmpDepts; admin.showEmpDepts=false; admin.clearDepts();">Add Access <div class="arrow-down"></button>
@@ -104,8 +103,8 @@
       <button class="submit-button" ng-click="admin.submitChanges()">Submit</button>
     </div>
   </div>
-
-  <div ng-show="((admin.showAddEmployee))" class="col-xs-8">
+<!--add Employee controlls-->
+  <div ng-show="((admin.showAddEmployee))" class="col-xs-10">
     <div>
       <form class="form-inline">
         <div class="form-group">
@@ -115,38 +114,15 @@
           <label class="sr-only">Last Name</label>
           <input ng-model="admin.lastName" type="text" class="form-control" placeholder="Last Name">
 
-
           <label class="sr-only" for="exampleInputEmail3">Email address</label>
           <input ng-model="admin.newUser" type="email" class="form-control" placeholder="Email">
         </div>
-          <button ng-click="admin.submitButton(); admin.empPlus=false" type="submit" class="btn btn-default">Submit</button>
+          <button ng-click="admin.submitButton(); admin.empPlus=false" type="submit" class="btn btn-success btn-md">Submit</button>
       </form>
     </div>
   </div>
 
 </div>
-    <!--dynamicly created list of users and there access-->
-    <!-- <div ng-repeat="user in admin.allUserAccess" ng-init="admin.showUserAccess[$index]= false"> -->
-      <!--accordion made dynamicly button-->
-      <!-- <button ng-init="admin.plus[$index]=true; admin.minus[$index]=false"
-      ng-click="admin.truthiness($index)" class="btn btn-default btn-block btn-small" >
-
-      {{user.first_name}} {{user.last_name}}<span ng-show="admin.plus[$index]" class ="glyphicon glyphicon-plus pull-right"></span>
-      <span ng-show="admin.minus[$index]" class ="glyphicon glyphicon-minus pull-right"></span></button>
-
-      <div class="text-left" ng-show="admin.showUserAccess[$index]" >
-        <label ng-repeat="(key,val) in user" ng-if="$index == 4" class="checkbox-inline">
-          <input type="checkbox" ng-model="val" ng-change="admin.updateUsersAccesses(user.email, key, val); admin.checkboxesTruthiness($index);" ng-checked="val" >
-          {{admin.pretty(key)}}
-        </label>
-        <span ng-show="admin.showCheckboxes[$index]" ng-init="admin.showCheckboxes[$index]= !user.admin">
-          <label ng-repeat="(key,val) in user" ng-if="$index >= 5" class="checkbox-inline">
-            <input type="checkbox" ng-model="val" ng-change="admin.updateUsersAccesses(user.email, key, val)" ng-checked="val" >
-            {{admin.pretty(key)}}
-          </label>
-        </span>
-      </div>
-  </div> -->
 
 <!--brands-->
 <div ng-show="((admin.brandsConsoleDisplay))" class="container upload-brands">
@@ -155,8 +131,7 @@
       <img ng-show="admin.upload.file!=undefined" ngf-src="admin.upload.file" alt="Brand Preview" class="preview" />
     </div>
 
-
-
+<!--historic site/deparment controlls-->
     <div class="row">
       <form enctype="multipart/form-data" name="uploadBrandForm" id="uploadBrandForm" role="main">
         <div class="row">
@@ -206,9 +181,9 @@
               <label class="sr-only">Text Area</label>
               <textarea class="form-control" rows="3" placeholder="Type a Comment Here" ng-model="admin.reviseComment"></textarea>
             </div>
-            <h4><p><u>Creator Comment</u></p></h4>
+            <h4><p><u>Employee Comment</u></p></h4>
             <p>{{admin.modalUserComment}}</p>
-            <h4><p><u>Manager Comment</u></p></h4>
+            <h4><p><u>Admin Comment</u></p></h4>
             <p>{{admin.modalAdminComment}}</p>
           </div>
         </h5>

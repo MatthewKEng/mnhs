@@ -22,7 +22,7 @@ var s3 = new AWS.S3();
 var uploads3 = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'rho',
+    bucket: 'mnhs',
     // Makes file viewable to public, which makes things easier when retrieving
     // file later on.  This is optional, but helpful.
     acl: 'public-read',
@@ -52,7 +52,7 @@ router.post('/brand', uploads3.single('file'), function (req, res) {
         console.log('error connecting to DB', err);
         res.sendStatus(500);
       }
-      client.query('INSERT INTO brands (url_brand, department_id) VALUES ($1, $2);',
+      client.query('INSERT INTO departments (url_brand, id) VALUES ($1, $2);',
                   [url, dep],
             function (err) {
               if (err) {

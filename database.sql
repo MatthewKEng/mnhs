@@ -39,22 +39,19 @@ w_w_mayo_house BOOLEAN DEFAULT FALSE
 
 CREATE TABLE departments (
 id SERIAL PRIMARY KEY,
-department varchar(120) NOT NULL
+department varchar(120) NOT NULL,
+url_brand varchar(1000),
+brand_color varchar(20) DEFAULT '#333e48'
 );
 
 --url is the url of the image on s3
 CREATE TABLE images (
 id SERIAL PRIMARY KEY,
-url_image varchar(1000) NOT NULL,
-department_id int NOT NULL
+url_brand varchar(1000) NOT NULL,
+department_id int NOT NULL,
+brand_color varchar(20)
 );
 
---url is the url of the brand on s3
-CREATE TABLE brands (
-id SERIAL PRIMARY KEY,
-url_brand varchar(1000) NOT NULL,
-department_id int NOT NULL
-);
 
 CREATE TABLE submissions (
 id SERIAL PRIMARY KEY,
