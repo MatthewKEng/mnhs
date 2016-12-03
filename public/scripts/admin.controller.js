@@ -180,19 +180,19 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
             admin.approvedCount++;
             //console.log('whats the approved count',admin.approvedCount);
             admin.aprroved.push(angular.copy(admin.allUsersSubmissions[i]));
-            // console.log('whats the aprroved array', admin.aprroved);
+            console.log('whats the aprroved array', admin.aprroved);
         }else if (admin.allUsersSubmissions[i].status == 'pending') {
           //count the number under this status
           admin.pendingCount++;
           //console.log('whats the pending count',admin.pendingCount);
           admin.pending.push(angular.copy(admin.allUsersSubmissions[i]));
-          // console.log('whats the pending array', admin.pending);
+          console.log('whats the pending array', admin.pending);
         }else if (admin.allUsersSubmissions[i].status == 'revision') {
           //count the number under this status
           admin.revisionCount++;
           //console.log('whats the revision count',admin.revisionCount);
           admin.revision.push(angular.copy(admin.allUsersSubmissions[i]));
-          // console.log('whats the revision array', admin.revision);
+          console.log('whats the revision array', admin.revision);
         }
       }
     });
@@ -378,7 +378,7 @@ admin.deleteEachDepartment = function(){
     imageData = image; //setting image data equal to the current image
     reviseClass = false; //for ng-show/ng-hide to hide delete and approve button on modal
     reviseInput = true; //to show input for comments
-    admin.revisionButton();
+    admin.revisionButton(image.department_id);
   };
 
   //popup modal revise button to submit comment for ADMIN
@@ -420,7 +420,8 @@ admin.deleteEachDepartment = function(){
   var modal = document.getElementById('adminModal');
 
   // When the user clicks the button, open the modal
-  admin.viewButton = function() {
+  admin.viewButton = function(department_id) {
+    admin.departmentFinder(department_id);//function to find department name
     admin.showInput = true;
     admin.rivisionShow = true;
     admin.deleteShow = false;
@@ -429,8 +430,9 @@ admin.deleteEachDepartment = function(){
     modal.style.display = "block";
   };
 
-  //when admin clicks the view button in the pending/aaproved section
-  admin.viewButtonApproved = function() {
+  //when admin clicks the view button in the pending/approved section
+  admin.viewButtonApproved = function(department_id) {
+    admin.departmentFinder(department_id);//function to find department name
     admin.showInput = false;
     admin.rivisionShow = false;
     admin.showUserComment = true;
@@ -440,7 +442,8 @@ admin.deleteEachDepartment = function(){
   };
 
   //function to open model when revision is clicked
-  admin.revisionButton = function() {
+  admin.revisionButton = function(department_id) {
+    admin.departmentFinder(department_id);//function to find department name
     admin.showInput = true;
     admin.rivisionShow = true;
     admin.deleteShow = false;
@@ -465,8 +468,24 @@ admin.deleteEachDepartment = function(){
     }
   };
 
+  //get list of deparments and thier ids from AccessService
   admin.deptNames = AccessService.departmentNames;
+  console.log('whats the department names',admin.deptNames);
+  //function to loop through and get department names based on department_id
+  admin.departmentFinder = function (department_id) {
+    for (var i = 0; i < admin.deptNames.length; i++) {
+      if (department_id == admin.deptNames[i].id) {
+        admin.departmentName = admin.deptNames[i].department;
+        console.log('whats the department of selected', admin.departmentName);
+      }
+    }
+  }
+
+  //makes name pretty
   admin.prettyDeptName = function(name) {
+    if (name == undefined) {
+      return;
+    }
     return name.replace(/_/g, ' ').toUpperCase()
   };
 
@@ -484,5 +503,7 @@ admin.deleteEachDepartment = function(){
       data: admin.upload,
     });
   };
+
+
 
 };//end of AdminController function

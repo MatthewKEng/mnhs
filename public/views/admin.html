@@ -18,11 +18,11 @@
       <img ng-src="{{pending.saved_edit}}" alt="pending submission" class="img-responsive img-thumbnail"/>
     </div>
     <span>
-      <button ng-click="admin.approveButton(pending)" class="btn btn-success">Approve</button>
+      <button ng-click="admin.approveButton(pending.department_id)" class="btn btn-success">Approve</button>
       <button  ng-click="admin.modalImageData = pending; admin.modalAdminComment = pending.admin_comment; admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
       admin.reviseButton(pending)" class="btn btn-danger">Revise</button>
       <button ng-click="admin.modalImageData = pending; admin.modalAdminComment = pending.admin_comment; admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
-      admin.viewButton();" class="btn btn-info">View</button>
+      admin.viewButton(pending.department_id);" class="btn btn-info">View</button>
     </span>
   </div>
 </div>
@@ -36,7 +36,7 @@
     <span>
       <button ng-click="admin.deleteButton(approved)" class="btn btn-danger">Delete</button>
       <button ng-click="admin.modalAdminComment = approved.admin_comment; admin.modalUserComment = approved.user_comment; admin.modalImage = approved.saved_edit;
-       admin.viewButtonApproved()" class="btn btn-info">View</button>
+       admin.viewButtonApproved(approved.department_id)" class="btn btn-info">View</button>
     </span>
   </div>
 </div>
@@ -50,7 +50,7 @@
     <span>
       <button ng-click="admin.deleteButton(revision)" class="btn btn-danger">Delete</button>
       <button ng-click="admin.modalAdminComment = revision.admin_comment; admin.modalUserComment = revision.user_comment; admin.modalImage = revision.saved_edit;
-      admin.viewButtonApproved()" class="btn btn-info">View</button>
+      admin.viewButtonApproved(revision.department_id)" class="btn btn-info">View</button>
     </span>
   </div>
 </div>
@@ -193,7 +193,7 @@
   <div class="modal-content">
     <div class="modal-header">
       <span ng-click="admin.closeModal()" class="close">×</span>
-      <h2>Department</h2>
+      <h2>{{admin.prettyDeptName(admin.departmentName)}}</h2>
     </div>
     <div class="modal-body text-center">
       <!--image dynamicly created same image as image clicked-->
@@ -201,16 +201,17 @@
         <h5 ng-show="((admin.showUserComment))">
           <img ng-src="{{admin.modalImage}}" alt="large version of image" />
           <div class="pull-right">
+            <div ng-show="((admin.showInput))">
+              <h4><u>Leave a comment</u></h4>
+              <label class="sr-only">Text Area</label>
+              <textarea class="form-control" rows="3" placeholder="Type a Comment Here" ng-model="admin.reviseComment"></textarea>
+            </div>
             <h4><p><u>Creator Comment</u></p></h4>
             <p>{{admin.modalUserComment}}</p>
             <h4><p><u>Manager Comment</u></p></h4>
             <p>{{admin.modalAdminComment}}</p>
           </div>
         </h5>
-        <div ng-show="((admin.showInput))">
-          <h4><u>Leave a comment</u></h4>
-          <input ng-model="admin.reviseComment" />
-        </div>
       </div>
     </div>
     <div class="modal-footer">
