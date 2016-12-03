@@ -22,7 +22,7 @@ var s3 = new AWS.S3();
 var uploads3 = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'rho',
+    bucket: 'mnhs',
     // Makes file viewable to public, which makes things easier when retrieving
     // file later on.  This is optional, but helpful.
     acl: 'public-read',
