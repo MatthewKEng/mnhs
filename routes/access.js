@@ -29,6 +29,28 @@ router.get('/departments', function(req, res) {
   });
 });
 
+// //query deparments table to get department based on department_id
+// router.get('/departments/:id', function(req, res) {
+//   var departmentId = req.params.id;
+//   pool.connect(function(error, client, done) {
+//     try {
+//       if (error) {
+//         console.log('Error connecting to DB', error);
+//         res.sendStatus(500);
+//       }
+//       client.query('SELECT department FROM departments WHERE id=$1;', [departmentId], function(error, result) {
+//         if (error) {
+//           console.log('Error querying DB', error);
+//           res.sendStatus(500);
+//         }
+//         res.send(result.rows);
+//       });
+//     } finally {
+//       done();
+//     }
+//   });
+// });
+
 
 
 
@@ -184,7 +206,7 @@ router.put('/', function (req, res, next) {
   });
 });//end of put
 
-router.delete('/:id', function (req, res, next) {
+router.delete('/users/:id', function (req, res, next) {
   var id = req.params.id;
   pool.connect(function (err, client, done) {
     try {
@@ -207,11 +229,10 @@ router.delete('/:id', function (req, res, next) {
   });
 });
 
-
-//dete the department column from users table
-
-router.delete('/:id', function (req, res, next) {
+router.delete('/:department/:id', function (req, res, next) {
   var id = req.params.id;
+  var department = req.params.department;
+  console.log('req.body', req.body);
   pool.connect(function (err, client, done) {
     try {
       if (err) {
@@ -219,7 +240,7 @@ router.delete('/:id', function (req, res, next) {
         res.sendStatus(500);
       }
 
-      client.query('ALTER TABLE users drop COLUMN ' + req.body.department + [id],
+      client.query('ALTER TABLE users drop COLUMN '+  department,
         function (err, result) {
           if (err) {
             console.log('Error querying DB: ', err);
@@ -232,6 +253,35 @@ router.delete('/:id', function (req, res, next) {
     }
   });
 });
+
+
+
+
+//dete the department column from users table
+
+// router.delete('/department', function (req, res, next) {
+//   // var id = req.params.id;
+//   console.log('req.body', req.body);
+//   pool.connect(function (err, client, done) {
+//     try {
+//       if (err) {
+//         console.log('Error connecting with DB: ', err);
+//         res.sendStatus(500);
+//       }
+//
+//       client.query('ALTER TABLE users drop COLUMN  $1',  [req.body.department],
+//         function (err, result) {
+//           if (err) {
+//             console.log('Error querying DB: ', err);
+//             return res.sendStatus(500);
+//           }
+//           res.sendStatus(204);
+//           });
+//     } finally {
+//       done();
+//     }
+//   });
+// });
 
 
 module.exports = router;

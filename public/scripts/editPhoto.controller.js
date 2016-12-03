@@ -30,13 +30,15 @@ function EditPhotoController(Upload, AccessService, ImageService) {
         var blob = Upload.dataUrltoBlob(theCanvas, 'pic.png');
         // var blob = upload.dataUrltoBlob(dataurl, name);
         console.log('blob', blob);
-        photo.submission.deptId = 1;
         Upload.upload({
             url: '/image/submissions',
             method: 'POST',
             data: {
                 originalname : "ryan",
-                file: blob
+                file: blob,
+                deptId: ImageService.deptId,
+                userId: AccessService.user.id,
+                imageId: ImageService.imageId,
             }
         });
     }

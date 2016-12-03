@@ -3,6 +3,7 @@
 body{
   padding: 0;
   margin: 0;
+  height: 100%;
 }
 body {
   background-color: #F0F8FF;
@@ -88,6 +89,7 @@ h1 {
   padding-right: 5%;
   margin-left: -10%;
 }
+
 /*.hero_tall {
   padding-top: 12vh;
   padding-bottom: 12vh;
@@ -102,13 +104,14 @@ h1 {
 /*.home .hero {
     text-align: center;
 }*/
+
 .centeredblock {
   text-align: center;
   padding-top: 3%;
   padding-bottom: 1%;
   background-color: #eeb111;
   width: 100vw;
-  height: 47vh;
+  height: 100vh;
 }
 
 /*top navbar */
@@ -221,6 +224,7 @@ h1 {
   padding: 2px 16px;
   background-color: #323e48;
   color: white;
+  width: 100%;
 }
 .glyphicon {
   color: white;
@@ -239,7 +243,9 @@ h1 {
   overflow: hidden;
   position: relative;
   border: 1px solid black;
-  margin-top: 10px;
+  margin-top: 20px;
+  margin-left: 0;
+  margin-bottom: 10px;
 }
 .preview {
   padding-top: 0;
@@ -322,7 +328,7 @@ h1 {
 #file-input {
   background: linear-gradient(#444, white);
   color: #263238;
-  padding-top: 10px;
+  padding: 10px;
   font-weight: normal;
 }
 #file-label:hover {
@@ -339,6 +345,7 @@ h1 {
   height: 200px;
   margin: 0 auto 20px auto;
   text-align: center;
+  cursor: pointer;
 }
 .gallery-item {
   margin: 0 auto;
@@ -387,6 +394,7 @@ h1 {
   width: 300px;
 }
 .show-access-button {
+  margin-top: 5px;
   background: lightgray;
   width: 40%;
   display: inline-block;
@@ -422,16 +430,17 @@ h1 {
   display: inline;
 }
 .submit-button {
-  background: lightgray;
+  /*background: lightgray;*/
   width: 40%;
   top: 200px;
   position: relative;
 }
 .submit-button:hover {
-  color: white;
-  background: darkgray;
+  /*color: white;*/
+  /*background: darkgray;*/
   text-decoration: underline;
 }
+
 .welcome {
   color: white;
   text-transform: capitalize;
@@ -441,6 +450,11 @@ h1 {
 }
 .newDepartment {
   margin: 20px;
+}
+
+.addDepartment {
+  margin: 20px;
+
 }
 .removeDepartment {
   margin:20px;
@@ -455,11 +469,39 @@ h1 {
 .form-inline {
   margin-top: 20px;
 }
+
+.container {
+  align-content: left;
+}
+
+.listedDepartment {
+  padding: 5px;
+}
 .make-selection {
-  position: absolute;
-  right: 0;
-  padding: 0;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+}
+.make-selection > h2 {
+  background-color: #eeb111;
+  width: 450px;
+  margin: 0 auto;
+  padding: 30px;
 }
 .show-access-button > span {
   color: black;
+}
+.modal-size {
+  max-width: 60vw;
+  max-height: 60vh;
+}
+.upload-form-button {
+  background: linear-gradient(#444, white);
+  color: #263238;
+  padding: 10px;
+  font-weight: normal;
+}
+.upload-form-button:hover {
+  background: linear-gradient(darkslategray, lightslategray);
+  color: white;
 }

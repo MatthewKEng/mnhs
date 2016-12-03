@@ -22,7 +22,7 @@ var s3 = new AWS.S3();
 var uploads3 = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'mnhs',
+    bucket: 'rho',
     // Makes file viewable to public, which makes things easier when retrieving
     // file later on.  This is optional, but helpful.
     acl: 'public-read',
@@ -72,14 +72,16 @@ router.post('/submissions', uploads3.single('file'), function (req, res) {
   // On success, send image to SQL DB to store URL.
   var url = 'https://s3.amazonaws.com/mnhs/' + req.file.key;
   var dep = req.body.deptId;
+  var user = req.body.userId;
+  var imageId = req.body.imageId;
   pool.connect(function (err, client, done) {
     try {
       if (err) {
         console.log('error connecting to DB', err);
-        res.sendStatus(500);
+        res.sendStatus(500)
       }
-      client.query('INSERT INTO submissions (saved_edit, department_id, user_id, image_id, brand_id) VALUES ($1, $2, $3, $4, $5);',
-                  [url, dep, 1, 1, 1],
+      client.query('INSERT INTO submissions (saved_edit, department_id, user_id, image_id, brand_id, status) VALUES ($1, $2, $3, $4, $5, $6);',
+                  [url, dep, user, imageId, 1, 'pending'],
             function (err) {
               if (err) {
                 console.log('Error inserting into db', err);
@@ -121,9 +123,48 @@ router.post('/', uploads3.single('file'), function (req, res) {
 
 
 //deletes entries from S3 database, then delete from SQL
+router.delete('/:key', function (req, res) {
+  var key = req.params.key;
+  var url = 'https://s3.amazonaws.com/mnhs/' + key;
+  var bucket = 'rho';
+  var params = {
+    Bucket: bucket,
+    Key: key,
+  };
+  s3.deleteObject(params, function(err, data) {
+    if (err) {
+      console.log(err, err.stack); // an error occurred
+    } else {
+      console.log(data);           // successful response
+      // On Success, need to delete image url from SQL database as well.
+      var id = req.params.id;
+      pool.connect(function (err, client, done) {
+        try {
+          if (err) {
+            console.log('Error connecting with DB: ', err);
+            res.sendStatus(500);
+          }
+
+          client.query('DELETE FROM images WHERE url_image=$1;', [url],
+            function (err, result) {
+              if (err) {
+                console.log('Error querying DB: ', err);
+                return res.sendStatus(500);
+              }
+              res.sendStatus(204);
+            });
+        } finally {
+          done();
+        }
+      });
+    }
+  });
+});
+
+//deletes entries from S3 database, then delete from SQL
 router.delete('/:key/:id', function (req, res) {
   var key = req.params.key;
-  var bucket = 'mnhs';
+  var bucket = 'rho';
   var params = {
     Bucket: bucket,
     Key: key,
