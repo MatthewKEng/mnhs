@@ -29,6 +29,28 @@ router.get('/departments', function(req, res) {
   });
 });
 
+// //query deparments table to get department based on department_id
+// router.get('/departments/:id', function(req, res) {
+//   var departmentId = req.params.id;
+//   pool.connect(function(error, client, done) {
+//     try {
+//       if (error) {
+//         console.log('Error connecting to DB', error);
+//         res.sendStatus(500);
+//       }
+//       client.query('SELECT department FROM departments WHERE id=$1;', [departmentId], function(error, result) {
+//         if (error) {
+//           console.log('Error querying DB', error);
+//           res.sendStatus(500);
+//         }
+//         res.send(result.rows);
+//       });
+//     } finally {
+//       done();
+//     }
+//   });
+// });
+
 
 
 
