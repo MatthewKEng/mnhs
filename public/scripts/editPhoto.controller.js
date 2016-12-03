@@ -95,26 +95,6 @@ function doCanvas() {
     console.log('hedgehog img var made');
 }
 
-//this adds BLACK text which is bold and in the gotham font. it is filled with the filltext line which has an x and y axis at the end of it.
-// function addTextLeft() {
-//     ctx.fillStyle = 'black';
-//     ctx.font = "bold 26px Gotham Condensed Book";
-//     ctx.fillText("THIS IS SOME TEXT THAT HOPEFULLY WORKS", 0, 50);
-// }
-//
-// function addTextRight() {
-//     ctx.fillStyle = 'black';
-//     ctx.font = "bold 26px Gotham Condensed Book";
-//     ctx.fillText("THIS IS SOME TEXT THAT HOPEFULLY WORKS", img.naturalWidth * 0.7, 50);
-// }
-//
-// function addTextBottom() {
-//     ctx.fillStyle = 'black';
-//     ctx.font = "bold 26px Gotham Condensed Book";
-//     ctx.fillText("THIS IS SOME TEXT THAT HOPEFULLY WORKS", 0, 50);
-// }
-//change the image size by changing the img.naturalWidth or img.naturalHeight multiplier in the latter half of the drawImage functions
-
 
 
 function resizeImage() {
@@ -131,6 +111,17 @@ function resizeImage() {
     }
 }
 
+// Minnesota Historical Society - Gray #333e48
+// Split Rock Lighthouse - Blue #004c6d
+// Mill City Museum - Red #c41230
+// Minnesota History Center - Yellow #edaa1e
+// James J. Hill House - Green #809e92
+// Historic Fort Snelling - Blue #003768
+// Oliver Kelley Farm - Dark Green #066f43
+// Minnesota State Capitol - Blue #064a76
+// Mille Lacs Indian Museum & Trading Post - Red #a10b30
+// Forest History Center - Green #405d18
+// Charles A. Lindbergh Historic Site - Blue #6fa7bb
 
 
 
@@ -142,7 +133,6 @@ function Left() {
     var img = document.getElementById('hedgehog');
     var icon = document.getElementById('icon');
     resizeImage();
-    // var text = 'This is an image of some Soldiers in a boat who are about to cross a river.';
 
     if (img.naturalWidth > img.naturalHeight){
         canvas.width = img.width;
@@ -248,7 +238,7 @@ function fitLeft() {
         ctx.fillStyle = 'white';
         ctx.font = "28px Gotham Condensed Book";
         var text = document.getElementById('buttonHtml').innerHTML;
-        wrapText(ctx, text, img.width * 0.03, img.height * 0.08, img.width * 0.23, lineHeight * 0.85);
+        wrapText(ctx, text, img.width * 0.03, img.height * 0.08, img.width * 0.21, lineHeight * 0.85);
 } else {
         canvas.width = img.width * 1;
         canvas.height = img.height * 0.75;
@@ -279,7 +269,7 @@ function updateTextFitLeft() {
         ctx.fillStyle = 'white';
         ctx.font = "28px Gotham Condensed Book";
         var text = document.getElementById('buttonHtml').innerHTML;
-        wrapText(ctx, text, img.width * 0.03, img.height * 0.08, img.width * 0.23, lineHeight * 0.85);
+        wrapText(ctx, text, img.width * 0.03, img.height * 0.08, img.width * 0.21, lineHeight * 0.85);
     } else {
         canvas.width = img.width * 1;
         canvas.height = img.height * 0.75;
@@ -438,7 +428,7 @@ function updateTextFitBottom() {
         ctx.fillRect(img.naturalWidth * 0.12, img.naturalHeight * 0.86, img.width * 0.001, img.height * -0.19);
         ctx.font = "28px Gotham Condensed Book";
         var text = document.getElementById('buttonHtml').innerHTML;
-        wrapText(ctx, text, img.naturalWidth * 0.15, img.naturalHeight * 0.74, img.naturalWidth * 0.5, lineHeight - 8)
+        wrapText(ctx, text, img.naturalWidth * 0.15, img.naturalHeight * 0.74, img.naturalWidth * 0.5, lineHeight * 0.85)
     } else {
         canvas.width = img.width * 0.75;
         canvas.height = img.height * 1;
@@ -503,8 +493,8 @@ function updateTextRight() {
     var icon = document.getElementById('icon');
     resizeImage();
     if(img.naturalWidth > img.naturalHeight){
-        canvas.width = img.naturalWidth;
-        canvas.height = img.naturalHeight;
+        canvas.width = img.width;
+        canvas.height = img.height;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
         ctx.fillStyle = '#47589C';
         ctx.fillRect(img.width * 1, img.naturalHeight * 0, img.width * -0.27, img.height * 1);
@@ -518,8 +508,8 @@ function updateTextRight() {
         var text = document.getElementById('buttonHtml').innerHTML;
         wrapText(ctx, text, img.width * 0.99, img.height * 0.1, img.width * 0.2, lineHeight * 0.85);
     } else {
-        canvas.width = img.naturalWidth;
-        canvas.height = img.naturalHeight;
+        canvas.width = img.width;
+        canvas.height = img.height;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
         ctx.fillStyle = '#47589C';
         ctx.fillRect(img.width * 1, img.naturalHeight * 0, img.width * -0.3, img.height * 1);
