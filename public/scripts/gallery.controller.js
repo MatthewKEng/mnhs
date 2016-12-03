@@ -8,6 +8,7 @@ function GalleryController($http, $location, TruthinessService, BrandTableServic
 
   console.log('GalleryController loaded');
   var ctrl = this;
+  ctrl.addImage = false;
 
   ctrl.modalImage = {};
   // get the modal
@@ -21,12 +22,14 @@ function GalleryController($http, $location, TruthinessService, BrandTableServic
   // When the user clicks on <span> (x), close the modal
   ctrl.closeModal = function() {
     ctrl.showDept(ctrl.currentDeptName);
+    ctrl.addImage = false;
     modal.style.display = "none";
   }
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal) {
+      ctrl.addImage = false;
       modal.style.display = "none";
     }
   }
@@ -76,6 +79,9 @@ function GalleryController($http, $location, TruthinessService, BrandTableServic
 };
 
   ctrl.pretty = function (name) {
+    if (name == undefined) {
+      return '';
+    }
     var prettyUserDept = name.replace(/_/g, " ").toLocaleUpperCase();
     return prettyUserDept;
   };

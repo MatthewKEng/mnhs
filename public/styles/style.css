@@ -222,6 +222,7 @@ h1 {
   padding: 2px 16px;
   background-color: #323e48;
   color: white;
+  width: 100%;
 }
 .glyphicon {
   color: white;
@@ -241,6 +242,8 @@ h1 {
   position: relative;
   border: 1px solid black;
   margin-top: 20px;
+  margin-left: 0;
+  margin-bottom: 10px;
 }
 .preview {
   padding-top: 0;
@@ -323,7 +326,7 @@ h1 {
 #file-input {
   background: linear-gradient(#444, white);
   color: #263238;
-  padding-top: 10px;
+  padding: 10px;
   font-weight: normal;
 }
 #file-label:hover {
@@ -472,11 +475,29 @@ h1 {
 }
 .make-selection {
   margin: 40px auto;
-  width: 400px;
   padding: 20px;
   text-align: center;
 }
+.make-selection > h2 {
+  background-color: #eeb111;
+  width: 450px;
+  margin: 0 auto;
+  padding: 30px;
+}
 .show-access-button > span {
   color: black;
-
+}
+.modal-size {
+  max-width: 60vw;
+  max-height: 60vh;
+}
+.upload-form-button {
+  background: linear-gradient(#444, white);
+  color: #263238;
+  padding: 10px;
+  font-weight: normal;
+}
+.upload-form-button:hover {
+  background: linear-gradient(darkslategray, lightslategray);
+  color: white;
 }
