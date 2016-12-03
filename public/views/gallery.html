@@ -1,15 +1,15 @@
 
 <div id="not" class="container-fluid col-xs-2 col-md-2 col-lg-2 sideMenu">
   <div class="sideButtonContainer2">
-    <button ng-repeat="dept in gallery.userDepts" ng-click="gallery.showDept(dept); gallery.getImages(dept, 1);" style="font-size:12px; margin-bottom:4px;white-space: normal;" class="btn btn-success btn-lg btn-block sideButton">{{gallery.pretty(dept)}}</button>
+    <button ng-repeat="dept in gallery.userDepts" ng-click="gallery.showDept(dept);  gallery.notDept=false; gallery.getImages(dept, 1);" style="font-size:12px; margin-bottom:4px;white-space: normal;" class="btn btn-success btn-lg btn-block sideButton">{{gallery.pretty(dept)}}</button>
   </div>
   <div class="sideButtonContainer2">
-    <button ng-repeat="notDept in gallery.notUserDepts" ng-click="gallery.showDept(notDept); gallery.getImages(notDept, 0);" style="font-size:12px; margin-bottom:4px;white-space: normal; background-color: #808080; color: black;" class="btn btn-info btn-lg btn-block sideButton">{{gallery.pretty(notDept)}}</button>
+    <button ng-repeat="notDept in gallery.notUserDepts" ng-click="gallery.showNotDept(notDept); gallery.notDept=true; gallery.getImages(notDept, 0);" style="font-size:12px; margin-bottom:4px;white-space: normal; background-color: #808080; color: black;" class="btn btn-info btn-lg btn-block sideButton">{{gallery.pretty(notDept)}}</button>
   </div>
 </div>
 
 <div class="container-fluid">
-  <div class="row col-xs-3 overflow" ng-hide="gallery.currentDeptName==undefined">
+  <div class="row col-xs-3 overflow" ng-hide="gallery.currentDeptName==undefined || (gallery.notDept && gallery.currentDeptName!=undefined)">
     <div class="row addContainer">
       <h4><u>Image Selection</u></h4>
       <h1 ng-hide="gallery.disableButtons || gallery.currentDeptName==undefined" class="addPhoto glyphicon glyphicon-upload" ng-click="gallery.modalImage=image; gallery.viewButton(); gallery.addImage=true;"></h1>
@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <div class="row col-xs-3 text-center overflow" ng-hide="gallery.currentDeptName==undefined">
+  <div class="row col-xs-3 text-center overflow" ng-hide="gallery.currentDeptName==undefined || (gallery.notDept && gallery.currentDeptName!=undefined)">
     <h4><u>Revision images:&nbsp;{{gallery.revisionCount}}</u></h4>
     <div class="gallery-display" ng-repeat="image in gallery.revision">
       <a ng-class="gallery.disabled()" href="/photoedit"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image)" ng-src="{{image.saved_edit}}" alt="revision image" /></a>
