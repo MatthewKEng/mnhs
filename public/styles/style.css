@@ -88,6 +88,7 @@ h1 {
   padding-right: 5%;
   margin-left: -10%;
 }
+
 /*.hero_tall {
   padding-top: 12vh;
   padding-bottom: 12vh;
@@ -239,7 +240,7 @@ h1 {
   overflow: hidden;
   position: relative;
   border: 1px solid black;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 .preview {
   padding-top: 0;
@@ -432,6 +433,7 @@ h1 {
   background: darkgray;
   text-decoration: underline;
 }
+
 .welcome {
   color: white;
   text-transform: capitalize;
@@ -441,6 +443,11 @@ h1 {
 }
 .newDepartment {
   margin: 20px;
+}
+
+.addDepartment {
+  margin: 20px;
+
 }
 .removeDepartment {
   margin:20px;
@@ -455,6 +462,14 @@ h1 {
 .form-inline {
   margin-top: 20px;
 }
+
+.container {
+  align-content: left;
+}
+
+.listedDepartment {
+  padding: 5px;
+
 .make-selection {
   position: absolute;
   right: 0;
@@ -462,4 +477,5 @@ h1 {
 }
 .show-access-button > span {
   color: black;
+
 }
