@@ -12,17 +12,17 @@
   <div class="row col-xs-3 overflow" ng-hide="gallery.currentDeptName==undefined">
     <div class="row addContainer">
       <h4><u>Image Selection</u></h4>
-      <h1 ng-hide="gallery.disableButtons || gallery.currentDeptName==undefined" class="addPhoto glyphicon glyphicon-upload" ng-click="gallery.modalImage=image.url_image; gallery.viewButton(); gallery.addImage=true;"></h1>
+      <h1 ng-hide="gallery.disableButtons || gallery.currentDeptName==undefined" class="addPhoto glyphicon glyphicon-upload" ng-click="gallery.modalImage=image; gallery.viewButton(); gallery.addImage=true;"></h1>
     </div>
     <div class="row gallery-display" ng-repeat="image in gallery.deptImages">
-      <a ng-class="gallery.disabled()"><img class="img-responsive gallery-item" ng-click="gallery.modalImage=image.url_image; gallery.viewButton()" ng-src="{{image.url_image}}" /></a>
+      <a ng-class="gallery.disabled()"><img class="img-responsive gallery-item" ng-click="gallery.modalImage=image; gallery.viewButton()" ng-src="{{image.url_image}}" /></a>
     </div>
   </div>
 
   <div class="row col-xs-3 text-center overflow" ng-hide="gallery.currentDeptName==undefined">
     <h4><u>Revision images:&nbsp;{{gallery.revisionCount}}</u></h4>
     <div class="gallery-display" ng-repeat="image in gallery.revision">
-      <a ng-class="gallery.disabled()" href="/photoedit"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image.saved_edit)" ng-src="{{image.saved_edit}}" alt="revision image" /></a>
+      <a ng-class="gallery.disabled()" href="/photoedit"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image)" ng-src="{{image.saved_edit}}" alt="revision image" /></a>
     </div>
   </div>
 
@@ -78,7 +78,7 @@
     <div ng-show="gallery.addImage==false && gallery.modalImage!=undefined" class="modal-body text-center">
       <div>
         <h5>
-          <img class="modal-size" ng-src="{{gallery.modalImage}}" alt="large version of image" />
+          <img class="modal-size" ng-src="{{gallery.modalImage.url_image}}" alt="large version of image" />
           <div class="pull-right">
             <h4><p><u>Creator Comment</u></p></h4>
             <p>{{gallery.modalUserComment}}</p>
@@ -96,7 +96,8 @@
       <span>
         <!-- <button ng-show="((admin.rivisionShow))" ng-click="admin.subReviseButton(admin.modalImageData)" class="btn btn-danger">Revise</button>
         <button ng-show="((admin.deleteShow))" ng-click="admin.deleteButton(admin)" class="btn btn-danger">Delete</button> -->
-        <p>footer</p>
+        <button class="upload-form-button" ng-show="gallery.addImage==false && gallery.modalImage!=undefined" ng-click="gallery.sendThisImage(gallery.modalImage)">Add Branding</button>
+        <button class="upload-form-button" ng-show="gallery.addImage==false && gallery.modalImage!=undefined" ng-click="gallery.deleteThisImage(gallery.modalImage)">Delete</button>
       </span>
     </div>
 

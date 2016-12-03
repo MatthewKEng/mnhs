@@ -148,17 +148,17 @@ function GalleryController($http, $location, TruthinessService, BrandTableServic
   }
 
   // function to attach image clicked url to the ImageService so the photoedit gets it
-  ctrl.sendThisImage = function (image, department_id, imageId) {
+  ctrl.sendThisImage = function (image) {
     //function to get brand based on department_id and assign it to the ImageService.brand
-    BrandTableService.getBrand(department_id).then(function(response){
-      ImageService.image = image;
-      ImageService.deptId = department_id;
-      ImageService.imageId = imageId;
-      console.log('did we get the image clicked', ImageService.image);
-      console.log('whats the department_id', department_id);
+    BrandTableService.getBrand(image.department_id).then(function(response){
+      ImageService.image = image.url_image || image.saved_edit;
+      ImageService.deptId = image.department_id;
+      ImageService.imageId = image.imageId;
+      // console.log('did we get the image clicked', ImageService.image);
+      // console.log('whats the department_id', image.department_id);
         //console.log('whats the brand url response', response[0].url_brand);
         ImageService.brand = response[0].url_brand;
-        console.log('whats the brand url', ImageService.brand);
+        // console.log('whats the brand url', ImageService.brand);
         $location.path('/photoedit');
       });
   }
@@ -197,6 +197,18 @@ function GalleryController($http, $location, TruthinessService, BrandTableServic
         ctrl.success = false;
       }, 2500);
 
+    });
+  };
+
+  ctrl.deleteThisImage = function (image) {
+    console.log('image', image);
+    var key = image.url_image.replace('https://s3.amazonaws.com/mnhs/', '');
+    console.log('key', key);
+    $http.delete('/image/' + key).then(function(response) {
+      if (response.status==204) {
+        ctrl.showDept(ctrl.currentDeptName);
+        ctrl.closeModal();
+      }
     });
   };
 }

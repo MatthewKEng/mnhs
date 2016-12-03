@@ -343,6 +343,7 @@ h1 {
   height: 200px;
   margin: 0 auto 20px auto;
   text-align: center;
+  cursor: pointer;
 }
 .gallery-item {
   margin: 0 auto;
