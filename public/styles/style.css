@@ -3,6 +3,7 @@
 body{
   padding: 0;
   margin: 0;
+  height: 100%;
 }
 body {
   background-color: #F0F8FF;
@@ -103,13 +104,14 @@ h1 {
 /*.home .hero {
     text-align: center;
 }*/
+
 .centeredblock {
   text-align: center;
   padding-top: 3%;
   padding-bottom: 1%;
   background-color: #eeb111;
   width: 100vw;
-  height: 47vh;
+  height: 100vh;
 }
 
 /*top navbar */
