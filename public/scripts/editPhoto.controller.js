@@ -10,9 +10,12 @@ function EditPhotoController(Upload, AccessService, ImageService) {
   //sets the image src onload based on the image clicked from the gallery.html
   photo.imageSrc = ImageService.image;
   photo.brandSrc = ImageService.brand;
+  photo.hexSrc = ImageService.brandColor;
+  console.log('HEX SOURCE', photo.hexSrc);
   console.log('photo dot brand source', photo.brandSrc);
   console.log('did the image arrive from gallery', photo.imageSrc);
 
+  var hex = photo.hexSrc;
 
   var canvas = document.getElementById('canvas');
   photo.canvas = document.getElementById('canvas');
@@ -138,7 +141,7 @@ function Left() {
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.naturalWidth * 0, img.naturalHeight * 0, img.width * 0.3, img.height * 1);
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
@@ -151,7 +154,7 @@ function Left() {
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.naturalWidth * 0, img.naturalHeight * 0, img.width * 0.3, img.height * 1);
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
@@ -172,7 +175,7 @@ function updateTextLeft() {
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.naturalWidth * 0, img.naturalHeight * 0, img.width * 0.3, img.height * 1);
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
@@ -186,7 +189,7 @@ function updateTextLeft() {
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.naturalWidth * 0, img.naturalHeight * 0, img.width * 0.3, img.height * 1);
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
@@ -207,7 +210,7 @@ function htmlChangeOLeft() {
     canvas.width = img.width;
     canvas.height = img.height;
     ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-    ctx.fillStyle = '#47589C';
+    ctx.fillStyle = hex;
     ctx.fillRect(img.naturalWidth * 0, img.naturalHeight * 0, img.naturalWidth * 0.3, img.naturalHeight * 1);
     ctx.globalAlpha=0.5;
     ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
@@ -232,7 +235,7 @@ function fitLeft() {
         canvas.width = img.width * 1;
         canvas.height = img.height * 0.75;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, img.width * 0.25, 0, img.width * 0.75, img.height * 0.75);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.naturalWidth * 0, img.naturalHeight * 0, img.width * 0.25, img.height * 1);
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.05, img.height * 0.62, icon.naturalWidth * 0.10, icon.naturalHeight * 0.10);
         ctx.fillStyle = 'white';
@@ -243,7 +246,7 @@ function fitLeft() {
         canvas.width = img.width * 1;
         canvas.height = img.height * 0.75;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, img.width * 0.25, 0, img.width * 0.75, img.height * 0.75);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.naturalWidth * 0, img.naturalHeight * 0, img.width * 0.25, img.height * 1);
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.03, img.height * 0.64, icon.naturalWidth * 0.13, icon.naturalHeight * 0.13);
         ctx.fillStyle = 'white';
@@ -263,7 +266,7 @@ function updateTextFitLeft() {
         canvas.width = img.width * 1;
         canvas.height = img.height * 0.75;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, img.width * 0.25, 0, img.width * 0.75, img.height * 0.75);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.naturalWidth * 0, img.naturalHeight * 0, img.width * 0.25, img.height * 1);
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.05, img.height * 0.62, icon.naturalWidth * 0.10, icon.naturalHeight * 0.10);
         ctx.fillStyle = 'white';
@@ -274,7 +277,7 @@ function updateTextFitLeft() {
         canvas.width = img.width * 1;
         canvas.height = img.height * 0.75;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, img.width * 0.25, 0, img.width * 0.75, img.height * 0.75);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.naturalWidth * 0, img.naturalHeight * 0, img.width * 0.25, img.height * 1);
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.03, img.height * 0.64, icon.naturalWidth * 0.13, icon.naturalHeight * 0.13);
         ctx.fillStyle = 'white';
@@ -302,7 +305,7 @@ function Bottom () {
         canvas.height = img.height;
         var text = document.getElementById('buttonHtml').innerHTML;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.width * 0, img.height * 1, img.width * 1, img.height * -0.3);
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
@@ -318,7 +321,7 @@ function Bottom () {
         canvas.height = img.height;
         var text = document.getElementById('buttonHtml').innerHTML;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.width * 0, img.height * 1, img.width * 1, img.height * -0.25);
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
@@ -342,7 +345,7 @@ function updateTextBottom() {
         canvas.height = img.height;
         var text = document.getElementById('buttonHtml').innerHTML;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.width * 0, img.height * 1, img.width * 1, img.height * -0.3);
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
@@ -358,7 +361,7 @@ function updateTextBottom() {
         canvas.height = img.height;
         var text = document.getElementById('buttonHtml').innerHTML;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.width * 0, img.height * 1, img.width * 1, img.height * -0.25);
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
@@ -387,7 +390,7 @@ function fitBottom() {
         canvas.width = img.width * 0.75;
         canvas.height = img.height * 1;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.width * 0, img.height * 1, img.width * 0.75, img.height * -0.25);
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.naturalWidth * 0.02, icon.naturalHeight * 0.775, icon.naturalWidth * 0.12, icon.naturalHeight * 0.12);
         ctx.globalAlpha=1;
@@ -399,7 +402,7 @@ function fitBottom() {
         canvas.width = img.width * 0.75;
         canvas.height = img.height * 1;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.width * 0, img.height * 1, img.width * 0.75, img.height * -0.25);
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.naturalWidth * 0.04, icon.naturalHeight * 1.18, icon.naturalWidth * 0.14, icon.naturalHeight * 0.14);
         ctx.globalAlpha=1;
@@ -420,7 +423,7 @@ function updateTextFitBottom() {
         canvas.width = img.width * 0.75;
         canvas.height = img.height * 1;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.width * 0, img.height * 1, img.width * 0.75, img.height * -0.25);
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.naturalWidth * 0.02, icon.naturalHeight * 0.775, icon.naturalWidth * 0.12, icon.naturalHeight * 0.12);
         ctx.globalAlpha=1;
@@ -433,7 +436,7 @@ function updateTextFitBottom() {
         canvas.width = img.width * 0.75;
         canvas.height = img.height * 1;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.width * 0, img.height * 1, img.width * 0.75, img.height * -0.25);
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.naturalWidth * 0.04, icon.naturalHeight * 1.18, icon.naturalWidth * 0.14, icon.naturalHeight * 0.14);
         ctx.globalAlpha=1;
@@ -459,7 +462,7 @@ function Right() {
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.width * 1, img.naturalHeight * 0, img.width * -0.27, img.height * 1);
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
@@ -473,7 +476,7 @@ function Right() {
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.width * 1, img.naturalHeight * 0, img.width * -0.3, img.height * 1);
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
@@ -496,7 +499,7 @@ function updateTextRight() {
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.width * 1, img.naturalHeight * 0, img.width * -0.27, img.height * 1);
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
@@ -511,7 +514,7 @@ function updateTextRight() {
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.width * 1, img.naturalHeight * 0, img.width * -0.3, img.height * 1);
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
@@ -535,7 +538,7 @@ function fitRight() {
         canvas.width = img.width * 1;
         canvas.height = img.height * 0.75;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.width * 1, img.height * 0, img.width * -0.3, img.height * 0.75);
         ctx.globalAlpha=1;
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 1.26, img.height * 0.62, icon.naturalWidth * 0.1, icon.naturalHeight * 0.1);
@@ -547,7 +550,7 @@ function fitRight() {
         canvas.width = img.width * 1;
         canvas.height = img.height * 0.75;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.width * 1, img.height * 0, img.width * -0.25, img.height * 0.75);
         ctx.globalAlpha=1;
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.92, img.height * 0.64, icon.naturalWidth * 0.13, icon.naturalHeight * 0.13);
@@ -568,7 +571,7 @@ function updateTextFitRight() {
         canvas.width = img.naturalWidth * 1.05;
         canvas.height = img.naturalHeight * 0.75;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.width * 1, img.height * 0, img.width * -0.3, img.height * 0.75);
         ctx.globalAlpha=1;
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 1.26, img.height * 0.62, icon.naturalWidth * 0.1, icon.naturalHeight * 0.1);
@@ -581,7 +584,7 @@ function updateTextFitRight() {
         canvas.width = img.width * 1.05;
         canvas.height = img.height * 0.75;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
-        ctx.fillStyle = '#47589C';
+        ctx.fillStyle = hex;
         ctx.fillRect(img.width * 1, img.height * 0, img.width * -0.25, img.height * 0.75);
         ctx.globalAlpha=1;
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.92, img.height * 0.64, icon.naturalWidth * 0.13, icon.naturalHeight * 0.13);

@@ -52,7 +52,7 @@ router.post('/brand', uploads3.single('file'), function (req, res) {
         console.log('error connecting to DB', err);
         res.sendStatus(500);
       }
-      client.query('INSERT INTO departments (url_brand, id) VALUES ($1, $2);',
+      client.query('UPDATE departments SET url_brand=$1 WHERE id=$2;',
                   [url, dep],
             function (err) {
               if (err) {
