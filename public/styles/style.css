@@ -394,6 +394,7 @@ h1 {
   width: 300px;
 }
 .show-access-button {
+  margin-top: 5px;
   background: lightgray;
   width: 40%;
   display: inline-block;
@@ -429,14 +430,14 @@ h1 {
   display: inline;
 }
 .submit-button {
-  background: lightgray;
+  /*background: lightgray;*/
   width: 40%;
   top: 200px;
   position: relative;
 }
 .submit-button:hover {
-  color: white;
-  background: darkgray;
+  /*color: white;*/
+  /*background: darkgray;*/
   text-decoration: underline;
 }
 

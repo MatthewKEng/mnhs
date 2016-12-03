@@ -79,17 +79,7 @@
       <div>
         <h5>
           <img class="modal-size" ng-src="{{gallery.modalImage.url_image}}" alt="large version of image" />
-          <div class="pull-right">
-            <h4><p><u>Creator Comment</u></p></h4>
-            <p>{{gallery.modalUserComment}}</p>
-            <h4><p><u>Manager Comment</u></p></h4>
-            <p>{{gallery.modalAdminComment}}</p>
-          </div>
         </h5>
-        <div>
-          <h4><u>Leave a comment</u></h4>
-          <input ng-model="admin.reviseComment" />
-        </div>
       </div>
     </div>
     <div class="modal-footer" ng-show="gallery.addImage==false && gallery.modalImage!=undefined">
