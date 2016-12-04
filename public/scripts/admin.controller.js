@@ -475,10 +475,21 @@ admin.deleteEachDepartment = function(){
   console.log('whats the department names',admin.deptNames);
   //function to loop through and get department names based on department_id
   admin.departmentFinder = function (department_id) {
-    for (var i = 0; i < admin.deptNames.length; i++) {
-      if (department_id == admin.deptNames[i].id) {
-        admin.departmentName = admin.deptNames[i].department;
-        console.log('whats the department of selected', admin.departmentName);
+    if (admin.deptNames == undefined) {
+      AccessService.getDepartmentIds().then(function() {
+        for (var i = 0; i < admin.deptNames.length; i++) {
+          if (department_id == admin.deptNames[i].id) {
+            admin.departmentName = admin.deptNames[i].department;
+            console.log('whats the department of selected', admin.departmentName);
+          }
+        }
+      }); 
+    } else {
+      for (var i = 0; i < admin.deptNames.length; i++) {
+        if (department_id == admin.deptNames[i].id) {
+          admin.departmentName = admin.deptNames[i].department;
+          console.log('whats the department of selected', admin.departmentName);
+        }
       }
     }
   }
