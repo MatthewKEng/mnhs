@@ -8,7 +8,7 @@ const path = require('path');
 const pg = require('pg');
 
 var config = {
-  database: 'rho'
+  database: 'mnhs'
 };
 
 var pool = new pg.Pool(config);
@@ -22,7 +22,7 @@ var s3 = new AWS.S3();
 var uploads3 = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'rho',
+    bucket: 'mnhs',
     // Makes file viewable to public, which makes things easier when retrieving
     // file later on.  This is optional, but helpful.
     acl: 'public-read',
@@ -126,7 +126,7 @@ router.post('/', uploads3.single('file'), function (req, res) {
 router.delete('/:key', function (req, res) {
   var key = req.params.key;
   var url = 'https://s3.amazonaws.com/mnhs/' + key;
-  var bucket = 'rho';
+  var bucket = 'mnhs';
   var params = {
     Bucket: bucket,
     Key: key,
@@ -164,7 +164,7 @@ router.delete('/:key', function (req, res) {
 //deletes entries from S3 database, then delete from SQL
 router.delete('/:key/:id', function (req, res) {
   var key = req.params.key;
-  var bucket = 'rho';
+  var bucket = 'mnhs';
   var params = {
     Bucket: bucket,
     Key: key,

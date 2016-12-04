@@ -1,7 +1,7 @@
 const pg = require('pg');
 
 var config = {
-  database: 'rho'
+  database: 'mnhs'
 };
 
 var pool = new pg.Pool(config);
