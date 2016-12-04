@@ -297,7 +297,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     });
   }
 
-  //to update and add a column to users DB with department // not sure how this should work???
+
   admin.addColumnUsers = function(){
     console.log('department');
     $http.post('/access/users', {
@@ -501,7 +501,10 @@ admin.deleteEachDepartment = function(){
       url: '/image/brand',
       method: 'POST',
       data: admin.upload,
+    }).then(function(){
+      admin.upload.color = "";
     });
+
   };
 
 

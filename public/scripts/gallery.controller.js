@@ -158,7 +158,8 @@ function GalleryController($http, $location, TruthinessService, BrandTableServic
       // console.log('whats the department_id', image.department_id);
         //console.log('whats the brand url response', response[0].url_brand);
         ImageService.brand = response[0].url_brand;
-        // console.log('whats the brand url', ImageService.brand);
+        ImageService.brandColor = response[0].brand_color;
+        console.log('whats the brand color', ImageService.brandColor);
         $location.path('/photoedit');
       });
   }

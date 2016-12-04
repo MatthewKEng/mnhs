@@ -42,18 +42,19 @@ var uploads3 = multer({
 });
 
 // Post request.  Need to send department_id as part of req.body from client
-router.post('/brand', uploads3.single('file'), function (req, res) {
+router.post('/brand', uploads3.single('file'), function (req, res) {  // add logic here for hexagons to put in departments table
   // On success, send image to SQL DB to store URL.
   var url = 'https://s3.amazonaws.com/mnhs/' + req.file.key;
   var dep = req.body.deptId;
+  var color = req.body.color;
   pool.connect(function (err, client, done) {
     try {
       if (err) {
         console.log('error connecting to DB', err);
         res.sendStatus(500);
       }
-      client.query('INSERT INTO brands (url_brand, department_id) VALUES ($1, $2);',
-                  [url, dep],
+      client.query('UPDATE departments SET url_brand=$1, brand_color=$2 WHERE id=$3;',
+                  [url, color, dep],
             function (err) {
               if (err) {
                 console.log('Error inserting into db', err);
