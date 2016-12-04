@@ -3,7 +3,7 @@ const path = require('path');
 const pg = require('pg');
 
 var config = {
-  database: 'mnhs'
+  database: 'rho'
 };
 
 var pool = new pg.Pool(config);
