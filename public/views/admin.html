@@ -18,7 +18,7 @@
       <img ng-src="{{pending.saved_edit}}" alt="pending submission" class="img-responsive img-thumbnail"/>
     </div>
     <span>
-      <button ng-click="admin.approveButton(pending.department_id)" class="btn btn-success">Approve</button>
+      <button ng-click="admin.approveButton(pending, 'Approved')" class="btn btn-success">Approve</button>
       <button  ng-click="admin.modalImageData = pending; admin.modalAdminComment = pending.admin_comment; admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
       admin.reviseButton(pending)" class="btn btn-danger">Revise</button>
       <button ng-click="admin.modalImageData = pending; admin.modalAdminComment = pending.admin_comment; admin.modalUserComment = pending.user_comment; admin.modalImage = pending.saved_edit;
@@ -36,7 +36,7 @@
     <span>
       <button ng-click="admin.deleteButton(approved)" class="btn btn-danger">Delete</button>
       <button ng-click="admin.modalAdminComment = approved.admin_comment; admin.modalUserComment = approved.user_comment; admin.modalImage = approved.saved_edit;
-       admin.viewButtonApproved(approved.department_id)" class="btn btn-info">View</button>
+       admin.viewButtonApproved(approved.department_id); admin.modalImageData = approved" class="btn btn-info">View</button>
     </span>
   </div>
 </div>
@@ -50,7 +50,7 @@
     <span>
       <button ng-click="admin.deleteButton(revision)" class="btn btn-danger">Delete</button>
       <button ng-click="admin.modalAdminComment = revision.admin_comment; admin.modalUserComment = revision.user_comment; admin.modalImage = revision.saved_edit;
-      admin.viewButtonApproved(revision.department_id)" class="btn btn-info">View</button>
+      admin.viewButtonApproved(revision.department_id); admin.modalImageData = revision;" class="btn btn-info">View</button>
     </span>
   </div>
 </div>
@@ -207,7 +207,7 @@
       <span>
         <button ng-click="admin.approveButton(admin.modalImageData, admin.reviseComment)" ng-show="((admin.showApproved))" class="btn btn-success">Approve</button>
         <button ng-show="((admin.rivisionShow))" ng-click="admin.subReviseButton(admin.modalImageData)" class="btn btn-danger">Revise</button>
-        <button ng-show="((admin.deleteShow))" ng-click="admin.deleteButton(admin)" class="btn btn-danger">Delete</button>
+        <button ng-show="((admin.deleteShow))" ng-click="admin.deleteButton(admin.modalImageData)" class="btn btn-danger">Delete</button>
       </span>
     </div>
   </div>

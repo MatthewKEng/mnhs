@@ -336,13 +336,13 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
 //delete button for all users
   admin.deleteButton = function(pending) {
     console.log('pending ', pending);
-    var id = pending.id;
-    $http.delete('/submissions/'+id, {
+    var key = pending.saved_edit.replace('https://s3.amazonaws.com/mnhs/', '');
+    $http.delete('/image/submissions/' + key, {
     }).then(function(){
       //$location.path('/admin'); //on click of button needs to refresh and not on page load
       //reload submissions data
       admin.getSubmissions();
-
+      admin.closeModal();
     })
   }
 

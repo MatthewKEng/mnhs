@@ -153,8 +153,12 @@ function GalleryController($http, $location, TruthinessService, BrandTableServic
     BrandTableService.getBrand(image.department_id).then(function(response){
       ImageService.image = image.url_image || image.saved_edit;
       ImageService.deptId = image.department_id;
-      ImageService.imageId = image.imageId;
-      // console.log('did we get the image clicked', ImageService.image);
+      if (image.url_image != undefined) {
+        ImageService.imageId = image.id;
+      } else {
+        ImageService.imageId = image.image_id;
+      }
+      console.log('did we get the image clicked', ImageService.image);
       // console.log('whats the department_id', image.department_id);
         //console.log('whats the brand url response', response[0].url_brand);
         ImageService.brand = response[0].url_brand;
@@ -162,16 +166,6 @@ function GalleryController($http, $location, TruthinessService, BrandTableServic
         console.log('whats the brand color', ImageService.brandColor);
         $location.path('/photoedit');
       });
-  }
-
-//delete function for image in gallery page
-  ctrl.deleteButton = function(pending) {
-    console.log('pending ', pending);
-    var id = pending.id;
-    $http.delete('/submissions/'+id, {
-    }).then(function(){
-
-    })
   }
 
 
@@ -197,19 +191,38 @@ function GalleryController($http, $location, TruthinessService, BrandTableServic
       $timeout(function() {
         ctrl.success = false;
       }, 2500);
-
     });
   };
 
   ctrl.deleteThisImage = function (image) {
     console.log('image', image);
-    var key = image.url_image.replace('https://s3.amazonaws.com/mnhs/', '');
-    console.log('key', key);
-    $http.delete('/image/' + key).then(function(response) {
-      if (response.status==204) {
-        ctrl.showDept(ctrl.currentDeptName);
-        ctrl.closeModal();
-      }
-    });
+    if (image.url_image != undefined) {
+      var key = image.url_image.replace('https://s3.amazonaws.com/mnhs/', '');
+      console.log('deleting url_image from images');
+      $http.delete('/image/images/' + key).then(function(response) {
+        if (response.status==204) {
+          ctrl.showDept(ctrl.currentDeptName);
+          ctrl.success = true;
+          $timeout(function() {
+            ctrl.success = false;
+            ctrl.closeModal();
+          }, 2500);
+        }
+      });
+    } else {
+      var key = image.saved_edit.replace('https://s3.amazonaws.com/mnhs/', '');
+      console.log('deleting saved_edit from submissions');
+      $http.delete('/image/submissions/' + key).then(function(response) {
+        if (response.status==204) {
+          console.log('Success!');
+          ctrl.success = true;
+          ctrl.getImages(ctrl.currentDeptName, 1);
+          $timeout(function() {
+            ctrl.success = false;
+            ctrl.closeModal();
+          }, 2500);
+        }
+      });
+    }
   };
 }

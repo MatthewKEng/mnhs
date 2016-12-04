@@ -123,8 +123,8 @@ router.post('/', uploads3.single('file'), function (req, res) {
 });
 
 
-//deletes entries from S3 database, then delete from SQL
-router.delete('/:key', function (req, res) {
+//deletes images with no overlay from S3 database, then delete from SQL
+router.delete('/images/:key', function (req, res) {
   var key = req.params.key;
   var url = 'https://s3.amazonaws.com/mnhs/' + key;
   var bucket = 'mnhs';
@@ -138,7 +138,6 @@ router.delete('/:key', function (req, res) {
     } else {
       console.log(data);           // successful response
       // On Success, need to delete image url from SQL database as well.
-      var id = req.params.id;
       pool.connect(function (err, client, done) {
         try {
           if (err) {
@@ -162,9 +161,10 @@ router.delete('/:key', function (req, res) {
   });
 });
 
-//deletes entries from S3 database, then delete from SQL
-router.delete('/:key/:id', function (req, res) {
+//deletes sumbmissions from S3 database, then delete from SQL
+router.delete('/submissions/:key', function (req, res) {
   var key = req.params.key;
+  var url = 'https://s3.amazonaws.com/mnhs/' + key;
   var bucket = 'mnhs';
   var params = {
     Bucket: bucket,
@@ -184,7 +184,7 @@ router.delete('/:key/:id', function (req, res) {
             res.sendStatus(500);
           }
 
-          client.query('DELETE FROM submissions WHERE id=$1;', [id],
+          client.query('DELETE FROM submissions WHERE saved_edit=$1;', [url],
             function (err, result) {
               if (err) {
                 console.log('Error querying DB: ', err);
