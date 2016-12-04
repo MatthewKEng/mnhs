@@ -505,3 +505,22 @@ h1 {
   background: linear-gradient(darkslategray, lightslategray);
   color: white;
 }
+
+.access {
+  align-content: right;
+  padding-top: 10px;
+
+}
+
+.accesslist {
+    align-content: right;
+    padding-top: 10px;
+}
+
+.accesssubmit {
+    align-content: right;
+}
+
+h3 span {
+  text-align: right;
+}
