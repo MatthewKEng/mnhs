@@ -122,6 +122,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   //     }
   //   }
   // }
+
   //function to show or hide add employee
   // admin.addEmployeeTruthiness = function () {
   //   //for loop that makes everything false if button is clicked
@@ -271,7 +272,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     admin.firstName;
     admin.lastName;
     admin.newUser;
-    // console.log('newUser ', admin.newUser);
+    console.log('newUser ', admin.newUser);
     $http.post('/access', {
       first_name: admin.firstName,
       last_name: admin.lastName,
@@ -483,7 +484,7 @@ admin.deleteEachDepartment = function(){
             console.log('whats the department of selected', admin.departmentName);
           }
         }
-      }); 
+      });
     } else {
       for (var i = 0; i < admin.deptNames.length; i++) {
         if (department_id == admin.deptNames[i].id) {
