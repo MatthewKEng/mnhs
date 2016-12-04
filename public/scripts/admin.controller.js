@@ -15,6 +15,8 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   admin.pendingCount = 0;
   admin.revisionCount = 0;
 
+  admin.addEmployeeTruthiness
+
   //ng-show variables onload
   admin.accessControlsDisplay = false;
   admin.pendingGalleryDisplay = true;
@@ -121,24 +123,24 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   //   }
   // }
   //function to show or hide add employee
-  admin.addEmployeeTruthiness = function () {
-    //for loop that makes everything false if button is clicked
-    // for (var i = 0; i < admin.allUserAccess.length; i++) {
-    //   admin.showUserAccess[i] = false;
-    //   admin.plus[i] = true;
-    //   admin.minus[i] = false;
-    //   }
-    // if else stament to set the boolean value of admin.showAddEmployee for ngShow
-    if (admin.showAddEmployee == false) {
-        admin.showAddEmployee = true;
-        admin.empPlus = false;
-        //console.log('whats the plus truth ',admin.empPlus);
-    }else{
-        admin.showAddEmployee = false;
-        admin.empPlus = true;
-        //console.log('whats the minus truth ',admin.empPlus);
-    }
-  }
+  // admin.addEmployeeTruthiness = function () {
+  //   //for loop that makes everything false if button is clicked
+  //   // for (var i = 0; i < admin.allUserAccess.length; i++) {
+  //   //   admin.showUserAccess[i] = false;
+  //   //   admin.plus[i] = true;
+  //   //   admin.minus[i] = false;
+  //   //   }
+  //   // if else stament to set the boolean value of admin.showAddEmployee for ngShow
+  //   if (admin.showAddEmployee == false) {
+  //       admin.showAddEmployee = true;
+  //       admin.empPlus = false;
+  //       //console.log('whats the plus truth ',admin.empPlus);
+  //   }else{
+  //       admin.showAddEmployee = false;
+  //       admin.empPlus = true;
+  //       //console.log('whats the minus truth ',admin.empPlus);
+  //   }
+  // }
 
 //   //apply correct checkbox truthiness value for if it shows for ng-show
 //
