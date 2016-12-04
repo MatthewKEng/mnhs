@@ -85,10 +85,9 @@
         <button ng-show="((admin.deleteShow))" ng-click="admin.deleteButton(admin)" class="btn btn-danger">Delete</button> -->
 
         <button class="upload-form-button" ng-show="gallery.addImage==false && gallery.modalImage.url_image!=undefined" ng-click="gallery.sendThisImage(gallery.modalImage)">Edit Image</button>
-        <button class="upload-form-button" ng-show="gallery.addImage==false && gallery.modalImage.status=='approved' && gallery.notDept==false" ng-click="gallery.disableButtons">Download Image</button>
+        <a target="_self" href="{{gallery.modalImage.saved_edit}}" download="download"><button class="upload-form-button" ng-show="gallery.addImage==false && gallery.modalImage.status=='approved' && gallery.notDept==false" ng-click="gallery.disableButtons">Download Image</button></a>
         <button class="upload-form-button" ng-show="gallery.addImage==false && gallery.modalImage!=undefined && gallery.notDept==false" ng-click="gallery.deleteThisImage(gallery.modalImage)">Delete</button>
         <div class="footer-spacer" ng-show="gallery.notDept==true" style="height: 46px;">
-
         </div>
 
       </span>
