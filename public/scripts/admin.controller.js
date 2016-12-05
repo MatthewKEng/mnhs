@@ -154,7 +154,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
 //       }
 //     }
 //   }
-showAccess
+
   //make the key pretty function
   admin.pretty = function (key) {
     var prettyKey = key.replace(/_/g, " ").toLocaleUpperCase();
