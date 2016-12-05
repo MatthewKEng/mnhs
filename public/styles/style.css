@@ -291,9 +291,9 @@ h1 {
   color: white;
   font-size: 70px;
   text-align: center;
-  height: 150px;
-  width: 150px;
-  padding-top: 38px;
+  height: 170px;
+  width: 170px;
+  padding-top: 50px;
   cursor: pointer;
 }
 .addPhoto:hover {
@@ -303,7 +303,6 @@ h1 {
 }
 .addContainer {
   text-align: center;
-  margin-bottom: 20px;
 }
 .upload {
   text-align: center;
@@ -362,11 +361,31 @@ h1 {
   height: 87vh;
   width: 29%;
 }
+.spread {
+  overflow: scroll;
+  height: 87vh;
+  width: 85%;
+}
+.spread > .gallery-display {
+  display: inline-block;
+  width: 29%;
+}
 .disabled {
   cursor: not-allowed;
 }
 .access-display {
-  margin-top: 20px;
+  margin-top: 30px;
+}
+.access-column {
+  height: 260px;
+  margin-right: 5px;
+  border-right: 1px solid gray;
+}
+.access-last {
+  border-right: none;
+}
+.access-col-current {
+  width: 340px;
 }
 .access {
   text-align: left;
@@ -379,6 +398,12 @@ h1 {
 .current-access > ul {
   list-style-type: none;
   padding: none;
+  height: 150px;
+  padding-left: 0;
+  overflow: scroll;
+}
+.current-access {
+  margin-right: 5px;
 }
 .user-access {
   height: 150px;
@@ -387,13 +412,15 @@ h1 {
   overflow: scroll;
   height: 150px;
   position: absolute;
-  margin-left: 30px;
-  top: 35px;
+  top: 60px;
+}
+.edit-item {
+  padding: 2px;
 }
 .add-access-container {
   background: lightgray;
-  padding: 0 5px;
-  width: 300px;
+  padding: 5px;
+  width: 320px;
 }
 .show-access-button {
   margin-top: 5px;
@@ -404,6 +431,9 @@ h1 {
   position: relative;
   padding-right: 20px;
   width: 140px;
+}
+.submit-button-position {
+  text-align: center;
 }
 .show-access-button:hover, .show-access-title:hover,
 .show-access-button:hover > span{
@@ -442,7 +472,12 @@ h1 {
   /*background: darkgray;*/
   text-decoration: underline;
 }
-
+.user-added {
+  font-size: 20px;
+  padding: 10px;
+  position: relative;
+  bottom: 40px;
+}
 .welcome {
   color: white;
   text-transform: capitalize;
@@ -462,8 +497,8 @@ h1 {
   margin:20px;
 }
 .add-user {
-  display: inherit;
   margin-left: 20px;
+  margin-bottom: 20px;
 }
 .glyphicon {
   right: -6px;
@@ -496,6 +531,8 @@ h1 {
 .modal-size {
   max-width: 60vw;
   max-height: 60vh;
+  min-width: 30vw;
+  min-height: 30vw;
 }
 .upload-form-button {
   background: linear-gradient(#444, white);
@@ -506,4 +543,17 @@ h1 {
 .upload-form-button:hover {
   background: linear-gradient(darkslategray, lightslategray);
   color: white;
+}
+
+.accesslist {
+    align-content: right;
+    padding-top: 10px;
+}
+
+.accesssubmit {
+    align-content: right;
+}
+
+h3 span {
+  text-align: right;
 }

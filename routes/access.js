@@ -109,26 +109,26 @@ router.get('/', function(req, res) {
   });
 });//end of get router
 
-//post users from admin into approved_users table
-router.post('/', function(req, res) {
-  pool.connect(function(error, client, done) {
-    if (error) {
-      done();
-      console.log('Error connecting to DB', error);
-      res.sendStatus(500);
-    }
-    client.query('INSERT INTO users (first_name, last_name, email) ' + 'VALUES ($1, $2, $3)', [req.body.first_name, req.body.last_name, req.body.email],
-    function(error, result) {
-      if (error) {
-        done();
-        console.log('Error querying DB', error);
-        res.sendStatus(500);
-      }
-      //console.log('whats the access route rows data',result.rows);
-      res.sendStatus(201);
-    });
-  });
-});//end of post router
+// //post users from admin into approved_users table
+// router.post('/', function(req, res) {
+//   pool.connect(function(error, client, done) {
+//     if (error) {
+//       done();
+//       console.log('Error connecting to DB', error);
+//       res.sendStatus(500);
+//     }
+//     client.query('INSERT INTO users (first_name, last_name, email) ' + 'VALUES ($1, $2, $3)', [req.body.first_name, req.body.last_name, req.body.email],
+//     function(error, result) {
+//       if (error) {
+//         done();
+//         console.log('Error querying DB', error);
+//         res.sendStatus(500);
+//       }
+//       //console.log('whats the access route rows data',result.rows);
+//       res.sendStatus(201);
+//     });
+//   });
+// });//end of post router
 
 
 
@@ -155,6 +155,27 @@ router.post('/users', function(req, res) {
     });
   });
 });//end of get router
+
+//post new users from admin.controller into approved_users table
+router.post('/', function(req, res) {
+  pool.connect(function(error, client, done) {
+    if (error) {
+      done();
+      console.log('Error connecting to DB', error);
+      res.sendStatus(500);
+    }
+    client.query('INSERT INTO users (first_name, last_name, email) ' + 'VALUES ($1, $2, $3)', [req.body.first_name, req.body.last_name, req.body.email],
+    function(error, result) {
+      if (error) {
+        done();
+        console.log('Error querying DB', error);
+        res.sendStatus(500);
+      }
+      //console.log('whats the access route rows data',result.rows);
+      res.sendStatus(201);
+    });
+  });
+});//end of post router
 
 
 
