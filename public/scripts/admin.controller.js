@@ -483,7 +483,7 @@ admin.deleteEachDepartment = function(){
             console.log('whats the department of selected', admin.departmentName);
           }
         }
-      }); 
+      });
     } else {
       for (var i = 0; i < admin.deptNames.length; i++) {
         if (department_id == admin.deptNames[i].id) {
