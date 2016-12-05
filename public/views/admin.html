@@ -15,7 +15,7 @@
   <h3>Pending Photos</h3>
   <div ng-repeat="pending in admin.pending" class="row col-xs-4 col-md-4 col-lg-4 text-center" class="row gallery-display">
     <div>
-      <img ng-src="{{pending.saved_edit}}" alt="pending submission" class="img-responsive img-thumbnail"/>
+      <img ng-src="{{pending.saved_edit}}" alt="pending submission" class="img-responsive gallery-item img-thumbnail"/>
     </div>
     <span>
       <button ng-click="admin.approveButton(pending, 'Approved')" class="btn btn-success">Approve</button>
@@ -31,7 +31,7 @@
   <h3>Approved Photos</h3>
   <div ng-repeat="approved in admin.aprroved" class="row col-xs-4 col-md-4 col-lg-4 text-center" class="row addContainer">
     <div>
-      <img ng-src="{{approved.saved_edit}}" alt="approved submission" class="img-responsive img-thumbnail"/>
+      <img ng-src="{{approved.saved_edit}}" alt="approved submission" class="img-responsive gallery-item img-thumbnail"/>
     </div>
     <span>
       <button ng-click="admin.deleteButton(approved)" class="btn btn-danger">Delete</button>
@@ -45,7 +45,7 @@
   <h3>Photos under Revision</h3>
   <div ng-repeat="revision in admin.revision" class="row col-xs-4 col-md-4 col-lg-4 text-center">
     <div>
-      <img ng-src="{{revision.saved_edit}}" alt="revision submission" class="img-responsive img-thumbnail" />
+      <img ng-src="{{revision.saved_edit}}" alt="revision submission" class="img-responsive gallery-item img-thumbnail" />
     </div>
     <span>
       <button ng-click="admin.deleteButton(revision)" class="btn btn-danger">Delete</button>
@@ -181,7 +181,7 @@
       <!--image dynamicly created same image as image clicked-->
       <div>
         <h5 ng-show="((admin.showUserComment))">
-          <img ng-src="{{admin.modalImage}}" alt="large version of image" />
+          <img class="modal-size" ng-src="{{admin.modalImage}}" alt="large version of image" />
           <div class="pull-right">
             <div ng-show="((admin.showInput))">
               <h4><u>Leave a comment</u></h4>

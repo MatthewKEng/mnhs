@@ -359,6 +359,15 @@ h1 {
   height: 87vh;
   width: 29%;
 }
+.spread {
+  overflow: scroll;
+  height: 87vh;
+  width: 85%;
+}
+.spread > .gallery-display {
+  display: inline-block;
+  width: 29%;
+}
 .disabled {
   cursor: not-allowed;
 }
@@ -520,6 +529,8 @@ h1 {
 .modal-size {
   max-width: 60vw;
   max-height: 60vh;
+  min-width: 30vw;
+  min-height: 30vw;
 }
 .upload-form-button {
   background: linear-gradient(#444, white);

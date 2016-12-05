@@ -286,8 +286,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
       $timeout(function() {
         admin.userAdded = false;
       }, 2500);
-
-  });
+    });
   }
 
   //add a new department
