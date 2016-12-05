@@ -1,7 +1,7 @@
 angular.module('BrandImageManagerApp')
     .controller('AdminController', AdminController);
 
-function AdminController($http, $location, AccessService, SubmissionsService, Upload) {
+function AdminController($http, $location, AccessService, SubmissionsService, Upload, $timeout) {
   var admin = this;
   var reviseClass = true;
   var reviseInput = false;
@@ -25,6 +25,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   admin.brandsConsoleDisplay = false;
   admin.showEmpDepts = false;
   admin.showNotEmpDepts = false;
+  admin.userAdded = false;
 
   //function to display access
   admin.showAccess = function () {
@@ -182,19 +183,19 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
             admin.approvedCount++;
             //console.log('whats the approved count',admin.approvedCount);
             admin.aprroved.push(angular.copy(admin.allUsersSubmissions[i]));
-            console.log('whats the aprroved array', admin.aprroved);
+            // console.log('whats the aprroved array', admin.aprroved);
         }else if (admin.allUsersSubmissions[i].status == 'pending') {
           //count the number under this status
           admin.pendingCount++;
           //console.log('whats the pending count',admin.pendingCount);
           admin.pending.push(angular.copy(admin.allUsersSubmissions[i]));
-          console.log('whats the pending array', admin.pending);
+          // console.log('whats the pending array', admin.pending);
         }else if (admin.allUsersSubmissions[i].status == 'revision') {
           //count the number under this status
           admin.revisionCount++;
           //console.log('whats the revision count',admin.revisionCount);
           admin.revision.push(angular.copy(admin.allUsersSubmissions[i]));
-          console.log('whats the revision array', admin.revision);
+          // console.log('whats the revision array', admin.revision);
         }
       }
     });
@@ -267,19 +268,24 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
 
 
   // //submit new user button
-  admin.submitButton = function() {
-    admin.firstName;
-    admin.lastName;
-    admin.newUser;
+  admin.submitButton = function(form) {
     // console.log('newUser ', admin.newUser);
+    if (form.$invalid) {
+      return;
+    }
     $http.post('/access', {
       first_name: admin.firstName,
       last_name: admin.lastName,
       email: admin.newUser
     }).then(function(){
+      admin.userAdded = true;
       admin.newUser = "";
       admin.firstName = "";
       admin.lastName = "";
+      admin.getUsersAccesses();
+      $timeout(function() {
+        admin.userAdded = false;
+      }, 2500);
 
   });
   }
@@ -301,13 +307,13 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
 
 
   admin.addColumnUsers = function(){
-    console.log('department');
+    // console.log('department');
     $http.post('/access/users', {
       department: admin.newDepartment
 
     }).then(function(){
       admin.newDepartment = "";
-      console.log('end of function');
+      // console.log('end of function');
     })
   }
 
@@ -315,10 +321,10 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
 
 //approve button for admin
   admin.approveButton = function(pending, adminComment) {
-    console.log('pending ', pending);
+    // console.log('pending ', pending);
     var id = pending.id;
     pending.status = "approved";
-    console.log('status ', pending.status);
+    // console.log('status ', pending.status);
     $http.put('/submissions/'+id, {
       id: id,
       status: pending.status,
@@ -335,7 +341,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
 
 //delete button for all users
   admin.deleteButton = function(pending) {
-    console.log('pending ', pending);
+    // console.log('pending ', pending);
     var key = pending.saved_edit.replace('https://s3.amazonaws.com/mnhs/', '');
     $http.delete('/image/submissions/' + key, {
     }).then(function(){
@@ -349,7 +355,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
 //delete function for departments table
 admin.deleteDepartment = function (){
 
-  console.log('remove', admin.remove); //admin.html line 176 ng-value, will target id with name.id, will target name with name.name
+  // console.log('remove', admin.remove); //admin.html line 176 ng-value, will target id with name.id, will target name with name.name
   $http.delete('/access/' + admin.remove.department+'/' + admin.remove.id, {
   }).then(function(){
     // admin.uploadBrand(); unable to refresh
@@ -362,12 +368,12 @@ admin.deleteDepartment = function (){
 //delete function for each department in users table
 admin.deleteEachDepartment = function(){
   var id = admin.remove.id;
-  console.log('id in 2nd delete ', id);
+  // console.log('id in 2nd delete ', id);
   $http.delete('/access/users/' +id, {
     // department: admin.newDepartment
   }).then(function(){
     admin.remove = "";
-    console.log('end of function');
+    // console.log('end of function');
   })
   }
 
@@ -375,8 +381,8 @@ admin.deleteEachDepartment = function(){
 
 //revise button under pending, will pop up the modal
   admin.reviseButton = function(image) {
-    console.log('revise working');
-    console.log('image', image);
+    // console.log('revise working');
+    // console.log('image', image);
     imageData = image; //setting image data equal to the current image
     reviseClass = false; //for ng-show/ng-hide to hide delete and approve button on modal
     reviseInput = true; //to show input for comments
@@ -385,12 +391,12 @@ admin.deleteEachDepartment = function(){
 
   //popup modal revise button to submit comment for ADMIN
   admin.subReviseButton = function(imageData) {
-    console.log('image info ', imageData); //using same image data to target image id
+    // console.log('image info ', imageData); //using same image data to target image id
     admin.closeModal();
     reviseClass = true; //should revert buttons back for view
     reviseInput = false; //should get rid of input and allow to see comment
     admin.reviseComment;
-    console.log('comment ', admin.reviseComment);
+    // console.log('comment ', admin.reviseComment);
     //updates comments and posts to DB
     $http.put('/submissions/'+imageData.id, {
       status: "revision",

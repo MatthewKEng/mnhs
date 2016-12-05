@@ -156,7 +156,7 @@ router.post('/users', function(req, res) {
   });
 });//end of get router
 
-//post users from admin into approved_users table
+//post new users from admin.controller into approved_users table
 router.post('/', function(req, res) {
   pool.connect(function(error, client, done) {
     if (error) {
