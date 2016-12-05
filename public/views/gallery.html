@@ -26,7 +26,7 @@
     </div>
   </div>
 
-  <div class="row col-xs-3 text-center overflow" ng-hide="gallery.currentDeptName==undefined">
+  <div class="row col-xs-3 text-center" ng-class="{'spread': gallery.notDept, 'overflow':!gallery.notDept}" ng-hide="gallery.currentDeptName==undefined">
     <h4><u>Approved Images:&nbsp;{{gallery.approvedCount}}</u></h4>
     <div class="gallery-display" ng-repeat="image in gallery.approved">
       <a ng-class="gallery.disabled()"><img ng-src="{{image.saved_edit}}" ng-click="gallery.modalImage=image; gallery.viewButton()" class="img-responsive gallery-item" alt="approved image" /></a>
@@ -55,7 +55,7 @@
       <div>
         <h3>Upload a new image.</h3>
         <div class="row preview-block">
-          <img ng-show="gallery.upload.file!=undefined" ngf-src="gallery.upload.file" alt="Image Preview" class="preview" />
+          <img ng-show="gallery.upload.file!=undefined" ngf-src="gallery.upload.file" alt="Image Preview" class="modal-size preview" />
           <span ng-show="gallery.success" class="success btn btn-success">Success!</span>
         </div>
       </div>

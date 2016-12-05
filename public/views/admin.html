@@ -15,7 +15,7 @@
   <h3>Pending Photos</h3>
   <div ng-repeat="pending in admin.pending" class="row col-xs-4 col-md-4 col-lg-4 text-center" class="row gallery-display">
     <div>
-      <img ng-src="{{pending.saved_edit}}" alt="pending submission" class="img-responsive img-thumbnail"/>
+      <img ng-src="{{pending.saved_edit}}" alt="pending submission" class="img-responsive gallery-item img-thumbnail"/>
     </div>
     <span>
       <button ng-click="admin.approveButton(pending, 'Approved')" class="btn btn-success">Approve</button>
@@ -31,7 +31,7 @@
   <h3>Approved Photos</h3>
   <div ng-repeat="approved in admin.aprroved" class="row col-xs-4 col-md-4 col-lg-4 text-center" class="row addContainer">
     <div>
-      <img ng-src="{{approved.saved_edit}}" alt="approved submission" class="img-responsive img-thumbnail"/>
+      <img ng-src="{{approved.saved_edit}}" alt="approved submission" class="img-responsive gallery-item img-thumbnail"/>
     </div>
     <span>
       <button ng-click="admin.deleteButton(approved)" class="btn btn-danger">Delete</button>
@@ -45,7 +45,7 @@
   <h3>Photos under Revision</h3>
   <div ng-repeat="revision in admin.revision" class="row col-xs-4 col-md-4 col-lg-4 text-center">
     <div>
-      <img ng-src="{{revision.saved_edit}}" alt="revision submission" class="img-responsive img-thumbnail" />
+      <img ng-src="{{revision.saved_edit}}" alt="revision submission" class="img-responsive gallery-item img-thumbnail" />
     </div>
     <span>
       <button ng-click="admin.deleteButton(revision)" class="btn btn-danger">Delete</button>
@@ -56,8 +56,8 @@
 </div>
 <!--access controls-->
 <div ng-show="((admin.accessControlsDisplay))" class="container text-center access-display">
-  <div class="col-xs-4">
-    <div class="row access" ng-show="admin.empPlus">
+  <div class="col-xs-4 access-column access-col-current">
+    <div class="row access">
       <h4 class="user-select">Select Employee:</h4>
       <select class="user-select" ng-model="admin.selectedUser" ng-options="user.id as
       admin.pretty(user.first_name) + ' ' + admin.pretty(user.last_name) for user
@@ -65,26 +65,21 @@
       </select>
     </div>
 
-    <div class="access current-access row" ng-show="admin.empPlus">
+    <div class="access current-access row">
       <h4>Current Access</h4>
       <ul>
         <li ng-repeat="dept in admin.empDepts">{{admin.pretty(dept)}}</li>
       </ul>
     </div>
-
   </div>
 
-
-
-
-
-  <div class="col-xs-5" ng-show="admin.empPlus" class="access">
-    <button class="show-access-button" ng-click="admin.showNotEmpDepts=!admin.showNotEmpDepts; admin.showEmpDepts=false; admin.clearDepts();">Add Access <div class="arrow-down"></button>
-    <button class="show-access-button" ng-click="admin.showEmpDepts=!admin.showEmpDepts; admin.showNotEmpDepts=false; admin.clearDepts();">Remove Access <div class="arrow-down"></button>
+  <div class="col-xs-4 access access-column">
+    <button class="show-access-button" ng-click="admin.showNotEmpDepts=!admin.showNotEmpDepts; admin.showEmpDepts=false; admin.clearDepts();">Add Access <div class="arrow-down"></div></button>
+    <button class="show-access-button" ng-click="admin.showEmpDepts=!admin.showEmpDepts; admin.showNotEmpDepts=false; admin.clearDepts();">Remove Access <div class="arrow-down"></div></button>
 
     <div ng-show="admin.showNotEmpDepts" class="access row edit-access" class="accesslist">
       <div class="add-access-container">
-        <div ng-repeat="dept in admin.notEmpDepts" class="text-left">
+        <div ng-repeat="dept in admin.notEmpDepts" class="text-left edit-item">
           <input ng-model="admin[dept]" ng-init="admin[dept]=false" ng-change="admin.updateUsersAccesses(dept)" type="checkbox" />
           <label for="dept">{{admin.pretty(dept)}}</label>
         </div>
@@ -93,7 +88,7 @@
 
     <div ng-show="admin.showEmpDepts" class="access row edit-access" class="accesslist">
       <div class="add-access-container">
-        <div ng-repeat="dept in admin.empDepts" class="text-left">
+        <div ng-repeat="dept in admin.empDepts" class="text-left edit-item">
           <input ng-model="admin[dept]" ng-init="admin[dept]=false" ng-change="admin.updateUsersAccesses(dept)" type="checkbox" />
           <label for="dept">{{admin.pretty(dept)}}</label>
         </div>
@@ -102,33 +97,31 @@
     <div class="row submit-button-position">
       <button class="submit-button" ng-click="admin.submitChanges()" class="accessSubmit" style="color: #fff;background-color: #5cb85c;border-color: #4cae4c;">Submit</button><br />
     </div>
-  </div><br /><br /><br /><br /><br /><br /><br /><br /><br />
-
-<!--add Employee controlls-->
-  <div  class="col-xs-3" style="">
+  </div>
+  <!--add Employee controls-->
+  <div class="col-xs-3 access-column access-last">
     <div>
-      <button ng-click="admin.addEmployeeTruthiness()" class="btn btn-default btn-sm show-access-button add-user"
-      ng-init="admin.showAddEmployee=false; admin.empPlus=true" ng-show="admin.accessControlsDisplay" style="margin-top: 100px;">Add Employee
+      <h4>Add Employee</h4>
 
       <!-- <span ng-show="admin.empPlus" class="glyphicon glyphicon-plus pull-right"></span>
       <span ng-hide="admin.empPlus" class="glyphicon glyphicon-minus pull-right"></span> -->
-    </button><br /><br />
-      <form class="form-block">
+    </button>
+      <form name="addUserForm" class="form-block">
         <div class="form-group">
           <label class="sr-only">First Name</label>
-          <input ng-model="admin.firstName" type="text" class="form-control" placeholder="First Name">
+          <input ng-model="admin.firstName" type="text" class="form-control" placeholder="First Name" required>
 
           <label class="sr-only">Last Name</label>
-          <input ng-model="admin.lastName" type="text" class="form-control" placeholder="Last Name">
+          <input ng-model="admin.lastName" type="text" class="form-control" placeholder="Last Name" required>
 
           <label class="sr-only" for="exampleInputEmail3">Email address</label>
-          <input ng-model="admin.newUser" type="email" class="form-control" placeholder="Email">
+          <input ng-model="admin.newUser" type="email" class="form-control" placeholder="Email" required>
         </div>
-          <button ng-click="admin.submitButton()" type="submit" class="btn btn-success btn-md">Submit</button>
+          <button ng-click="admin.submitButton(addUserForm)" type="submit" class="btn btn-success btn-md">Submit</button>
       </form>
+      <div ng-show="admin.userAdded" class="user-added btn btn-success">Success!</div>
     </div>
   </div>
-
 </div>
 
 <!--brands-->
@@ -188,7 +181,7 @@
       <!--image dynamicly created same image as image clicked-->
       <div>
         <h5 ng-show="((admin.showUserComment))">
-          <img ng-src="{{admin.modalImage}}" alt="large version of image" />
+          <img class="modal-size" ng-src="{{admin.modalImage}}" alt="large version of image" />
           <div class="pull-right">
             <div ng-show="((admin.showInput))">
               <h4><u>Leave a comment</u></h4>

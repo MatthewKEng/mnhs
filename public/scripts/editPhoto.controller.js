@@ -104,13 +104,13 @@ function resizeImage() {
     if (img.naturalWidth > img.naturalHeight){
         img.width = 850;
         img.height = 566;
-        icon.width = icon.naturalWidth;
-        icon.height = icon.naturalHeight;
+        icon.height = 100;
+        icon.width = (100 * (icon.naturalWidth / icon.naturalHeight));
     } else {
         img.width = 650;
         img.height = 850;
-        icon.width = icon.naturalWidth;
-        icon.height = icon.naturalHeight;
+        icon.width = 100;
+        icon.height = (100 * (icon.naturalHeight / icon.naturalWidth));
     }
 }
 
@@ -146,9 +146,10 @@ function Left() {
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
         ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.04, img.height * 0.84, icon.naturalWidth * 0.12, icon.naturalHeight * 0.12);
+        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.03, img.height * 0.82, icon.width * 0.9, icon.height * 0.9);
         ctx.fillStyle = 'white';
         ctx.font = "34px Gotham Condensed Book";
+        var text = document.getElementById('buttonHtml').innerHTML;
         wrapText(ctx, text, img.width * 0.035, img.height * 0.1, img.width * 0.2, lineHeight * 0.85);
     } else {
         canvas.width = img.width;
@@ -159,69 +160,15 @@ function Left() {
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
         ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.04, img.height * 0.88, icon.naturalWidth * 0.15, icon.naturalHeight * 0.15);
+        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.04, img.height * 0.85, icon.width, icon.height);
         ctx.fillStyle = 'white';
         ctx.font = "42px Gotham Condensed Book";
+        var text = document.getElementById('buttonHtml').innerHTML;
         wrapText(ctx, text, img.width * 0.035, img.height * 0.1, img.width * 0.24, lineHeight * 0.85);
 }
 }
 
-function updateTextLeft() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    var img = document.getElementById('hedgehog');
-    var icon = document.getElementById('icon');
-    resizeImage();
-    if (img.naturalWidth > img.naturalHeight){
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.fillStyle = hex;
-        ctx.fillRect(img.naturalWidth * 0, img.naturalHeight * 0, img.width * 0.3, img.height * 1);
-        ctx.globalAlpha=0.5;
-        ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.04, img.height * 0.84, icon.naturalWidth * 0.12, icon.naturalHeight * 0.12);
-        ctx.fillStyle = 'white';
-        ctx.font = "34px Gotham Condensed Book";
-        var text = document.getElementById('buttonHtml').innerHTML;
-        wrapText(ctx, text, img.width * 0.035, img.height * 0.1, img.width * 0.2, lineHeight * 0.85)
-    } else {
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.fillStyle = hex;
-        ctx.fillRect(img.naturalWidth * 0, img.naturalHeight * 0, img.width * 0.3, img.height * 1);
-        ctx.globalAlpha=0.5;
-        ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.04, img.height * 0.88, icon.naturalWidth * 0.15, icon.naturalHeight * 0.15);
-        ctx.fillStyle = 'white';
-        ctx.font = "42px Gotham Condensed Book";
-        var text = document.getElementById('buttonHtml').innerHTML;
-        wrapText(ctx, text, img.width * 0.035, img.height * 0.1, img.width * 0.24, lineHeight * 0.85)
-}
-}
 
-function htmlChangeOLeft() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    var img = document.getElementById('hedgehog');
-    var icon = document.getElementById('icon');
-    resizeImage();
-    canvas.width = img.width;
-    canvas.height = img.height;
-    ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-    ctx.fillStyle = hex;
-    ctx.fillRect(img.naturalWidth * 0, img.naturalHeight * 0, img.naturalWidth * 0.3, img.naturalHeight * 1);
-    ctx.globalAlpha=0.5;
-    ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-    ctx.globalAlpha=1;
-    ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.naturalWidth * 0.02, icon.naturalHeight * 0.88, icon.naturalWidth * 0.15, icon.naturalHeight * 0.15);
-    ctx.fillStyle = 'white';
-    ctx.font = "42px Gotham Condensed Book";
-    var text = document.getElementById('buttonHtml').innerHTML;
-    document.getElementById('buttonHtml').innerHTML = text;
-    wrapText(ctx, text, img.naturalWidth * 0.015, y, img.naturalWidth * 0.25, lineHeight);
-}
 
 
 
@@ -237,7 +184,7 @@ function fitLeft() {
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, img.width * 0.25, 0, img.width * 0.75, img.height * 0.75);
         ctx.fillStyle = hex;
         ctx.fillRect(img.naturalWidth * 0, img.naturalHeight * 0, img.width * 0.25, img.height * 1);
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.05, img.height * 0.62, icon.naturalWidth * 0.10, icon.naturalHeight * 0.10);
+        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.03, img.height * 0.58, icon.width * 0.8, icon.height * 0.8);
         ctx.fillStyle = 'white';
         ctx.font = "28px Gotham Condensed Book";
         var text = document.getElementById('buttonHtml').innerHTML;
@@ -248,7 +195,7 @@ function fitLeft() {
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, img.width * 0.25, 0, img.width * 0.75, img.height * 0.75);
         ctx.fillStyle = hex;
         ctx.fillRect(img.naturalWidth * 0, img.naturalHeight * 0, img.width * 0.25, img.height * 1);
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.03, img.height * 0.64, icon.naturalWidth * 0.13, icon.naturalHeight * 0.13);
+        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.03, img.height * 0.62, icon.width * 0.9, icon.height * 0.9);
         ctx.fillStyle = 'white';
         ctx.font = "28px Gotham Condensed Book";
         var text = document.getElementById('buttonHtml').innerHTML;
@@ -256,36 +203,7 @@ function fitLeft() {
 }
 }
 
-function updateTextFitLeft() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    var img = document.getElementById('hedgehog');
-    var icon = document.getElementById('icon');
-    resizeImage();
 
-    if (img.naturalWidth > img.naturalHeight){
-        canvas.width = img.width * 1;
-        canvas.height = img.height * 0.75;
-        ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, img.width * 0.25, 0, img.width * 0.75, img.height * 0.75);
-        ctx.fillStyle = hex;
-        ctx.fillRect(img.naturalWidth * 0, img.naturalHeight * 0, img.width * 0.25, img.height * 1);
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.05, img.height * 0.62, icon.naturalWidth * 0.10, icon.naturalHeight * 0.10);
-        ctx.fillStyle = 'white';
-        ctx.font = "28px Gotham Condensed Book";
-        var text = document.getElementById('buttonHtml').innerHTML;
-        wrapText(ctx, text, img.width * 0.03, img.height * 0.08, img.width * 0.21, lineHeight * 0.85);
-    } else {
-        canvas.width = img.width * 1;
-        canvas.height = img.height * 0.75;
-        ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, img.width * 0.25, 0, img.width * 0.75, img.height * 0.75);
-        ctx.fillStyle = hex;
-        ctx.fillRect(img.naturalWidth * 0, img.naturalHeight * 0, img.width * 0.25, img.height * 1);
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.03, img.height * 0.64, icon.naturalWidth * 0.13, icon.naturalHeight * 0.13);
-        ctx.fillStyle = 'white';
-        ctx.font = "28px Gotham Condensed Book";
-        var text = document.getElementById('buttonHtml').innerHTML;
-        wrapText(ctx, text, img.width * 0.03, img.height * 0.08, img.width * 0.23, lineHeight * 0.85);
-    }
-}
 
 
 
@@ -310,7 +228,7 @@ function Bottom () {
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
         ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.naturalWidth * 0.04, icon.naturalHeight * 0.74, icon.width * 0.15, icon.height * 0.15);
+        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.03, img.height * 0.76, icon.width, icon.height);
         ctx.fillStyle = 'white';
         ctx.fillRect(img.naturalWidth * 0.15, img.naturalHeight * 0.84, img.width * 0.001, img.height * -0.20);
         ctx.font = "30px Gotham Condensed Book";
@@ -326,54 +244,16 @@ function Bottom () {
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
         ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.naturalWidth * 0.04, icon.naturalHeight * 1.17, icon.width * 0.15, icon.height * 0.15);
+        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.02, img.height * 0.82, icon.width, icon.height);
         ctx.fillStyle = 'white';
         ctx.fillRect(img.naturalWidth * 0.15, img.naturalHeight * 0.8, img.width * 0.001, img.height * -0.20);
         ctx.font = "30px Gotham Condensed Book";
         // var text = document.getElementById('textHtmlBottom').innerHTML;
-        wrapText(ctx, text, img.naturalWidth * 0.19, img.naturalHeight * 0.66, img.naturalWidth * 0.5, lineHeight * 0.85)
+        wrapText(ctx, text, img.naturalWidth * 0.19, img.height * 0.82, img.width * 0.7, lineHeight * 0.85)
     }
 }
 
-function updateTextBottom() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    var img = document.getElementById('hedgehog');
-    var icon = document.getElementById('icon');
-    resizeImage();
-    if(img.naturalWidth > img.naturalHeight){
-        canvas.width = img.width;
-        canvas.height = img.height;
-        var text = document.getElementById('buttonHtml').innerHTML;
-        ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.fillStyle = hex;
-        ctx.fillRect(img.width * 0, img.height * 1, img.width * 1, img.height * -0.3);
-        ctx.globalAlpha=0.5;
-        ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.naturalWidth * 0.04, icon.naturalHeight * 0.74, icon.width * 0.15, icon.height * 0.15);
-        ctx.fillStyle = 'white';
-        ctx.fillRect(img.naturalWidth * 0.15, img.naturalHeight * 0.84, img.width * 0.001, img.height * -0.20);
-        ctx.font = "30px Gotham Condensed Book";
-        // var text = document.getElementById('textHtmlBottom').innerHTML;
-        wrapText(ctx, text, img.naturalWidth * 0.19, img.naturalHeight * 0.71, img.naturalWidth * 0.6, lineHeight * 0.85)
-    } else {
-        canvas.width = img.width;
-        canvas.height = img.height;
-        var text = document.getElementById('buttonHtml').innerHTML;
-        ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.fillStyle = hex;
-        ctx.fillRect(img.width * 0, img.height * 1, img.width * 1, img.height * -0.25);
-        ctx.globalAlpha=0.5;
-        ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.naturalWidth * 0.04, icon.naturalHeight * 1.17, icon.width * 0.15, icon.height * 0.15);
-        ctx.fillStyle = 'white';
-        ctx.fillRect(img.naturalWidth * 0.15, img.naturalHeight * 0.8, img.width * 0.001, img.height * -0.20);
-        ctx.font = "30px Gotham Condensed Book";
-        // var text = document.getElementById('textHtmlBottom').innerHTML;
-        wrapText(ctx, text, img.naturalWidth * 0.19, img.naturalHeight * 0.66, img.naturalWidth * 0.5, lineHeight * 0.85)
-    }
-}
+
 
 
 
@@ -392,40 +272,7 @@ function fitBottom() {
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
         ctx.fillStyle = hex;
         ctx.fillRect(img.width * 0, img.height * 1, img.width * 0.75, img.height * -0.25);
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.naturalWidth * 0.02, icon.naturalHeight * 0.775, icon.naturalWidth * 0.12, icon.naturalHeight * 0.12);
-        ctx.globalAlpha=1;
-        ctx.fillStyle = 'white';
-        ctx.fillRect(img.naturalWidth * 0.12, img.naturalHeight * 0.86, img.width * 0.001, img.height * -0.19);
-        ctx.font = "28px Gotham Condensed Book";
-        wrapText(ctx, text, img.naturalWidth * 0.15, img.naturalHeight * 0.74, img.naturalWidth * 0.5, lineHeight * 0.85)
-    } else {
-        canvas.width = img.width * 0.75;
-        canvas.height = img.height * 1;
-        ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
-        ctx.fillStyle = hex;
-        ctx.fillRect(img.width * 0, img.height * 1, img.width * 0.75, img.height * -0.25);
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.naturalWidth * 0.04, icon.naturalHeight * 1.18, icon.naturalWidth * 0.14, icon.naturalHeight * 0.14);
-        ctx.globalAlpha=1;
-        ctx.fillStyle = 'white';
-        ctx.fillRect(img.naturalWidth * 0.15, img.naturalHeight * 0.79, img.width * 0.001, img.height * -0.19);
-        ctx.font = "26px Gotham Condensed Book";
-        wrapText(ctx, text, img.width * 0.22, img.naturalHeight * 0.67, img.naturalWidth * 0.4, lineHeight * 0.85)
-    }
-}
-
-
-function updateTextFitBottom() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    var img = document.getElementById('hedgehog');
-    var icon = document.getElementById('icon');
-    resizeImage();
-    if (img.naturalWidth > img.naturalHeight){
-        canvas.width = img.width * 0.75;
-        canvas.height = img.height * 1;
-        ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
-        ctx.fillStyle = hex;
-        ctx.fillRect(img.width * 0, img.height * 1, img.width * 0.75, img.height * -0.25);
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.naturalWidth * 0.02, icon.naturalHeight * 0.775, icon.naturalWidth * 0.12, icon.naturalHeight * 0.12);
+        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.02, img.height * 0.81, icon.width * 0.8, icon.height * 0.8);
         ctx.globalAlpha=1;
         ctx.fillStyle = 'white';
         ctx.fillRect(img.naturalWidth * 0.12, img.naturalHeight * 0.86, img.width * 0.001, img.height * -0.19);
@@ -438,7 +285,7 @@ function updateTextFitBottom() {
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
         ctx.fillStyle = hex;
         ctx.fillRect(img.width * 0, img.height * 1, img.width * 0.75, img.height * -0.25);
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.naturalWidth * 0.04, icon.naturalHeight * 1.18, icon.naturalWidth * 0.14, icon.naturalHeight * 0.14);
+        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.03, img.height * 0.82, icon.width * 0.9, icon.height * 0.9);
         ctx.globalAlpha=1;
         ctx.fillStyle = 'white';
         ctx.fillRect(img.naturalWidth * 0.15, img.naturalHeight * 0.79, img.width * 0.001, img.height * -0.19);
@@ -447,6 +294,8 @@ function updateTextFitBottom() {
         wrapText(ctx, text, img.width * 0.22, img.naturalHeight * 0.67, img.naturalWidth * 0.4, lineHeight * 0.85)
     }
 }
+
+
 
 
 
@@ -467,10 +316,11 @@ function Right() {
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
         ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 1.264, icon.height * 0.794, icon.naturalWidth * 0.12, icon.naturalHeight * 0.12);
+        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.86, img.height * 0.82, icon.width * 0.9, icon.height * 0.9);
         ctx.textAlign="right";
         ctx.fillStyle = 'white';
         ctx.font = "34px Gotham Condensed Book";
+        var text = document.getElementById('buttonHtml').innerHTML;
             wrapText(ctx, text, img.width * 0.99, img.height * 0.1, img.width * 0.2, lineHeight * 0.85);
     } else {
         canvas.width = img.width;
@@ -481,45 +331,7 @@ function Right() {
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
         ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.92, img.height * 0.88, icon.naturalWidth * 0.15, icon.naturalHeight * 0.15);
-        ctx.textAlign="right";
-        ctx.fillStyle = 'white';
-        ctx.font = "42px Gotham Condensed Book";
-        wrapText(ctx, text, img.width * 0.99, img.height * 0.1, img.width * 0.2, lineHeight * 0.85);
-    }
-}
-
-
-function updateTextRight() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    var img = document.getElementById('hedgehog');
-    var icon = document.getElementById('icon');
-    resizeImage();
-    if(img.naturalWidth > img.naturalHeight){
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.fillStyle = hex;
-        ctx.fillRect(img.width * 1, img.naturalHeight * 0, img.width * -0.27, img.height * 1);
-        ctx.globalAlpha=0.5;
-        ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 1.264, icon.height * 0.794, icon.naturalWidth * 0.12, icon.naturalHeight * 0.12);
-        ctx.textAlign="right";
-        ctx.fillStyle = 'white';
-        ctx.font = "34px Gotham Condensed Book";
-        var text = document.getElementById('buttonHtml').innerHTML;
-        wrapText(ctx, text, img.width * 0.99, img.height * 0.1, img.width * 0.2, lineHeight * 0.85);
-    } else {
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.fillStyle = hex;
-        ctx.fillRect(img.width * 1, img.naturalHeight * 0, img.width * -0.3, img.height * 1);
-        ctx.globalAlpha=0.5;
-        ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
-        ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.92, img.height * 0.88, icon.naturalWidth * 0.15, icon.naturalHeight * 0.15);
+        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.8, img.height * 0.85, icon.width, icon.height);
         ctx.textAlign="right";
         ctx.fillStyle = 'white';
         ctx.font = "42px Gotham Condensed Book";
@@ -527,6 +339,8 @@ function updateTextRight() {
         wrapText(ctx, text, img.width * 0.99, img.height * 0.1, img.width * 0.2, lineHeight * 0.85);
     }
 }
+
+
 
 
 function fitRight() {
@@ -541,10 +355,11 @@ function fitRight() {
         ctx.fillStyle = hex;
         ctx.fillRect(img.width * 1, img.height * 0, img.width * -0.3, img.height * 0.75);
         ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 1.26, img.height * 0.62, icon.naturalWidth * 0.1, icon.naturalHeight * 0.1);
+        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.88, img.height * 0.58, icon.width * 0.8, icon.height * 0.8);
         ctx.textAlign="right";
         ctx.fillStyle = 'white';
         ctx.font = "28px Gotham Condensed Book";
+        var text = document.getElementById('buttonHtml').innerHTML;
         wrapText(ctx, text, img.width * 0.965, img.height * 0.081, img.width * 0.23, lineHeight * 0.85);
     } else {
         canvas.width = img.width * 1;
@@ -553,57 +368,24 @@ function fitRight() {
         ctx.fillStyle = hex;
         ctx.fillRect(img.width * 1, img.height * 0, img.width * -0.25, img.height * 0.75);
         ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.92, img.height * 0.64, icon.naturalWidth * 0.13, icon.naturalHeight * 0.13);
-        ctx.textAlign="right";
-        ctx.fillStyle = 'white';
-        ctx.font = "28px Gotham Condensed Book";
-        wrapText(ctx, text, img.width * 0.98, img.height * 0.081, img.width * 0.23, lineHeight * 0.85);
-}
-}
-
-
-
-function updateTextFitRight() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    var img = document.getElementById('hedgehog');
-    resizeImage();
-    if (img.naturalWidth > img.naturalHeight){
-        canvas.width = img.naturalWidth * 1.05;
-        canvas.height = img.naturalHeight * 0.75;
-        ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
-        ctx.fillStyle = hex;
-        ctx.fillRect(img.width * 1, img.height * 0, img.width * -0.3, img.height * 0.75);
-        ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 1.26, img.height * 0.62, icon.naturalWidth * 0.1, icon.naturalHeight * 0.1);
-        ctx.textAlign="right";
-        ctx.fillStyle = 'white';
-        ctx.font = "28px Gotham Condensed Book";
-        var text = document.getElementById('buttonHtml').innerHTML;
-        wrapText(ctx, text, img.width * 0.965, img.height * 0.081, img.width * 0.23, lineHeight * 0.85);
-    } else {
-        canvas.width = img.width * 1.05;
-        canvas.height = img.height * 0.75;
-        ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
-        ctx.fillStyle = hex;
-        ctx.fillRect(img.width * 1, img.height * 0, img.width * -0.25, img.height * 0.75);
-        ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, icon.width * 0.92, img.height * 0.64, icon.naturalWidth * 0.13, icon.naturalHeight * 0.13);
+        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.83, img.height * 0.62, icon.width * 0.9, icon.height * 0.9);
         ctx.textAlign="right";
         ctx.fillStyle = 'white';
         ctx.font = "28px Gotham Condensed Book";
         var text = document.getElementById('buttonHtml').innerHTML;
         wrapText(ctx, text, img.width * 0.98, img.height * 0.081, img.width * 0.23, lineHeight * 0.85);
-    }
 }
+}
+
+
+
+
 
 
 
 
 //all of the ugly buttons i have created
 
-document.getElementById('theButton').addEventListener('click', function() {
-    htmlChangeOLeft();
-}, false);
 
 document.getElementById('Left').addEventListener('click', function() {
     Left();
@@ -629,41 +411,7 @@ document.getElementById('fitBottom').addEventListener('click', function() {
     fitBottom();
 }, false);
 
-// document.getElementById('addTextLeft').addEventListener('click', function() {
-//     addTextLeft();
-// }, false);
-//
-// document.getElementById('addTextRight').addEventListener('click', function() {
-//     addTextRight();
-// }, false);
-//
-// document.getElementById('addTextBottom').addEventListener('click', function() {
-//     addTextBottom();
-// }, false);
 
-document.getElementById('updateTextLeft').addEventListener('click', function() {
-    updateTextLeft();
-}, false);
-
-document.getElementById('updateTextRight').addEventListener('click', function() {
-    updateTextRight();
-}, false);
-
-document.getElementById('updateTextBottom').addEventListener('click', function() {
-    updateTextBottom();
-}, false);
-
-document.getElementById('updateTextFitBottom').addEventListener('click', function(){
-    updateTextFitBottom();
-}, false);
-
-document.getElementById('updateTextFitLeft').addEventListener('click', function(){
-    updateTextFitLeft();
-}, false);
-
-document.getElementById('updateTextFitRight').addEventListener('click', function(){
-    updateTextFitRight();
-}, false);
 /**
  * Draw something to canvas
  */
