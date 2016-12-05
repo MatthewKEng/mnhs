@@ -159,16 +159,16 @@
 
     </div>
 
-  </div><br />
+  </div><br /><br /><br />
 
-  <span><h3 style="background-color: #eeb111; align-content: right; float: left">Add Historical Site</h3></span><br />
-  <div class="container" style="text-align: right;"><br />
+  <div class="container" style="text-align: right;">
+      <span><h3 style="background-color: #eeb111; float: right;">Add Historical Site</h3></span><br /><br /><br />
   <input class="addDepartment" type="text" ng-model="admin.newDepartment"/>
   <button ng-click="admin.addDepartment()" class="newDepartment">Add Site</button><br />
 
   <select class="addDepartment" ng-model="admin.remove" ng-options="name as admin.prettyDeptName(name.department) for name in admin.deptNames" required>
-    <!-- <option value="" selected disabled>Select...</option> -->
-    <!-- <option ng-repeat="name in admin.deptNames" ng-value="name">{{admin.prettyDeptName(name.department)}}</option> -->
+    <option value="" selected disabled>Select...</option>
+    <option ng-repeat="name in admin.deptNames" ng-value="name">{{admin.prettyDeptName(name.department)}}</option>
   </select>
   <button ng-click="admin.deleteDepartment()" class="removeDepartment">Delete Site</button>
       </div>

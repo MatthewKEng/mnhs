@@ -122,7 +122,6 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   //     }
   //   }
   // }
-
   //function to show or hide add employee
   // admin.addEmployeeTruthiness = function () {
   //   //for loop that makes everything false if button is clicked
@@ -155,7 +154,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
 //       }
 //     }
 //   }
-
+showAccess
   //make the key pretty function
   admin.pretty = function (key) {
     var prettyKey = key.replace(/_/g, " ").toLocaleUpperCase();
@@ -272,7 +271,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     admin.firstName;
     admin.lastName;
     admin.newUser;
-    console.log('newUser ', admin.newUser);
+    // console.log('newUser ', admin.newUser);
     $http.post('/access', {
       first_name: admin.firstName,
       last_name: admin.lastName,
