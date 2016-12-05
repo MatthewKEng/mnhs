@@ -1,7 +1,7 @@
 angular.module('BrandImageManagerApp')
     .controller('AdminController', AdminController);
 
-function AdminController($http, $location, AccessService, SubmissionsService, Upload) {
+function AdminController($http, $location, AccessService, SubmissionsService, Upload, $timeout) {
   var admin = this;
   var reviseClass = true;
   var reviseInput = false;
@@ -15,6 +15,8 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   admin.pendingCount = 0;
   admin.revisionCount = 0;
 
+  admin.addEmployeeTruthiness
+
   //ng-show variables onload
   admin.accessControlsDisplay = false;
   admin.pendingGalleryDisplay = true;
@@ -23,6 +25,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   admin.brandsConsoleDisplay = false;
   admin.showEmpDepts = false;
   admin.showNotEmpDepts = false;
+  admin.userAdded = false;
 
   //function to display access
   admin.showAccess = function () {
@@ -69,16 +72,14 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   };
   // display the access information for the currently selected user.
   admin.showUser = function (id) {
+    // For loop determines which employee is selected
     for (i = 0; i < admin.allUserAccess.length; i++) {
       if (admin.allUserAccess[i].id == id) {
-        // admin.showUserAccess[i] = true;
         admin.emp = admin.allUserAccess[i];
       }
-      //else {
-      //   admin.showUserAccess[i] = false;
-      // }
     }
-    console.log('emp name ' + admin.emp.first_name + ' ' + admin.emp.last_name + ' user.id ' + id);
+    admin.showEmpDepts = false;
+    admin.showNotEmpDepts = false;
     admin.empDepts = [];
     admin.notEmpDepts = [];
     admin.admin = false;
@@ -96,13 +97,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
         }
       }
     }
-    // for (i = 0; i < admin.allUserAccess.length; i++) {
-    //   if (i == index) {
-    //     admin.showUserAccess[i] = !admin.showUserAccess[i];
-    //   } else {
-    //     admin.showUserAccess[i] = false;
-    //   }
-    // }
+
   };
   // //function for truthy value for access accordion
   // admin.truthiness = function (index) {
@@ -129,24 +124,24 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   //   }
   // }
   //function to show or hide add employee
-  admin.addEmployeeTruthiness = function () {
-    //for loop that makes everything false if button is clicked
-    // for (var i = 0; i < admin.allUserAccess.length; i++) {
-    //   admin.showUserAccess[i] = false;
-    //   admin.plus[i] = true;
-    //   admin.minus[i] = false;
-    //   }
-    // if else stament to set the boolean value of admin.showAddEmployee for ngShow
-    if (admin.showAddEmployee == false) {
-        admin.showAddEmployee = true;
-        admin.empPlus = false;
-        //console.log('whats the plus truth ',admin.empPlus);
-    }else{
-        admin.showAddEmployee = false;
-        admin.empPlus = true;
-        //console.log('whats the minus truth ',admin.empPlus);
-    }
-  }
+  // admin.addEmployeeTruthiness = function () {
+  //   //for loop that makes everything false if button is clicked
+  //   // for (var i = 0; i < admin.allUserAccess.length; i++) {
+  //   //   admin.showUserAccess[i] = false;
+  //   //   admin.plus[i] = true;
+  //   //   admin.minus[i] = false;
+  //   //   }
+  //   // if else stament to set the boolean value of admin.showAddEmployee for ngShow
+  //   if (admin.showAddEmployee == false) {
+  //       admin.showAddEmployee = true;
+  //       admin.empPlus = false;
+  //       //console.log('whats the plus truth ',admin.empPlus);
+  //   }else{
+  //       admin.showAddEmployee = false;
+  //       admin.empPlus = true;
+  //       //console.log('whats the minus truth ',admin.empPlus);
+  //   }
+  // }
 
 //   //apply correct checkbox truthiness value for if it shows for ng-show
 //
@@ -217,8 +212,8 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
       console.log('No departments selected');
       return;
     }
-    console.log(admin.emp + ' ' + admin.emp.id);
-    console.log(admin.changeDepts);
+    // console.log(admin.emp + ' ' + admin.emp.id);
+    // console.log(admin.changeDepts);
     var accessObj = {
       id: admin.emp.id,
       departments: admin.changeDepts,
@@ -226,7 +221,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     };
     AccessService.updateAccess(accessObj).then(function(response){
       if (response == 'OK') {
-        console.log('whats the update access response', response);
+        // console.log('whats the update access response', response);
         admin.getUsersAccesses();
       }
     });
@@ -242,7 +237,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
         admin.showEmpDepts = false;
         admin.showNotEmpDepts = false;
       }
-      console.log('whats the access response', admin.allUserAccess);
+      // console.log('whats the access response', admin.allUserAccess);
     });
   };
 
@@ -267,35 +262,39 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     if (repeat == false) {
       admin.changeDepts.push(dept);
     }
-    console.log(admin.changeDepts);
+    // console.log(admin.changeDepts);
   };
 
 
 
   // //submit new user button
-  admin.submitButton = function() {
-    admin.firstName;
-    admin.lastName;
-    admin.newUser;
-    console.log('newUser ', admin.newUser);
+  admin.submitButton = function(form) {
+    // console.log('newUser ', admin.newUser);
+    if (form.$invalid) {
+      return;
+    }
     $http.post('/access', {
       first_name: admin.firstName,
       last_name: admin.lastName,
       email: admin.newUser
     }).then(function(){
+      admin.userAdded = true;
       admin.newUser = "";
       admin.firstName = "";
       admin.lastName = "";
-
-  });
+      admin.getUsersAccesses();
+      $timeout(function() {
+        admin.userAdded = false;
+      }, 2500);
+    });
   }
 
   //add a new department
   admin.addDepartment = function() {
     admin.newDepartment;
-    console.log('department', admin.newDepartment);
+    // console.log('department', admin.newDepartment);
     admin.newDepartment = admin.newDepartment.replace(/ /g, '_').toLowerCase();
-    console.log('create space');
+    // console.log('create space');
     $http.post('/access/departments', {
       department: admin.newDepartment
     }).then(function(){
@@ -305,58 +304,61 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     });
   }
 
-  //to update and add a column to users DB with department // not sure how this should work???
+
   admin.addColumnUsers = function(){
-    console.log('department');
+    // console.log('department');
     $http.post('/access/users', {
       department: admin.newDepartment
 
     }).then(function(){
       admin.newDepartment = "";
-      console.log('end of function');
+      // console.log('end of function');
     })
   }
 
 
 
 //approve button for admin
-  admin.approveButton = function(pending) {
-    console.log('pending ', pending);
+  admin.approveButton = function(pending, adminComment) {
+    // console.log('pending ', pending);
     var id = pending.id;
     pending.status = "approved";
-    console.log('status ', pending.status);
+    // console.log('status ', pending.status);
     $http.put('/submissions/'+id, {
       id: id,
-      status: pending.status
+      status: pending.status,
+      admin_comment: adminComment
     }).then(function(){
       //$location.path('/admin'); //on click of button needs to refresh and not on page load
       //reload submissions data
       admin.getSubmissions();
+      admin.reviseComment = '';
+      modal.style.display = "none";
     });
   };
 
 
 //delete button for all users
   admin.deleteButton = function(pending) {
-    console.log('pending ', pending);
-    var id = pending.id;
-    $http.delete('/submissions/'+id, {
+    // console.log('pending ', pending);
+    var key = pending.saved_edit.replace('https://s3.amazonaws.com/mnhs/', '');
+    $http.delete('/image/submissions/' + key, {
     }).then(function(){
       //$location.path('/admin'); //on click of button needs to refresh and not on page load
       //reload submissions data
       admin.getSubmissions();
-
+      admin.closeModal();
     })
   }
 
 //delete function for departments table
 admin.deleteDepartment = function (){
-  var id = admin.remove.deptId;
-  console.log('pending', admin.remove.deptId);
-  $http.delete('/access/'+id, {
+
+  // console.log('remove', admin.remove); //admin.html line 176 ng-value, will target id with name.id, will target name with name.name
+  $http.delete('/access/' + admin.remove.department+'/' + admin.remove.id, {
   }).then(function(){
     // admin.uploadBrand(); unable to refresh
-    admin.remove.deptId = "";
+
     admin.deleteEachDepartment();
     admin.getSubmissions();
   })
@@ -364,12 +366,13 @@ admin.deleteDepartment = function (){
 
 //delete function for each department in users table
 admin.deleteEachDepartment = function(){
-  var id = admin.deptId;
-  $http.delete('/access/users', {
+  var id = admin.remove.id;
+  // console.log('id in 2nd delete ', id);
+  $http.delete('/access/users/' +id, {
     // department: admin.newDepartment
   }).then(function(){
-    admin.deptId = "";
-    console.log('end of function');
+    admin.remove = "";
+    // console.log('end of function');
   })
   }
 
@@ -377,37 +380,45 @@ admin.deleteEachDepartment = function(){
 
 //revise button under pending, will pop up the modal
   admin.reviseButton = function(image) {
-    console.log('revise working');
-    console.log('image', image);
+    // console.log('revise working');
+    // console.log('image', image);
     imageData = image; //setting image data equal to the current image
     reviseClass = false; //for ng-show/ng-hide to hide delete and approve button on modal
     reviseInput = true; //to show input for comments
-    admin.viewButton();
+    admin.revisionButton(image.department_id);
   };
 
   //popup modal revise button to submit comment for ADMIN
-  admin.subReviseButton = function() {
-    console.log('image info ', imageData); //using same image data to target image id
+  admin.subReviseButton = function(imageData) {
+    // console.log('image info ', imageData); //using same image data to target image id
     admin.closeModal();
     reviseClass = true; //should revert buttons back for view
     reviseInput = false; //should get rid of input and allow to see comment
     admin.reviseComment;
-    console.log('comment ', admin.reviseComment);
+    // console.log('comment ', admin.reviseComment);
     //updates comments and posts to DB
     $http.put('/submissions/'+imageData.id, {
-      status: "pending",
+      status: "revision",
       admin_comment: admin.reviseComment,
       id: imageData.id
     }).then(function(){
       //clears comment input field
-    admin.reviseComment = "";
+    admin.reviseComment = '';
     //resets image data to an empty object
     imageData = {};
+    //get submissions again
+    admin.getSubmissions();
     });
   };
 
 
   //modal controlls
+  //start shows as false
+  admin.showApproved = false;
+  admin.deleteShow = false;
+  admin.showUserComment = false;
+  admin.rivisionShow = false;
+  admin.showInput = false;
   //image src for modal
   admin.modalImage = {};
   //user comment for modal
@@ -416,24 +427,83 @@ admin.deleteEachDepartment = function(){
   var modal = document.getElementById('adminModal');
 
   // When the user clicks the button, open the modal
-  admin.viewButton = function() {
+  admin.viewButton = function(department_id) {
+    admin.departmentFinder(department_id);//function to find department name
+    admin.showInput = true;
+    admin.rivisionShow = true;
+    admin.deleteShow = false;
+    admin.showUserComment = true;
+    admin.showApproved = true;
+    modal.style.display = "block";
+  };
+
+  //when admin clicks the view button in the pending/approved section
+  admin.viewButtonApproved = function(department_id) {
+    admin.departmentFinder(department_id);//function to find department name
+    admin.showInput = false;
+    admin.rivisionShow = false;
+    admin.showUserComment = true;
+    admin.showApproved = false;
+    admin.deleteShow = true;
+    modal.style.display = "block";
+  };
+
+  //function to open model when revision is clicked
+  admin.revisionButton = function(department_id) {
+    admin.departmentFinder(department_id);//function to find department name
+    admin.showInput = true;
+    admin.rivisionShow = true;
+    admin.deleteShow = false;
+    admin.showUserComment = true;
+    admin.showApproved = false;
     modal.style.display = "block";
   };
 
   // When the user clicks on <span> (x), close the modal
   admin.closeModal = function() {
+    admin.showUserComment = false;
+    admin.showApproved = false;
     modal.style.display = "none";
   };
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal) {
+      admin.showUserComment = false;
+      admin.showApproved = false;
       modal.style.display = "none";
     }
   };
 
+  //get list of deparments and thier ids from AccessService
   admin.deptNames = AccessService.departmentNames;
+  console.log('whats the department names',admin.deptNames);
+  //function to loop through and get department names based on department_id
+  admin.departmentFinder = function (department_id) {
+    if (admin.deptNames == undefined) {
+      AccessService.getDepartmentIds().then(function() {
+        for (var i = 0; i < admin.deptNames.length; i++) {
+          if (department_id == admin.deptNames[i].id) {
+            admin.departmentName = admin.deptNames[i].department;
+            console.log('whats the department of selected', admin.departmentName);
+          }
+        }
+      });
+    } else {
+      for (var i = 0; i < admin.deptNames.length; i++) {
+        if (department_id == admin.deptNames[i].id) {
+          admin.departmentName = admin.deptNames[i].department;
+          console.log('whats the department of selected', admin.departmentName);
+        }
+      }
+    }
+  }
+
+  //makes name pretty
   admin.prettyDeptName = function(name) {
+    if (name == undefined) {
+      return;
+    }
     return name.replace(/_/g, ' ').toUpperCase()
   };
 
@@ -449,7 +519,12 @@ admin.deleteEachDepartment = function(){
       url: '/image/brand',
       method: 'POST',
       data: admin.upload,
+    }).then(function(){
+      admin.upload.color = "";
     });
+
   };
+
+
 
 };//end of AdminController function

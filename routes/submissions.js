@@ -21,7 +21,7 @@ router.get('/admin', function(req, res) {
           console.log('Error querying DB', err);
           res.sendStatus(500);
         }
-        console.log('whats all submissions row',result.rows);
+        // console.log('whats all submissions row',result.rows);
         res.send(result.rows);
       });
     } finally {
@@ -29,6 +29,8 @@ router.get('/admin', function(req, res) {
     }
   });
 });
+
+
 
 // Get all info associated with submissions for a specific dept.
 router.get('/:deptID', function(req, res) {

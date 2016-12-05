@@ -29,6 +29,28 @@ router.get('/departments', function(req, res) {
   });
 });
 
+// //query deparments table to get department based on department_id
+// router.get('/departments/:id', function(req, res) {
+//   var departmentId = req.params.id;
+//   pool.connect(function(error, client, done) {
+//     try {
+//       if (error) {
+//         console.log('Error connecting to DB', error);
+//         res.sendStatus(500);
+//       }
+//       client.query('SELECT department FROM departments WHERE id=$1;', [departmentId], function(error, result) {
+//         if (error) {
+//           console.log('Error querying DB', error);
+//           res.sendStatus(500);
+//         }
+//         res.send(result.rows);
+//       });
+//     } finally {
+//       done();
+//     }
+//   });
+// });
+
 
 
 
@@ -63,7 +85,8 @@ router.get('/', function(req, res) {
   pool.connect(function(error, client, done) {
     if (error) {
       done();
-      next(error);
+      console.log('Error connecting to DB', error);
+      res.sendStatus(500);
     }
     client.query('SELECT id, first_name, last_name, email, admin, alexander_ramsey_house,'+
       'birch_coulee_battlefield, charles_a_lindbergh_historic_site,'+
@@ -77,7 +100,8 @@ router.get('/', function(req, res) {
       'w_w_mayo_house from users',function(error, result) {
       if (error) {
         done();
-        next(error);
+        console.log('Error querying DB', error);
+        res.sendStatus(500);
       }
       //console.log('whats the access route rows data',result.rows);
       res.send(result.rows);
@@ -85,45 +109,73 @@ router.get('/', function(req, res) {
   });
 });//end of get router
 
-//post users from admin into approved_users table
-router.post('/', function(req, res) {
-  pool.connect(function(error, client, done) {
-    if (error) {
-      done();
-      next(error);
-    }
-    client.query('INSERT INTO users (first_name, last_name, email) ' + 'VALUES ($1, $2, $3)', [req.body.first_name, req.body.last_name, req.body.email],
-    function(error, result) {
-      if (error) {
-        done();
-        next(error);
-      }
-      //console.log('whats the access route rows data',result.rows);
-      res.sendStatus(201);
-    });
-  });
-});//end of post router
+// //post users from admin into approved_users table
+// router.post('/', function(req, res) {
+//   pool.connect(function(error, client, done) {
+//     if (error) {
+//       done();
+//       console.log('Error connecting to DB', error);
+//       res.sendStatus(500);
+//     }
+//     client.query('INSERT INTO users (first_name, last_name, email) ' + 'VALUES ($1, $2, $3)', [req.body.first_name, req.body.last_name, req.body.email],
+//     function(error, result) {
+//       if (error) {
+//         done();
+//         console.log('Error querying DB', error);
+//         res.sendStatus(500);
+//       }
+//       //console.log('whats the access route rows data',result.rows);
+//       res.sendStatus(201);
+//     });
+//   });
+// });//end of post router
 
 
 
 //to add a column to users DB of department
 router.post('/users', function(req, res) {
+  console.log('query ', req.query);
+  console.log('body ', req.body);
   pool.connect(function(error, client, done) {
     if (error) {
       done();
-      next(error);
+      console.log('Error connecting to DB', error);
+      res.sendStatus(500);
     }
     client.query ('ALTER TABLE users ADD COLUMN ' + req.body.department + '  BOOLEAN DEFAULT FALSE',
     function(error, result) {
       if (error) {
         done();
-        next(error);
+        // next(error);
+        console.log('Error querying DB', error);
+        res.sendStatus(500);
       }
       //console.log('whats the access route rows data',result.rows);
       res.sendStatus(201);
     });
   });
 });//end of get router
+
+//post new users from admin.controller into approved_users table
+router.post('/', function(req, res) {
+  pool.connect(function(error, client, done) {
+    if (error) {
+      done();
+      console.log('Error connecting to DB', error);
+      res.sendStatus(500);
+    }
+    client.query('INSERT INTO users (first_name, last_name, email) ' + 'VALUES ($1, $2, $3)', [req.body.first_name, req.body.last_name, req.body.email],
+    function(error, result) {
+      if (error) {
+        done();
+        console.log('Error querying DB', error);
+        res.sendStatus(500);
+      }
+      //console.log('whats the access route rows data',result.rows);
+      res.sendStatus(201);
+    });
+  });
+});//end of post router
 
 
 
@@ -142,7 +194,7 @@ router.put('/', function (req, res, next) {
     }
   }
   statement = statement + ' WHERE id=' + id;
-  console.log('STATEMENT: ', statement);
+  // console.log('STATEMENT: ', statement);
 
   pool.connect(function (err, client, done) {
     try {
@@ -175,7 +227,7 @@ router.put('/', function (req, res, next) {
   });
 });//end of put
 
-router.delete('/:id', function (req, res, next) {
+router.delete('/users/:id', function (req, res, next) {
   var id = req.params.id;
   pool.connect(function (err, client, done) {
     try {
@@ -198,11 +250,10 @@ router.delete('/:id', function (req, res, next) {
   });
 });
 
-
-//dete the department column from users table
-
-router.delete('/:id', function (req, res, next) {
+router.delete('/:department/:id', function (req, res, next) {
   var id = req.params.id;
+  var department = req.params.department;
+  console.log('req.body', req.body);
   pool.connect(function (err, client, done) {
     try {
       if (err) {
@@ -210,7 +261,7 @@ router.delete('/:id', function (req, res, next) {
         res.sendStatus(500);
       }
 
-      client.query('ALTER TABLE users drop COLUMN ' + req.body.department + [id],
+      client.query('ALTER TABLE users drop COLUMN '+  department,
         function (err, result) {
           if (err) {
             console.log('Error querying DB: ', err);
@@ -223,6 +274,35 @@ router.delete('/:id', function (req, res, next) {
     }
   });
 });
+
+
+
+
+//dete the department column from users table
+
+// router.delete('/department', function (req, res, next) {
+//   // var id = req.params.id;
+//   console.log('req.body', req.body);
+//   pool.connect(function (err, client, done) {
+//     try {
+//       if (err) {
+//         console.log('Error connecting with DB: ', err);
+//         res.sendStatus(500);
+//       }
+//
+//       client.query('ALTER TABLE users drop COLUMN  $1',  [req.body.department],
+//         function (err, result) {
+//           if (err) {
+//             console.log('Error querying DB: ', err);
+//             return res.sendStatus(500);
+//           }
+//           res.sendStatus(204);
+//           });
+//     } finally {
+//       done();
+//     }
+//   });
+// });
 
 
 module.exports = router;

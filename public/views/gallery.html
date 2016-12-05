@@ -1,40 +1,40 @@
 
 <div id="not" class="container-fluid col-xs-2 col-md-2 col-lg-2 sideMenu">
   <div class="sideButtonContainer2">
-    <button ng-repeat="dept in gallery.userDepts" ng-click="gallery.showDept(dept); gallery.getImages(dept, 1);" style="font-size:12px; margin-bottom:4px;white-space: normal;" class="btn btn-success btn-lg btn-block sideButton">{{gallery.pretty(dept)}}</button>
+    <button ng-repeat="dept in gallery.userDepts" ng-click="gallery.showDept(dept);  gallery.notDept=false; gallery.getImages(dept, 1);" style="font-size:12px; margin-bottom:4px;white-space: normal;" class="btn btn-success btn-lg btn-block sideButton">{{gallery.pretty(dept)}}</button>
   </div>
   <div class="sideButtonContainer2">
-    <button ng-repeat="notDept in gallery.notUserDepts" ng-click="gallery.showDept(notDept); gallery.getImages(notDept, 0);" style="font-size:12px; margin-bottom:4px;white-space: normal; background-color: #808080; color: black;" class="btn btn-info btn-lg btn-block sideButton">{{gallery.pretty(notDept)}}</button>
+    <button ng-repeat="notDept in gallery.notUserDepts" ng-click="gallery.showDept(notDept); gallery.notDept=true; gallery.getImages(notDept, 0);" style="font-size:12px; margin-bottom:4px;white-space: normal; background-color: #808080; color: black;" class="btn btn-info btn-lg btn-block sideButton">{{gallery.pretty(notDept)}}</button>
   </div>
 </div>
 
 <div class="container-fluid">
-  <div class="row col-xs-3 overflow">
+  <div class="row col-xs-3 overflow" ng-hide="gallery.currentDeptName==undefined || (gallery.notDept && gallery.currentDeptName!=undefined)">
     <div class="row addContainer">
       <h4><u>Image Selection</u></h4>
-      <h1 class="addPhoto glyphicon glyphicon-upload" ng-click="gallery.modalImage=image.url_image; gallery.viewButton()"></h1>
+      <h1 ng-hide="gallery.disableButtons || gallery.currentDeptName==undefined" class="addPhoto glyphicon glyphicon-upload" ng-click="gallery.modalImage=image; gallery.viewButton(); gallery.addImage=true;"></h1>
     </div>
     <div class="row gallery-display" ng-repeat="image in gallery.deptImages">
-      <a ng-class="gallery.disabled()"href="/photoedit"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image.url_image, image.department_id)" ng-src="{{image.url_image}}" /></a>
-    </div>
-  </div>
-  
-  <div class="row col-xs-3 text-center overflow">
-    <h4><u>Revision images:&nbsp;{{gallery.revisionCount}}</u></h4>
-    <div class="gallery-display" ng-repeat="image in gallery.revision">
-      <a ng-class="gallery.disabled()" href="/photoedit"><img class="img-responsive gallery-item" ng-click="gallery.sendThisImage(image.saved_edit)" ng-src="{{image.saved_edit}}" alt="revision image" /></a>
+      <a ng-class="gallery.disabled()"><img class="img-responsive gallery-item" ng-click="gallery.modalImage=image; gallery.viewButton()" ng-src="{{image.url_image}}" /></a>
     </div>
   </div>
 
-  <div class="row col-xs-3 text-center overflow">
+  <div class="row col-xs-3 text-center overflow" ng-hide="gallery.currentDeptName==undefined || (gallery.notDept && gallery.currentDeptName!=undefined)">
+    <h4><u>Revision images:&nbsp;{{gallery.revisionCount}}</u></h4>
+    <div class="gallery-display" ng-repeat="image in gallery.revision">
+      <a ng-class="gallery.disabled()" ><img class="img-responsive gallery-item" ng-click="gallery.modalImage=image; gallery.viewButton()" ng-src="{{image.saved_edit}}" alt="revision image" /></a>
+    </div>
+  </div>
+
+  <div class="row col-xs-3 text-center" ng-class="{'spread': gallery.notDept, 'overflow':!gallery.notDept}" ng-hide="gallery.currentDeptName==undefined">
     <h4><u>Approved Images:&nbsp;{{gallery.approvedCount}}</u></h4>
     <div class="gallery-display" ng-repeat="image in gallery.approved">
-      <img ng-src="{{image.saved_edit}}" class="img-responsive gallery-item" alt="approved image" />
-      <div class="row">
-        <button ng-disabled="gallery.disableButtons" class="btn btn-success">Download</button>
-        <button ng-disabled="gallery.disableButtons" class="btn btn-danger">Delete</button>
-      </div>
+      <a ng-class="gallery.disabled()"><img ng-src="{{image.saved_edit}}" ng-click="gallery.modalImage=image; gallery.viewButton()" class="img-responsive gallery-item" alt="approved image" /></a>
     </div>
+  </div>
+
+  <div class="col-xs-10 make-selection" ng-show="gallery.currentDeptName==undefined">
+    <h2>SELECT A HISTORIC SITE</h2>
   </div>
 </div>
 
@@ -48,36 +48,63 @@
   <div class="modal-content">
     <div class="modal-header">
       <span ng-click="gallery.closeModal()" class="close">×</span>
-      <h2>Department</h2>
+      <h2>{{gallery.pretty(gallery.currentDeptName)}}</h2>
     </div>
-    <div class="modal-body text-center">
+    <div ng-show="gallery.addImage==true" class="modal-body text-center">
       <!--image dynamicly created same image as image clicked-->
       <div>
         <h3>Upload a new image.</h3>
         <div class="row preview-block">
-          <img ng-show="gallery.upload.file!=undefined" ngf-src="gallery.upload.file" alt="Image Preview" class="preview" />
+          <img ng-show="gallery.upload.file!=undefined" ngf-src="gallery.upload.file" alt="Image Preview" class="modal-size preview" />
           <span ng-show="gallery.success" class="success btn btn-success">Success!</span>
         </div>
-
-        <form enctype="multipart/form-data" name="uploadForm" id="uploadForm">
-          <div class="col-xs-12">
-            <label ng-hide="gallery.upload.file!=undefined" id="file-label" for="file-input">Please select an image</label>
-            <label ng-show="gallery.upload.file!=undefined" id="file-label" for="file-input">Change image</label>
-            <input type="file" ng-model="gallery.upload.file" ngf-select ngf-max-size="10MB" name="file-input" id="file-input"required>
-          </div>
-            <input class="upload-form-button" type="submit" ng-click="gallery.uploadPicture(uploadForm)" value="Upload Image" />
-          </div>
-        </form>
-
       </div>
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer"ng-show="gallery.addImage==true">
+      <form enctype="multipart/form-data" name="uploadForm" id="uploadForm" role="search">
+        <div class="col-xs-12">
+          <label ng-hide="gallery.upload.file!=undefined" id="file-label" for="file-input">Please select an image</label>
+          <label ng-show="gallery.upload.file!=undefined" id="file-label" for="file-input">Change image</label>
+          <input type="file" ng-model="gallery.upload.file" ngf-select ngf-max-size="10MB" name="file-input" id="file-input"required>
+          <input class="upload-form-button" type="submit" ng-click="gallery.uploadPicture(uploadForm)" value="Upload Image" />
+        </div>
+      </form>
+    </div>
+
+    <div ng-show="gallery.addImage==false" class="modal-body text-center">
+      <div>
+        <h5>
+          <img class="modal-size" ng-hide="gallery.success" ng-src="{{gallery.modalImage.url_image || gallery.modalImage.saved_edit}}" alt="large version of image" />
+          <span ng-show="gallery.success" class="success btn btn-success">Success!</span>
+          <div class="pull-right" ng-show="((gallery.modalImage.saved_edit!=undefined))">
+            <div ng-show="gallery.modalImage.status=='revision'">
+              <h4><u>Leave a comment</u></h4>
+              <label class="sr-only">Text Area</label>
+              <textarea class="form-control" rows="3" placeholder="Type a Comment Here" ng-model="gallery.reviseComment"></textarea>
+            </div>
+            <h4><p><u>Employee Comment</u></p></h4>
+            <p>{{gallery.modalImage.user_comment || 'No comment provided'}}</p>
+            <h4><p><u>Admin Comment</u></p></h4>
+            <p>{{gallery.modalImage.admin_comment || 'No comment provided'}}</p>
+          </div>
+        </h5>
+      </div>
+    </div>
+    <div class="modal-footer" ng-show="gallery.addImage==false">
       <span>
-        <button class="btn btn-success">Approve</button>
-        <button class="btn btn-danger">Revise</button>
-        <button class="btn btn-danger">Delete</button>
+        <!-- <button ng-show="((admin.rivisionShow))" ng-click="admin.subReviseButton(admin.modalImageData)" class="btn btn-danger">Revise</button>
+        <button ng-show="((admin.deleteShow))" ng-click="admin.deleteButton(admin)" class="btn btn-danger">Delete</button> -->
+
+        <button class="upload-form-button" ng-show="gallery.addImage==false && gallery.modalImage.url_image!=undefined" ng-click="gallery.sendThisImage(gallery.modalImage)">Edit Image</button>
+        <a target="_self" href="{{gallery.modalImage.saved_edit}}" download="download"><button class="upload-form-button" ng-show="gallery.addImage==false && gallery.modalImage.status=='approved' && gallery.notDept==false" ng-click="gallery.disableButtons">Download Image</button></a>
+        <button class="upload-form-button" ng-show="gallery.modalImage.status=='revision'" ng-click="gallery.addComment()">Add a Comment</button>
+        <button class="upload-form-button" ng-show="gallery.addImage==false && gallery.modalImage!=undefined && gallery.notDept==false" ng-click="gallery.deleteThisImage(gallery.modalImage)">Delete</button>
+        <div class="footer-spacer" ng-show="gallery.notDept==true" style="height: 46px;">
+        </div>
+
       </span>
     </div>
-  </div>
 
+    </div>
+  </div>
 </div>

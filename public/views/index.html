@@ -26,6 +26,7 @@
    <script src="scripts/editPhoto.controller.js" charset="utf-8"></script>
    <script src="scripts/image.service.js" charset="utf-8"></script>
    <script src="scripts/brandTable.service.js" charset="utf-8"></script>
+   <script src="scripts/truthiness.service.js" charset="utf-8"></script>
    <!-- <script type="text/javascript" src="/scripts/orangescript.js"></script> REST IN PEACE ORANGE SCRIPT NOV 2016 - DEC 2016 -->
    <!--stylesheets-->
    <link rel="stylesheet" href="vendors/bootstrap.min.css" media="screen" title="bootstrap">
@@ -38,18 +39,19 @@
 
 
  <nav class="navbar navbar-default">
-       <div class="container-fluid">
-           <div class="navbar-header">
-             <a alt="Minnesota Historical Society"><img src="http://www.mnhs.org/static/masthead/mnhs_org/img/mnhs-logo-white.svg" class="picLogo"/></a>
-           </div>
-           <div class="row col-xs-9 col-md-9 col-lg-9">
-             <ul class="nav navbar-nav pull-right" ng-controller="NavController as nav">
-             <li ng-show="nav.displayLogout" class="icons"><a href="/admin"><span class="glyphicon glyphicon-user"><br /><span class="icon">Admin</span></span></a></li>
-             <li ng-show="nav.displayLogout" class="icons"><a href="/gallery"><span class="glyphicon glyphicon-home"><br /><span class="icon">Home</span></span></a></li>
-             <li ng-show="nav.displayLogout" class="icons"><a ng-click="nav.logout()" href="/"><span class="glyphicon glyphicon-log-out"><br /><span class="icon">Logout</span></span></a></li>
-             </ul>
-           </div>
-            </div>
+   <div class="container-fluid">
+    <div class="navbar-header">
+      <a alt="Minnesota Historical Society"><img src="http://www.mnhs.org/static/masthead/mnhs_org/img/mnhs-logo-white.svg" class="picLogo"/></a>
+    </div>
+    <div class="row col-xs-9 col-md-9 col-lg-9" ng-controller="NavController as nav">
+      <p class="welcome" ng-show="nav.displayLogout">Welcome, {{nav.pretty(nav.user.first_name)}}&nbsp;{{nav.pretty(nav.user.last_name)}}</p>
+      <ul class="nav navbar-nav pull-right">
+      <li ng-show="nav.admin" class="icons"><a href="/admin"><span class="glyphicon glyphicon-user"><br /><span class="icon">Admin</span></span></a></li>
+      <li ng-show="nav.displayLogout" class="icons"><a href="/gallery"><span class="glyphicon glyphicon-home"><br /><span class="icon">Home</span></span></a></li>
+      <li ng-show="nav.displayLogout" class="icons"><a ng-click="nav.logout()" href="/"><span class="glyphicon glyphicon-log-out"><br /><span class="icon">Logout</span></span></a></li>
+      </ul>
+    </div>
+  </div>
  </nav>
 
    <ng-view>

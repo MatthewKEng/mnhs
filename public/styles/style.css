@@ -3,6 +3,7 @@
 body{
   padding: 0;
   margin: 0;
+  height: 100%;
 }
 body {
   background-color: #F0F8FF;
@@ -10,14 +11,14 @@ body {
 h1 {
   margin-top: 0%;
   padding-top: .4444444444rem;
-padding-bottom: .4444444444rem;
-line-height: 1.125;
-font-size: 3.1666666667rem;
-font-weight: 600;
-font-family: helvetica;
-display: block;
-text-align: center;
-background-color: #eeb111;
+  padding-bottom: .4444444444rem;
+  line-height: 1.125;
+  font-size: 3.1666666667rem;
+  font-weight: 600;
+  font-family: helvetica;
+  display: block;
+  text-align: center;
+  background-color: #eeb111;
 }
 .sideButton {
   background-color: #323e48;
@@ -52,17 +53,17 @@ background-color: #eeb111;
   outline: none;
 }
 #left img {
-    align-items: left;
-    background-size: cover;
-    justify-content: left;
-    float: left;
-    padding-top: -8%;
-    width:50%;
-   height: auto;
-   margin-left: -14%;
-   padding-right: 5%;
-   /*padding-left: 0%;*/
-   margin-right: 0%;
+  align-items: left;
+  background-size: cover;
+  justify-content: left;
+  float: left;
+  padding-top: -8%;
+  width:50%;
+  height: auto;
+  margin-left: -14%;
+  padding-right: 5%;
+  /*padding-left: 0%;*/
+  margin-right: 0%;
 }
 #right img {
   align-items: right;
@@ -72,10 +73,10 @@ background-color: #eeb111;
   width:50%;
   height: auto;
   margin-right: -13%;
- padding-left: 5%;
- margin-top: -30%;
- margin-left: -14%;
- padding-right: -8%;
+  padding-left: 5%;
+  margin-top: -30%;
+  margin-left: -14%;
+  padding-right: -8%;
 }
 #middle img {
   align-items: center;
@@ -84,10 +85,11 @@ background-color: #eeb111;
   float: center;
   padding-top: -8%;
   width:50%;
- height: auto;
- padding-right: 5%;
- margin-left: -10%;
+  height: auto;
+  padding-right: 5%;
+  margin-left: -10%;
 }
+
 /*.hero_tall {
   padding-top: 12vh;
   padding-bottom: 12vh;
@@ -102,13 +104,14 @@ background-color: #eeb111;
 /*.home .hero {
     text-align: center;
 }*/
+
 .centeredblock {
-    text-align: center;
-    padding-top: 3%;
-    padding-bottom: 1%;
-    background-color: #eeb111;
-    width: 100vw;
-    height: 47vh;
+  text-align: center;
+  padding-top: 3%;
+  padding-bottom: 1%;
+  background-color: #eeb111;
+  width: 100vw;
+  height: 100vh;
 }
 
 /*top navbar */
@@ -139,7 +142,6 @@ background-color: #eeb111;
   margin-top: 10px;
   margin-bottom: 10px;
 }
-
 #not{
   overflow: scroll;
 }
@@ -162,64 +164,67 @@ background-color: #eeb111;
 }
 /*modal styles and animation*/
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 /* Modal Content */
 .modal-content {
-    position: relative;
-    background-color: #fefefe;
-    margin: auto;
-    padding: 0;
-    border: 1px solid #888;
-    width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
 }
 /* Add Animation */
 @-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
 }
 @keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
 }
 /* The Close Button */
 .close {
-    color: white;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 .close:hover,
 .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
 .modal-header {
-    padding: 2px 16px;
-    background-color: #323e48;
-    color: white;
+  padding: 2px 16px;
+  background-color: #323e48;
+  color: white;
 }
-.modal-body {padding: 2px 16px;}
+.modal-body {
+  padding: 2px 16px;
+}
 .modal-footer {
-    padding: 2px 16px;
-    background-color: #323e48;
-    color: white;
+  padding: 2px 16px;
+  background-color: #323e48;
+  color: white;
+  width: 100%;
 }
 .glyphicon {
   color: white;
@@ -238,6 +243,9 @@ background-color: #eeb111;
   overflow: hidden;
   position: relative;
   border: 1px solid black;
+  margin-top: 20px;
+  margin-left: 0;
+  margin-bottom: 10px;
 }
 .preview {
   padding-top: 0;
@@ -249,31 +257,31 @@ background-color: #eeb111;
   transform: translate(-50%, -50%);
 }
 .withinTheCanvas {
-    position: absolute;
-    top: 100px;
-    right: 600px;
+  position: absolute;
+  top: 100px;
+  right: 600px;
 }
 @font-face {
-    font-family: 'Gotham Black';
-    src: local('GothamBlack'), url(./fonts/GothamBlack/Gotham-Black.ttf);
+  font-family: 'Gotham Black';
+  src: local('GothamBlack'), url(./fonts/Gotham-Black.ttf);
 }
 @font-face {
-    font-family: 'Gotham Book';
-    src: local('Gotham-Book'), url(./fonts/GothamBook/Gotham-Book.ttf);
+  font-family: 'Gotham Book';
+  src: local('Gotham-Book'), url(./fonts/Gotham-Book.ttf);
 }
 @font-face {
-    font-family: 'Gotham Bold';
-    src: local('Gotham Bold'), url(./fonts/GothamBold/Gotham-Bold.ttf);
+  font-family: 'Gotham Bold';
+  src: local('Gotham Bold'), url(./fonts/Gotham-Bold.ttf);
 }
 @font-face {
-    font-family: 'Gotham Condensed Book';
-    src: local('GothamCondensed-Book'), url(fonts/GothamCondensedBook/GothamCondensed-Book.ttf);
+  font-family: 'Gotham Condensed Book';
+  src: local('GothamCondensed-Book'), url(fonts/GothamCondensed-Book.ttf);
 }
 #downloadButton {
-    font-family: 'Gotham Condensed Book';
+  font-family: 'Gotham Condensed Book';
 }
 #buttonHtml {
-    background-color: #EAEAEA;
+  background-color: #EAEAEA;
 }
 /* Temporary styling for gallery and photoUploader pages*/
 .addPhoto, .addPhoto:active, .addPhoto:visited {
@@ -281,9 +289,9 @@ background-color: #eeb111;
   color: white;
   font-size: 70px;
   text-align: center;
-  height: 150px;
-  width: 150px;
-  padding-top: 38px;
+  height: 170px;
+  width: 170px;
+  padding-top: 50px;
   cursor: pointer;
 }
 .addPhoto:hover {
@@ -293,7 +301,6 @@ background-color: #eeb111;
 }
 .addContainer {
   text-align: center;
-  margin-bottom: 20px;
 }
 .upload {
   text-align: center;
@@ -320,7 +327,7 @@ background-color: #eeb111;
 #file-input {
   background: linear-gradient(#444, white);
   color: #263238;
-  padding: 7px;
+  padding: 10px;
   font-weight: normal;
 }
 #file-label:hover {
@@ -337,6 +344,7 @@ background-color: #eeb111;
   height: 200px;
   margin: 0 auto 20px auto;
   text-align: center;
+  cursor: pointer;
 }
 .gallery-item {
   margin: 0 auto;
@@ -351,11 +359,31 @@ background-color: #eeb111;
   height: 87vh;
   width: 29%;
 }
+.spread {
+  overflow: scroll;
+  height: 87vh;
+  width: 85%;
+}
+.spread > .gallery-display {
+  display: inline-block;
+  width: 29%;
+}
 .disabled {
   cursor: not-allowed;
 }
 .access-display {
-  margin-top: 20px;
+  margin-top: 30px;
+}
+.access-column {
+  height: 260px;
+  margin-right: 5px;
+  border-right: 1px solid gray;
+}
+.access-last {
+  border-right: none;
+}
+.access-col-current {
+  width: 340px;
 }
 .access {
   text-align: left;
@@ -368,6 +396,12 @@ background-color: #eeb111;
 .current-access > ul {
   list-style-type: none;
   padding: none;
+  height: 150px;
+  padding-left: 0;
+  overflow: scroll;
+}
+.current-access {
+  margin-right: 5px;
 }
 .user-access {
   height: 150px;
@@ -376,23 +410,31 @@ background-color: #eeb111;
   overflow: scroll;
   height: 150px;
   position: absolute;
-  margin-left: 30px;
-  top: 35px;
+  top: 60px;
+}
+.edit-item {
+  padding: 2px;
 }
 .add-access-container {
   background: lightgray;
-  padding: 0 5px;
-  width: 300px;
+  padding: 5px;
+  width: 320px;
 }
 .show-access-button {
+  margin-top: 5px;
   background: lightgray;
   width: 40%;
   display: inline-block;
   margin-right: 20px;
   position: relative;
   padding-right: 20px;
+  width: 140px;
 }
-.show-access-button:hover, .show-access-title:hover {
+.submit-button-position {
+  text-align: center;
+}
+.show-access-button:hover, .show-access-title:hover,
+.show-access-button:hover > span{
   color: white;
   background: darkgray;
 }
@@ -418,13 +460,98 @@ background-color: #eeb111;
   display: inline;
 }
 .submit-button {
-  background: lightgray;
+  /*background: lightgray;*/
   width: 40%;
   top: 200px;
   position: relative;
 }
 .submit-button:hover {
-  color: white;
-  background: darkgray;
+  /*color: white;*/
+  /*background: darkgray;*/
   text-decoration: underline;
+}
+.user-added {
+  font-size: 20px;
+  padding: 10px;
+  position: relative;
+  bottom: 40px;
+}
+.welcome {
+  color: white;
+  text-transform: capitalize;
+  position: absolute;
+  bottom: -25px;
+  left: 20%;
+}
+.newDepartment {
+  margin: 20px;
+}
+
+.addDepartment {
+  margin: 20px;
+
+}
+.removeDepartment {
+  margin:20px;
+}
+.add-user {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+.glyphicon {
+  right: -6px;
+}
+.form-inline {
+  margin-top: 20px;
+}
+
+.container {
+  align-content: left;
+}
+
+.listedDepartment {
+  padding: 5px;
+}
+.make-selection {
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+}
+.make-selection > h2 {
+  background-color: #eeb111;
+  width: 450px;
+  margin: 0 auto;
+  padding: 30px;
+}
+.show-access-button > span {
+  color: black;
+}
+.modal-size {
+  max-width: 60vw;
+  max-height: 60vh;
+  min-width: 30vw;
+  min-height: 30vw;
+}
+.upload-form-button {
+  background: linear-gradient(#444, white);
+  color: #263238;
+  padding: 10px;
+  font-weight: normal;
+}
+.upload-form-button:hover {
+  background: linear-gradient(darkslategray, lightslategray);
+  color: white;
+}
+
+.accesslist {
+    align-content: right;
+    padding-top: 10px;
+}
+
+.accesssubmit {
+    align-content: right;
+}
+
+h3 span {
+  text-align: right;
 }
