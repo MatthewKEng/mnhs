@@ -114,18 +114,6 @@ function resizeImage() {
     }
 }
 
-// Minnesota Historical Society - Gray #333e48
-// Split Rock Lighthouse - Blue #004c6d
-// Mill City Museum - Red #c41230
-// Minnesota History Center - Yellow #edaa1e
-// James J. Hill House - Green #809e92
-// Historic Fort Snelling - Blue #003768
-// Oliver Kelley Farm - Dark Green #066f43
-// Minnesota State Capitol - Blue #064a76
-// Mille Lacs Indian Museum & Trading Post - Red #a10b30
-// Forest History Center - Green #405d18
-// Charles A. Lindbergh Historic Site - Blue #6fa7bb
-
 
 
 
@@ -146,7 +134,7 @@ function Left() {
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
         ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.03, img.height * 0.82, icon.width * 0.9, icon.height * 0.9);
+        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.03, img.height * 0.82, img.width * 0.11, img.height * 0.16);
         ctx.fillStyle = 'white';
         ctx.font = "34px Gotham Condensed Book";
         var text = document.getElementById('buttonHtml').innerHTML;
@@ -188,7 +176,7 @@ function fitLeft() {
         ctx.fillStyle = 'white';
         ctx.font = "28px Gotham Condensed Book";
         var text = document.getElementById('buttonHtml').innerHTML;
-        wrapText(ctx, text, img.width * 0.03, img.height * 0.08, img.width * 0.21, lineHeight * 0.85);
+        wrapText(ctx, text, img.width * 0.02, img.height * 0.08, img.width * 0.23, lineHeight * 0.85);
 } else {
         canvas.width = img.width * 1;
         canvas.height = img.height * 0.75;
@@ -230,10 +218,10 @@ function Bottom () {
         ctx.globalAlpha=1;
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.03, img.height * 0.76, icon.width, icon.height);
         ctx.fillStyle = 'white';
-        ctx.fillRect(img.naturalWidth * 0.15, img.naturalHeight * 0.84, img.width * 0.001, img.height * -0.20);
-        ctx.font = "30px Gotham Condensed Book";
+        ctx.fillRect(img.width * 0.18, img.height * 0.95, img.width * 0.001, img.height * -0.20);
+        ctx.font = "34px Gotham Condensed Book";
         // var text = document.getElementById('textHtmlBottom').innerHTML;
-        wrapText(ctx, text, img.naturalWidth * 0.19, img.naturalHeight * 0.71, img.naturalWidth * 0.6, lineHeight * 0.85)
+        wrapText(ctx, text, img.width * 0.21, img.height * 0.79, img.width * 0.7, lineHeight * 0.83)
     } else {
         canvas.width = img.width;
         canvas.height = img.height;
@@ -246,10 +234,10 @@ function Bottom () {
         ctx.globalAlpha=1;
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.02, img.height * 0.82, icon.width, icon.height);
         ctx.fillStyle = 'white';
-        ctx.fillRect(img.naturalWidth * 0.15, img.naturalHeight * 0.8, img.width * 0.001, img.height * -0.20);
+        ctx.fillRect(img.width * 0.21, img.height * 0.98, img.width * 0.001, img.height * -0.20);
         ctx.font = "30px Gotham Condensed Book";
         // var text = document.getElementById('textHtmlBottom').innerHTML;
-        wrapText(ctx, text, img.naturalWidth * 0.19, img.height * 0.82, img.width * 0.7, lineHeight * 0.85)
+        wrapText(ctx, text, img.width * 0.24, img.height * 0.82, img.width * 0.7, lineHeight * 0.85)
     }
 }
 
@@ -275,23 +263,23 @@ function fitBottom() {
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.02, img.height * 0.81, icon.width * 0.8, icon.height * 0.8);
         ctx.globalAlpha=1;
         ctx.fillStyle = 'white';
-        ctx.fillRect(img.naturalWidth * 0.12, img.naturalHeight * 0.86, img.width * 0.001, img.height * -0.19);
+        ctx.fillRect(img.width * 0.13, img.height * 0.97, img.width * 0.001, img.height * -0.19);
         ctx.font = "28px Gotham Condensed Book";
         var text = document.getElementById('buttonHtml').innerHTML;
-        wrapText(ctx, text, img.naturalWidth * 0.15, img.naturalHeight * 0.74, img.naturalWidth * 0.5, lineHeight * 0.85)
+        wrapText(ctx, text, img.width * 0.15, img.height * 0.82, img.width * 0.55, lineHeight * 0.83)
     } else {
         canvas.width = img.width * 0.75;
         canvas.height = img.height * 1;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
         ctx.fillStyle = hex;
-        ctx.fillRect(img.width * 0, img.height * 1, img.width * 0.75, img.height * -0.25);
+        ctx.fillRect(img.width * 0, img.height * 1, img.width * 0.75, img.height * -0.26);
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.03, img.height * 0.82, icon.width * 0.9, icon.height * 0.9);
         ctx.globalAlpha=1;
         ctx.fillStyle = 'white';
-        ctx.fillRect(img.naturalWidth * 0.15, img.naturalHeight * 0.79, img.width * 0.001, img.height * -0.19);
+        ctx.fillRect(img.width * 0.2, img.height * 0.97, img.width * 0.001, img.height * -0.19);
         ctx.font = "26px Gotham Condensed Book";
         var text = document.getElementById('buttonHtml').innerHTML;
-        wrapText(ctx, text, img.width * 0.22, img.naturalHeight * 0.67, img.naturalWidth * 0.4, lineHeight * 0.85)
+        wrapText(ctx, text, img.width * 0.22, img.height * 0.805, img.width * 0.5, lineHeight * 0.84)
     }
 }
 
@@ -316,7 +304,7 @@ function Right() {
         ctx.globalAlpha=0.5;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 1, img.height * 1);
         ctx.globalAlpha=1;
-        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.86, img.height * 0.82, icon.width * 0.9, icon.height * 0.9);
+        ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.86, img.height * 0.82, img.width * 0.11, img.height * 0.16);
         ctx.textAlign="right";
         ctx.fillStyle = 'white';
         ctx.font = "34px Gotham Condensed Book";
@@ -353,14 +341,14 @@ function fitRight() {
         canvas.height = img.height * 0.75;
         ctx.drawImage(img, 0, 0, img.naturalWidth * 1, img.naturalHeight * 1, 0, 0, img.width * 0.75, img.height * 0.75);
         ctx.fillStyle = hex;
-        ctx.fillRect(img.width * 1, img.height * 0, img.width * -0.3, img.height * 0.75);
+        ctx.fillRect(img.width * 1, img.height * 0, img.width * -0.25, img.height * 0.75);
         ctx.globalAlpha=1;
         ctx.drawImage(icon, 0, 0, icon.naturalWidth * 1, icon.naturalHeight * 1, img.width * 0.88, img.height * 0.58, icon.width * 0.8, icon.height * 0.8);
         ctx.textAlign="right";
         ctx.fillStyle = 'white';
         ctx.font = "28px Gotham Condensed Book";
         var text = document.getElementById('buttonHtml').innerHTML;
-        wrapText(ctx, text, img.width * 0.965, img.height * 0.081, img.width * 0.23, lineHeight * 0.85);
+        wrapText(ctx, text, img.width * 0.99, img.height * 0.081, img.width * 0.23, lineHeight * 0.85);
     } else {
         canvas.width = img.width * 1;
         canvas.height = img.height * 0.75;
