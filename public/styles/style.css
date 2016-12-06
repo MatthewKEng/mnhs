@@ -280,11 +280,19 @@ h1 {
   color: white;
   transform: translate(-50%, -50%);
 }
+
+
+/*photo editor page*/
+
 .withinTheCanvas {
   position: absolute;
   top: 100px;
   right: 600px;
+  background-color: #EAEAEA;
+  text-align: center;
 }
+
+
 @font-face {
   font-family: 'Gotham Black';
   src: local('GothamBlack'), url(./fonts/Gotham-Black.ttf);
@@ -304,11 +312,27 @@ h1 {
 #downloadButton {
   font-family: 'Gotham Condensed Book';
 }
-
-
 #buttonHtml {
+    margin: auto;
   background-color: #EAEAEA;
+  font-family: 'Gotham Book';
+  font-size: 18px;
+  width: 360px;
+  overflow: auto;
+  text-align: center;
+  border: 3px solid #eeb111;
 }
+h4 {
+    font-size: 24px;
+    font-family: 'Gotham Book';
+    text-decoration: underline;
+}
+.theForm {
+    font-family: 'Gotham Book';
+    text-align: left;
+}
+
+
 /* Temporary styling for gallery and photoUploader pages*/
 .addPhoto, .addPhoto:active, .addPhoto:visited {
   background-color: lightslategray;
