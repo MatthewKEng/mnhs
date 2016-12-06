@@ -238,14 +238,37 @@ h1 {
 }
 /* photoUploader.html */
 .preview-block {
-  height: 200px;
   width: 100%;
-  overflow: hidden;
+  min-height: 200px;
   position: relative;
   border: 1px solid black;
   margin-top: 20px;
   margin-left: 0;
   margin-bottom: 10px;
+}
+.logo-button {
+  margin: 40px 0 0 10px;
+}
+.preview-brand {
+  min-height: 100px;
+  position: relative;
+  border: 1px solid black;
+  margin-top: 20px;
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+.brand-upload {
+  text-align: center;
+  margin-left: 45px;
+}
+.brand-color, .brand-submit {
+  margin-top: 20px;
+}
+.edit-department-form {
+  text-align: center;
+}
+.historical-site {
+  border-right: 1px solid gray;
 }
 .preview {
   padding-top: 0;
@@ -254,13 +277,22 @@ h1 {
   position: absolute;
   top: 50%;
   left: 50%;
+  color: white;
   transform: translate(-50%, -50%);
 }
+
+
+/*photo editor page*/
+
 .withinTheCanvas {
   position: absolute;
   top: 100px;
   right: 600px;
+  background-color: #EAEAEA;
+  text-align: center;
 }
+
+
 @font-face {
   font-family: 'Gotham Black';
   src: local('GothamBlack'), url(./fonts/Gotham-Black.ttf);
@@ -280,11 +312,27 @@ h1 {
 #downloadButton {
   font-family: 'Gotham Condensed Book';
 }
-
-
 #buttonHtml {
+    margin: auto;
   background-color: #EAEAEA;
+  font-family: 'Gotham Book';
+  font-size: 18px;
+  width: 360px;
+  overflow: auto;
+  text-align: center;
+  border: 3px solid #eeb111;
 }
+.photoedit-heading {
+    font-size: 24px;
+    font-family: 'Gotham Book';
+    text-decoration: underline;
+}
+.theForm {
+    font-family: 'Gotham Book';
+    text-align: left;
+}
+
+
 /* Temporary styling for gallery and photoUploader pages*/
 .addPhoto, .addPhoto:active, .addPhoto:visited {
   background-color: lightslategray;
@@ -325,18 +373,18 @@ h1 {
 .file-upload {
   text-align: center;
 }
-#file-input:focus, #file-label,
-#file-input {
+.file-input:focus, .file-label,
+.file-input {
   background: linear-gradient(#444, white);
   color: #263238;
   padding: 10px;
   font-weight: normal;
 }
-#file-label:hover {
+.file-label:hover {
   background: linear-gradient(darkslategray, lightslategray);
   color: white;
 }
-#file-input, #file-label {
+#file-input, .file-label {
   cursor: pointer;
   border-width: 2px;
   border-style: outset;
@@ -380,6 +428,7 @@ h1 {
   height: 260px;
   margin-right: 5px;
   border-right: 1px solid gray;
+  margin-left: -10px;
 }
 .access-last {
   border-right: none;
@@ -486,16 +535,22 @@ h1 {
   bottom: -25px;
   left: 20%;
 }
-.newDepartment {
-  margin: 20px;
+.add-site {
+  text-align: left;
 }
-
+p.add-site {
+  margin-bottom: 0;
+  margin-left: 20px;
+}
+.add-remove-sites {
+  text-align: center;
+}
 .addDepartment {
-  margin: 20px;
-
+  margin: 10px;
+  width: 300px;
 }
-.removeDepartment {
-  margin:20px;
+.btn-wider {
+  width: 130px;
 }
 .add-user {
   margin-left: 20px;
@@ -521,7 +576,6 @@ h1 {
   text-align: center;
 }
 .make-selection > h2 {
-  background-color: #eeb111;
   width: 450px;
   margin: 0 auto;
   padding: 30px;
