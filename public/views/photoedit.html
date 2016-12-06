@@ -16,11 +16,11 @@
 <div class="withinTheCanvas" style="width: 368px; position: absolute; left: 70%;">
 
 
-    <h4>EDIT TEXT</h4>
+    <h4 class="photoedit-heading">EDIT TEXT</h4>
     <h5 style="font-size: 12px; background-color: rgba(0, 0, 0, 0.2); font-family: 'Gotham Book'">Click on the text below to change it, then move onto the Edit Layout section!</h5>
     <p id="buttonHtml" contenteditable="true">BECOME A MEMBER OF THE MINNESOTA HISTORICAL SOCIETY AND GET THE BEST DEAL IN HISTORY, INCLUDING FREE REGULAR ADMISSION ALL YEAR LONG.</p>
 
-<h4>EDIT LAYOUT</h4>
+<h4 class="photoedit-heading">EDIT LAYOUT</h4>
 <h5 style="font-size: 12px; background-color: rgba(0, 0, 0, 0.2); font-family: 'Gotham Book'">Click on the circle buttons next to which overlay/template you'd like, then press Submit for Approval to upload the photo to be approved!</h5>
 
 <form class="theForm">
@@ -37,8 +37,8 @@
 </form>
 
 
-<a ng-click="photo.downloadCanvas()" id="downloadButton" style="font-size: 36px">Submit for Approval</a>
-
+<a ng-hide="photo.canvasSaved" ng-click="photo.downloadCanvas()" id="downloadButton" style="font-size: 36px; cursor: pointer;">Submit for Approval</a>
+<div ng-show="photo.canvasSaved" class="btn btn-lg btn-success">Success!</div>
 
 
 

@@ -26,6 +26,9 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   admin.showEmpDepts = false;
   admin.showNotEmpDepts = false;
   admin.userAdded = false;
+  admin.invalidHex = false;
+  admin.brandSuccess = false;
+
 
   //function to display access
   admin.showAccess = function () {
@@ -300,7 +303,11 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     }).then(function(){
       //for below function
       admin.addColumnUsers();
-      // admin.newDepartment = "";
+      admin.siteAddSuccess = true;
+      $timeout(function() {
+        admin.siteAddSuccess = false;
+      },2000);
+      admin.newDepartment = "";
     });
   }
 
@@ -354,14 +361,14 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
 //delete function for departments table
 admin.deleteDepartment = function (){
 
-  // console.log('remove', admin.remove); //admin.html line 176 ng-value, will target id with name.id, will target name with name.name
-  $http.delete('/access/' + admin.remove.department+'/' + admin.remove.id, {
-  }).then(function(){
-    // admin.uploadBrand(); unable to refresh
-
-    admin.deleteEachDepartment();
-    admin.getSubmissions();
-  })
+  console.log('remove', admin.remove); //admin.html line 176 ng-value, will target id with name.id, will target name with name.name
+  // $http.delete('/access/' + admin.remove.department+'/' + admin.remove.id, {
+  // }).then(function(){
+  //   // admin.uploadBrand(); unable to refresh
+  //
+  //   admin.deleteEachDepartment();
+  //   admin.getSubmissions();
+  // })
 }
 
 //delete function for each department in users table
@@ -477,7 +484,6 @@ admin.deleteEachDepartment = function(){
 
   //get list of deparments and thier ids from AccessService
   admin.deptNames = AccessService.departmentNames;
-  console.log('whats the department names',admin.deptNames);
   //function to loop through and get department names based on department_id
   admin.departmentFinder = function (department_id) {
     if (admin.deptNames == undefined) {
@@ -510,21 +516,72 @@ admin.deleteEachDepartment = function(){
   // Uploads brand to S3 if one is selected.  Also sends brand url to SQL db
   // with department_id.
   admin.uploadBrand = function(form) {
-    if (form.$invalid) {
+    if (form.$invalid || admin.upload.file == undefined && admin.upload.color == undefined) {
       return;
     }
-    admin.upload.deptId = parseInt(admin.upload.deptId);
-    console.log('admin.controller', admin.upload);
-    Upload.upload({
-      url: '/image/brand',
-      method: 'POST',
-      data: admin.upload,
-    }).then(function(){
-      admin.upload.color = "";
-    });
+
+    if (admin.upload.color != undefined && admin.upload.color != '') {
+      //check to see if hex code is undefined or needs a # at the beginning
+      if (admin.upload.color.startsWith('#')) {
+        // do nothing here
+      } else {
+        admin.upload.color = '#' + admin.upload.color;
+      }
+      // check if hex code is valid.  Alert if not.
+      if (!/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(admin.upload.color)) {
+        admin.invalidHex = true;
+        return;
+      } else if (admin.upload.file == undefined) {
+        // update only brand color
+        return $http.post('/image/brandColor', admin.upload).then(function() {
+          console.log('Color updated');
+          admin.upload = '';
+          admin.invalidHex = false;
+          admin.brandSuccess = true;
+          $timeout(function() {
+            admin.brandSuccess = false;
+          },2000);
+        });
+      } else {
+        // update both brand color and logo like current upload.
+        admin.upload.deptId = parseInt(admin.upload.deptId);
+        console.log('admin.controller', admin.upload);
+        Upload.upload({
+          url: '/image/brand',
+          method: 'POST',
+          data: admin.upload,
+        }).then(function(){
+          admin.upload = '';
+          admin.invalidHex = false;
+          console.log('color and logo updated');
+          admin.brandSuccess = true;
+          $timeout(function() {
+            admin.brandSuccess = false;
+          },2000);
+        });
+      }
+    } else {
+      admin.upload.color = undefined;
+      admin.invalidHex = false;
+      // upload logo only
+      admin.upload.deptId = parseInt(admin.upload.deptId);
+      console.log('admin.controller', admin.upload);
+      Upload.upload({
+        url: '/image/brand',
+        method: 'POST',
+        data: admin.upload,
+      }).then(function(){
+        admin.upload = '';
+        console.log('logo updated');
+        admin.brandSuccess = true;
+        $timeout(function() {
+          admin.brandSuccess = false;
+        },2000);
+      });
+    }
+
+
 
   };
-
-
 
 };//end of AdminController function
