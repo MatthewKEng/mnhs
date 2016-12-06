@@ -27,6 +27,8 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   admin.showNotEmpDepts = false;
   admin.userAdded = false;
   admin.invalidHex = false;
+  admin.brandSuccess = false;
+
 
   //function to display access
   admin.showAccess = function () {
@@ -301,7 +303,11 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     }).then(function(){
       //for below function
       admin.addColumnUsers();
-      // admin.newDepartment = "";
+      admin.siteAddSuccess = true;
+      $timeout(function() {
+        admin.siteAddSuccess = false;
+      },2000);
+      admin.newDepartment = "";
     });
   }
 
@@ -355,14 +361,14 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
 //delete function for departments table
 admin.deleteDepartment = function (){
 
-  // console.log('remove', admin.remove); //admin.html line 176 ng-value, will target id with name.id, will target name with name.name
-  $http.delete('/access/' + admin.remove.department+'/' + admin.remove.id, {
-  }).then(function(){
-    // admin.uploadBrand(); unable to refresh
-
-    admin.deleteEachDepartment();
-    admin.getSubmissions();
-  })
+  console.log('remove', admin.remove); //admin.html line 176 ng-value, will target id with name.id, will target name with name.name
+  // $http.delete('/access/' + admin.remove.department+'/' + admin.remove.id, {
+  // }).then(function(){
+  //   // admin.uploadBrand(); unable to refresh
+  //
+  //   admin.deleteEachDepartment();
+  //   admin.getSubmissions();
+  // })
 }
 
 //delete function for each department in users table
@@ -531,6 +537,10 @@ admin.deleteEachDepartment = function(){
           console.log('Color updated');
           admin.upload = '';
           admin.invalidHex = false;
+          admin.brandSuccess = true;
+          $timeout(function() {
+            admin.brandSuccess = false;
+          },2000);
         });
       } else {
         // update both brand color and logo like current upload.
@@ -544,6 +554,10 @@ admin.deleteEachDepartment = function(){
           admin.upload = '';
           admin.invalidHex = false;
           console.log('color and logo updated');
+          admin.brandSuccess = true;
+          $timeout(function() {
+            admin.brandSuccess = false;
+          },2000);
         });
       }
     } else {
@@ -559,6 +573,10 @@ admin.deleteEachDepartment = function(){
       }).then(function(){
         admin.upload = '';
         console.log('logo updated');
+        admin.brandSuccess = true;
+        $timeout(function() {
+          admin.brandSuccess = false;
+        },2000);
       });
     }
 

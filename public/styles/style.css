@@ -322,7 +322,7 @@ h1 {
   text-align: center;
   border: 3px solid #eeb111;
 }
-h4 {
+.photoedit-heading {
     font-size: 24px;
     font-family: 'Gotham Book';
     text-decoration: underline;
@@ -534,16 +534,22 @@ h4 {
   bottom: -25px;
   left: 20%;
 }
-.newDepartment {
-  margin: 20px;
+.add-site {
+  text-align: left;
 }
-
+p.add-site {
+  margin-bottom: 0;
+  margin-left: 20px;
+}
+.add-remove-sites {
+  text-align: center;
+}
 .addDepartment {
-  margin: 20px;
-
+  margin: 10px;
+  width: 300px;
 }
-.removeDepartment {
-  margin:20px;
+.btn-wider {
+  width: 130px;
 }
 .add-user {
   margin-left: 20px;
@@ -569,7 +575,6 @@ h4 {
   text-align: center;
 }
 .make-selection > h2 {
-  background-color: #eeb111;
   width: 450px;
   margin: 0 auto;
   padding: 30px;
