@@ -123,20 +123,19 @@
   </div>
 </div>
 
-<!--brands-->
+<!--historic sites-->
 <div ng-show="((admin.brandsConsoleDisplay))" class="container upload-brands">
   <div class="col-xs-6 historical-site">
     <h4>Update Historical Site</h4>
 
 
-<!--historic site/deparment controlls-->
+<!--historic site/deparment controls-->
     <div class="row edit-department-form">
       <form enctype="multipart/form-data" name="uploadBrandForm" id="uploadBrandForm" role="main">
         <label>Select Site to Update:</label>
-          <select class="listedDepartment" ng-model="admin.upload.deptId" required><br />
-            <option class="listedDepartment" value="" selected disabled>Select...</option><br />
-            <option ng-repeat="name in admin.deptNames" ng-value="name.id">{{admin.prettyDeptName(name.department)}}</option>
-          </select>
+        <select ng-model="admin.upload.deptId" required
+        ng-options="name.id as admin.prettyDeptName(name.department) for name in admin.deptNames | orderBy: 'department'">
+        </select>
         <div class="row brand-upload">
           <div class="col-xs-4 preview-brand" style="margin-left: 2px; background-color: lightgray;">
             <img ng-show="admin.upload.file!=undefined" ngf-src="admin.upload.file" alt="Brand Preview" class="preview" style="z-index: 1;"/>
@@ -170,9 +169,8 @@
     </div>
     <div ng-show="admin.siteAddSuccess" class="btn btn-success btn-lg">Success</div>
     <p class="add-site">Remove Site:</p>
-    <select class="addDepartment" ng-model="admin.remove" required>
-      <option value="" selected disabled>Select...</option>
-      <option ng-repeat="name in admin.deptNames" ng-value="name">{{admin.prettyDeptName(name.department)}}</option>
+    <select class="addDepartment" ng-model="admin.remove" required
+    ng-options="admin.prettyDeptName(name.department) for name in admin.deptNames | orderBy: 'department'">
     </select>
     <div class="row">
       <button class="file-label btn-wider" ng-click="admin.deleteDepartment()">Remove Site</button>
