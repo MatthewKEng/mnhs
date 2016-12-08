@@ -161,7 +161,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
 
   //make the key pretty function
   admin.pretty = function (key) {
-    var prettyKey = key.replace(/_/g, " ").toLocaleUpperCase();
+    var prettyKey = key //replace(/_/g, " ").toLocaleUpperCase();
     return prettyKey;
   }
   //call to service to get all data from submissions table
@@ -345,9 +345,9 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   };
 
 
-//delete button for all users
+//delete button for all users (this function works when deleting only from sql but when s3 is included it doesn't work)
   admin.deleteButton = function(pending) {
-    // console.log('pending ', pending);
+    console.log('pending ', pending);
     var key = pending.saved_edit.replace('https://s3.amazonaws.com/mnhs/', '');
     $http.delete('/image/submissions/' + key, {
     }).then(function(){
