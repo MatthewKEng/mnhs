@@ -64,7 +64,6 @@
       in admin.allUserAccess" ng-change="admin.showUser(admin.selectedUser); admin.clearDepts()">
       </select>
     </div>
-
     <div class="access current-access row">
       <h4>Current Access</h4>
       <ul>
@@ -81,7 +80,7 @@
       <div class="add-access-container">
         <div ng-repeat="dept in admin.notEmpDepts" class="text-left edit-item">
           <input ng-model="admin[dept]" ng-init="admin[dept]=false" ng-change="admin.updateUsersAccesses(dept)" type="checkbox" />
-          <label for="dept">{{admin.pretty(dept)}}</label>
+          <label ng-click="admin[dept]=!admin[dept]; admin.updateUsersAccesses(dept);" for="dept">{{admin.pretty(dept)}}</label>
         </div>
       </div>
     </div>
@@ -90,12 +89,16 @@
       <div class="add-access-container">
         <div ng-repeat="dept in admin.empDepts" class="text-left edit-item">
           <input ng-model="admin[dept]" ng-init="admin[dept]=false" ng-change="admin.updateUsersAccesses(dept)" type="checkbox" />
-          <label for="dept">{{admin.pretty(dept)}}</label>
+          <label ng-click="admin[dept]=!admin[dept]; admin.updateUsersAccesses(dept);" for="dept">{{admin.pretty(dept)}}</label>
         </div>
       </div>
     </div>
     <div class="row submit-button-position">
-      <button class="submit-button" ng-click="admin.submitChanges()" class="accessSubmit" style="color: #fff;background-color: #5cb85c;border-color: #4cae4c; border-radius: 5px; text-decoration: none; border-color: #4cae4c; padding: 6px 12px; font-weight: 400px; line-height: 1.42857143; text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; border: 1px solid; border-radius: 4px; margin: 0; overflow: visible; touch-action: manipulation; display: inline-block; display: inline-block; margin: 0; overflow: visible; overflow-x: visible; overflow-y: visible;">Submit</button><br />
+
+      <!-- <button class="submit-button" ng-click="admin.submitChanges()" class="accessSubmit" style="color: #fff;background-color: #5cb85c;border-color: #4cae4c; border-radius: 5px; text-decoration: none; border-color: #4cae4c; padding: 6px 12px; font-weight: 400px; line-height: 1.42857143; text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; border: 1px solid; border-radius: 4px; margin: 0; overflow: visible; touch-action: manipulation; display: inline-block; display: inline-block; margin: 0; overflow: visible; overflow-x: visible; overflow-y: visible;">Submit</button><br /> -->
+
+      <button class="submit-button btn btn-success" ng-click="admin.submitChanges()" class="accessSubmit">Submit</button><br />
+
     </div>
   </div>
   <!--add Employee controls-->
@@ -124,20 +127,19 @@
   </div>
 </div>
 
-<!--brands-->
+<!--historic sites-->
 <div ng-show="((admin.brandsConsoleDisplay))" class="container upload-brands">
   <div class="col-xs-6 historical-site">
     <h4>Update Historical Site</h4>
 
 
-<!--historic site/deparment controlls-->
+<!--historic site/deparment controls-->
     <div class="row edit-department-form">
       <form enctype="multipart/form-data" name="uploadBrandForm" id="uploadBrandForm" role="main">
         <label>Select Site to Update:</label>
-          <select class="listedDepartment" ng-model="admin.upload.deptId" required><br />
-            <option class="listedDepartment" value="" selected disabled>Select...</option><br />
-            <option ng-repeat="name in admin.deptNames" ng-value="name.id">{{admin.prettyDeptName(name.department)}}</option>
-          </select>
+        <select ng-model="admin.upload.deptId" required
+        ng-options="name.id as admin.prettyDeptName(name.department) for name in admin.deptNames | orderBy: 'department'">
+        </select>
         <div class="row brand-upload">
           <div class="col-xs-4 preview-brand" style="margin-left: 2px; background-color: lightgray;">
             <img ng-show="admin.upload.file!=undefined" ngf-src="admin.upload.file" alt="Brand Preview" class="preview" style="z-index: 1;"/>
@@ -171,9 +173,8 @@
     </div>
     <div ng-show="admin.siteAddSuccess" class="btn btn-success btn-lg">Success</div>
     <p class="add-site">Remove Site:</p>
-    <select class="addDepartment" ng-model="admin.remove" required>
-      <option value="" selected disabled>Select...</option>
-      <option ng-repeat="name in admin.deptNames" ng-value="name">{{admin.prettyDeptName(name.department)}}</option>
+    <select class="addDepartment" ng-model="admin.remove" required
+    ng-options="admin.prettyDeptName(name.department) for name in admin.deptNames | orderBy: 'department'">
     </select>
     <div class="row">
       <button class="file-label btn-wider" ng-click="admin.deleteDepartment()">Remove Site</button>

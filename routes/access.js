@@ -76,10 +76,6 @@ router.post('/departments', function(req, res) {
 });
 
 
-
-// "select column_name from information_schema.columns where table_name='users';"
-
-
 //query the users table for access data and users email
 router.get('/', function(req, res) {
   pool.connect(function(error, client, done) {
@@ -120,8 +116,6 @@ router.get('/', function(req, res) {
 //     });
 //   });
 // });//end of post router
-
-
 
 //to add a column to users DB of department
 router.post('/users', function(req, res) {
@@ -226,7 +220,6 @@ router.delete('/users/:id', function (req, res, next) {
         console.log('Error connecting with DB: ', err);
         res.sendStatus(500);
       }
-
       client.query('DELETE FROM departments WHERE id=$1;', [id],
         function (err, result) {
           if (err) {
@@ -252,7 +245,7 @@ router.delete('/:department/:id', function (req, res, next) {
         res.sendStatus(500);
       }
 
-      client.query('ALTER TABLE users drop COLUMN '+  department,
+      client.query('ALTER TABLE users drop COLUMN ' +  department,
         function (err, result) {
           if (err) {
             console.log('Error querying DB: ', err);
