@@ -1,7 +1,7 @@
 angular.module('BrandImageManagerApp')
        .controller('EditPhotoController', EditPhotoController);
 
-function EditPhotoController(Upload, AccessService, ImageService) {
+function EditPhotoController(Upload, AccessService, ImageService, $timeout) {
 
   console.log('PhotoController loaded');
   var photo = this;
@@ -14,6 +14,7 @@ function EditPhotoController(Upload, AccessService, ImageService) {
   console.log('HEX SOURCE', photo.hexSrc);
   console.log('photo dot brand source', photo.brandSrc);
   console.log('did the image arrive from gallery', photo.imageSrc);
+  photo.canvasSaved = false;
 
   var hex = photo.hexSrc;
 
@@ -43,6 +44,11 @@ function EditPhotoController(Upload, AccessService, ImageService) {
                 userId: AccessService.user.id,
                 imageId: ImageService.imageId,
             }
+        }).then(function() {
+          photo.canvasSaved = true;
+          $timeout(function() {
+            photo.canvasSaved = false;
+          }, 2000);
         });
     }
 
