@@ -516,11 +516,6 @@ h1 {
   top: 200px;
   position: relative;
 }
-.submit-button:hover {
-  /*color: white;*/
-  /*background: darkgray;*/
-  text-decoration: underline;
-}
 .user-added {
   font-size: 20px;
   padding: 10px;

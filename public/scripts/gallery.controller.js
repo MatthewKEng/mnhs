@@ -186,7 +186,7 @@ function GalleryController($http, $location, TruthinessService, BrandTableServic
       data: ctrl.upload,
     }).then(function() {
       console.log('Success!');
-      ctrl.upload = undefined;
+      ctrl.upload = '';
       ctrl.success = true;
       $timeout(function() {
         ctrl.success = false;
