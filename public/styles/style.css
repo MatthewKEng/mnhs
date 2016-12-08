@@ -311,6 +311,9 @@ h1 {
 }
 #downloadButton {
   font-family: 'Gotham Condensed Book';
+  border: 3px solid #5cb85c;
+  background-color: #5cb85c;
+  color: white;
 }
 #buttonHtml {
     margin: auto;
