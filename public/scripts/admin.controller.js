@@ -524,9 +524,6 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
         },2000);
       });
     }
-
-
-
   };
 
 };//end of AdminController function
