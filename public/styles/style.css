@@ -315,6 +315,9 @@ h1 {
 }
 #downloadButton {
   font-family: 'Gotham Condensed Book';
+  border: 3px solid #5cb85c;
+  background-color: #5cb85c;
+  color: white;
 }
 #buttonHtml {
     margin: auto;
@@ -520,6 +523,14 @@ h1 {
   top: 200px;
   position: relative;
 }
+
+.submit-button:hover {
+  /*color: white;*/
+  /*background: darkgray;*/
+  text-decoration: underline;
+  background-color: #449d44;
+}
+
 .user-added {
   font-size: 20px;
   padding: 10px;
