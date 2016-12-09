@@ -2,11 +2,14 @@ const router = require('express').Router();
 const path = require('path');
 const pg = require('pg');
 
+
 var config = {
   database: 'mnhs'
 };
 
 var pool = new pg.Pool(config);
+
+
 
 // Get only Brand URL's in SQL DB for specific user department
 router.get('/:deptID', function(req, res) {
