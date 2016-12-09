@@ -8,7 +8,7 @@ const path = require('path');
 const pg = require('pg');
 
 var config = {
-  database: 'mnhs'
+  database: 'rho'
 };
 
 var pool = new pg.Pool(config);
@@ -207,6 +207,28 @@ router.delete('/images/:key', function (req, res) {
           done();
         }
       });
+    }
+  });
+});
+
+router.get('/revision/:id', function(req, res) {
+  var id = req.params.id;
+  pool.connect(function(err, client, done) {
+    try {
+      if (err) {
+        console.log('Error connecting to DB ', err)
+        res.sendStatus(500);
+      }
+      client.query('SELECT * from images WHERE id=$1', [id], function(err, result) {
+        if (err) {
+          console.log('Error querying DB ', err);
+          res.sendStatus(500);
+        }
+        console.log('RESULT: ', result.rows[0]);
+        res.send(result.rows[0]);
+      });
+    } finally {
+      done();
     }
   });
 });
