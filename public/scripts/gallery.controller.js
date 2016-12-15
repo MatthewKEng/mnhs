@@ -150,23 +150,39 @@ function GalleryController($http, $location, TruthinessService, BrandTableServic
   // function to attach image clicked url to the ImageService so the photoedit gets it
   ctrl.sendThisImage = function (image) {
     //function to get brand based on department_id and assign it to the ImageService.brand
-    BrandTableService.getBrand(image.department_id).then(function(response){
-      ImageService.image = image.url_image || image.saved_edit;
-      ImageService.deptId = image.department_id;
-      if (image.url_image != undefined) {
-        ImageService.imageId = image.id;
-      } else {
-        ImageService.imageId = image.image_id;
-      }
-      console.log('did we get the image clicked', ImageService.image);
-      // console.log('whats the department_id', image.department_id);
-        //console.log('whats the brand url response', response[0].url_brand);
+    if (image.saved_edit) {
+      $http.get('/image/revision/' + image.image_id).then(function(response) {
+        image.url_image = response.data.url_image;
+        BrandTableService.getBrand(image.department_id).then(function(response){
+          ImageService.image = image.url_image;
+          ImageService.deptId = image.department_id;
+          if (image.url_image != undefined) {
+            ImageService.imageId = image.id;
+          } else {
+            ImageService.imageId = image.image_id;
+          }
+          // console.log('did we get the image clicked', ImageService.image);
+          ImageService.brand = response[0].url_brand;
+          ImageService.brandColor = response[0].brand_color;
+          $location.path('/photoedit');
+        });
+      });
+    } else {
+      BrandTableService.getBrand(image.department_id).then(function(response){
+        ImageService.image = image.url_image || image.saved_edit;
+        ImageService.deptId = image.department_id;
+        if (image.url_image != undefined) {
+          ImageService.imageId = image.id;
+        } else {
+          ImageService.imageId = image.image_id;
+        }
+        // console.log('did we get the image clicked', ImageService.image);
         ImageService.brand = response[0].url_brand;
         ImageService.brandColor = response[0].brand_color;
-        console.log('whats the brand color', ImageService.brandColor);
         $location.path('/photoedit');
       });
-  }
+    }
+  };
 
 
 
@@ -186,7 +202,7 @@ function GalleryController($http, $location, TruthinessService, BrandTableServic
       data: ctrl.upload,
     }).then(function() {
       console.log('Success!');
-      ctrl.upload = undefined;
+      ctrl.upload = '';
       ctrl.success = true;
       $timeout(function() {
         ctrl.success = false;

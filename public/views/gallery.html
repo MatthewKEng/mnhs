@@ -53,9 +53,8 @@
     <div ng-show="gallery.addImage==true" class="modal-body text-center">
       <!--image dynamicly created same image as image clicked-->
       <div>
-        <h3>Upload a new image.</h3>
         <div class="row preview-block">
-          <img ng-show="gallery.upload.file!=undefined" ngf-src="gallery.upload.file" alt="Image Preview" class="modal-size preview" />
+          <img ng-show="gallery.upload.file!=undefined" ngf-src="gallery.upload.file" alt="Image Preview" class="modal-size" />
           <span ng-show="gallery.success" class="success btn btn-success">Success!</span>
         </div>
       </div>
@@ -63,8 +62,8 @@
     <div class="modal-footer"ng-show="gallery.addImage==true">
       <form enctype="multipart/form-data" name="uploadForm" id="uploadForm" role="search">
         <div class="col-xs-12">
-          <label ng-hide="gallery.upload.file!=undefined" id="file-label" for="file-input">Please select an image</label>
-          <label ng-show="gallery.upload.file!=undefined" id="file-label" for="file-input">Change image</label>
+          <label class="file-label" ng-show="gallery.upload.file==undefined" id="file-label" for="file-input">Please select an image</label>
+          <label class="file-label" ng-show="gallery.upload.file!=undefined" id="file-label" for="file-input">Change image</label>
           <input type="file" ng-model="gallery.upload.file" ngf-select ngf-max-size="10MB" name="file-input" id="file-input"required>
           <input class="upload-form-button" type="submit" ng-click="gallery.uploadPicture(uploadForm)" value="Upload Image" />
         </div>
@@ -98,6 +97,7 @@
         <button class="upload-form-button" ng-show="gallery.addImage==false && gallery.modalImage.url_image!=undefined" ng-click="gallery.sendThisImage(gallery.modalImage)">Edit Image</button>
         <a target="_self" href="{{gallery.modalImage.saved_edit}}" download="download"><button class="upload-form-button" ng-show="gallery.addImage==false && gallery.modalImage.status=='approved' && gallery.notDept==false" ng-click="gallery.disableButtons">Download Image</button></a>
         <button class="upload-form-button" ng-show="gallery.modalImage.status=='revision'" ng-click="gallery.addComment()">Add a Comment</button>
+        <button class="upload-form-button" ng-show="gallery.modalImage.status=='revision' || gallery.modalImage.status=='approved'" ng-click="gallery.sendThisImage(gallery.modalImage)">Revise</button>
         <button class="upload-form-button" ng-show="gallery.addImage==false && gallery.modalImage!=undefined && gallery.notDept==false" ng-click="gallery.deleteThisImage(gallery.modalImage)">Delete</button>
         <div class="footer-spacer" ng-show="gallery.notDept==true" style="height: 46px;">
         </div>

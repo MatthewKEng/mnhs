@@ -42,9 +42,58 @@ var uploads3 = multer({
 });
 
 // Post request.  Need to send department_id as part of req.body from client
-router.post('/brand', uploads3.single('file'), function (req, res) {  // add logic here for hexagons to put in departments table
+router.post('/brand', uploads3.single('file'), function (req, res) {
   // On success, send image to SQL DB to store URL.
   var url = 'https://s3.amazonaws.com/mnhs/' + req.file.key;
+  var dep = req.body.deptId;
+  // If a color is included, update database.
+  if (req.body.color != undefined) {
+    var color = req.body.color;
+    pool.connect(function (err, client, done) {
+      try {
+        if (err) {
+          console.log('error connecting to DB', err);
+          res.sendStatus(500);
+        }
+        client.query('UPDATE departments SET url_brand=$1, brand_color=$2 WHERE id=$3;',
+                    [url, color, dep],
+              function (err) {
+                if (err) {
+                  console.log('Error inserting into db', err);
+                  return res.sendStatus(500);
+                }
+                res.sendStatus(200);
+                });
+      } finally {
+        done();
+      }
+    });
+  } else {
+    // if no color included in update request
+    pool.connect(function (err, client, done) {
+      try {
+        if (err) {
+          console.log('error connecting to DB', err);
+          res.sendStatus(500);
+        }
+        client.query('UPDATE departments SET url_brand=$1 WHERE id=$2;',
+                    [url, dep],
+              function (err) {
+                if (err) {
+                  console.log('Error inserting into db', err);
+                  return res.sendStatus(500);
+                }
+                res.sendStatus(200);
+                });
+      } finally {
+        done();
+      }
+    });
+  }
+});
+
+// Post to update brand color only {
+router.post('/brandColor', function(req, res) {
   var dep = req.body.deptId;
   var color = req.body.color;
   pool.connect(function (err, client, done) {
@@ -53,8 +102,8 @@ router.post('/brand', uploads3.single('file'), function (req, res) {  // add log
         console.log('error connecting to DB', err);
         res.sendStatus(500);
       }
-      client.query('UPDATE departments SET url_brand=$1, brand_color=$2 WHERE id=$3;',
-                  [url, color, dep],
+      client.query('UPDATE departments SET brand_color=$1 WHERE id=$2;',
+                  [color, dep],
             function (err) {
               if (err) {
                 console.log('Error inserting into db', err);
@@ -67,6 +116,7 @@ router.post('/brand', uploads3.single('file'), function (req, res) {  // add log
     }
   });
 });
+
 
 // Post request.  Need to send department_id as part of req.body from client
 router.post('/submissions', uploads3.single('file'), function (req, res) {
@@ -157,6 +207,28 @@ router.delete('/images/:key', function (req, res) {
           done();
         }
       });
+    }
+  });
+});
+
+router.get('/revision/:id', function(req, res) {
+  var id = req.params.id;
+  pool.connect(function(err, client, done) {
+    try {
+      if (err) {
+        console.log('Error connecting to DB ', err)
+        res.sendStatus(500);
+      }
+      client.query('SELECT * from images WHERE id=$1', [id], function(err, result) {
+        if (err) {
+          console.log('Error querying DB ', err);
+          res.sendStatus(500);
+        }
+        console.log('RESULT: ', result.rows[0]);
+        res.send(result.rows[0]);
+      });
+    } finally {
+      done();
     }
   });
 });

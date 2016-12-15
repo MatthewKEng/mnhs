@@ -26,6 +26,9 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   admin.showEmpDepts = false;
   admin.showNotEmpDepts = false;
   admin.userAdded = false;
+  admin.invalidHex = false;
+  admin.brandSuccess = false;
+
 
   //function to display access
   admin.showAccess = function () {
@@ -97,70 +100,14 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
         }
       }
     }
-
   };
-  // //function for truthy value for access accordion
-  // admin.truthiness = function (index) {
-  //   //for loop that takes current index of button clicked turns proberty of index true and
-  //   //all other properties in the admin.showUserAccess array false
-  //   for (var i = 0; i < admin.allUserAccess.length; i++) {
-  //     if (i == index) {
-  //       admin.showUserAccess[i] = !admin.showUserAccess[i];
-  //
-  //       admin.plus[i] = !admin.plus[i];
-  //       admin.minus[i] = !admin.minus[i];
-  //       admin.showAddEmployee = false;
-  //       admin.empPlus = true;
-  //        //console.log('whats the truth ',admin.showUserAccess);
-  //      }
-  //      else{
-  //       admin.showUserAccess[i] = false;
-  //       admin.plus[i] = true;
-  //       admin.minus[i] = false;
-  //       admin.showAddEmployee = false;
-  //       admin.empPlus = true;
-  //        //console.log('whats the truth ',admin.showUserAccess);
-  //     }
-  //   }
-  // }
-  //function to show or hide add employee
-  // admin.addEmployeeTruthiness = function () {
-  //   //for loop that makes everything false if button is clicked
-  //   // for (var i = 0; i < admin.allUserAccess.length; i++) {
-  //   //   admin.showUserAccess[i] = false;
-  //   //   admin.plus[i] = true;
-  //   //   admin.minus[i] = false;
-  //   //   }
-  //   // if else stament to set the boolean value of admin.showAddEmployee for ngShow
-  //   if (admin.showAddEmployee == false) {
-  //       admin.showAddEmployee = true;
-  //       admin.empPlus = false;
-  //       //console.log('whats the plus truth ',admin.empPlus);
-  //   }else{
-  //       admin.showAddEmployee = false;
-  //       admin.empPlus = true;
-  //       //console.log('whats the minus truth ',admin.empPlus);
-  //   }
-  // }
-
-//   //apply correct checkbox truthiness value for if it shows for ng-show
-//
-// admin.checkboxesTruthiness = function (index) {
-//   for (var i = 0; i < admin.allUsersSubmissions.length; i++) {
-//     if (admin.showCheckboxes[i] == false) {
-//       admin.showCheckboxes[i] = true;
-//     }else{
-//       admin.showCheckboxes[i] = false;
-//
-//       }
-//     }
-//   }
 
   //make the key pretty function
   admin.pretty = function (key) {
-    var prettyKey = key.replace(/_/g, " ").toLocaleUpperCase();
+    var prettyKey = key //replace(/_/g, " ").toLocaleUpperCase();
     return prettyKey;
-  }
+  };
+
   //call to service to get all data from submissions table
   admin.getSubmissions = function () {
     //reset to zero
@@ -199,7 +146,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
         }
       }
     });
-  }
+  };
 
   admin.submitChanges = function() {
     var addOrDelete;
@@ -265,8 +212,6 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     // console.log(admin.changeDepts);
   };
 
-
-
   // //submit new user button
   admin.submitButton = function(form) {
     // console.log('newUser ', admin.newUser);
@@ -287,7 +232,7 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
         admin.userAdded = false;
       }, 2500);
     });
-  }
+  };
 
   //add a new department
   admin.addDepartment = function() {
@@ -300,23 +245,24 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
     }).then(function(){
       //for below function
       admin.addColumnUsers();
-      // admin.newDepartment = "";
+      admin.siteAddSuccess = true;
+      $timeout(function() {
+        admin.siteAddSuccess = false;
+      },2000);
+      admin.newDepartment = "";
     });
-  }
-
+  };
 
   admin.addColumnUsers = function(){
     // console.log('department');
     $http.post('/access/users', {
       department: admin.newDepartment
-
     }).then(function(){
       admin.newDepartment = "";
+      admin.getDeptNames();
       // console.log('end of function');
-    })
-  }
-
-
+    });
+  };
 
 //approve button for admin
   admin.approveButton = function(pending, adminComment) {
@@ -338,9 +284,9 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   };
 
 
-//delete button for all users
+//delete button for all users (this function works when deleting only from sql but when s3 is included it doesn't work)
   admin.deleteButton = function(pending) {
-    // console.log('pending ', pending);
+    console.log('pending ', pending);
     var key = pending.saved_edit.replace('https://s3.amazonaws.com/mnhs/', '');
     $http.delete('/image/submissions/' + key, {
     }).then(function(){
@@ -352,31 +298,29 @@ function AdminController($http, $location, AccessService, SubmissionsService, Up
   }
 
 //delete function for departments table
-admin.deleteDepartment = function (){
-
-  // console.log('remove', admin.remove); //admin.html line 176 ng-value, will target id with name.id, will target name with name.name
-  $http.delete('/access/' + admin.remove.department+'/' + admin.remove.id, {
-  }).then(function(){
-    // admin.uploadBrand(); unable to refresh
-
-    admin.deleteEachDepartment();
-    admin.getSubmissions();
-  })
-}
+  admin.deleteDepartment = function (){
+    if (confirm('Are you sure you want to delete ' + admin.prettyDeptName(admin.remove.department) + '?')) {
+      console.log('remove', admin.remove); //admin.html line 176 ng-value, will target id with name.id, will target name with name.name
+      $http.delete('/access/' + admin.remove.department+'/' + admin.remove.id, {
+      }).then(function(){
+        admin.deleteEachDepartment();
+      });
+    } else {
+      return;
+    }
+  };
 
 //delete function for each department in users table
-admin.deleteEachDepartment = function(){
-  var id = admin.remove.id;
-  // console.log('id in 2nd delete ', id);
-  $http.delete('/access/users/' +id, {
-    // department: admin.newDepartment
-  }).then(function(){
-    admin.remove = "";
-    // console.log('end of function');
-  })
-  }
-
-
+  admin.deleteEachDepartment = function(){
+    var id = admin.remove.id;
+    // console.log('id in 2nd delete ', id);
+    $http.delete('/access/users/' +id, {
+    }).then(function() {
+      admin.remove = "";
+      admin.getDeptNames();
+      admin.getSubmissions();
+    })
+  };
 
 //revise button under pending, will pop up the modal
   admin.reviseButton = function(image) {
@@ -477,7 +421,15 @@ admin.deleteEachDepartment = function(){
 
   //get list of deparments and thier ids from AccessService
   admin.deptNames = AccessService.departmentNames;
-  console.log('whats the department names',admin.deptNames);
+
+  // function to reload deptNames if it is undefined
+  admin.getDeptNames = function() {
+    AccessService.getDepartmentIds().then(function() {
+      admin.deptNames = AccessService.departmentNames;
+    });
+  };
+  admin.getDeptNames();
+
   //function to loop through and get department names based on department_id
   admin.departmentFinder = function (department_id) {
     if (admin.deptNames == undefined) {
@@ -497,7 +449,7 @@ admin.deleteEachDepartment = function(){
         }
       }
     }
-  }
+  };
 
   //makes name pretty
   admin.prettyDeptName = function(name) {
@@ -510,21 +462,68 @@ admin.deleteEachDepartment = function(){
   // Uploads brand to S3 if one is selected.  Also sends brand url to SQL db
   // with department_id.
   admin.uploadBrand = function(form) {
-    if (form.$invalid) {
+    if (form.$invalid || admin.upload.file == undefined && admin.upload.color == undefined) {
       return;
     }
-    admin.upload.deptId = parseInt(admin.upload.deptId);
-    console.log('admin.controller', admin.upload);
-    Upload.upload({
-      url: '/image/brand',
-      method: 'POST',
-      data: admin.upload,
-    }).then(function(){
-      admin.upload.color = "";
-    });
-
+    if (admin.upload.color != undefined && admin.upload.color != '') {
+      //check to see if hex code is undefined or needs a # at the beginning
+      if (admin.upload.color.startsWith('#')) {
+        // do nothing here
+      } else {
+        admin.upload.color = '#' + admin.upload.color;
+      }
+      // check if hex code is valid.  Alert if not.
+      if (!/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(admin.upload.color)) {
+        admin.invalidHex = true;
+        return;
+      } else if (admin.upload.file == undefined) {
+        // update only brand color
+        return $http.post('/image/brandColor', admin.upload).then(function() {
+          console.log('Color updated');
+          admin.upload = '';
+          admin.invalidHex = false;
+          admin.brandSuccess = true;
+          $timeout(function() {
+            admin.brandSuccess = false;
+          },2000);
+        });
+      } else {
+        // update both brand color and logo like current upload.
+        admin.upload.deptId = parseInt(admin.upload.deptId);
+        console.log('admin.controller', admin.upload);
+        Upload.upload({
+          url: '/image/brand',
+          method: 'POST',
+          data: admin.upload,
+        }).then(function(){
+          admin.upload = '';
+          admin.invalidHex = false;
+          console.log('color and logo updated');
+          admin.brandSuccess = true;
+          $timeout(function() {
+            admin.brandSuccess = false;
+          },2000);
+        });
+      }
+    } else {
+      admin.upload.color = undefined;
+      admin.invalidHex = false;
+      // upload logo only
+      admin.upload.deptId = parseInt(admin.upload.deptId);
+      console.log('admin.controller', admin.upload);
+      Upload.upload({
+        url: '/image/brand',
+        method: 'POST',
+        data: admin.upload,
+      }).then(function(){
+        admin.upload = '';
+        console.log('logo updated');
+        admin.brandSuccess = true;
+        $timeout(function() {
+          admin.brandSuccess = false;
+        },2000);
+      });
+    }
   };
-
-
 
 };//end of AdminController function

@@ -12,6 +12,7 @@ const submissions = require('./routes/submissions');
 const logout = require('./routes/logout');
 const imageRouter = require('./routes/imageRouter');
 const brand = require('./routes/brand');
+// require('dotenv').config();
 
 const sessionConfig = {
   secret: 'super secret key goes here', // TODO this info gets stored in ENV file
